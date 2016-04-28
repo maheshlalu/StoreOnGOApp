@@ -11,8 +11,7 @@ import UIKit
 
 class ViewController: UIViewController{
     
-    var productCategory  : ProductCategories!
-    var imagePager : KIImagePager = KIImagePager()
+   // var imagePager : KIImagePager = KIImagePager()
     var homeCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -25,7 +24,7 @@ class ViewController: UIViewController{
         NSManagedObjectContext.defaultContext().saveToPersistentStoreAndWait()*/
         
         self.callsServices()
-        self.setupPagenator()
+        //self.setupPagenator()
         //self.setupCollectionView()
         
         
@@ -39,7 +38,7 @@ class ViewController: UIViewController{
     
     // MARK: - SetUp Paginater
     
-    func setupPagenator (){
+   /* func setupPagenator (){
         
         imagePager.frame = CGRectMake(5, 50, CXConstant.screenSize.width-10, 250)
         imagePager.pageControl.currentPageIndicatorTintColor = UIColor.lightGrayColor()
@@ -50,7 +49,7 @@ class ViewController: UIViewController{
         imagePager.dataSource = self;
         //imagePager.checkWetherToToggleSlideshowTimer()
         self.view.addSubview(imagePager)
-    }
+    }*/
     
     
     //MARK: - Setup CollectionView
@@ -115,7 +114,7 @@ class ViewController: UIViewController{
     
 }
 
-
+/*
 extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
     
     func arrayWithImages(pager: KIImagePager!) -> [AnyObject]! {
@@ -133,7 +132,7 @@ extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
     }
     
 }
-
+*/
 
 extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     
