@@ -15,6 +15,14 @@
 		AA01633C1CD2073B00EA1619 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA01633A1CD2073B00EA1619 /* LaunchScreen.storyboard */; };
 		AA0163471CD2073B00EA1619 /* StoreOnGoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163461CD2073B00EA1619 /* StoreOnGoAppTests.swift */; };
 		AA0163521CD2073B00EA1619 /* StoreOnGoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163511CD2073B00EA1619 /* StoreOnGoAppUITests.swift */; };
+		AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163631CD20BE900EA1619 /* CXDBSettings.swift */; };
+		AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163661CD20C0F00EA1619 /* CXConstant.swift */; };
+		AA0163741CD20D8500EA1619 /* CX_Products+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01636D1CD20D8500EA1619 /* CX_Products+CoreDataProperties.m */; };
+		AA0163751CD20D8500EA1619 /* CX_Products.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01636F1CD20D8500EA1619 /* CX_Products.m */; };
+		AA0163761CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0163711CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m */; };
+		AA0163771CD20D8500EA1619 /* CX_Product_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0163731CD20D8500EA1619 /* CX_Product_Category.m */; };
+		AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163791CD20E1400EA1619 /* SMSyncService.swift */; };
+		C72B320162E53AF6D3A1840D /* Pods_StoreOnGoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682EC0A3E7BA1A60207CFFA7 /* Pods_StoreOnGoApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		453DFE9D84B6E088522E0E8A /* Pods-StoreOnGoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp.debug.xcconfig"; sourceTree = "<group>"; };
+		682EC0A3E7BA1A60207CFFA7 /* Pods_StoreOnGoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreOnGoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D77281171B74087A9E5F6F2 /* Pods-StoreOnGoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp.release.xcconfig"; sourceTree = "<group>"; };
 		AA01632B1CD2073B00EA1619 /* StoreOnGoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreOnGoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01632E1CD2073B00EA1619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA0163301CD2073B00EA1619 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +60,18 @@
 		AA01634D1CD2073B00EA1619 /* StoreOnGoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoreOnGoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0163511CD2073B00EA1619 /* StoreOnGoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreOnGoAppUITests.swift; sourceTree = "<group>"; };
 		AA0163531CD2073B00EA1619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA0163631CD20BE900EA1619 /* CXDBSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDBSettings.swift; sourceTree = "<group>"; };
+		AA0163661CD20C0F00EA1619 /* CXConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXConstant.swift; sourceTree = "<group>"; };
+		AA0163681CD20CB400EA1619 /* StoreOnGoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StoreOnGoApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		AA01636C1CD20D8500EA1619 /* CX_Products+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CX_Products+CoreDataProperties.h"; sourceTree = "<group>"; };
+		AA01636D1CD20D8500EA1619 /* CX_Products+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CX_Products+CoreDataProperties.m"; sourceTree = "<group>"; };
+		AA01636E1CD20D8500EA1619 /* CX_Products.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CX_Products.h; sourceTree = "<group>"; };
+		AA01636F1CD20D8500EA1619 /* CX_Products.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CX_Products.m; sourceTree = "<group>"; };
+		AA0163701CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CX_Product_Category+CoreDataProperties.h"; sourceTree = "<group>"; };
+		AA0163711CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CX_Product_Category+CoreDataProperties.m"; sourceTree = "<group>"; };
+		AA0163721CD20D8500EA1619 /* CX_Product_Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CX_Product_Category.h; sourceTree = "<group>"; };
+		AA0163731CD20D8500EA1619 /* CX_Product_Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CX_Product_Category.m; sourceTree = "<group>"; };
+		AA0163791CD20E1400EA1619 /* SMSyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSyncService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C72B320162E53AF6D3A1840D /* Pods_StoreOnGoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B7749A9A6B71BB821339F46 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				453DFE9D84B6E088522E0E8A /* Pods-StoreOnGoApp.debug.xcconfig */,
+				7D77281171B74087A9E5F6F2 /* Pods-StoreOnGoApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		AA0163221CD2073B00EA1619 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +116,8 @@
 				AA0163451CD2073B00EA1619 /* StoreOnGoAppTests */,
 				AA0163501CD2073B00EA1619 /* StoreOnGoAppUITests */,
 				AA01632C1CD2073B00EA1619 /* Products */,
+				1B7749A9A6B71BB821339F46 /* Pods */,
+				ABFC5783A464FCA6DBC068CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +134,16 @@
 		AA01632D1CD2073B00EA1619 /* StoreOnGoApp */ = {
 			isa = PBXGroup;
 			children = (
+				AA0163611CD20BC300EA1619 /* Controller */,
+				AA0163601CD20BBE00EA1619 /* View */,
+				AA01635F1CD20BB500EA1619 /* Model */,
 				AA01632E1CD2073B00EA1619 /* AppDelegate.swift */,
-				AA0163301CD2073B00EA1619 /* ViewController.swift */,
 				AA0163321CD2073B00EA1619 /* Main.storyboard */,
 				AA0163381CD2073B00EA1619 /* Assets.xcassets */,
 				AA01633A1CD2073B00EA1619 /* LaunchScreen.storyboard */,
 				AA01633D1CD2073B00EA1619 /* Info.plist */,
 				AA0163351CD2073B00EA1619 /* StoreOnGoApp.xcdatamodeld */,
+				AA0163681CD20CB400EA1619 /* StoreOnGoApp-Bridging-Header.h */,
 			);
 			path = StoreOnGoApp;
 			sourceTree = "<group>";
@@ -128,6 +166,79 @@
 			path = StoreOnGoAppUITests;
 			sourceTree = "<group>";
 		};
+		AA01635F1CD20BB500EA1619 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AA0163781CD20E0800EA1619 /* Services */,
+				AA01636B1CD20D6D00EA1619 /* manageObjects */,
+				AA0163651CD20BFA00EA1619 /* Constants */,
+				AA0163621CD20BD500EA1619 /* DB */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		AA0163601CD20BBE00EA1619 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		AA0163611CD20BC300EA1619 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AA0163301CD2073B00EA1619 /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		AA0163621CD20BD500EA1619 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				AA0163631CD20BE900EA1619 /* CXDBSettings.swift */,
+			);
+			name = DB;
+			sourceTree = "<group>";
+		};
+		AA0163651CD20BFA00EA1619 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				AA0163661CD20C0F00EA1619 /* CXConstant.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		AA01636B1CD20D6D00EA1619 /* manageObjects */ = {
+			isa = PBXGroup;
+			children = (
+				AA01636C1CD20D8500EA1619 /* CX_Products+CoreDataProperties.h */,
+				AA01636D1CD20D8500EA1619 /* CX_Products+CoreDataProperties.m */,
+				AA01636E1CD20D8500EA1619 /* CX_Products.h */,
+				AA01636F1CD20D8500EA1619 /* CX_Products.m */,
+				AA0163701CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.h */,
+				AA0163711CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m */,
+				AA0163721CD20D8500EA1619 /* CX_Product_Category.h */,
+				AA0163731CD20D8500EA1619 /* CX_Product_Category.m */,
+			);
+			name = manageObjects;
+			sourceTree = "<group>";
+		};
+		AA0163781CD20E0800EA1619 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA0163791CD20E1400EA1619 /* SMSyncService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		ABFC5783A464FCA6DBC068CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				682EC0A3E7BA1A60207CFFA7 /* Pods_StoreOnGoApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA0163561CD2073B00EA1619 /* Build configuration list for PBXNativeTarget "StoreOnGoApp" */;
 			buildPhases = (
+				2B0849479192174B8D3096F3 /* Check Pods Manifest.lock */,
 				AA0163271CD2073B00EA1619 /* Sources */,
 				AA0163281CD2073B00EA1619 /* Frameworks */,
 				AA0163291CD2073B00EA1619 /* Resources */,
+				4D227E75E49B2A2AEA7F16E3 /* Embed Pods Frameworks */,
+				A0805DD9178447DEADC7AC9A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,6 +368,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2B0849479192174B8D3096F3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4D227E75E49B2A2AEA7F16E3 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0805DD9178447DEADC7AC9A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AA0163271CD2073B00EA1619 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -261,7 +423,14 @@
 			files = (
 				AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */,
 				AA0163371CD2073B00EA1619 /* StoreOnGoApp.xcdatamodeld in Sources */,
+				AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */,
+				AA0163751CD20D8500EA1619 /* CX_Products.m in Sources */,
+				AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */,
+				AA0163771CD20D8500EA1619 /* CX_Product_Category.m in Sources */,
 				AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */,
+				AA0163741CD20D8500EA1619 /* CX_Products+CoreDataProperties.m in Sources */,
+				AA0163761CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m in Sources */,
+				AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,23 +568,30 @@
 		};
 		AA0163571CD2073B00EA1619 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 453DFE9D84B6E088522E0E8A /* Pods-StoreOnGoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = StoreOnGoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.date.StoreOnGoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StoreOnGoApp/StoreOnGoApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		AA0163581CD2073B00EA1619 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D77281171B74087A9E5F6F2 /* Pods-StoreOnGoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = StoreOnGoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.date.StoreOnGoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StoreOnGoApp/StoreOnGoApp-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -486,6 +662,7 @@
 				AA0163581CD2073B00EA1619 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA0163591CD2073B00EA1619 /* Build configuration list for PBXNativeTarget "StoreOnGoAppTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +671,7 @@
 				AA01635B1CD2073B00EA1619 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA01635C1CD2073B00EA1619 /* Build configuration list for PBXNativeTarget "StoreOnGoAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +680,7 @@
 				AA01635E1CD2073B00EA1619 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
