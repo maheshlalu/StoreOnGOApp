@@ -155,5 +155,44 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     }
 }
 
+/*
+ 
+ var homeList:[String] = ["setting", "fetured", "offer","aboutus"]
+ 
+ 
+ override func viewDidLoad() {
+ super.viewDidLoad()
+ // Do any additional setup after loading the view, typically from a nib.
+ 
+ //http://randexdev.com/2014/07/uicollectionview/
+ 
+ let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+ layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+ layout.itemSize = CGSize(width: 192, height: 140)
+ 
+ collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+ collectionView.dataSource = self
+ collectionView.delegate = self
+ collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+ collectionView.backgroundColor = UIColor.whiteColor()
+ self.view.addSubview(collectionView)
+ }
+ 
+ override func didReceiveMemoryWarning() {
+ super.didReceiveMemoryWarning()
+ // Dispose of any resources that can be recreated.
+ }
+ 
+ func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+ return homeList.count
+ }
+ 
+ func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+ let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
+ cell.backgroundColor = UIColor.redColor()
+ return cell
+ }
+
+ */
 
 
