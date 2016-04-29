@@ -26,7 +26,8 @@ class CXConstant: NSObject {
 
 
     static let tableViewHeigh : CGFloat = 280
-    
+    static let screenSize = UIScreen.mainScreen().bounds.size
+
     static let someString : String = "Some Text" // struct
     static let collectiViewCellSize :  CGSize = CGSize(width: UIScreen.mainScreen().bounds.size.width-20,height: tableViewHeigh-50)
     
@@ -36,13 +37,14 @@ class CXConstant: NSObject {
     
     
     static let collectionCellborderColor : UIColor = UIColor(red: 191.0/255.0, green: 191.0/255.0, blue: 191.0/255.0, alpha: 1.0)
+    
+    static let collectionFram : CGRect = CGRectMake(0, 300,screenSize.width, screenSize.height-300)
 
     
     static let DetailTableView_Width = UIScreen.mainScreen().bounds.width-20
-    static let DetailCollectionCellSize :  CGSize = CGSize(width: 180,height: tableViewHeigh-50)
+    static let DetailCollectionCellSize :  CGSize = CGSize(width: 190,height: tableViewHeigh-80)
     static let MallID = "4452"
-    static let screenSize = UIScreen.mainScreen().bounds.size
-        
+    
         //CGSize(width: UIScreen.mainScreen().bounds.size.width-20,height: tableViewHeigh-50)
         
         ///

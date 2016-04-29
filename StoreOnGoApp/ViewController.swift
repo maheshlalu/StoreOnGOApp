@@ -13,7 +13,8 @@ class ViewController: UIViewController{
     
    // var imagePager : KIImagePager = KIImagePager()
     var homeCollectionView: UICollectionView!
-    
+    let homeList: [String] = ["Products", "Feature Products","Offers","About Us"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
@@ -25,8 +26,7 @@ class ViewController: UIViewController{
         
         self.callsServices()
         //self.setupPagenator()
-        //self.setupCollectionView()
-        
+        self.setupCollectionView()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -57,12 +57,12 @@ class ViewController: UIViewController{
     func setupCollectionView (){
         
         let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CXConstant.DetailCollectionCellSize
-        self.homeCollectionView = UICollectionView(frame: CGRectMake(0, 300, CXConstant.screenSize.width, 400), collectionViewLayout: layout)
+        self.homeCollectionView = UICollectionView(frame: CXConstant.collectionFram, collectionViewLayout: layout)
         self.homeCollectionView.showsHorizontalScrollIndicator = false
-        self.homeCollectionView.frame = CXConstant.DetailCollectionViewFrame
         layout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        self.homeCollectionView.registerClass(CXDetailCollectionViewCell.self, forCellWithReuseIdentifier: "DetailCollectionViewCell")
+        self.homeCollectionView.registerClass(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "HomeCollectionViewCell")
         self.homeCollectionView.backgroundColor = UIColor.clearColor()
         self.view.addSubview(self.homeCollectionView)
         self.setCollectionViewDataSourceDelegate(self, forRow: 0)
@@ -141,18 +141,29 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             // let prodCategory:CX_Product_Category = self.mallProductCategories[collectionView.tag] as! CX_Product_Category
             // let products:NSArray = self.getProducts(prodCategory)
             
-            return 4;
+            return homeList.count;
     }
     
     func collectionView(collectionView: UICollectionView,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            let identifier = "DetailCollectionViewCell"
-            let cell: CXDetailCollectionViewCell! = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?CXDetailCollectionViewCell
+            let identifier = "HomeCollectionViewCell"
+            let cell: HomeCollectionViewCell! = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?HomeCollectionViewCell
             if cell == nil {
-                collectionView.registerNib(UINib(nibName: "CXDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
+                collectionView.registerNib(UINib(nibName: "HomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
             }
+        cell.backgroundColor = UIColor.redColor()
+        cell.titleLabel.text = homeList[indexPath.row]
             return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
+        let productView = ProductsCnt.init()
+        self.navigationController?.pushViewController(productView, animated: true)
+        
+    }
+    
+    
 }
 
 /*
