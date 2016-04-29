@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1202FB0B1CD323D400EF8F5B /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */; };
 		1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */; };
+		12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */; };
 		99A2353B9D399DEC7EB49FFF /* Pods_StoreOnGoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682EC0A3E7BA1A60207CFFA7 /* Pods_StoreOnGoApp.framework */; };
 		AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01632E1CD2073B00EA1619 /* AppDelegate.swift */; };
 		AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163301CD2073B00EA1619 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 		AA0163771CD20D8500EA1619 /* CX_Product_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0163731CD20D8500EA1619 /* CX_Product_Category.m */; };
 		AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163791CD20E1400EA1619 /* SMSyncService.swift */; };
 		AAF679331CD2644F001E1238 /* CXDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */; };
+		AAFDDAA68C54C910736A9062 /* Pods_StoreOnGoAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +48,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0145B61FE9DB76F9CCDB4E70 /* Pods-StoreOnGoAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCnt.swift; sourceTree = "<group>"; };
+		12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionCell.swift; sourceTree = "<group>"; };
+		639A3E67E26A3965EB6B1BC6 /* Pods-StoreOnGoAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		682EC0A3E7BA1A60207CFFA7 /* Pods_StoreOnGoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreOnGoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01632B1CD2073B00EA1619 /* StoreOnGoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreOnGoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01632E1CD2073B00EA1619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 		AA0163731CD20D8500EA1619 /* CX_Product_Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CX_Product_Category.m; sourceTree = "<group>"; };
 		AA0163791CD20E1400EA1619 /* SMSyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSyncService.swift; sourceTree = "<group>"; };
 		AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreOnGoAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1D4A9304C6D9CB12D45FA79 /* Pods-StoreOnGoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp.release.xcconfig"; sourceTree = "<group>"; };
 		F912ACE886EAFA7466710239 /* Pods-StoreOnGoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAFDDAA68C54C910736A9062 /* Pods_StoreOnGoAppUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +118,8 @@
 			children = (
 				F912ACE886EAFA7466710239 /* Pods-StoreOnGoApp.debug.xcconfig */,
 				F1D4A9304C6D9CB12D45FA79 /* Pods-StoreOnGoApp.release.xcconfig */,
+				639A3E67E26A3965EB6B1BC6 /* Pods-StoreOnGoAppUITests.debug.xcconfig */,
+				0145B61FE9DB76F9CCDB4E70 /* Pods-StoreOnGoAppUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -186,6 +195,7 @@
 		AA0163601CD20BBE00EA1619 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */,
 				1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */,
 			);
 			name = View;
@@ -244,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				682EC0A3E7BA1A60207CFFA7 /* Pods_StoreOnGoApp.framework */,
+				E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -293,9 +304,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA01635C1CD2073B00EA1619 /* Build configuration list for PBXNativeTarget "StoreOnGoAppUITests" */;
 			buildPhases = (
+				E7FC70BA74F4282A3025BAF7 /* Check Pods Manifest.lock */,
 				AA0163491CD2073B00EA1619 /* Sources */,
 				AA01634A1CD2073B00EA1619 /* Frameworks */,
 				AA01634B1CD2073B00EA1619 /* Resources */,
+				EB43BDEF3424A2489541632D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -423,6 +436,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E7FC70BA74F4282A3025BAF7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EB43BDEF3424A2489541632D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -439,6 +482,7 @@
 				AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */,
 				AA0163771CD20D8500EA1619 /* CX_Product_Category.m in Sources */,
 				AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */,
+				12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */,
 				AA0163741CD20D8500EA1619 /* CX_Products+CoreDataProperties.m in Sources */,
 				AA0163761CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m in Sources */,
 				AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */,
@@ -589,7 +633,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.date.StoreOnGoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "StoreOnGoApp/StoreOnGoApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/ramakuppa/StoreOnGOApp/StoreOnGoApp/StoreOnGoApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -605,7 +649,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.date.StoreOnGoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "StoreOnGoApp/StoreOnGoApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/ramakuppa/StoreOnGOApp/StoreOnGoApp/StoreOnGoApp-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -637,6 +681,7 @@
 		};
 		AA01635D1CD2073B00EA1619 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 639A3E67E26A3965EB6B1BC6 /* Pods-StoreOnGoAppUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = StoreOnGoAppUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -650,6 +695,7 @@
 		};
 		AA01635E1CD2073B00EA1619 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0145B61FE9DB76F9CCDB4E70 /* Pods-StoreOnGoAppUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = StoreOnGoAppUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

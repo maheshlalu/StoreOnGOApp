@@ -4,7 +4,7 @@
  use_frameworks!
 
 target 'StoreOnGoApp' do
-    pod 'KIImagePager', '~> 2.1'
+    pod 'KIImagePager'
 
 end
 

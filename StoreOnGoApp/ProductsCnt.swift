@@ -29,13 +29,14 @@ class ProductsCnt: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CXConstant.DetailCollectionCellSize
-        self.productCollectionView = UICollectionView(frame: CXConstant.collectionFram, collectionViewLayout: layout)
+        self.productCollectionView = UICollectionView(frame:self.view.frame, collectionViewLayout: layout)
         self.productCollectionView.showsHorizontalScrollIndicator = false
+        self.productCollectionView.delegate = self
+        self.productCollectionView.dataSource = self
         layout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        self.productCollectionView.registerClass(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "HomeCollectionViewCell")
+        self.productCollectionView.registerClass(ProductCollectionCell.self, forCellWithReuseIdentifier: "ProductCollectionCell")
         self.productCollectionView.backgroundColor = UIColor.clearColor()
         self.view.addSubview(self.productCollectionView)
-        
     }
     
     
@@ -54,12 +55,11 @@ extension ProductsCnt:UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView,
                         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let identifier = "HomeCollectionViewCell"
-        let cell: HomeCollectionViewCell! = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?HomeCollectionViewCell
+        let identifier = "ProductCollectionCell"
+        let cell: ProductCollectionCell! = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?ProductCollectionCell
         if cell == nil {
-            collectionView.registerNib(UINib(nibName: "HomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
+            collectionView.registerNib(UINib(nibName: "ProductCollectionCell", bundle: nil), forCellWithReuseIdentifier: identifier)
         }
-        cell.backgroundColor = UIColor.redColor()
         return cell
     }
     

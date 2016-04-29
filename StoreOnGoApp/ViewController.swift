@@ -18,6 +18,7 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        self.navigationController?.navigationBarHidden = true
         /*productCategory = ProductCategories.createEntity() as! ProductCategories
         productCategory.categoryName = "StoreOnGo"
         productCategory.dummyName = "dummyData"

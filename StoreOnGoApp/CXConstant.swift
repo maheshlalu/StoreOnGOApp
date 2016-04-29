@@ -36,8 +36,10 @@ class CXConstant: NSObject {
     static let titleLabelColor : UIColor = UIColor(red: 240.0/255.0, green: 40.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     
     
-    static let collectionCellborderColor : UIColor = UIColor(red: 191.0/255.0, green: 191.0/255.0, blue: 191.0/255.0, alpha: 1.0)
-    
+    static let collectionCellborderColor : UIColor = UIColor(red: 190.0/255.0, green: 210.0/255.0, blue: 220.0/255.0, alpha: 1.0)
+    ///211,41,39
+    static let collectionCellBgColor : UIColor = UIColor(red: 211.0/255.0, green: 41.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+
     static let collectionFram : CGRect = CGRectMake(0, 300,screenSize.width, screenSize.height-300)
 
     
