@@ -11,7 +11,7 @@ import UIKit
 
 class ViewController: UIViewController{
     
-   // var imagePager : KIImagePager = KIImagePager()
+    var imagePager : KIImagePager = KIImagePager()
     var homeCollectionView: UICollectionView!
     let homeList: [String] = ["Products", "Feature Products","Offers","About Us"]
 
@@ -19,14 +19,8 @@ class ViewController: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationController?.navigationBarHidden = true
-        /*productCategory = ProductCategories.createEntity() as! ProductCategories
-        productCategory.categoryName = "StoreOnGo"
-        productCategory.dummyName = "dummyData"
-        
-        NSManagedObjectContext.defaultContext().saveToPersistentStoreAndWait()*/
-        
         self.callsServices()
-        //self.setupPagenator()
+        self.setupPagenator()
         self.setupCollectionView()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -39,7 +33,7 @@ class ViewController: UIViewController{
     
     // MARK: - SetUp Paginater
     
-   /* func setupPagenator (){
+   func setupPagenator (){
         
         imagePager.frame = CGRectMake(5, 50, CXConstant.screenSize.width-10, 250)
         imagePager.pageControl.currentPageIndicatorTintColor = UIColor.lightGrayColor()
@@ -50,7 +44,7 @@ class ViewController: UIViewController{
         imagePager.dataSource = self;
         //imagePager.checkWetherToToggleSlideshowTimer()
         self.view.addSubview(imagePager)
-    }*/
+    }
     
     
     //MARK: - Setup CollectionView
@@ -81,10 +75,11 @@ class ViewController: UIViewController{
     // MARK: - Call Services
     
     func callsServices () {
-        
-        //   BXProgressHUD.showHUDAddedTo(self.view).hide(afterDelay: 1)
-        SMSyncService.sharedInstance.startSyncProcessWithUrl("http://storeongo.com:8081/Services/getMasters?type=stores&mallId=4452") { (responseDict) in
-            // print("data array \(responseDict)")
+        self.callTheStoreServices()
+        return
+            //   BXProgressHUD.showHUDAddedTo(self.view).hide(afterDelay: 1)
+            SMSyncService.sharedInstance.startSyncProcessWithUrl("http://storeongo.com:8081/Services/getMasters?type=stores&mallId=4452") { (responseDict) in
+                // print("data array \(responseDict)")
         }
         
         let reqUrl = CXConstant.PRODUCT_CATEGORY_URL + CXConstant.MallID
@@ -93,7 +88,6 @@ class ViewController: UIViewController{
             // CXDBSettings.sharedInstance.saveProductCategoriesInDB(responseDict.valueForKey("jobs")! as! NSArray, catID: self.mall.mid!)
         }
         
-        self.callTheStoreServices()
         
     }
     
@@ -102,10 +96,12 @@ class ViewController: UIViewController{
         
         let reqUrl = CXConstant.STORES_URL + CXConstant.MallID
         SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
-            print ("stores   response   data \(responseDict.valueForKey("userdetails")! as! NSDictionary) ")
-            // CXDBSettings.sharedInstance.saveProductCategoriesInDB(responseDict.valueForKey("jobs")! as! NSArray, catID: self.mall.mid!)
+           // print ("stores   response   data \(responseDict.valueForKey("jobs")! as! NSArray) ")
+             CXDBSettings.sharedInstance.saveStoresInDB(responseDict.valueForKey("jobs")! as! NSArray)
             //userdetails
             //\(responseDict.valueForKey("jobs")! as! NSArray)
+            //   var unarchievedName =    NSKeyedUnarchiver.unarchiveObjectWithData(returnedData[i].valueForKey("name") as NSData) as String
+
         }
         
     }
@@ -115,7 +111,7 @@ class ViewController: UIViewController{
     
 }
 
-/*
+
 extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
     
     func arrayWithImages(pager: KIImagePager!) -> [AnyObject]! {
@@ -133,7 +129,7 @@ extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
     }
     
 }
-*/
+
 
 extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     
@@ -166,45 +162,3 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     
     
 }
-
-/*
- 
- var homeList:[String] = ["setting", "fetured", "offer","aboutus"]
- 
- 
- override func viewDidLoad() {
- super.viewDidLoad()
- // Do any additional setup after loading the view, typically from a nib.
- 
- //http://randexdev.com/2014/07/uicollectionview/
- 
- let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
- layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
- layout.itemSize = CGSize(width: 192, height: 140)
- 
- collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
- collectionView.dataSource = self
- collectionView.delegate = self
- collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
- collectionView.backgroundColor = UIColor.whiteColor()
- self.view.addSubview(collectionView)
- }
- 
- override func didReceiveMemoryWarning() {
- super.didReceiveMemoryWarning()
- // Dispose of any resources that can be recreated.
- }
- 
- func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
- return homeList.count
- }
- 
- func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
- let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
- cell.backgroundColor = UIColor.redColor()
- return cell
- }
-
- */
-
-

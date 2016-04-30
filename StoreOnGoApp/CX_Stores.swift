@@ -1,15 +1,17 @@
 //
-//  CX_Product_Category.m
+//  CX_Stores.swift
 //  StoreOnGoApp
 //
-//  Created by Mahesh Y on 28/04/16.
+//  Created by Rama kuppa on 30/04/16.
 //  Copyright © 2016 CX. All rights reserved.
 //
 
-#import "CX_Product_Category.h"
+import Foundation
+import CoreData
 
-@implementation CX_Product_Category
+
+class CX_Stores: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 
-@end
+}

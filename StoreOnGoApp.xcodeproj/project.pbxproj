@@ -9,8 +9,16 @@
 /* Begin PBXBuildFile section */
 		1202FB0B1CD323D400EF8F5B /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */; };
 		1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */; };
+		1220DCCF1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCB1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift */; };
+		1220DCD01CD44E5600A78C3B /* CX_Product_Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCC1CD44E5600A78C3B /* CX_Product_Category.swift */; };
+		1220DCD11CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCD1CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift */; };
+		1220DCD21CD44E5600A78C3B /* CX_Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCE1CD44E5600A78C3B /* CX_Products.swift */; };
+		1220DCD51CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCD31CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift */; };
+		1220DCD61CD4515300A78C3B /* CX_Stores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCD41CD4515300A78C3B /* CX_Stores.swift */; };
 		12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */; };
-		99A2353B9D399DEC7EB49FFF /* Pods_StoreOnGoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682EC0A3E7BA1A60207CFFA7 /* Pods_StoreOnGoApp.framework */; };
+		12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859581CD3E1CD007BE1D0 /* KICamera.png */; };
+		12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */; };
+		12F8595E1CD3E1CD007BE1D0 /* KIImagePager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8595B1CD3E1CD007BE1D0 /* KIImagePager.m */; };
 		AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01632E1CD2073B00EA1619 /* AppDelegate.swift */; };
 		AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163301CD2073B00EA1619 /* ViewController.swift */; };
 		AA0163341CD2073B00EA1619 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA0163321CD2073B00EA1619 /* Main.storyboard */; };
@@ -21,10 +29,6 @@
 		AA0163521CD2073B00EA1619 /* StoreOnGoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163511CD2073B00EA1619 /* StoreOnGoAppUITests.swift */; };
 		AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163631CD20BE900EA1619 /* CXDBSettings.swift */; };
 		AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163661CD20C0F00EA1619 /* CXConstant.swift */; };
-		AA0163741CD20D8500EA1619 /* CX_Products+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01636D1CD20D8500EA1619 /* CX_Products+CoreDataProperties.m */; };
-		AA0163751CD20D8500EA1619 /* CX_Products.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01636F1CD20D8500EA1619 /* CX_Products.m */; };
-		AA0163761CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0163711CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m */; };
-		AA0163771CD20D8500EA1619 /* CX_Product_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0163731CD20D8500EA1619 /* CX_Product_Category.m */; };
 		AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163791CD20E1400EA1619 /* SMSyncService.swift */; };
 		AAF679331CD2644F001E1238 /* CXDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */; };
 		AAFDDAA68C54C910736A9062 /* Pods_StoreOnGoAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */; };
@@ -51,7 +55,18 @@
 		0145B61FE9DB76F9CCDB4E70 /* Pods-StoreOnGoAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCnt.swift; sourceTree = "<group>"; };
+		1220DCCB1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Product_Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1220DCCC1CD44E5600A78C3B /* CX_Product_Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Product_Category.swift; sourceTree = "<group>"; };
+		1220DCCD1CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Products+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1220DCCE1CD44E5600A78C3B /* CX_Products.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Products.swift; sourceTree = "<group>"; };
+		1220DCD31CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Stores+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1220DCD41CD4515300A78C3B /* CX_Stores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Stores.swift; sourceTree = "<group>"; };
 		12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionCell.swift; sourceTree = "<group>"; };
+		12F8594B1CD3DE6E007BE1D0 /* StoreOnGoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StoreOnGoApp-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		12F859581CD3E1CD007BE1D0 /* KICamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KICamera.png; sourceTree = "<group>"; };
+		12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KICamera@2x.png"; sourceTree = "<group>"; };
+		12F8595A1CD3E1CD007BE1D0 /* KIImagePager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIImagePager.h; sourceTree = "<group>"; };
+		12F8595B1CD3E1CD007BE1D0 /* KIImagePager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIImagePager.m; sourceTree = "<group>"; };
 		639A3E67E26A3965EB6B1BC6 /* Pods-StoreOnGoAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		682EC0A3E7BA1A60207CFFA7 /* Pods_StoreOnGoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreOnGoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01632B1CD2073B00EA1619 /* StoreOnGoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreOnGoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,15 +85,6 @@
 		AA0163531CD2073B00EA1619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA0163631CD20BE900EA1619 /* CXDBSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDBSettings.swift; sourceTree = "<group>"; };
 		AA0163661CD20C0F00EA1619 /* CXConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXConstant.swift; sourceTree = "<group>"; };
-		AA0163681CD20CB400EA1619 /* StoreOnGoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StoreOnGoApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		AA01636C1CD20D8500EA1619 /* CX_Products+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CX_Products+CoreDataProperties.h"; sourceTree = "<group>"; };
-		AA01636D1CD20D8500EA1619 /* CX_Products+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CX_Products+CoreDataProperties.m"; sourceTree = "<group>"; };
-		AA01636E1CD20D8500EA1619 /* CX_Products.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CX_Products.h; sourceTree = "<group>"; };
-		AA01636F1CD20D8500EA1619 /* CX_Products.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CX_Products.m; sourceTree = "<group>"; };
-		AA0163701CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CX_Product_Category+CoreDataProperties.h"; sourceTree = "<group>"; };
-		AA0163711CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CX_Product_Category+CoreDataProperties.m"; sourceTree = "<group>"; };
-		AA0163721CD20D8500EA1619 /* CX_Product_Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CX_Product_Category.h; sourceTree = "<group>"; };
-		AA0163731CD20D8500EA1619 /* CX_Product_Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CX_Product_Category.m; sourceTree = "<group>"; };
 		AA0163791CD20E1400EA1619 /* SMSyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSyncService.swift; sourceTree = "<group>"; };
 		AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreOnGoAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +97,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99A2353B9D399DEC7EB49FFF /* Pods_StoreOnGoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +118,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1220DCD71CD4DC7900A78C3B /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				12F859581CD3E1CD007BE1D0 /* KICamera.png */,
+				12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */,
+				12F8595A1CD3E1CD007BE1D0 /* KIImagePager.h */,
+				12F8595B1CD3E1CD007BE1D0 /* KIImagePager.m */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
 		1B7749A9A6B71BB821339F46 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +165,7 @@
 		AA01632D1CD2073B00EA1619 /* StoreOnGoApp */ = {
 			isa = PBXGroup;
 			children = (
+				1220DCD71CD4DC7900A78C3B /* ThirdParty */,
 				AA0163611CD20BC300EA1619 /* Controller */,
 				AA0163601CD20BBE00EA1619 /* View */,
 				AA01635F1CD20BB500EA1619 /* Model */,
@@ -158,7 +175,7 @@
 				AA01633A1CD2073B00EA1619 /* LaunchScreen.storyboard */,
 				AA01633D1CD2073B00EA1619 /* Info.plist */,
 				AA0163351CD2073B00EA1619 /* StoreOnGoApp.xcdatamodeld */,
-				AA0163681CD20CB400EA1619 /* StoreOnGoApp-Bridging-Header.h */,
+				12F8594B1CD3DE6E007BE1D0 /* StoreOnGoApp-Bridging-Header.h */,
 			);
 			path = StoreOnGoApp;
 			sourceTree = "<group>";
@@ -230,14 +247,12 @@
 		AA01636B1CD20D6D00EA1619 /* manageObjects */ = {
 			isa = PBXGroup;
 			children = (
-				AA01636C1CD20D8500EA1619 /* CX_Products+CoreDataProperties.h */,
-				AA01636D1CD20D8500EA1619 /* CX_Products+CoreDataProperties.m */,
-				AA01636E1CD20D8500EA1619 /* CX_Products.h */,
-				AA01636F1CD20D8500EA1619 /* CX_Products.m */,
-				AA0163701CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.h */,
-				AA0163711CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m */,
-				AA0163721CD20D8500EA1619 /* CX_Product_Category.h */,
-				AA0163731CD20D8500EA1619 /* CX_Product_Category.m */,
+				1220DCCB1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift */,
+				1220DCCC1CD44E5600A78C3B /* CX_Product_Category.swift */,
+				1220DCCD1CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift */,
+				1220DCCE1CD44E5600A78C3B /* CX_Products.swift */,
+				1220DCD31CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift */,
+				1220DCD41CD4515300A78C3B /* CX_Stores.swift */,
 			);
 			name = manageObjects;
 			sourceTree = "<group>";
@@ -368,6 +383,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */,
+				12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */,
 				AA01633C1CD2073B00EA1619 /* LaunchScreen.storyboard in Resources */,
 				AA0163391CD2073B00EA1619 /* Assets.xcassets in Resources */,
 				AA0163341CD2073B00EA1619 /* Main.storyboard in Resources */,
@@ -403,7 +420,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 		4D227E75E49B2A2AEA7F16E3 /* Embed Pods Frameworks */ = {
@@ -418,7 +435,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp-frameworks.sh\"\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 		A0805DD9178447DEADC7AC9A /* Copy Pods Resources */ = {
@@ -433,7 +450,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp-resources.sh\"\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 		E7FC70BA74F4282A3025BAF7 /* Check Pods Manifest.lock */ = {
@@ -474,18 +491,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */,
+				1220DCD01CD44E5600A78C3B /* CX_Product_Category.swift in Sources */,
 				AA0163371CD2073B00EA1619 /* StoreOnGoApp.xcdatamodeld in Sources */,
 				1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */,
 				AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */,
 				AAF679331CD2644F001E1238 /* CXDetailCollectionViewCell.swift in Sources */,
-				AA0163751CD20D8500EA1619 /* CX_Products.m in Sources */,
+				12F8595E1CD3E1CD007BE1D0 /* KIImagePager.m in Sources */,
+				1220DCCF1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift in Sources */,
+				1220DCD11CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift in Sources */,
 				AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */,
-				AA0163771CD20D8500EA1619 /* CX_Product_Category.m in Sources */,
+				1220DCD51CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift in Sources */,
 				AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */,
 				12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */,
-				AA0163741CD20D8500EA1619 /* CX_Products+CoreDataProperties.m in Sources */,
-				AA0163761CD20D8500EA1619 /* CX_Product_Category+CoreDataProperties.m in Sources */,
+				1220DCD61CD4515300A78C3B /* CX_Stores.swift in Sources */,
 				AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */,
+				1220DCD21CD44E5600A78C3B /* CX_Products.swift in Sources */,
 				1202FB0B1CD323D400EF8F5B /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -633,7 +653,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.date.StoreOnGoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/ramakuppa/StoreOnGOApp/StoreOnGoApp/StoreOnGoApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "StoreOnGoApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -649,7 +669,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.date.StoreOnGoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/ramakuppa/StoreOnGOApp/StoreOnGoApp/StoreOnGoApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "StoreOnGoApp-Bridging-Header.h";
 			};
 			name = Release;
 		};

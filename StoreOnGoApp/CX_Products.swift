@@ -1,15 +1,17 @@
 //
-//  CX_Products.m
+//  CX_Products.swift
 //  StoreOnGoApp
 //
-//  Created by Mahesh Y on 28/04/16.
+//  Created by Rama kuppa on 30/04/16.
 //  Copyright © 2016 CX. All rights reserved.
 //
 
-#import "CX_Products.h"
+import Foundation
+import CoreData
 
-@implementation CX_Products
+
+class CX_Products: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 
-@end
+}
