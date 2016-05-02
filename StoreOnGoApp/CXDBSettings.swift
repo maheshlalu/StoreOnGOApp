@@ -68,8 +68,6 @@ class CXDBSettings: NSObject {
     
     /*
      9618665901
-     
-     
      func getAllMallsInDB() -> NSArray{
      let managedContext = self.appDelegate.managedObjectContext
      let fetchRequest = NSFetchRequest(entityName: "CX_AllMalls")
@@ -202,6 +200,40 @@ class CXDBSettings: NSObject {
             } catch let error as NSError  {
                 print("Could not save \(error), \(error.userInfo)")
             }
+        }
+        
+    }
+    
+    //MARK : Featured products
+    
+    func saveFeaturedProducts(products:NSArray){
+        
+        print("featured products \(products)")
+        
+        let managedObjContext = self.appDelegate.managedObjectContext
+        let featureProductEn = NSEntityDescription.entityForName("CX_FeaturedProducts", inManagedObjectContext: managedObjContext)
+        
+        for prod in products {
+            
+            let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+            let predicate:NSPredicate = NSPredicate(format: "id = %@", itemID)
+            if self.getRequiredItemsFromDB("CX_FeaturedProducts", predicate: predicate).count == 0 {
+            let enProduct = CX_FeaturedProducts(entity: featureProductEn!,insertIntoManagedObjectContext: managedObjContext)
+            enProduct.id = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+            enProduct.itemCode = CXConstant.sharedInstance.resultString(prod.valueForKey("ItemCode")!)
+            enProduct.jobTypeId = CXConstant.sharedInstance.resultString(prod.valueForKey("jobTypeId")!)
+            enProduct.jobTypeName = prod.valueForKey("jobTypeName") as? String
+            enProduct.createdByFullName = prod.valueForKey("createdByFullName") as? String
+            enProduct.name = prod.valueForKey("Name") as? String
+            enProduct.publicURL = prod.valueForKey("publicURL") as? String
+            enProduct.campaign_Jobs = prod.valueForKey("Campaign_Jobs") as? String
+            do {
+                try managedObjContext.save()
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+
+        }
         }
         
     }

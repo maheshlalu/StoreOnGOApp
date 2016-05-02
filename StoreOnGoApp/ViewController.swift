@@ -24,9 +24,9 @@ class ViewController: UIViewController{
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationController?.navigationBarHidden = true
         self.designHeaderView()
+        CX_AppData.sharedInstance.dataDelegate = self
         CX_AppData.sharedInstance.getStoresData()
         self.setupCollectionView()
-        self.getStores()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -41,7 +41,6 @@ class ViewController: UIViewController{
 
     
     //MARK : HeaderView
-    
     func designHeaderView (){
         
         self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
@@ -52,7 +51,6 @@ class ViewController: UIViewController{
     }
     
     //MARK : SearchBar
-    
     func designSearchBar (){
      
         self.searchBar = SearchBar.designSearchBar()
@@ -60,10 +58,7 @@ class ViewController: UIViewController{
         self.view.addSubview(self.searchBar)
     }
 
-    
-    
     //MARK: Get Stores
-    
     func getStores(){
         let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
        self.coverPageImagesList = storesData.attachments as? NSMutableArray
@@ -109,7 +104,6 @@ class ViewController: UIViewController{
         self.homeCollectionView.dataSource = dataSourceDelegate
         self.homeCollectionView.reloadData()
     }
-    
     
     
     // MARK: - Call Services
@@ -189,17 +183,22 @@ extension ViewController:UISearchBarDelegate{
 
     }
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
         print("search string \(searchText)")
-        
     }
 
 }
 
 extension ViewController: DetailViewControllerDelegate {
     func didFinishTask(sender: HeaderView) {
-        
-        
         // do stuff like updating the UI
     }
+}
+
+extension ViewController :AppDataDelegate {
+    
+    func completedTheFetchingTheData(sender: CX_AppData) {
+         self.getStores()
+
+    }
+
 }

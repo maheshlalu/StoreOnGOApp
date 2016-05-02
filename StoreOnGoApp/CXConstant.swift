@@ -92,7 +92,8 @@ class CXConstant: NSObject {
     
     static let PRODUCT_CATEGORY_URL = "http://storeongo.com:8081/Services/getMasters?type=productCategories&mallId="
     static let STORES_URL = "http://storeongo.com:8081/Services/getMasters?type=stores&mallId="
-    
+    static let FEATUREDPRODUCT_URL = "http://storeongo.com:8081/Services/getMasters?type=featured%20products&mallId="
+
     
     //http://storeongo.com:8081/Services/getMasters?type=productCategories&mallId=4452
     

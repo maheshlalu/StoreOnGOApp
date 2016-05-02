@@ -35,6 +35,8 @@
 		AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163631CD20BE900EA1619 /* CXDBSettings.swift */; };
 		AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163661CD20C0F00EA1619 /* CXConstant.swift */; };
 		AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163791CD20E1400EA1619 /* SMSyncService.swift */; };
+		AA833A141CD7861A00ABFCC1 /* CX_FeaturedProducts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA833A121CD7861A00ABFCC1 /* CX_FeaturedProducts+CoreDataProperties.swift */; };
+		AA833A151CD7861A00ABFCC1 /* CX_FeaturedProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA833A131CD7861A00ABFCC1 /* CX_FeaturedProducts.swift */; };
 		AAF679331CD2644F001E1238 /* CXDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */; };
 		AAFDDAA68C54C910736A9062 /* Pods_StoreOnGoAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -96,6 +98,8 @@
 		AA0163631CD20BE900EA1619 /* CXDBSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDBSettings.swift; sourceTree = "<group>"; };
 		AA0163661CD20C0F00EA1619 /* CXConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXConstant.swift; sourceTree = "<group>"; };
 		AA0163791CD20E1400EA1619 /* SMSyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSyncService.swift; sourceTree = "<group>"; };
+		AA833A121CD7861A00ABFCC1 /* CX_FeaturedProducts+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_FeaturedProducts+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AA833A131CD7861A00ABFCC1 /* CX_FeaturedProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_FeaturedProducts.swift; sourceTree = "<group>"; };
 		AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreOnGoAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1D4A9304C6D9CB12D45FA79 /* Pods-StoreOnGoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 				1220DCCE1CD44E5600A78C3B /* CX_Products.swift */,
 				1220DCD31CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift */,
 				1220DCD41CD4515300A78C3B /* CX_Stores.swift */,
+				AA833A121CD7861A00ABFCC1 /* CX_FeaturedProducts+CoreDataProperties.swift */,
+				AA833A131CD7861A00ABFCC1 /* CX_FeaturedProducts.swift */,
 			);
 			name = manageObjects;
 			sourceTree = "<group>";
@@ -507,6 +513,7 @@
 			files = (
 				AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */,
 				1220DCD01CD44E5600A78C3B /* CX_Product_Category.swift in Sources */,
+				AA833A151CD7861A00ABFCC1 /* CX_FeaturedProducts.swift in Sources */,
 				12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */,
 				AA0163371CD2073B00EA1619 /* StoreOnGoApp.xcdatamodeld in Sources */,
 				1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */,
@@ -520,6 +527,7 @@
 				1220DCD51CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift in Sources */,
 				AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */,
 				12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */,
+				AA833A141CD7861A00ABFCC1 /* CX_FeaturedProducts+CoreDataProperties.swift in Sources */,
 				1220DCD61CD4515300A78C3B /* CX_Stores.swift in Sources */,
 				AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */,
 				12F64D911CD63A08007D760C /* CXDetailTableViewCell.swift in Sources */,
