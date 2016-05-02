@@ -15,6 +15,8 @@ class FeatureProductsCnt: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customizeView()
+        self.setTheNavigationProperty()
+
         // Do any additional setup after loading the view.
     }
 
@@ -22,9 +24,18 @@ class FeatureProductsCnt: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func setTheNavigationProperty(){
+        super.viewDidLoad()
+        self.title = "WELOCOME TO NV AGENCIES"
+        //self.designHeaderView()
+        self.navigationController?.navigationBarHidden = false
+        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController!.navigationBar.barTintColor = UIColor.redColor()
+        navigationController!.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.whiteColor()]
+    }
     
     func customizeView () {
-        self.designHeaderView()
         self.feturedProductTbl = self.customizeTableView(CGRectMake(0, CXConstant.headerViewHeigh, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh))
         self.view.addSubview(self.feturedProductTbl)
         

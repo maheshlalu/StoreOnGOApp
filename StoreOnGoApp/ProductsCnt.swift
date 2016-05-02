@@ -17,11 +17,25 @@ class ProductsCnt: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        self.setTheNavigationProperty()
         //self.designHeaderView()
-        self.navigationController?.navigationBarHidden = false
         self.setupCollectionView()
         self.getProducts()
+        
+       
+        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func setTheNavigationProperty(){
+        super.viewDidLoad()
+        self.title = "WELOCOME TO NV AGENCIES"
+        //self.designHeaderView()
+        self.navigationController?.navigationBarHidden = false
+        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController!.navigationBar.barTintColor = UIColor.redColor()
+        navigationController!.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,13 +43,14 @@ class ProductsCnt: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
     func setupCollectionView (){
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CXConstant.DetailCollectionCellSize
         //self.view.frame
-        self.productCollectionView = UICollectionView(frame:CGRectMake(0, CXConstant.headerViewHeigh, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
+        self.productCollectionView = UICollectionView(frame:CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
         self.productCollectionView.showsHorizontalScrollIndicator = false
         self.productCollectionView.delegate = self
         self.productCollectionView.dataSource = self

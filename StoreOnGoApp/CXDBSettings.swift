@@ -207,14 +207,10 @@ class CXDBSettings: NSObject {
     //MARK : Featured products
     
     func saveFeaturedProducts(products:NSArray){
-        
         print("featured products \(products)")
-        
         let managedObjContext = self.appDelegate.managedObjectContext
         let featureProductEn = NSEntityDescription.entityForName("CX_FeaturedProducts", inManagedObjectContext: managedObjContext)
-        
         for prod in products {
-            
             let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
             let predicate:NSPredicate = NSPredicate(format: "id = %@", itemID)
             if self.getRequiredItemsFromDB("CX_FeaturedProducts", predicate: predicate).count == 0 {

@@ -47,7 +47,7 @@ class CXDetailTableViewCell: UITableViewCell {
         self.bgView.layer.borderColor = UIColor.grayColor().CGColor
         self.bgView.layer.borderWidth = 1.0
         self.bgView.backgroundColor = UIColor.whiteColor()
-        self.addSubview(self.bgView)
+        //self.addSubview(self.bgView)
         
         self.headerLbl.frame = CGRectMake(0, 0, self.bgView.frame.size.width, 30)
         self.headerLbl.font = UIFont(name:"Roboto-Bold", size:16)

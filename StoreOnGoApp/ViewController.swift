@@ -166,11 +166,30 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
-       // let fetureProductView = FeatureProductsCnt.init()
-       // self.navigationController?.pushViewController(fetureProductView, animated: true)
+        
+        var index = indexPath.row
+        
+        switch index {
+        case 0  :
+            let productView = ProductsCnt.init()
+            self.navigationController?.pushViewController(productView, animated: true)
+            
+            break
+        case 1 :
+            let fetureProductView = FeatureProductsCnt.init()
+            self.navigationController?.pushViewController(fetureProductView, animated: true)
+            
+            
+            break
+        case 2  :
+            
+            break
+        default :
+            
+            break
+        }
+        
 
-        let productView = ProductsCnt.init()
-        self.navigationController?.pushViewController(productView, animated: true)
         
     }
     
