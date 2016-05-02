@@ -14,15 +14,19 @@ class ViewController: UIViewController{
     var imagePager : KIImagePager = KIImagePager()
     var homeCollectionView: UICollectionView!
     let homeList: [String] = ["Products", "Feature Products","Offers","About Us"]
+    var coverPageImagesList: NSMutableArray!
+    var headerview: HeaderView!
+    var searchBar: SearchBar!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationController?.navigationBarHidden = true
-        self.callsServices()
-        self.setupPagenator()
+        self.designHeaderView()
+        CX_AppData.sharedInstance.getStoresData()
         self.setupCollectionView()
-        
+        self.getStores()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -30,12 +34,48 @@ class ViewController: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = true
+    }
+
+    
+    //MARK : HeaderView
+    
+    func designHeaderView (){
+        
+        self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
+        self.view.addSubview(self.headerview)
+        self.headerview.delegate = self
+        self.designSearchBar()
+        
+    }
+    
+    //MARK : SearchBar
+    
+    func designSearchBar (){
+     
+        self.searchBar = SearchBar.designSearchBar()
+        self.searchBar.delegate = self
+        self.view.addSubview(self.searchBar)
+    }
+
+    
+    
+    //MARK: Get Stores
+    
+    func getStores(){
+        let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
+       self.coverPageImagesList = storesData.attachments as? NSMutableArray
+          print("data array \(storesData.attachments)")
+        self.setupPagenator()
+    }
     
     // MARK: - SetUp Paginater
     
    func setupPagenator (){
         
-        imagePager.frame = CGRectMake(5, 50, CXConstant.screenSize.width-10, 250)
+        imagePager.frame = CXConstant.pagerFrame
         imagePager.pageControl.currentPageIndicatorTintColor = UIColor.lightGrayColor()
         imagePager.pageControl.pageIndicatorTintColor = UIColor.blackColor();
         imagePager.slideshowTimeInterval = 2;
@@ -75,36 +115,14 @@ class ViewController: UIViewController{
     // MARK: - Call Services
     
     func callsServices () {
-        self.callTheStoreServices()
-        return
             //   BXProgressHUD.showHUDAddedTo(self.view).hide(afterDelay: 1)
             SMSyncService.sharedInstance.startSyncProcessWithUrl("http://storeongo.com:8081/Services/getMasters?type=stores&mallId=4452") { (responseDict) in
                 // print("data array \(responseDict)")
         }
-        
-        let reqUrl = CXConstant.PRODUCT_CATEGORY_URL + CXConstant.MallID
-        SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
-            print ("Product category response \(responseDict)")
-            // CXDBSettings.sharedInstance.saveProductCategoriesInDB(responseDict.valueForKey("jobs")! as! NSArray, catID: self.mall.mid!)
-        }
-        
-        
+     
     }
     
     
-    func callTheStoreServices(){
-        
-        let reqUrl = CXConstant.STORES_URL + CXConstant.MallID
-        SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
-           // print ("stores   response   data \(responseDict.valueForKey("jobs")! as! NSArray) ")
-             CXDBSettings.sharedInstance.saveStoresInDB(responseDict.valueForKey("jobs")! as! NSArray)
-            //userdetails
-            //\(responseDict.valueForKey("jobs")! as! NSArray)
-            //   var unarchievedName =    NSKeyedUnarchiver.unarchiveObjectWithData(returnedData[i].valueForKey("name") as NSData) as String
-
-        }
-        
-    }
     
     // MARK: - Call Services
     
@@ -113,20 +131,19 @@ class ViewController: UIViewController{
 
 
 extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
-    
-    func arrayWithImages(pager: KIImagePager!) -> [AnyObject]! {
-        
-        return [
-            "https://raw.github.com/kimar/tapebooth/master/Screenshots/Screen1.png",
-            "https://raw.github.com/kimar/tapebooth/master/Screenshots/Screen2.png",
-            "https://raw.github.com/kimar/tapebooth/master/Screenshots/Screen3.png"
-        ];
-    }
+
+//    }
     
     func contentModeForImage(image: UInt, inPager pager: KIImagePager!) -> UIViewContentMode {
         
         return .ScaleAspectFill
     }
+    
+    func arrayWithImages(pager: KIImagePager!) -> [AnyObject]! {
+        return self.coverPageImagesList as [AnyObject]
+    }
+    
+    
     
 }
 
@@ -155,10 +172,34 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
+       // let fetureProductView = FeatureProductsCnt.init()
+       // self.navigationController?.pushViewController(fetureProductView, animated: true)
+
         let productView = ProductsCnt.init()
         self.navigationController?.pushViewController(productView, animated: true)
         
     }
     
-    
+}
+
+
+extension ViewController:UISearchBarDelegate{
+    func searchBarSearchButtonClicked( searchBar: UISearchBar)
+    {
+
+    }
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        print("search string \(searchText)")
+        
+    }
+
+}
+
+extension ViewController: DetailViewControllerDelegate {
+    func didFinishTask(sender: HeaderView) {
+        
+        
+        // do stuff like updating the UI
+    }
 }

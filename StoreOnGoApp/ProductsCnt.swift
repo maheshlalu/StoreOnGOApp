@@ -10,12 +10,17 @@ import UIKit
 
 class ProductsCnt: UIViewController {
     var productCollectionView: UICollectionView!
+    var productCategories: NSMutableArray!
+    var headerview: HeaderView!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        //self.designHeaderView()
+        self.navigationController?.navigationBarHidden = false
         self.setupCollectionView()
+        self.getProducts()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -29,7 +34,8 @@ class ProductsCnt: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CXConstant.DetailCollectionCellSize
-        self.productCollectionView = UICollectionView(frame:self.view.frame, collectionViewLayout: layout)
+        //self.view.frame
+        self.productCollectionView = UICollectionView(frame:CGRectMake(0, CXConstant.headerViewHeigh, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
         self.productCollectionView.showsHorizontalScrollIndicator = false
         self.productCollectionView.delegate = self
         self.productCollectionView.dataSource = self
@@ -39,6 +45,18 @@ class ProductsCnt: UIViewController {
         self.view.addSubview(self.productCollectionView)
     }
     
+    func getProducts(){
+         let productCatList :NSArray  = (CXDBSettings.sharedInstance.getTableData("CX_Product_Category") as? NSArray)!
+        self.productCategories = NSMutableArray(array: productCatList)
+        self.productCollectionView.reloadData()
+
+    }
+    func designHeaderView (){
+        
+        self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "",backButtonVisible: true)
+        self.view.addSubview(self.headerview)
+        
+    }
     
     
 }
@@ -50,7 +68,7 @@ extension ProductsCnt:UICollectionViewDelegate,UICollectionViewDataSource {
         // let prodCategory:CX_Product_Category = self.mallProductCategories[collectionView.tag] as! CX_Product_Category
         // let products:NSArray = self.getProducts(prodCategory)
         
-        return 50;
+        return self.productCategories.count;
     }
     
     func collectionView(collectionView: UICollectionView,

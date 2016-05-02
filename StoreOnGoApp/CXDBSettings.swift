@@ -28,17 +28,20 @@ class CXDBSettings: NSObject {
     }
     
     
-    func saveProductCategoriesInDB(productCategories:NSArray,catID:String) {
-        let predicate:NSPredicate = NSPredicate(format: "createdById = %@", catID)
-        if self.getRequiredItemsFromDB("CX_Product_Category", predicate: predicate).count == 0 {
+    func saveProductCategoriesInDB(productCategories:NSArray) {
+        
+        for productCategory in productCategories {
+            let itemID = CXConstant.sharedInstance.resultString(productCategory.valueForKey("id")!)
+            let predicate:NSPredicate = NSPredicate(format: "pid = %@", itemID)
             let managedContext = self.appDelegate.managedObjectContext
             let productCatEn = NSEntityDescription.entityForName("CX_Product_Category", inManagedObjectContext: managedContext)
-            for productCategory in productCategories {
+            
+            if self.getRequiredItemsFromDB("CX_Product_Category", predicate: predicate).count == 0 {
                 let enProCat = CX_Product_Category(entity: productCatEn!,insertIntoManagedObjectContext: managedContext)
                 let createByID : String = CXConstant.sharedInstance.resultString(productCategory.valueForKey("createdById")!)
-                enProCat.pid = productCategory.valueForKey("id") as? String
+                enProCat.pid = CXConstant.sharedInstance.resultString(productCategory.valueForKey("id")!)
                 enProCat.categoryMall = productCategory.valueForKey("Category_Mall") as? String
-                enProCat.itemCode = productCategory.valueForKey("ItemCode") as? String
+                enProCat.itemCode = CXConstant.sharedInstance.resultString(productCategory.valueForKey("ItemCode")!)
                 enProCat.createdByFullName = productCategory.valueForKey("createdByFullName") as? String
                 enProCat.createdById = createByID
                 enProCat.mallID = createByID
@@ -59,36 +62,13 @@ class CXDBSettings: NSObject {
                     print("Could not save \(error), \(error.userInfo)")
                 }
             }
+            print("product Cat\(productCategory)")
         }
     }
     
     /*
+     9618665901
      
-     
-     func saveProductsInDB(products:NSArray,productCategory:CX_Product_Category) {
-     let managedObjContext = self.appDelegate.managedObjectContext
-     let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: managedObjContext)
-     for prod in products {
-     let enProduct = CX_Products(entity: productEn!,insertIntoManagedObjectContext: managedObjContext)
-     let createByID : String = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
-     enProduct.createdByID = createByID
-     enProduct.mallID = createByID
-     enProduct.itemCode = prod.valueForKey("ItemCode") as? String
-     let jsonString = CXConstant.sharedInstance.convertDictionayToString(prod as! NSDictionary)
-     enProduct.json = jsonString as String
-     print("Parsing \(enProduct.json)")
-     enProduct.name = prod.valueForKey("Name") as? String
-     enProduct.pID = prod.valueForKey("jobTypeId") as? String
-     enProduct.type = prod.valueForKey("jobTypeName") as? String
-     enProduct.mallID = createByID
-     do {
-     try managedObjContext.save()
-     } catch let error as NSError  {
-     print("Could not save \(error), \(error.userInfo)")
-     }
-     }
-     
-     }
      
      func getAllMallsInDB() -> NSArray{
      let managedContext = self.appDelegate.managedObjectContext
@@ -103,7 +83,7 @@ class CXDBSettings: NSObject {
      return NSArray()
      }
      
-*/
+     */
     
     //    func getAllProductCategories(predicate:NSPredicate) -> NSArray {
     //        let managedContext = self.appDelegate.managedObjectContext
@@ -134,9 +114,9 @@ class CXDBSettings: NSObject {
     }
     //MARK: Get Stores
     
-    func getStores() ->NSArray{
+    func getTableData(entity:String) ->NSArray{
         let managedContext = self.appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "CX_Stores")
+        let fetchRequest = NSFetchRequest(entityName: entity)
         do {
             let results =
                 try managedContext.executeFetchRequest(fetchRequest)
@@ -151,7 +131,7 @@ class CXDBSettings: NSObject {
     func saveStoresInDB(stores:NSArray) {
         
         //let predicate:NSPredicate = NSPredicate(format: "createdById = %@", catID)
-
+        
         let managedContext = self.appDelegate.managedObjectContext
         let productCatEn = NSEntityDescription.entityForName("CX_Stores", inManagedObjectContext: managedContext)
         print ("stores   response   data \(stores) ")
@@ -183,7 +163,9 @@ class CXDBSettings: NSObject {
                         attachmentsList.addObject((attachmentUrl.valueForKey("URL") as? String)!)
                     }
                 }
-                storeEntity.attachments = NSKeyedArchiver.archivedDataWithRootObject(attachmentsList)
+                //storeEntity.attachments = NSKeyedArchiver.archivedDataWithRootObject(attachmentsList)
+                storeEntity.setValue(attachmentsList, forKey: "attachments")
+                
                 let jsonString = CXConstant.sharedInstance.convertDictionayToString(storesItem as! NSDictionary)
                 storeEntity.json = jsonString as String
                 do {
@@ -191,13 +173,39 @@ class CXDBSettings: NSObject {
                 } catch let error as NSError  {
                     print("Could not save \(error), \(error.userInfo)")
                 }
-
+                
             }
             
         }
-      
+        
         
     }
-
+    
+    func saveProductsInDB(products:NSArray,productCategory:CX_Product_Category) {
+        let managedObjContext = self.appDelegate.managedObjectContext
+        let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: managedObjContext)
+        for prod in products {
+            let enProduct = CX_Products(entity: productEn!,insertIntoManagedObjectContext: managedObjContext)
+            let createByID : String = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
+            enProduct.createdByID = createByID
+            enProduct.mallID = createByID
+            enProduct.itemCode = prod.valueForKey("ItemCode") as? String
+            let jsonString = CXConstant.sharedInstance.convertDictionayToString(prod as! NSDictionary)
+            enProduct.json = jsonString as String
+            print("Parsing \(enProduct.json)")
+            enProduct.name = prod.valueForKey("Name") as? String
+            enProduct.pID = prod.valueForKey("jobTypeId") as? String
+            enProduct.type = prod.valueForKey("jobTypeName") as? String
+            enProduct.mallID = createByID
+            do {
+                try managedObjContext.save()
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+        }
+        
+    }
+    
+    
     
 }

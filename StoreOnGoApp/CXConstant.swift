@@ -24,6 +24,19 @@ class CXConstant: NSObject {
         _SingletonSharedInstance = nil
     }
 
+    //MARK : 
+    
+    static let headerViewHeigh : CGFloat = 70
+    static let pagerHeight : CGFloat = 250
+
+    static let searchBarFrame : CGRect = CGRectMake(0, headerViewHeigh, UIScreen.mainScreen().bounds.size.width, headerViewHeigh)
+    static let pagerFrame : CGRect = CGRectMake(0, headerViewHeigh*2, UIScreen.mainScreen().bounds.size.width, pagerHeight)
+    static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y,screenSize.width, screenSize.height-300)
+
+
+
+    
+    //MARK :
 
     static let tableViewHeigh : CGFloat = 280
     static let screenSize = UIScreen.mainScreen().bounds.size
@@ -40,7 +53,6 @@ class CXConstant: NSObject {
     ///211,41,39
     static let collectionCellBgColor : UIColor = UIColor(red: 211.0/255.0, green: 41.0/255.0, blue: 39.0/255.0, alpha: 1.0)
 
-    static let collectionFram : CGRect = CGRectMake(0, 300,screenSize.width, screenSize.height-300)
 
     
     static let DetailTableView_Width = UIScreen.mainScreen().bounds.width-20

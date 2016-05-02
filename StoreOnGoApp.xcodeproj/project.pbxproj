@@ -15,6 +15,11 @@
 		1220DCD21CD44E5600A78C3B /* CX_Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCE1CD44E5600A78C3B /* CX_Products.swift */; };
 		1220DCD51CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCD31CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift */; };
 		1220DCD61CD4515300A78C3B /* CX_Stores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCD41CD4515300A78C3B /* CX_Stores.swift */; };
+		12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */; };
+		12F64D8B1CD5B52F007D760C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8A1CD5B52F007D760C /* HeaderView.swift */; };
+		12F64D8D1CD5B923007D760C /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8C1CD5B923007D760C /* SearchBar.swift */; };
+		12F64D8F1CD6389C007D760C /* FeatureProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8E1CD6389C007D760C /* FeatureProductsCnt.swift */; };
+		12F64D911CD63A08007D760C /* CXDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D901CD63A08007D760C /* CXDetailTableViewCell.swift */; };
 		12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */; };
 		12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859581CD3E1CD007BE1D0 /* KICamera.png */; };
 		12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */; };
@@ -61,6 +66,11 @@
 		1220DCCE1CD44E5600A78C3B /* CX_Products.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Products.swift; sourceTree = "<group>"; };
 		1220DCD31CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Stores+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1220DCD41CD4515300A78C3B /* CX_Stores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Stores.swift; sourceTree = "<group>"; };
+		12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_AppData.swift; sourceTree = "<group>"; };
+		12F64D8A1CD5B52F007D760C /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		12F64D8C1CD5B923007D760C /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		12F64D8E1CD6389C007D760C /* FeatureProductsCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureProductsCnt.swift; sourceTree = "<group>"; };
+		12F64D901CD63A08007D760C /* CXDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDetailTableViewCell.swift; sourceTree = "<group>"; };
 		12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionCell.swift; sourceTree = "<group>"; };
 		12F8594B1CD3DE6E007BE1D0 /* StoreOnGoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StoreOnGoApp-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		12F859581CD3E1CD007BE1D0 /* KICamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KICamera.png; sourceTree = "<group>"; };
@@ -212,8 +222,11 @@
 		AA0163601CD20BBE00EA1619 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				12F64D901CD63A08007D760C /* CXDetailTableViewCell.swift */,
 				12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */,
 				1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */,
+				12F64D8A1CD5B52F007D760C /* HeaderView.swift */,
+				12F64D8C1CD5B923007D760C /* SearchBar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -224,6 +237,7 @@
 				AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */,
 				AA0163301CD2073B00EA1619 /* ViewController.swift */,
 				1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */,
+				12F64D8E1CD6389C007D760C /* FeatureProductsCnt.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -232,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				AA0163631CD20BE900EA1619 /* CXDBSettings.swift */,
+				12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */,
 			);
 			name = DB;
 			sourceTree = "<group>";
@@ -492,9 +507,11 @@
 			files = (
 				AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */,
 				1220DCD01CD44E5600A78C3B /* CX_Product_Category.swift in Sources */,
+				12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */,
 				AA0163371CD2073B00EA1619 /* StoreOnGoApp.xcdatamodeld in Sources */,
 				1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */,
 				AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */,
+				12F64D8B1CD5B52F007D760C /* HeaderView.swift in Sources */,
 				AAF679331CD2644F001E1238 /* CXDetailCollectionViewCell.swift in Sources */,
 				12F8595E1CD3E1CD007BE1D0 /* KIImagePager.m in Sources */,
 				1220DCCF1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift in Sources */,
@@ -505,8 +522,11 @@
 				12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */,
 				1220DCD61CD4515300A78C3B /* CX_Stores.swift in Sources */,
 				AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */,
+				12F64D911CD63A08007D760C /* CXDetailTableViewCell.swift in Sources */,
+				12F64D8D1CD5B923007D760C /* SearchBar.swift in Sources */,
 				1220DCD21CD44E5600A78C3B /* CX_Products.swift in Sources */,
 				1202FB0B1CD323D400EF8F5B /* HomeCollectionViewCell.swift in Sources */,
+				12F64D8F1CD6389C007D760C /* FeatureProductsCnt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
