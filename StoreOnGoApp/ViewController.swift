@@ -13,7 +13,7 @@ class ViewController: UIViewController{
     
     var imagePager : KIImagePager = KIImagePager()
     var homeCollectionView: UICollectionView!
-    let homeList: [String] = ["Products", "Feature Products","Offers","About Us"]
+    let homeList: [String] = ["products", "featuredProducts","offers","aboutUs"]
     var coverPageImagesList: NSMutableArray!
     var headerview: HeaderView!
     var searchBar: SearchBar!
@@ -46,7 +46,7 @@ class ViewController: UIViewController{
         self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
         self.view.addSubview(self.headerview)
         self.headerview.delegate = self
-        self.designSearchBar()
+        //self.designSearchBar()
         
     }
     
@@ -87,7 +87,7 @@ class ViewController: UIViewController{
     func setupCollectionView (){
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
         layout.itemSize = CXConstant.DetailCollectionCellSize
         self.homeCollectionView = UICollectionView(frame: CXConstant.collectionFram, collectionViewLayout: layout)
         self.homeCollectionView.showsHorizontalScrollIndicator = false
@@ -116,8 +116,6 @@ class ViewController: UIViewController{
      
     }
     
-    
-    
     // MARK: - Call Services
     
     
@@ -136,8 +134,6 @@ extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
     func arrayWithImages(pager: KIImagePager!) -> [AnyObject]! {
         return self.coverPageImagesList as [AnyObject]
     }
-    
-    
     
 }
 
@@ -160,7 +156,9 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
                 collectionView.registerNib(UINib(nibName: "HomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
             }
         cell.backgroundColor = UIColor.redColor()
-        cell.titleLabel.text = homeList[indexPath.row]
+        //cell.titleLabel.text = homeList[indexPath.row]
+        cell.iconImageView.image = UIImage(named: homeList[indexPath.row])
+
             return cell
     }
     

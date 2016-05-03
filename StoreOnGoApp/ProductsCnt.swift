@@ -93,6 +93,12 @@ extension ProductsCnt:UICollectionViewDelegate,UICollectionViewDataSource {
         if cell == nil {
             collectionView.registerNib(UINib(nibName: "ProductCollectionCell", bundle: nil), forCellWithReuseIdentifier: identifier)
         }
+        
+        let proCat : CX_Product_Category = self.productCategories[indexPath.row] as! CX_Product_Category
+        
+        cell.textLabel.text = proCat.name
+        
+
         return cell
     }
     

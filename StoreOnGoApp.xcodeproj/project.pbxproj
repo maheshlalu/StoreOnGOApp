@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1202FB0B1CD323D400EF8F5B /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */; };
 		1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */; };
+		120F3F311CD8780100376275 /* allProductsNV.txt in Resources */ = {isa = PBXBuildFile; fileRef = 120F3F301CD8780000376275 /* allProductsNV.txt */; };
 		1220DCCF1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCB1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift */; };
 		1220DCD01CD44E5600A78C3B /* CX_Product_Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCC1CD44E5600A78C3B /* CX_Product_Category.swift */; };
 		1220DCD11CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCD1CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift */; };
@@ -62,6 +63,7 @@
 		0145B61FE9DB76F9CCDB4E70 /* Pods-StoreOnGoAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCnt.swift; sourceTree = "<group>"; };
+		120F3F301CD8780000376275 /* allProductsNV.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allProductsNV.txt; sourceTree = "<group>"; };
 		1220DCCB1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Product_Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1220DCCC1CD44E5600A78C3B /* CX_Product_Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Product_Category.swift; sourceTree = "<group>"; };
 		1220DCCD1CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Products+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -132,6 +134,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		120F3F2F1CD877F100376275 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				120F3F301CD8780000376275 /* allProductsNV.txt */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		1220DCD71CD4DC7900A78C3B /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +189,7 @@
 		AA01632D1CD2073B00EA1619 /* StoreOnGoApp */ = {
 			isa = PBXGroup;
 			children = (
+				120F3F2F1CD877F100376275 /* Resources */,
 				1220DCD71CD4DC7900A78C3B /* ThirdParty */,
 				AA0163611CD20BC300EA1619 /* Controller */,
 				AA0163601CD20BBE00EA1619 /* View */,
@@ -408,6 +419,7 @@
 				12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */,
 				AA01633C1CD2073B00EA1619 /* LaunchScreen.storyboard in Resources */,
 				AA0163391CD2073B00EA1619 /* Assets.xcassets in Resources */,
+				120F3F311CD8780100376275 /* allProductsNV.txt in Resources */,
 				AA0163341CD2073B00EA1619 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

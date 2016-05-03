@@ -30,7 +30,7 @@ class CXConstant: NSObject {
     static let pagerHeight : CGFloat = 250
 
     static let searchBarFrame : CGRect = CGRectMake(0, headerViewHeigh, UIScreen.mainScreen().bounds.size.width, headerViewHeigh)
-    static let pagerFrame : CGRect = CGRectMake(0, headerViewHeigh*2, UIScreen.mainScreen().bounds.size.width, pagerHeight)
+    static let pagerFrame : CGRect = CGRectMake(0, headerViewHeigh, UIScreen.mainScreen().bounds.size.width, pagerHeight)
     static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y,screenSize.width, screenSize.height-300)
 
 

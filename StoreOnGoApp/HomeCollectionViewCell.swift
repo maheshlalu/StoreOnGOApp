@@ -24,6 +24,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     func customizeMainView() {
         
+        self.iconImageView = UIImageView.init(frame: CGRectMake(self.frame.origin.x+10, self.frame.origin.y+10, 100, 100))
+        self.addSubview(self.iconImageView)
+
         self.titleLabel = UILabel.init(frame: CGRectMake(50, 70, 150, 40))
         self.titleLabel.alpha = 0.7
         self.titleLabel.font = UIFont(name:"Roboto-Regular",size:15)
