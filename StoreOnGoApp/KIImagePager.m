@@ -130,7 +130,7 @@
     UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
     [icon setImage:[UIImage imageNamed:@"KICamera"]];
     icon.center = CGPointMake(_imageCounterBackground.frame.size.width-18, _imageCounterBackground.frame.size.height/2);
-    [_imageCounterBackground addSubview:icon];
+    //[_imageCounterBackground addSubview:icon];
 
     _countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48, 24)];
     [_countLabel setTextAlignment:NSTextAlignmentCenter];
@@ -138,7 +138,7 @@
     [_countLabel setTextColor:[UIColor blackColor]];
     [_countLabel setFont:[UIFont systemFontOfSize:11.0f]];
     _countLabel.center = CGPointMake(15, _imageCounterBackground.frame.size.height/2);
-    [_imageCounterBackground addSubview:_countLabel];
+    //[_imageCounterBackground addSubview:_countLabel];
 
     if(!_imageCounterDisabled) [self addSubview:_imageCounterBackground];
 }
@@ -306,6 +306,7 @@
     CGRect pageControlFrame = CGRectMake(0, 0, _scrollView.frame.size.width, kPageControlHeight);
     _pageControl = [[UIPageControl alloc] initWithFrame:pageControlFrame];
     _pageControl.center = CGPointMake(_scrollView.frame.size.width / 2, _scrollView.frame.size.height - 12.0);
+    _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
     _pageControl.userInteractionEnabled = NO;
     if(!_indicatorDisabled) [self addSubview:_pageControl];
 }

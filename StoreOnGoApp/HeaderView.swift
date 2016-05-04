@@ -37,8 +37,9 @@ class HeaderView: UIView {
         
         let headerView : HeaderView = HeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, 70))
         headerView.backgroundColor = UIColor.redColor()
-        let headerLbl : UILabel = UILabel.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, 70))
+        let headerLbl : UILabel = UILabel.init(frame: CGRectMake(50, 0, CXConstant.screenSize.width-50, 70))
         headerLbl.text = headerTitle as String
+        headerLbl.font = UIFont(name:"Roboto-Regular",size:18)
         headerLbl.textColor = UIColor.whiteColor()
         headerView.addSubview(headerLbl)
         

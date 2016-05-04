@@ -28,10 +28,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
         //self.iconImageView = UIImageView.init(frame: CGRectMake(self.frame.origin.x+10, self.frame.origin.y+10, 100, 100))
         self.iconImageView = UIImageView.init(frame: CGRectMake(0, 0, 70, 70))
         self.iconImageView.center = CGPointMake(self.frame.width/2, self.frame.height/2)
-
         self.addSubview(self.iconImageView)
 
-        self.titleLabel = UILabel.init(frame: CGRectMake(50, 70, 150, 40))
+        self.titleLabel = UILabel.init(frame: CGRectMake(0, self.frame.height-100, self.frame.size.width, self.frame.height-70))
         self.titleLabel.alpha = 0.7
         self.titleLabel.font = UIFont(name:"Roboto-Regular",size:15)
         self.titleLabel.textAlignment = NSTextAlignment.Center

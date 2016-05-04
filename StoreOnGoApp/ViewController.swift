@@ -14,6 +14,8 @@ class ViewController: UIViewController{
     var imagePager : KIImagePager = KIImagePager()
     var homeCollectionView: UICollectionView!
     let homeList: [String] = ["products", "featuredProducts","offers","aboutUs"]
+    let homeListTitles: [String] = ["Products", "Feature Products","Offers","AboutUs"]
+
     var coverPageImagesList: NSMutableArray!
     var headerview: HeaderView!
     var searchBar: SearchBar!
@@ -77,7 +79,7 @@ class ViewController: UIViewController{
         imagePager.slideshowShouldCallScrollToDelegate = true
         imagePager.delegate = self
         imagePager.dataSource = self;
-        //imagePager.checkWetherToToggleSlideshowTimer()
+        imagePager.checkWetherToToggleSlideshowTimer()
         self.view.addSubview(imagePager)
     }
     
@@ -155,7 +157,7 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             collectionView.registerNib(UINib(nibName: "HomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
         }
        // cell.backgroundColor = UIColor.redColor()
-        //cell.titleLabel.text = homeList[indexPath.row]
+        cell.titleLabel.text = homeListTitles[indexPath.row]
         cell.iconImageView.image = UIImage(named: homeList[indexPath.row])
         return cell
     }

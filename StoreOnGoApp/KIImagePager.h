@@ -74,5 +74,6 @@ typedef void(^KIImagePagerImageRequestBlock)(UIImage*image, NSError * error);
 
 - (void) reloadData;
 - (void) setCurrentPage:(NSUInteger)currentPage animated:(BOOL)animated;
+- (void) checkWetherToToggleSlideshowTimer;
 
 @end

@@ -23,54 +23,47 @@ class CXConstant: NSObject {
     func destory () {
         _SingletonSharedInstance = nil
     }
-
-    //MARK : 
-    
-    static let headerViewHeigh : CGFloat = 70
-    static let pagerHeight : CGFloat = 250
-
-    static let searchBarFrame : CGRect = CGRectMake(0, headerViewHeigh, UIScreen.mainScreen().bounds.size.width, headerViewHeigh)
-    static let pagerFrame : CGRect = CGRectMake(0, headerViewHeigh, UIScreen.mainScreen().bounds.size.width, pagerHeight)
-    static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y,screenSize.width, screenSize.height-300)
-
-    static let homeCellBgColor : UIColor = UIColor(red: 236.0/255.0, green: 50.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-
-
     
     //MARK :
-
-    static let tableViewHeigh : CGFloat = 280
     static let screenSize = UIScreen.mainScreen().bounds.size
-
+    
+    static let headerViewHeigh : CGFloat = 70
+    static let pagerHeight : CGFloat = screenSize.height/3
+    
+    static let searchBarFrame : CGRect = CGRectMake(0, headerViewHeigh, UIScreen.mainScreen().bounds.size.width, headerViewHeigh)
+    static let pagerFrame : CGRect = CGRectMake(0, headerViewHeigh+2, UIScreen.mainScreen().bounds.size.width, pagerHeight)
+    static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y,screenSize.width, screenSize.height-pagerHeight-headerViewHeigh)
+    
+    static let homeCellBgColor : UIColor = UIColor(red: 236.0/255.0, green: 50.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+    
+    //MARK :
+    //2.15
+    static let tableViewHeigh : CGFloat = 280
+    
     static let someString : String = "Some Text" // struct
-    static let collectiViewCellSize :  CGSize = CGSize(width: UIScreen.mainScreen().bounds.size.width-20,height: tableViewHeigh-50)
+    //static let collectiViewCellSize :  CGSize = CGSize(width: UIScreen.mainScreen().bounds.size.width-20,height: tableViewHeigh-50)
     
     static let collectionViewFrame : CGRect = CGRectMake(8, 30, UIScreen.mainScreen().bounds.size.width-20, tableViewHeigh-50)
     
     static let titleLabelColor : UIColor = UIColor(red: 240.0/255.0, green: 40.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     
-    
     static let collectionCellborderColor : UIColor = UIColor(red: 190.0/255.0, green: 210.0/255.0, blue: 220.0/255.0, alpha: 1.0)
     ///211,41,39
     static let collectionCellBgColor : UIColor = UIColor(red: 211.0/255.0, green: 41.0/255.0, blue: 39.0/255.0, alpha: 1.0)
-
-
+    
+    
     
     static let DetailTableView_Width = UIScreen.mainScreen().bounds.width-20
-    static let DetailCollectionCellSize :  CGSize = CGSize(width: 192,height: tableViewHeigh-80)
+    static let DetailCollectionCellSize :  CGSize = CGSize(width: screenSize.width/2.3+5,height: screenSize.width/2.3+5)
+    // static let DetailCollectionCellSize :  CGSize = CGSize(width: 150,height: 150)
+    
     static let MallID = "4452"
     
-        //CGSize(width: UIScreen.mainScreen().bounds.size.width-20,height: tableViewHeigh-50)
-        
-        ///
+    //CGSize(width: UIScreen.mainScreen().bounds.size.width-20,height: tableViewHeigh-50)        ///
     
     static let DetailCollectionViewFrame : CGRect = CGRectMake(4, 30, DetailTableView_Width-8, tableViewHeigh-50)
-        
-        
-        //CGRectMake(8, 30, UIScreen.mainScreen().bounds.size.width-20, tableViewHeigh-50)
-        
-        //
     
+    //CGRectMake(8, 30, UIScreen.mainScreen().bounds.size.width-20, tableViewHeigh-50)
     
     static let HOME_BANNAER = "/133516651/AppHome"
     static let TOLLYWOOD_BANNAER = "/133516651/AppTollyBanner"
@@ -87,21 +80,21 @@ class CXConstant: NSObject {
     let kViewControllerAccountID = "3636334180001"
     let kViewControllerVideoID = "3987127390001"
     
-        
+    
     
     // Sevices URLs
     
     static let PRODUCT_CATEGORY_URL = "http://storeongo.com:8081/Services/getMasters?type=productCategories&mallId="
     static let STORES_URL = "http://storeongo.com:8081/Services/getMasters?type=stores&mallId="
     static let FEATUREDPRODUCT_URL = "http://storeongo.com:8081/Services/getMasters?type=featured%20products&mallId="
-
+    
     
     //http://storeongo.com:8081/Services/getMasters?type=productCategories&mallId=4452
     
     
     
     
-
+    
     func productURL(productType:String, mallId: String) -> String {
         let escapedString = productType.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
         let reqString = "http://52.74.102.199:8081/services/getmasters?type="+escapedString!+"&mallId="+mallId
@@ -148,5 +141,5 @@ class CXConstant: NSObject {
         }
         return jsonDict
     }
-
+    
 }
