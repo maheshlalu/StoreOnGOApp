@@ -156,14 +156,11 @@ class CXDBSettings: NSObject {
                 
                 let attachmentsList = NSMutableArray()
                 for attachmentUrl in (storesItem.valueForKey("Attachments") as? NSArray)! {
-                    //URL
-                    if (!(attachmentUrl.valueForKey("URL") as? String)!.isEmpty) {
+                    if (!(attachmentUrl.valueForKey("URL") as? String)!.isEmpty && (attachmentUrl.valueForKey("isBannerImage") as? String) == "true") {
                         attachmentsList.addObject((attachmentUrl.valueForKey("URL") as? String)!)
                     }
                 }
-                //storeEntity.attachments = NSKeyedArchiver.archivedDataWithRootObject(attachmentsList)
                 storeEntity.setValue(attachmentsList, forKey: "attachments")
-                
                 let jsonString = CXConstant.sharedInstance.convertDictionayToString(storesItem as! NSDictionary)
                 storeEntity.json = jsonString as String
                 do {

@@ -33,6 +33,7 @@ class CXConstant: NSObject {
     static let pagerFrame : CGRect = CGRectMake(0, headerViewHeigh, UIScreen.mainScreen().bounds.size.width, pagerHeight)
     static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y,screenSize.width, screenSize.height-300)
 
+    static let homeCellBgColor : UIColor = UIColor(red: 236.0/255.0, green: 50.0/255.0, blue: 55.0/255.0, alpha: 1.0)
 
 
     
@@ -56,7 +57,7 @@ class CXConstant: NSObject {
 
     
     static let DetailTableView_Width = UIScreen.mainScreen().bounds.width-20
-    static let DetailCollectionCellSize :  CGSize = CGSize(width: 190,height: tableViewHeigh-80)
+    static let DetailCollectionCellSize :  CGSize = CGSize(width: 192,height: tableViewHeigh-80)
     static let MallID = "4452"
     
         //CGSize(width: UIScreen.mainScreen().bounds.size.width-20,height: tableViewHeigh-50)

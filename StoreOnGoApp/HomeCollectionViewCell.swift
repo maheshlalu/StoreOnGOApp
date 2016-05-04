@@ -14,6 +14,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = CXConstant.homeCellBgColor
         self.customizeMainView()
     }
     
@@ -24,7 +25,10 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     func customizeMainView() {
         
-        self.iconImageView = UIImageView.init(frame: CGRectMake(self.frame.origin.x+10, self.frame.origin.y+10, 100, 100))
+        //self.iconImageView = UIImageView.init(frame: CGRectMake(self.frame.origin.x+10, self.frame.origin.y+10, 100, 100))
+        self.iconImageView = UIImageView.init(frame: CGRectMake(0, 0, 70, 70))
+        self.iconImageView.center = CGPointMake(self.frame.width/2, self.frame.height/2)
+
         self.addSubview(self.iconImageView)
 
         self.titleLabel = UILabel.init(frame: CGRectMake(50, 70, 150, 40))

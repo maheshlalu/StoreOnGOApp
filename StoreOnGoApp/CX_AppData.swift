@@ -59,7 +59,7 @@ class CX_AppData: NSObject {
         dispatch_async(dispatch_get_main_queue(), {
             self.dataDelegate?.completedTheFetchingTheData(self)
         })
-
+     //self.parseTheProductsList()
     }
     
     
@@ -68,10 +68,5 @@ class CX_AppData: NSObject {
         
         
     }
-    
-    
-    
 }
-
-
 

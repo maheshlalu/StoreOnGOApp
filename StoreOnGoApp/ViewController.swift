@@ -115,7 +115,6 @@ class ViewController: UIViewController{
         }
      
     }
-    
     // MARK: - Call Services
     
     
@@ -149,45 +148,39 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView,
-        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            let identifier = "HomeCollectionViewCell"
-            let cell: HomeCollectionViewCell! = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?HomeCollectionViewCell
-            if cell == nil {
-                collectionView.registerNib(UINib(nibName: "HomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
-            }
-        cell.backgroundColor = UIColor.redColor()
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let identifier = "HomeCollectionViewCell"
+        let cell: HomeCollectionViewCell! = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?HomeCollectionViewCell
+        if cell == nil {
+            collectionView.registerNib(UINib(nibName: "HomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
+        }
+       // cell.backgroundColor = UIColor.redColor()
         //cell.titleLabel.text = homeList[indexPath.row]
         cell.iconImageView.image = UIImage(named: homeList[indexPath.row])
-
-            return cell
+        return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
         
-        var index = indexPath.row
-        
+        let index = indexPath.row
         switch index {
         case 0  :
             let productView = ProductsCnt.init()
             self.navigationController?.pushViewController(productView, animated: true)
-            
             break
         case 1 :
             let fetureProductView = FeatureProductsCnt.init()
             self.navigationController?.pushViewController(fetureProductView, animated: true)
-            
-            
             break
         case 2  :
+            let productListCnt = ProductListCntl.init()
+            self.navigationController?.pushViewController(productListCnt, animated: true)
             
             break
         default :
-            
             break
         }
-        
-
         
     }
     
