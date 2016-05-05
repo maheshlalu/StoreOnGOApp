@@ -62,11 +62,34 @@ class CX_AppData: NSObject {
      //self.parseTheProductsList()
     }
     
-    
     func parseTheProductsList(){
         
+//        if let path = NSBundle.mainBundle().pathForResource("test", ofType: "json")
+//        {
+//            if let jsonData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
+//            {
+//                if let jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary
+//                {
+//                    if let persons : NSArray = jsonResult["person"] as? NSArray
+//                    {
+//                        // Do stuff
+//                    }
+//                }
+//            }
+//        }
+        
+    }
+    
+    func miscellaneousList(){
+        
+    }
+    
+    func parseTheProductSubCategory(){
         
         
     }
+    
+    
+    
 }
 

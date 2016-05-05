@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		1202FB0B1CD323D400EF8F5B /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */; };
 		1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */; };
-		120F3F311CD8780100376275 /* allProductsNV.txt in Resources */ = {isa = PBXBuildFile; fileRef = 120F3F301CD8780000376275 /* allProductsNV.txt */; };
 		12100C311CD90F1900A44C0D /* ProductListCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12100C301CD90F1900A44C0D /* ProductListCntl.swift */; };
 		12100C341CD91C5E00A44C0D /* ProductHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12100C331CD91C5E00A44C0D /* ProductHeaderCell.swift */; };
+		121EA63F1CDB171B00A69A4C /* miscellaneous.txt in Resources */ = {isa = PBXBuildFile; fileRef = 121EA63D1CDB171B00A69A4C /* miscellaneous.txt */; };
+		121EA6401CDB171B00A69A4C /* subcate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 121EA63E1CDB171B00A69A4C /* subcate.txt */; };
+		121EA6421CDB186100A69A4C /* productslist.txt in Resources */ = {isa = PBXBuildFile; fileRef = 121EA6411CDB186100A69A4C /* productslist.txt */; };
 		1220DCCF1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCB1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift */; };
 		1220DCD01CD44E5600A78C3B /* CX_Product_Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCC1CD44E5600A78C3B /* CX_Product_Category.swift */; };
 		1220DCD11CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCD1CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift */; };
@@ -65,9 +67,11 @@
 		0145B61FE9DB76F9CCDB4E70 /* Pods-StoreOnGoAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCnt.swift; sourceTree = "<group>"; };
-		120F3F301CD8780000376275 /* allProductsNV.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allProductsNV.txt; sourceTree = "<group>"; };
 		12100C301CD90F1900A44C0D /* ProductListCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListCntl.swift; sourceTree = "<group>"; };
 		12100C331CD91C5E00A44C0D /* ProductHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHeaderCell.swift; sourceTree = "<group>"; };
+		121EA63D1CDB171B00A69A4C /* miscellaneous.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = miscellaneous.txt; sourceTree = "<group>"; };
+		121EA63E1CDB171B00A69A4C /* subcate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = subcate.txt; sourceTree = "<group>"; };
+		121EA6411CDB186100A69A4C /* productslist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = productslist.txt; sourceTree = "<group>"; };
 		1220DCCB1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Product_Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1220DCCC1CD44E5600A78C3B /* CX_Product_Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Product_Category.swift; sourceTree = "<group>"; };
 		1220DCCD1CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Products+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -149,8 +153,10 @@
 		120F3F2F1CD877F100376275 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				121EA63D1CDB171B00A69A4C /* miscellaneous.txt */,
+				121EA6411CDB186100A69A4C /* productslist.txt */,
+				121EA63E1CDB171B00A69A4C /* subcate.txt */,
 				12F539D21CDA68C300EF26C9 /* Fonts */,
-				120F3F301CD8780000376275 /* allProductsNV.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -161,6 +167,13 @@
 				12100C331CD91C5E00A44C0D /* ProductHeaderCell.swift */,
 			);
 			name = HeaderCell;
+			sourceTree = "<group>";
+		};
+		121EA6431CDB21A600A69A4C /* TabPager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TabPager;
 			sourceTree = "<group>";
 		};
 		1220DCD71CD4DC7900A78C3B /* ThirdParty */ = {
@@ -225,6 +238,7 @@
 		AA01632D1CD2073B00EA1619 /* StoreOnGoApp */ = {
 			isa = PBXGroup;
 			children = (
+				121EA6431CDB21A600A69A4C /* TabPager */,
 				120F3F2F1CD877F100376275 /* Resources */,
 				1220DCD71CD4DC7900A78C3B /* ThirdParty */,
 				AA0163611CD20BC300EA1619 /* Controller */,
@@ -453,12 +467,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				121EA6401CDB171B00A69A4C /* subcate.txt in Resources */,
 				12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */,
 				12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */,
 				AA01633C1CD2073B00EA1619 /* LaunchScreen.storyboard in Resources */,
 				AA0163391CD2073B00EA1619 /* Assets.xcassets in Resources */,
-				120F3F311CD8780100376275 /* allProductsNV.txt in Resources */,
 				AA0163341CD2073B00EA1619 /* Main.storyboard in Resources */,
+				121EA6421CDB186100A69A4C /* productslist.txt in Resources */,
+				121EA63F1CDB171B00A69A4C /* miscellaneous.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
