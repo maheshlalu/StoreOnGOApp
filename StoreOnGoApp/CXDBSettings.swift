@@ -176,10 +176,13 @@ class CXDBSettings: NSObject {
         
     }
     
-    func saveProductsInDB(products:NSArray,productCategory:CX_Product_Category) {
+    func saveProductsInDB(products:NSArray,typeCategory:NSString) {
         let managedObjContext = self.appDelegate.managedObjectContext
         let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: managedObjContext)
         for prod in products {
+            let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+            let predicate:NSPredicate = NSPredicate(format: "pID = %@", itemID)
+            if self.getRequiredItemsFromDB("CX_Products", predicate: predicate).count == 0 {
             let enProduct = CX_Products(entity: productEn!,insertIntoManagedObjectContext: managedObjContext)
             let createByID : String = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
             enProduct.createdByID = createByID
@@ -189,8 +192,9 @@ class CXDBSettings: NSObject {
             enProduct.json = jsonString as String
             print("Parsing \(enProduct.json)")
             enProduct.name = prod.valueForKey("Name") as? String
-            enProduct.pID = prod.valueForKey("jobTypeId") as? String
-            enProduct.type = prod.valueForKey("jobTypeName") as? String
+            enProduct.pID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+           // enProduct.type = prod.valueForKey("jobTypeName") as? String
+            enProduct.type = typeCategory as String
             enProduct.mallID = createByID
             do {
                 try managedObjContext.save()
@@ -198,7 +202,7 @@ class CXDBSettings: NSObject {
                 print("Could not save \(error), \(error.userInfo)")
             }
         }
-        
+        }
     }
     
     //MARK : Featured products
@@ -211,26 +215,86 @@ class CXDBSettings: NSObject {
             let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
             let predicate:NSPredicate = NSPredicate(format: "id = %@", itemID)
             if self.getRequiredItemsFromDB("CX_FeaturedProducts", predicate: predicate).count == 0 {
-            let enProduct = CX_FeaturedProducts(entity: featureProductEn!,insertIntoManagedObjectContext: managedObjContext)
-            enProduct.id = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
-            enProduct.itemCode = CXConstant.sharedInstance.resultString(prod.valueForKey("ItemCode")!)
-            enProduct.jobTypeId = CXConstant.sharedInstance.resultString(prod.valueForKey("jobTypeId")!)
-            enProduct.jobTypeName = prod.valueForKey("jobTypeName") as? String
-            enProduct.createdByFullName = prod.valueForKey("createdByFullName") as? String
-            enProduct.name = prod.valueForKey("Name") as? String
-            enProduct.publicURL = prod.valueForKey("publicURL") as? String
-            enProduct.campaign_Jobs = prod.valueForKey("Campaign_Jobs") as? String
-            do {
-                try managedObjContext.save()
-            } catch let error as NSError  {
-                print("Could not save \(error), \(error.userInfo)")
+                let enProduct = CX_FeaturedProducts(entity: featureProductEn!,insertIntoManagedObjectContext: managedObjContext)
+                enProduct.id = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+                enProduct.itemCode = CXConstant.sharedInstance.resultString(prod.valueForKey("ItemCode")!)
+                enProduct.jobTypeId = CXConstant.sharedInstance.resultString(prod.valueForKey("jobTypeId")!)
+                enProduct.jobTypeName = prod.valueForKey("jobTypeName") as? String
+                enProduct.createdByFullName = prod.valueForKey("createdByFullName") as? String
+                enProduct.name = prod.valueForKey("Name") as? String
+                enProduct.publicURL = prod.valueForKey("publicURL") as? String
+                enProduct.campaign_Jobs = prod.valueForKey("Campaign_Jobs") as? String
+                do {
+                    try managedObjContext.save()
+                } catch let error as NSError  {
+                    print("Could not save \(error), \(error.userInfo)")
+                }
+                
             }
-
-        }
         }
         
     }
     
+    func savetheSubCategoryData(subCategory:NSArray){
+        
+        let managedObjContext = self.appDelegate.managedObjectContext
+        let subCategoryEntity = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: managedObjContext)
+
+        for prod in subCategory {
+            let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+            let predicate:NSPredicate = NSPredicate(format: "id = %@", itemID)
+            if self.getRequiredItemsFromDB("TABLE_PRODUCT_SUB_CATEGORIES", predicate: predicate).count == 0 {
+                let enProduct = TABLE_PRODUCT_SUB_CATEGORIES(entity: subCategoryEntity!,insertIntoManagedObjectContext: managedObjContext)
+                enProduct.id = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+                enProduct.itemCode = CXConstant.sharedInstance.resultString(prod.valueForKey("ItemCode")!)
+                enProduct.createdByFullName = prod.valueForKey("createdByFullName") as? String
+                enProduct.name = prod.valueForKey("Name") as? String
+                enProduct.createdById = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
+                enProduct.descriptionData = prod.valueForKey("Description") as? String
+                enProduct.masterCategory = prod.valueForKey("MasterCategory") as? String
+                //enProduct.subCategoryType = prod.valueForKey("MasterCategory") as? String
+                do {
+                    try managedObjContext.save()
+                } catch let error as NSError  {
+                    print("Could not save \(error), \(error.userInfo)")
+                }
+                
+            }
+        }
+
+        
+    }
     
+    /*
+     ▿ 28 elements
+     - [0] : MasterCategory
+     - [1] : Next_Job_Statuses
+     - [2] : jobTypeId
+     - [3] : jobTypeName
+     - [4] : jobComments
+     - [5] : Image
+     - [6] : createdOn
+     - [7] : hrsOfOperation
+     - [8] : Current_Job_StatusId
+     - [9] : Next_Seq_Nos
+     - [10] : overallRating
+     - [11] : publicURL
+     - [12] : createdById
+     - [13] : Name
+     - [14] : guestUserId
+     - [15] : Attachments
+     - [16] : guestUserEmail
+     - [17] : Current_Job_Status
+     - [18] : totalReviews
+     - [19] : Category_Mall
+     - [20] : PackageName
+     - [21] : id
+     - [22] : Additional_Details
+     - [23] : lastModifiedDate
+     - [24] : CreatedSubJobs
+     - [25] : Insights
+     - [26] : ItemCode
+     - [27] : createdByFullName
+*/
     
 }

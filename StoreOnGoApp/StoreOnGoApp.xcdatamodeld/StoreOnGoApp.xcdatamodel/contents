@@ -62,10 +62,23 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="TABLE_PRODUCT_SUB_CATEGORIES" representedClassName=".TABLE_PRODUCT_SUB_CATEGORIES" syncable="YES">
+        <attribute name="createdByFullName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdById" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="icon_Name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="icon_URL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="masterCategory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subCategoryType" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
+        <element name="CX_FeaturedProducts" positionX="-54" positionY="135" width="128" height="165"/>
         <element name="CX_Product_Category" positionX="-54" positionY="-9" width="128" height="330"/>
         <element name="CX_Products" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="CX_Stores" positionX="-54" positionY="126" width="128" height="270"/>
-        <element name="CX_FeaturedProducts" positionX="-54" positionY="135" width="128" height="165"/>
+        <element name="TABLE_PRODUCT_SUB_CATEGORIES" positionX="-54" positionY="135" width="128" height="195"/>
     </elements>
 </model>
