@@ -30,12 +30,19 @@ class CX_AppData: NSObject {
     }
     
     func getStoresData(){
+        
+        self.configure()
         let reqUrl = CXConstant.STORES_URL + CXConstant.MallID
         SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
             // print ("stores   response   data \(responseDict.valueForKey("jobs")! as! NSArray) ")
             CXDBSettings.sharedInstance.saveStoresInDB(responseDict.valueForKey("jobs")! as! NSArray)
-            self.getProductCategory()
         }
+        
+        //dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+            self.parseTheProductSubCategory()
+        //})
+        
+        
     }
     
     func getProductCategory(){
@@ -44,8 +51,10 @@ class CX_AppData: NSObject {
         SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
             print ("Product category response \(responseDict)")
             CXDBSettings.sharedInstance.saveProductCategoriesInDB(responseDict.valueForKey("jobs")! as! NSArray)
-            self.getFeaturedProducts()
         }
+       // dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+            self.getFeaturedProducts()
+       // })
         
     }
     
@@ -56,28 +65,61 @@ class CX_AppData: NSObject {
             print ("Featured Product  response \(responseDict)")
             CXDBSettings.sharedInstance.saveFeaturedProducts(responseDict.valueForKey("jobs")! as! NSArray)
         }
-        dispatch_async(dispatch_get_main_queue(), {
-            self.dataDelegate?.completedTheFetchingTheData(self)
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+            self.parseTheProductsList()
         })
-        self.parseTheProductsList()
     }
     
     func parseTheProductsList(){
-        //self.getTheDictionaryDataFromTextFile("productslist")
-        CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("productslist").valueForKey("jobs")! as! NSArray, typeCategory: "Products List")
-       // self.miscellaneousList()
         
+        LoadingView.show("ProductList Loading....", animated: true)
+
+        if    CXDBSettings.sharedInstance.getTableData("CX_Products").count == 0 {
+
+            CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("productslist").valueForKey("jobs")! as! NSArray, typeCategory: "Products List")
+            
+        }
+        //self.getTheDictionaryDataFromTextFile("productslist")
+
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+             self.miscellaneousList()
+        })
         //
     }
     
     func miscellaneousList(){
-        // self.getTheDictionaryDataFromTextFile("miscellaneous")
-        self.parseTheProductSubCategory()
+        LoadingView.show("Miscellaneous Loading....", animated: true)
+
+        if    CXDBSettings.sharedInstance.getTableData("CX_Products").count == 0 {
+            
+            CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("miscellaneous").valueForKey("jobs")! as! NSArray, typeCategory: "Miscellaneous")
+            
+        }
+        
+        
+       
     }
     
     func parseTheProductSubCategory(){
        // self.getTheDictionaryDataFromTextFile("subcate")
-        CXDBSettings.sharedInstance.savetheSubCategoryData(self.getTheDictionaryDataFromTextFile("subcate").valueForKey("jobs")! as! NSArray)
+        LoadingView.show("Subcategory Loading....", animated: true)
+
+        if    CXDBSettings.sharedInstance.getTableData("TABLE_PRODUCT_SUB_CATEGORIES").count == 0 {
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+                //call your background operation.
+                let dataDic : NSDictionary = self.getTheDictionaryDataFromTextFile("subcate")
+                if (dataDic.valueForKey("jobs") != nil) {
+                    CXDBSettings.sharedInstance.savetheSubCategoryData(dataDic.valueForKey("jobs")! as! NSArray)
+                }
+            })
+        }
+
+        dispatch_async(dispatch_get_main_queue(), {
+            //self.dataDelegate?.completedTheFetchingTheData(self)
+        })
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+            self.getProductCategory()
+        })
     }
     
     func getTheDictionaryDataFromTextFile(testFileName:String)-> NSDictionary{
@@ -99,6 +141,18 @@ class CX_AppData: NSObject {
             print("\(JSONError)")
         }
         return NSDictionary()
+    }
+    
+     func configure (){
+        var config : LoadingView.Config = LoadingView.Config()
+        config.size = 170
+        config.backgroundColor = UIColor(red:0.03, green:0.82, blue:0.7, alpha:1)
+        config.spinnerColor = UIColor(red:0.88, green:0.26, blue:0.18, alpha:1)
+        config.titleTextColor = UIColor(red:0.88, green:0.26, blue:0.18, alpha:1)
+        config.spinnerLineWidth = 2.0
+        config.foregroundColor = UIColor.blackColor()
+        config.foregroundAlpha = 0.5
+        LoadingView.setConfig(config)
     }
     
 }

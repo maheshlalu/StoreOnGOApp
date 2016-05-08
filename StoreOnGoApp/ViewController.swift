@@ -180,6 +180,11 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             self.navigationController?.pushViewController(productListCnt, animated: true)
             
             break
+        case 3  :
+            let aboutUs = AboutUsViewCnt.init()
+            self.navigationController?.pushViewController(aboutUs, animated: true)
+            
+            break
         default :
             break
         }

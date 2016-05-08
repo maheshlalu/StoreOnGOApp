@@ -98,16 +98,21 @@ class CXDBSettings: NSObject {
     //    }
     
     func getRequiredItemsFromDB(entity:String,predicate:NSPredicate) -> NSArray {
-        let managedContext = self.appDelegate.managedObjectContext
+        
+        let moc = self.appDelegate.managedObjectContext
+        let privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        privateMOC.parentContext = moc
+        
         let fetchRequest = NSFetchRequest(entityName: entity)
         fetchRequest.predicate = predicate
         do {
             let results =
-                try managedContext.executeFetchRequest(fetchRequest)
+                try privateMOC.executeFetchRequest(fetchRequest)
             return results as! [NSManagedObject]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
+        
         return NSArray()
     }
     //MARK: Get Stores
@@ -177,32 +182,41 @@ class CXDBSettings: NSObject {
     }
     
     func saveProductsInDB(products:NSArray,typeCategory:NSString) {
-        let managedObjContext = self.appDelegate.managedObjectContext
-        let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: managedObjContext)
+        
+        let moc = self.appDelegate.managedObjectContext
+        
+        let privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        privateMOC.parentContext = moc
+        let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: privateMOC)
+        
         for prod in products {
             let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
             let predicate:NSPredicate = NSPredicate(format: "pID = %@", itemID)
             if self.getRequiredItemsFromDB("CX_Products", predicate: predicate).count == 0 {
-            let enProduct = CX_Products(entity: productEn!,insertIntoManagedObjectContext: managedObjContext)
-            let createByID : String = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
-            enProduct.createdByID = createByID
-            enProduct.mallID = createByID
-            enProduct.itemCode = prod.valueForKey("ItemCode") as? String
-            let jsonString = CXConstant.sharedInstance.convertDictionayToString(prod as! NSDictionary)
-            enProduct.json = jsonString as String
-            print("Parsing \(enProduct.json)")
-            enProduct.name = prod.valueForKey("Name") as? String
-            enProduct.pID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
-           // enProduct.type = prod.valueForKey("jobTypeName") as? String
-            enProduct.type = typeCategory as String
-            enProduct.mallID = createByID
-            do {
-                try managedObjContext.save()
-            } catch let error as NSError  {
-                print("Could not save \(error), \(error.userInfo)")
+                let enProduct = CX_Products(entity: productEn!,insertIntoManagedObjectContext: privateMOC)
+                let createByID : String = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
+                enProduct.createdByID = createByID
+                enProduct.mallID = createByID
+                enProduct.itemCode = prod.valueForKey("ItemCode") as? String
+                let jsonString = CXConstant.sharedInstance.convertDictionayToString(prod as! NSDictionary)
+                enProduct.json = jsonString as String
+                //print("Parsing \(enProduct.json)")
+                enProduct.name = prod.valueForKey("Name") as? String
+                enProduct.pID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+                // enProduct.type = prod.valueForKey("jobTypeName") as? String
+                enProduct.type = typeCategory as String
+                enProduct.mallID = createByID
+                privateMOC.performBlock {
+                    //operations
+                    do {
+                        try privateMOC.save()
+                    } catch {
+                        fatalError("Failure to save context: \(error)")
+                    }
+                }
             }
         }
-        }
+        //    SwiftLoader.hide()
     }
     
     //MARK : Featured products
@@ -232,19 +246,25 @@ class CXDBSettings: NSObject {
                 
             }
         }
+        LoadingView.hide()
         
     }
     
     func savetheSubCategoryData(subCategory:NSArray){
         
-        let managedObjContext = self.appDelegate.managedObjectContext
-        let subCategoryEntity = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: managedObjContext)
+        let moc = self.appDelegate.managedObjectContext
+        
+        let privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        privateMOC.parentContext = moc
+        
+       // let managedObjContext = self.appDelegate.managedObjectContext
+        let subCategoryEntity = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: moc)
 
         for prod in subCategory {
             let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
             let predicate:NSPredicate = NSPredicate(format: "id = %@", itemID)
             if self.getRequiredItemsFromDB("TABLE_PRODUCT_SUB_CATEGORIES", predicate: predicate).count == 0 {
-                let enProduct = TABLE_PRODUCT_SUB_CATEGORIES(entity: subCategoryEntity!,insertIntoManagedObjectContext: managedObjContext)
+                let enProduct = TABLE_PRODUCT_SUB_CATEGORIES(entity: subCategoryEntity!,insertIntoManagedObjectContext: moc)
                 enProduct.id = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
                 enProduct.itemCode = CXConstant.sharedInstance.resultString(prod.valueForKey("ItemCode")!)
                 enProduct.createdByFullName = prod.valueForKey("createdByFullName") as? String
@@ -253,18 +273,60 @@ class CXDBSettings: NSObject {
                 enProduct.descriptionData = prod.valueForKey("Description") as? String
                 enProduct.masterCategory = prod.valueForKey("MasterCategory") as? String
                 //enProduct.subCategoryType = prod.valueForKey("MasterCategory") as? String
+                
+                moc.performBlock {
+                    //operations
+                    do {
+                        try moc.save()
+                    } catch {
+                        fatalError("Failure to save context: \(error)")
+                    }
+                }
+               /*
                 do {
                     try managedObjContext.save()
                 } catch let error as NSError  {
                     print("Could not save \(error), \(error.userInfo)")
-                }
+                }*/
                 
             }
         }
-
+       LoadingView.hide()
+        
+    }
+   /* func actionShowLoader() {
+        
+        var config : SwiftLoader.Config = SwiftLoader.Config()
+        config.size = 170
+        config.backgroundColor = UIColor(red:0.03, green:0.82, blue:0.7, alpha:1)
+        config.spinnerColor = UIColor(red:0.88, green:0.26, blue:0.18, alpha:1)
+        config.titleTextColor = UIColor(red:0.88, green:0.26, blue:0.18, alpha:1)
+        config.spinnerLineWidth = 2.0
+        config.foregroundColor = UIColor.blackColor()
+        config.foregroundAlpha = 0.5
+        
+        
+        SwiftLoader.setConfig(config)
+        
+        //SwiftLoader.show(animated: true)
+//        
+//        delay(seconds: 3.0) { () -> () in
+//            SwiftLoader.show("Loading...", animated: true)
+//        }
+//        delay(seconds: 6.0) { () -> () in
+//            SwiftLoader.hide()
+//        }
         
     }
     
+    func delay(seconds seconds: Double, completion:()->()) {
+        let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * seconds ))
+        
+        dispatch_after(popTime, dispatch_get_main_queue()) {
+            completion()
+        }
+    }*/
+
     /*
      ▿ 28 elements
      - [0] : MasterCategory

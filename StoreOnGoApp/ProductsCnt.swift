@@ -18,11 +18,11 @@ class ProductsCnt: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         self.setTheNavigationProperty()
-        //self.designHeaderView()
         self.setupCollectionView()
-        self.getProducts()
+       // self.getProducts()
         
-       
+        self.getProductSubCategory()
+        
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -48,9 +48,9 @@ class ProductsCnt: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CXConstant.DetailCollectionCellSize
+        layout.itemSize = CXConstant.ProductCollectionCellSize
         //self.view.frame
-        self.productCollectionView = UICollectionView(frame:CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
+        self.productCollectionView = UICollectionView(frame:CGRectMake(0,0, CXConstant.screenSize.width, CXConstant.screenSize.height), collectionViewLayout: layout)
         self.productCollectionView.showsHorizontalScrollIndicator = false
         self.productCollectionView.delegate = self
         self.productCollectionView.dataSource = self
@@ -66,6 +66,14 @@ class ProductsCnt: UIViewController {
         self.productCollectionView.reloadData()
 
     }
+    
+    func getProductSubCategory(){
+        
+        let productCatList :NSArray  = (CXDBSettings.sharedInstance.getTableData("TABLE_PRODUCT_SUB_CATEGORIES") as? NSArray)!
+        self.productCategories = NSMutableArray(array: productCatList)
+        self.productCollectionView.reloadData()
+    }
+    
     func designHeaderView (){
         
         self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "",backButtonVisible: true)
@@ -94,7 +102,7 @@ extension ProductsCnt:UICollectionViewDelegate,UICollectionViewDataSource {
             collectionView.registerNib(UINib(nibName: "ProductCollectionCell", bundle: nil), forCellWithReuseIdentifier: identifier)
         }
         
-        let proCat : CX_Product_Category = self.productCategories[indexPath.row] as! CX_Product_Category
+        let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
         
         cell.textLabel.text = proCat.name
         

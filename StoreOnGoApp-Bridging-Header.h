@@ -10,5 +10,5 @@
 #define StoreOnGoApp_Bridging_Header_h
 
 #import "KIImagePager.h"
-
+#import "ADPageControl.h"
 #endif /* StoreOnGoApp_Bridging_Header_h */

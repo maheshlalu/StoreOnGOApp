@@ -20,7 +20,13 @@
 		1220DCD21CD44E5600A78C3B /* CX_Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCCE1CD44E5600A78C3B /* CX_Products.swift */; };
 		1220DCD51CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCD31CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift */; };
 		1220DCD61CD4515300A78C3B /* CX_Stores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1220DCD41CD4515300A78C3B /* CX_Stores.swift */; };
+		122805971CDE3C0D000343AC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122805961CDE3C0D000343AC /* LoadingView.swift */; };
 		12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */; };
+		12F10A2A1CDEF23D007C8F5B /* ProductHomeCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */; };
+		12F10A2F1CDEF29F007C8F5B /* ADPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A2D1CDEF29F007C8F5B /* ADPageControl.m */; };
+		12F10A301CDEF29F007C8F5B /* ADPageControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12F10A2E1CDEF29F007C8F5B /* ADPageControl.xib */; };
+		12F10A321CDF0C9B007C8F5B /* AboutUsViewCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */; };
+		12F10A341CDF0E0F007C8F5B /* MapViewCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */; };
 		12F64D8B1CD5B52F007D760C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8A1CD5B52F007D760C /* HeaderView.swift */; };
 		12F64D8D1CD5B923007D760C /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8C1CD5B923007D760C /* SearchBar.swift */; };
 		12F64D8F1CD6389C007D760C /* FeatureProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8E1CD6389C007D760C /* FeatureProductsCnt.swift */; };
@@ -80,7 +86,14 @@
 		1220DCCE1CD44E5600A78C3B /* CX_Products.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Products.swift; sourceTree = "<group>"; };
 		1220DCD31CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CX_Stores+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1220DCD41CD4515300A78C3B /* CX_Stores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Stores.swift; sourceTree = "<group>"; };
+		122805961CDE3C0D000343AC /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_AppData.swift; sourceTree = "<group>"; };
+		12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHomeCntl.swift; sourceTree = "<group>"; };
+		12F10A2C1CDEF29F007C8F5B /* ADPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADPageControl.h; sourceTree = "<group>"; };
+		12F10A2D1CDEF29F007C8F5B /* ADPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADPageControl.m; sourceTree = "<group>"; };
+		12F10A2E1CDEF29F007C8F5B /* ADPageControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADPageControl.xib; sourceTree = "<group>"; };
+		12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewCnt.swift; sourceTree = "<group>"; };
+		12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCntl.swift; sourceTree = "<group>"; };
 		12F539D31CDA68DC00EF26C9 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		12F539D41CDA68DC00EF26C9 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		12F539D51CDA68DC00EF26C9 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
@@ -183,12 +196,23 @@
 		1220DCD71CD4DC7900A78C3B /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				12F10A2B1CDEF291007C8F5B /* PageCntl */,
 				12F859581CD3E1CD007BE1D0 /* KICamera.png */,
 				12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */,
 				12F8595A1CD3E1CD007BE1D0 /* KIImagePager.h */,
 				12F8595B1CD3E1CD007BE1D0 /* KIImagePager.m */,
 			);
 			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		12F10A2B1CDEF291007C8F5B /* PageCntl */ = {
+			isa = PBXGroup;
+			children = (
+				12F10A2C1CDEF29F007C8F5B /* ADPageControl.h */,
+				12F10A2D1CDEF29F007C8F5B /* ADPageControl.m */,
+				12F10A2E1CDEF29F007C8F5B /* ADPageControl.xib */,
+			);
+			name = PageCntl;
 			sourceTree = "<group>";
 		};
 		12F539D21CDA68C300EF26C9 /* Fonts */ = {
@@ -297,6 +321,7 @@
 				1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */,
 				12F64D8A1CD5B52F007D760C /* HeaderView.swift */,
 				12F64D8C1CD5B923007D760C /* SearchBar.swift */,
+				122805961CDE3C0D000343AC /* LoadingView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -309,6 +334,9 @@
 				1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */,
 				12F64D8E1CD6389C007D760C /* FeatureProductsCnt.swift */,
 				12100C301CD90F1900A44C0D /* ProductListCntl.swift */,
+				12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */,
+				12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */,
+				12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -475,6 +503,7 @@
 			files = (
 				121EA6401CDB171B00A69A4C /* subcate.txt in Resources */,
 				12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */,
+				12F10A301CDEF29F007C8F5B /* ADPageControl.xib in Resources */,
 				12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */,
 				AA01633C1CD2073B00EA1619 /* LaunchScreen.storyboard in Resources */,
 				AA0163391CD2073B00EA1619 /* Assets.xcassets in Resources */,
@@ -585,6 +614,7 @@
 			files = (
 				AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */,
 				1220DCD01CD44E5600A78C3B /* CX_Product_Category.swift in Sources */,
+				12F10A2F1CDEF29F007C8F5B /* ADPageControl.m in Sources */,
 				AA833A151CD7861A00ABFCC1 /* CX_FeaturedProducts.swift in Sources */,
 				12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */,
 				AA0163371CD2073B00EA1619 /* StoreOnGoApp.xcdatamodeld in Sources */,
@@ -597,17 +627,21 @@
 				1220DCCF1CD44E5600A78C3B /* CX_Product_Category+CoreDataProperties.swift in Sources */,
 				1220DCD11CD44E5600A78C3B /* CX_Products+CoreDataProperties.swift in Sources */,
 				AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */,
+				12F10A341CDF0E0F007C8F5B /* MapViewCntl.swift in Sources */,
 				1220DCD51CD4515300A78C3B /* CX_Stores+CoreDataProperties.swift in Sources */,
 				AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */,
 				12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */,
+				12F10A321CDF0C9B007C8F5B /* AboutUsViewCnt.swift in Sources */,
 				AA6B3BDA1CDCD54000BF2BF4 /* TABLE_PRODUCT_SUB_CATEGORIES+CoreDataProperties.swift in Sources */,
 				AA833A141CD7861A00ABFCC1 /* CX_FeaturedProducts+CoreDataProperties.swift in Sources */,
+				12F10A2A1CDEF23D007C8F5B /* ProductHomeCntl.swift in Sources */,
 				1220DCD61CD4515300A78C3B /* CX_Stores.swift in Sources */,
 				AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */,
 				12F64D911CD63A08007D760C /* CXDetailTableViewCell.swift in Sources */,
 				12100C311CD90F1900A44C0D /* ProductListCntl.swift in Sources */,
 				AA6B3BDB1CDCD54000BF2BF4 /* TABLE_PRODUCT_SUB_CATEGORIES.swift in Sources */,
 				12F64D8D1CD5B923007D760C /* SearchBar.swift in Sources */,
+				122805971CDE3C0D000343AC /* LoadingView.swift in Sources */,
 				1220DCD21CD44E5600A78C3B /* CX_Products.swift in Sources */,
 				1202FB0B1CD323D400EF8F5B /* HomeCollectionViewCell.swift in Sources */,
 				12F64D8F1CD6389C007D760C /* FeatureProductsCnt.swift in Sources */,
