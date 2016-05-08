@@ -62,7 +62,7 @@ class CXDBSettings: NSObject {
                     print("Could not save \(error), \(error.userInfo)")
                 }
             }
-            print("product Cat\(productCategory)")
+            //print("product Cat\(productCategory)")
         }
     }
     
@@ -183,46 +183,48 @@ class CXDBSettings: NSObject {
     
     func saveProductsInDB(products:NSArray,typeCategory:NSString) {
         
-        let moc = self.appDelegate.managedObjectContext
-        
-        let privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        privateMOC.parentContext = moc
-        let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: privateMOC)
-        
-        for prod in products {
-            let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
-            let predicate:NSPredicate = NSPredicate(format: "pID = %@", itemID)
-            if self.getRequiredItemsFromDB("CX_Products", predicate: predicate).count == 0 {
-                let enProduct = CX_Products(entity: productEn!,insertIntoManagedObjectContext: privateMOC)
-                let createByID : String = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
-                enProduct.createdByID = createByID
-                enProduct.mallID = createByID
-                enProduct.itemCode = prod.valueForKey("ItemCode") as? String
-                let jsonString = CXConstant.sharedInstance.convertDictionayToString(prod as! NSDictionary)
-                enProduct.json = jsonString as String
-                //print("Parsing \(enProduct.json)")
-                enProduct.name = prod.valueForKey("Name") as? String
-                enProduct.pID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
-                // enProduct.type = prod.valueForKey("jobTypeName") as? String
-                enProduct.type = typeCategory as String
-                enProduct.mallID = createByID
-                privateMOC.performBlock {
-                    //operations
-                    do {
-                        try privateMOC.save()
-                    } catch {
-                        fatalError("Failure to save context: \(error)")
-                    }
+         MagicalRecord.saveWithBlock({ (localContext : NSManagedObjectContext!) in
+            let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: localContext)
+
+            for prod in products {
+                
+                let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+                let predicate:NSPredicate = NSPredicate(format: "pID = %@", itemID)
+                let fetchRequest = NSFetchRequest(entityName: "CX_Products")
+                fetchRequest.predicate = predicate
+                
+                if CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
+                    
+                    let enProduct = CX_Products(entity: productEn!,insertIntoManagedObjectContext: localContext)
+
+                    let createByID : String = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
+                    enProduct.createdByID = createByID
+                    enProduct.mallID = createByID
+                    enProduct.itemCode = prod.valueForKey("ItemCode") as? String
+                    let jsonString = CXConstant.sharedInstance.convertDictionayToString(prod as! NSDictionary)
+                    enProduct.json = jsonString as String
+                    //print("Parsing \(enProduct.json)")
+                    enProduct.name = prod.valueForKey("Name") as? String
+                    enProduct.pID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+                    // enProduct.type = prod.valueForKey("jobTypeName") as? String
+                    enProduct.type = typeCategory as String
+                    enProduct.mallID = createByID
                 }
             }
-        }
-        //    SwiftLoader.hide()
+            
+            }, completion: { (success : Bool, error : NSError!) in
+                
+                print("save the data >>>>>")
+                LoadingView.hide()
+                // This block runs in main thread
+        })
+        
     }
     
     //MARK : Featured products
     
     func saveFeaturedProducts(products:NSArray){
-        print("featured products \(products)")
+        //print("featured products \(products)")
         let managedObjContext = self.appDelegate.managedObjectContext
         let featureProductEn = NSEntityDescription.entityForName("CX_FeaturedProducts", inManagedObjectContext: managedObjContext)
         for prod in products {
@@ -246,52 +248,41 @@ class CXDBSettings: NSObject {
                 
             }
         }
-        LoadingView.hide()
         
     }
     
     func savetheSubCategoryData(subCategory:NSArray){
         
-        let moc = self.appDelegate.managedObjectContext
-        
-        let privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        privateMOC.parentContext = moc
-        
-       // let managedObjContext = self.appDelegate.managedObjectContext
-        let subCategoryEntity = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: moc)
+        MagicalRecord.saveWithBlock({ (localContext : NSManagedObjectContext!) in
+            
+              let subCategoryEntity = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: localContext)
+            
+            for prod in subCategory {
+                let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+                let predicate:NSPredicate = NSPredicate(format: "id = %@", itemID)
+                let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
+                fetchRequest.predicate = predicate
+                
+                if TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest).count == 0 {
+                    
+                    let enProduct = TABLE_PRODUCT_SUB_CATEGORIES(entity: subCategoryEntity!,insertIntoManagedObjectContext: localContext)
 
-        for prod in subCategory {
-            let itemID = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
-            let predicate:NSPredicate = NSPredicate(format: "id = %@", itemID)
-            if self.getRequiredItemsFromDB("TABLE_PRODUCT_SUB_CATEGORIES", predicate: predicate).count == 0 {
-                let enProduct = TABLE_PRODUCT_SUB_CATEGORIES(entity: subCategoryEntity!,insertIntoManagedObjectContext: moc)
-                enProduct.id = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
-                enProduct.itemCode = CXConstant.sharedInstance.resultString(prod.valueForKey("ItemCode")!)
-                enProduct.createdByFullName = prod.valueForKey("createdByFullName") as? String
-                enProduct.name = prod.valueForKey("Name") as? String
-                enProduct.createdById = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
-                enProduct.descriptionData = prod.valueForKey("Description") as? String
-                enProduct.masterCategory = prod.valueForKey("MasterCategory") as? String
-                //enProduct.subCategoryType = prod.valueForKey("MasterCategory") as? String
-                
-                moc.performBlock {
-                    //operations
-                    do {
-                        try moc.save()
-                    } catch {
-                        fatalError("Failure to save context: \(error)")
-                    }
+                    enProduct.id = CXConstant.sharedInstance.resultString(prod.valueForKey("id")!)
+                    enProduct.itemCode = CXConstant.sharedInstance.resultString(prod.valueForKey("ItemCode")!)
+                    enProduct.createdByFullName = prod.valueForKey("createdByFullName") as? String
+                    enProduct.name = prod.valueForKey("Name") as? String
+                    enProduct.createdById = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
+                    enProduct.descriptionData = prod.valueForKey("Description") as? String
+                    enProduct.masterCategory = prod.valueForKey("MasterCategory") as? String
+                    
                 }
-               /*
-                do {
-                    try managedObjContext.save()
-                } catch let error as NSError  {
-                    print("Could not save \(error), \(error.userInfo)")
-                }*/
-                
             }
-        }
-       LoadingView.hide()
+            // This block runs in background thread
+            }, completion: { (success : Bool, error : NSError!) in
+                print("save the data >>>>>")
+                LoadingView.hide()
+                // This block runs in main thread
+        })
         
     }
    /* func actionShowLoader() {

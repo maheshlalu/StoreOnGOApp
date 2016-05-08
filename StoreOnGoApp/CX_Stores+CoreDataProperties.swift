@@ -2,7 +2,7 @@
 //  CX_Stores+CoreDataProperties.swift
 //  StoreOnGoApp
 //
-//  Created by Rama kuppa on 30/04/16.
+//  Created by Rama kuppa on 08/05/16.
 //  Copyright © 2016 CX. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,20 +14,20 @@ import CoreData
 
 extension CX_Stores {
 
-    @NSManaged var id: String?
-    @NSManaged var createdById: String?
-    @NSManaged var jobTypeId: String?
-    @NSManaged var jobTypeName: String?
-    @NSManaged var name: String?
     @NSManaged var address: String?
-    @NSManaged var descriptionData: String?
-    @NSManaged var longitude: String?
-    @NSManaged var latitude: String?
+    @NSManaged var attachments: NSObject?
     @NSManaged var city: String?
     @NSManaged var contactNumber: String?
+    @NSManaged var createdById: String?
+    @NSManaged var descriptionData: String?
     @NSManaged var faceBook: String?
-    @NSManaged var twitter: String?
+    @NSManaged var id: String?
+    @NSManaged var jobTypeId: String?
+    @NSManaged var jobTypeName: String?
     @NSManaged var json: String?
-    @NSManaged var attachments: NSObject?
+    @NSManaged var latitude: String?
+    @NSManaged var longitude: String?
+    @NSManaged var name: String?
+    @NSManaged var twitter: String?
 
 }

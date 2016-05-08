@@ -8,7 +8,7 @@
 
 #ifndef StoreOnGoApp_Bridging_Header_h
 #define StoreOnGoApp_Bridging_Header_h
-
+#import <CoreData+MagicalRecord.h>
 #import "KIImagePager.h"
 #import "ADPageControl.h"
 #endif /* StoreOnGoApp_Bridging_Header_h */

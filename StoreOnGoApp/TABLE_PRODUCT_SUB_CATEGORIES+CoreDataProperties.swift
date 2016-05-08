@@ -2,7 +2,7 @@
 //  TABLE_PRODUCT_SUB_CATEGORIES+CoreDataProperties.swift
 //  StoreOnGoApp
 //
-//  Created by Mahesh Y on 06/05/16.
+//  Created by Rama kuppa on 08/05/16.
 //  Copyright © 2016 CX. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

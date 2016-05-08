@@ -123,9 +123,9 @@ class CXConstant: NSObject {
         var dataString: String!
         do {
             let jsonData = try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions.PrettyPrinted)
-            print("JSON data is \(jsonData)")
+            //print("JSON data is \(jsonData)")
             dataString = String(data: jsonData, encoding: NSUTF8StringEncoding)
-            print("Converted JSON string is \(dataString)")
+           // print("Converted JSON string is \(dataString)")
             // here "jsonData" is the dictionary encoded in JSON data
         } catch let error as NSError {
             dataString = ""

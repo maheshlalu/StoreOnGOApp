@@ -62,10 +62,17 @@ class ViewController: UIViewController{
 
     //MARK: Get Stores
     func getStores(){
-        let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
-       self.coverPageImagesList = storesData.attachments as? NSMutableArray
-          print("data array \(storesData.attachments)")
-        self.setupPagenator()
+        
+        let fetchRequest = NSFetchRequest(entityName: "CX_Stores")
+        if CX_Stores.MR_executeFetchRequest(fetchRequest).count != 0 {
+            
+            let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
+            self.coverPageImagesList = storesData.attachments as? NSMutableArray
+            print("data array \(storesData.attachments)")
+            self.setupPagenator()
+
+        }
+        
     }
     
     // MARK: - SetUp Paginater
@@ -214,7 +221,7 @@ extension ViewController: DetailViewControllerDelegate {
 extension ViewController :AppDataDelegate {
     
     func completedTheFetchingTheData(sender: CX_AppData) {
-         self.getStores()
+        self.getStores()
 
     }
 
