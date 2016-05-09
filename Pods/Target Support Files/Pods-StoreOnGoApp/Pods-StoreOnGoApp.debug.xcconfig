@@ -1,0 +1,5 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HMSegmentedControl" "${PODS_ROOT}/Headers/Public/MMSpreadsheetView" "${PODS_ROOT}/Headers/Public/MagicalRecord"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HMSegmentedControl" -isystem "${PODS_ROOT}/Headers/Public/MMSpreadsheetView" -isystem "${PODS_ROOT}/Headers/Public/MagicalRecord"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"HMSegmentedControl" -l"MMSpreadsheetView" -l"MagicalRecord" -framework "CoreData" -framework "QuartzCore"
+PODS_ROOT = ${SRCROOT}/Pods

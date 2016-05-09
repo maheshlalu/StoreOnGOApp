@@ -49,6 +49,8 @@
 		AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163631CD20BE900EA1619 /* CXDBSettings.swift */; };
 		AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163661CD20C0F00EA1619 /* CXConstant.swift */; };
 		AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163791CD20E1400EA1619 /* SMSyncService.swift */; };
+		AA5A46931CE0C2CA007E01A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5A46921CE0C2CA007E01A4 /* MapKit.framework */; };
+		AA5A46951CE0C326007E01A4 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5A46941CE0C326007E01A4 /* Station.swift */; };
 		AAF679331CD2644F001E1238 /* CXDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */; };
 		AAFDDAA68C54C910736A9062 /* Pods_StoreOnGoAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -130,6 +132,8 @@
 		AA0163631CD20BE900EA1619 /* CXDBSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDBSettings.swift; sourceTree = "<group>"; };
 		AA0163661CD20C0F00EA1619 /* CXConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXConstant.swift; sourceTree = "<group>"; };
 		AA0163791CD20E1400EA1619 /* SMSyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSyncService.swift; sourceTree = "<group>"; };
+		AA5A46921CE0C2CA007E01A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		AA5A46941CE0C326007E01A4 /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		CD8BCF12D5EE24986213CFD8 /* libPods-StoreOnGoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreOnGoAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5A46931CE0C2CA007E01A4 /* MapKit.framework in Frameworks */,
 				3396D58E6FE6CA4F9228769B /* libPods-StoreOnGoApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +336,7 @@
 				12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */,
 				12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */,
 				12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */,
+				AA5A46941CE0C326007E01A4 /* Station.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 		ABFC5783A464FCA6DBC068CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA5A46921CE0C2CA007E01A4 /* MapKit.framework */,
 				E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */,
 				CD8BCF12D5EE24986213CFD8 /* libPods-StoreOnGoApp.a */,
 			);
@@ -624,6 +631,7 @@
 				126F82791CDF6F57003C3DE4 /* CX_Product_Category.swift in Sources */,
 				AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */,
 				126F82751CDF6F57003C3DE4 /* CX_Products.swift in Sources */,
+				AA5A46951CE0C326007E01A4 /* Station.swift in Sources */,
 				12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */,
 				12F10A321CDF0C9B007C8F5B /* AboutUsViewCnt.swift in Sources */,
 				12F10A2A1CDEF23D007C8F5B /* ProductHomeCntl.swift in Sources */,

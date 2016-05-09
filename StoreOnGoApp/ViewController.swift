@@ -183,8 +183,8 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             self.navigationController?.pushViewController(fetureProductView, animated: true)
             break
         case 2  :
-            let productListCnt = ProductListCntl.init()
-            self.navigationController?.pushViewController(productListCnt, animated: true)
+            let mapView = MapViewCntl.init()
+            self.navigationController?.pushViewController(mapView, animated: true)
             
             break
         case 3  :

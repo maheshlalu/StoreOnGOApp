@@ -10,7 +10,6 @@
 #define StoreOnGoApp_Bridging_Header_h
 #import <CoreData+MagicalRecord.h>
 #import "KIImagePager.h"
-#import "ROSwipenger.h"
 #import "HMSegmentedControl.h"
 
 #endif /* StoreOnGoApp_Bridging_Header_h */
