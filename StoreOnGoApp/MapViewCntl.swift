@@ -94,6 +94,9 @@ class MapViewCntl: UIViewController {
         
         var annotations:Array = [Station]()
         let annotation = Station(latitude: lat, longitude: long)
+        let annotation1 = Station(latitude: 17.3840500	, longitude:  78.4563600)
+        
+        annotations.append(annotation1)
         annotations.append(annotation)
         
         self.mapView.addAnnotation(annotation)
@@ -131,7 +134,7 @@ extension MapViewCntl :MKMapViewDelegate,CLLocationManagerDelegate {
         
         if overlay is MKPolyline {
             polylineRenderer.strokeColor = UIColor.redColor()
-            polylineRenderer.lineWidth = 5
+            polylineRenderer.lineWidth = 3
             
         }
         return polylineRenderer

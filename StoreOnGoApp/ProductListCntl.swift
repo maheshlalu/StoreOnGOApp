@@ -10,6 +10,9 @@ import UIKit
 
 class ProductListCntl: UIViewController {
 
+    var productsList : NSArray = NSArray()
+    var predicate : NSPredicate = NSPredicate()
+    
     var productListTableView : UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,19 @@ class ProductListCntl: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getTheProductsList(){
+        
+        
+    }
+    
+    
+    func setUpTheSpreadSheetView (){
+        
+        
+        
+        
     }
     
     func designProductListTableView(){

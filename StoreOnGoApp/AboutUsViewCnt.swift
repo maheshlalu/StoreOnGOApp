@@ -76,7 +76,6 @@ class AboutUsViewCnt: UIViewController {
 
 }
 
-
 extension AboutUsViewCnt:KIImagePagerDelegate,KIImagePagerDataSource {
     
     //    }
