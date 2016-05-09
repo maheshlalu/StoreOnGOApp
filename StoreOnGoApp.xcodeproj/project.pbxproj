@@ -26,11 +26,8 @@
 		126F827B1CDF6F57003C3DE4 /* CX_FeaturedProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126F82711CDF6F57003C3DE4 /* CX_FeaturedProducts.swift */; };
 		126F827C1CDF6F57003C3DE4 /* CX_Stores+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126F82721CDF6F57003C3DE4 /* CX_Stores+CoreDataProperties.swift */; };
 		126F827D1CDF6F57003C3DE4 /* CX_Stores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126F82731CDF6F57003C3DE4 /* CX_Stores.swift */; };
-		1274E23B7CA5BB42F196CC34 /* libPods-StoreOnGoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6DDE7C5C28763F62693EFB6 /* libPods-StoreOnGoApp.a */; };
 		12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */; };
 		12F10A2A1CDEF23D007C8F5B /* ProductHomeCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */; };
-		12F10A2F1CDEF29F007C8F5B /* ADPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A2D1CDEF29F007C8F5B /* ADPageControl.m */; };
-		12F10A301CDEF29F007C8F5B /* ADPageControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12F10A2E1CDEF29F007C8F5B /* ADPageControl.xib */; };
 		12F10A321CDF0C9B007C8F5B /* AboutUsViewCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */; };
 		12F10A341CDF0E0F007C8F5B /* MapViewCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */; };
 		12F64D8B1CD5B52F007D760C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8A1CD5B52F007D760C /* HeaderView.swift */; };
@@ -41,6 +38,7 @@
 		12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859581CD3E1CD007BE1D0 /* KICamera.png */; };
 		12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */; };
 		12F8595E1CD3E1CD007BE1D0 /* KIImagePager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8595B1CD3E1CD007BE1D0 /* KIImagePager.m */; };
+		3396D58E6FE6CA4F9228769B /* libPods-StoreOnGoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8BCF12D5EE24986213CFD8 /* libPods-StoreOnGoApp.a */; };
 		AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01632E1CD2073B00EA1619 /* AppDelegate.swift */; };
 		AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163301CD2073B00EA1619 /* ViewController.swift */; };
 		AA0163341CD2073B00EA1619 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA0163321CD2073B00EA1619 /* Main.storyboard */; };
@@ -95,9 +93,6 @@
 		126F82731CDF6F57003C3DE4 /* CX_Stores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_Stores.swift; sourceTree = "<group>"; };
 		12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_AppData.swift; sourceTree = "<group>"; };
 		12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHomeCntl.swift; sourceTree = "<group>"; };
-		12F10A2C1CDEF29F007C8F5B /* ADPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADPageControl.h; sourceTree = "<group>"; };
-		12F10A2D1CDEF29F007C8F5B /* ADPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADPageControl.m; sourceTree = "<group>"; };
-		12F10A2E1CDEF29F007C8F5B /* ADPageControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADPageControl.xib; sourceTree = "<group>"; };
 		12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewCnt.swift; sourceTree = "<group>"; };
 		12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCntl.swift; sourceTree = "<group>"; };
 		12F539D31CDA68DC00EF26C9 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -136,7 +131,7 @@
 		AA0163661CD20C0F00EA1619 /* CXConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXConstant.swift; sourceTree = "<group>"; };
 		AA0163791CD20E1400EA1619 /* SMSyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSyncService.swift; sourceTree = "<group>"; };
 		AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDetailCollectionViewCell.swift; sourceTree = "<group>"; };
-		B6DDE7C5C28763F62693EFB6 /* libPods-StoreOnGoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD8BCF12D5EE24986213CFD8 /* libPods-StoreOnGoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoreOnGoAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1D4A9304C6D9CB12D45FA79 /* Pods-StoreOnGoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp.release.xcconfig"; sourceTree = "<group>"; };
 		F912ACE886EAFA7466710239 /* Pods-StoreOnGoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoApp/Pods-StoreOnGoApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1274E23B7CA5BB42F196CC34 /* libPods-StoreOnGoApp.a in Frameworks */,
+				3396D58E6FE6CA4F9228769B /* libPods-StoreOnGoApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,9 +205,6 @@
 		12F10A2B1CDEF291007C8F5B /* PageCntl */ = {
 			isa = PBXGroup;
 			children = (
-				12F10A2C1CDEF29F007C8F5B /* ADPageControl.h */,
-				12F10A2D1CDEF29F007C8F5B /* ADPageControl.m */,
-				12F10A2E1CDEF29F007C8F5B /* ADPageControl.xib */,
 			);
 			name = PageCntl;
 			sourceTree = "<group>";
@@ -389,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */,
-				B6DDE7C5C28763F62693EFB6 /* libPods-StoreOnGoApp.a */,
+				CD8BCF12D5EE24986213CFD8 /* libPods-StoreOnGoApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -505,7 +497,6 @@
 			files = (
 				121EA6401CDB171B00A69A4C /* subcate.txt in Resources */,
 				12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */,
-				12F10A301CDEF29F007C8F5B /* ADPageControl.xib in Resources */,
 				12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */,
 				AA01633C1CD2073B00EA1619 /* LaunchScreen.storyboard in Resources */,
 				AA0163391CD2073B00EA1619 /* Assets.xcassets in Resources */,
@@ -618,7 +609,6 @@
 				126F82691CDF6F24003C3DE4 /* StoreOnGoData.xcdatamodeld in Sources */,
 				126F82761CDF6F57003C3DE4 /* TABLE_PRODUCT_SUB_CATEGORIES+CoreDataProperties.swift in Sources */,
 				AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */,
-				12F10A2F1CDEF29F007C8F5B /* ADPageControl.m in Sources */,
 				12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */,
 				1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */,
 				AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */,

@@ -9,14 +9,21 @@
 import UIKit
 
 class ProductHomeCntl: UIViewController {
-
-    var  _pageControl : ADPageControl = ADPageControl()
+    var segmentedControl4 : HMSegmentedControl = HMSegmentedControl()
+    var searchBar: SearchBar!
+    var productCollectionView: UICollectionView!
+    var productCategories: NSArray!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         self.setTheNavigationProperty()
-       // self.setUpPageView()
+        self.setupPager()
+        self.designSearchBar()
+        self.setupCollectionView()
+        let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
+        self.getProductSubCategory(predicate)
+        
         // Do any additional setup after loading the view.
     }
 
@@ -36,44 +43,69 @@ class ProductHomeCntl: UIViewController {
             [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
     
-    
-    func setUpPageView(){
+   
+    func setupPager () {
         
-        let page1 : ADPageModel = ADPageModel()
-        page1.strPageTitle = "PRODUCTS LIST"
-        page1.viewController = ProductsCnt.init()
-        page1.iPageNumber = 0
+        self.segmentedControl4 = HMSegmentedControl(frame: CGRectMake(0, 60, CXConstant.screenSize.width, 50))
+        self.segmentedControl4.sectionTitles = ["PRODUCTS LIST", "MISCELLANEOUS"]
+        self.segmentedControl4.selectedSegmentIndex = 0
+        self.segmentedControl4.backgroundColor =  UIColor.whiteColor()
+        self.segmentedControl4.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
+        self.segmentedControl4.selectedTitleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)]
+        self.segmentedControl4.selectionIndicatorColor = UIColor.redColor()
+            self.segmentedControl4.selectionStyle = HMSegmentedControlSelectionStyleBox
+        self.segmentedControl4.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationUp
+        self.segmentedControl4.tag = 3
+        segmentedControl4.addTarget(self, action: #selector(ProductHomeCntl.segmentedControlChangedValue(_:)), forControlEvents: .ValueChanged)
+        self.view.addSubview(self.segmentedControl4)
         
-        let page2 : ADPageModel = ADPageModel()
-        page2.strPageTitle = "MISCELLANEOUS"
-        page2.viewController = ProductsCnt.init()
-        page2.iPageNumber = 1
-
-        self._pageControl.delegateADPageControl = self
-        
-        _pageControl.arrPageModel = [page1,page2];
-        
-        _pageControl.iFirstVisiblePageNumber =  1;
-        _pageControl.iTitleViewHeight =         40;
-        _pageControl.iPageIndicatorHeight =     4;
-       // _pageControl.fontTitleTabText =         [UIFont fontWithName:@"Helvetica" size:16];
-        
-        _pageControl.bEnablePagesEndBounceEffect =  false;
-        _pageControl.bEnableTitlesEndBounceEffect = false;
-        
-        _pageControl.colorTabText =              UIColor.whiteColor()
-        _pageControl.colorTitleBarBackground =       UIColor.purpleColor()
-        _pageControl.colorPageIndicator =               UIColor.whiteColor()
-        _pageControl.colorPageOverscrollBackground =    UIColor.lightGrayColor()
-        _pageControl.bShowMoreTabAvailableIndicator =   false;
-        
-        self._pageControl.view.frame = CGRectMake(0, 100, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh)
-        self.view.addSubview(_pageControl.view)
-        _pageControl.view.translatesAutoresizingMaskIntoConstraints = false;
-        
+        //Miscellaneous(135918)
     }
     
+    //MARK : SearchBar
+    func designSearchBar (){
+        
+        self.searchBar = SearchBar.designSearchBar()
+        self.searchBar.delegate = self
+        self.searchBar.placeholder = "Search Products Categories"
+        self.view.addSubview(self.searchBar)
+    }
+    
+    
+    func setupCollectionView (){
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 200, right: 10)
+        layout.itemSize = CXConstant.ProductCollectionCellSize
+        //self.view.frame
+        self.productCollectionView = UICollectionView(frame:CGRectMake(0,CXConstant.searchBarFrame.origin.y+CXConstant.searchBarFrame.size.height, CXConstant.screenSize.width, CXConstant.screenSize.height), collectionViewLayout: layout)
+        self.productCollectionView.showsHorizontalScrollIndicator = false
+        self.productCollectionView.delegate = self
+        self.productCollectionView.dataSource = self
+        layout.scrollDirection = UICollectionViewScrollDirection.Vertical
+        self.productCollectionView.registerClass(ProductCollectionCell.self, forCellWithReuseIdentifier: "ProductCollectionCell")
+        self.productCollectionView.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(self.productCollectionView)
+    }
+    
+    
+    func getProductSubCategory (predicate:NSPredicate){
+        let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
+        fetchRequest.predicate = predicate
+        self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
+        self.productCollectionView.reloadData()
 
+    }
+    
+    
+    
+    //SELECT * FROM ZTABLE_PRODUCT_SUB_CATEGORIES WHERE ZMASTERCATEGORY = 'Products List(129121)'
+    //SELECT * FROM ZTABLE_PRODUCT_SUB_CATEGORIES WHERE ZMASTERCATEGORY = 'Miscellaneous(135918)'
+
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 
@@ -83,14 +115,85 @@ class ProductHomeCntl: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
-
-extension ProductHomeCntl:ADPageControlDelegate {
     
-    func adPageControlGetViewControllerForPageModel(pageModel: ADPageModel!) -> UIViewController! {
+    func segmentedControlChangedValue(segmentedControl: HMSegmentedControl) {
+        NSLog("Selected index %ld (via UIControlEventValueChanged)", Int(segmentedControl.selectedSegmentIndex))
         
-        var page : UIViewController = UIViewController.init()
-        return page
+        let index = Int(segmentedControl.selectedSegmentIndex)
+        
+        switch index {
+        case 0  :
+            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
+            self.getProductSubCategory(predicate)
+            break
+        case 1 :
+            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Miscellaneous(135918)")
+            self.getProductSubCategory(predicate)
+            break
+            
+        default :
+            break
+        }
+
+     
+    }
+    
+    func uisegmentedControlChangedValue(segmentedControl: UISegmentedControl) {
+        NSLog("Selected index %ld", Int(segmentedControl.selectedSegmentIndex))
+        
     }
 }
+
+extension ProductHomeCntl:UISearchBarDelegate{
+    func searchBarSearchButtonClicked( searchBar: UISearchBar)
+    {
+        
+    }
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print("search string \(searchText)")
+    }
+    
+}
+
+
+extension ProductHomeCntl:UICollectionViewDelegate,UICollectionViewDataSource {
+    
+    func collectionView(collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        // let prodCategory:CX_Product_Category = self.mallProductCategories[collectionView.tag] as! CX_Product_Category
+        // let products:NSArray = self.getProducts(prodCategory)
+        
+        return self.productCategories.count;
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let identifier = "ProductCollectionCell"
+        let cell: ProductCollectionCell! = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?ProductCollectionCell
+        if cell == nil {
+            collectionView.registerNib(UINib(nibName: "ProductCollectionCell", bundle: nil), forCellWithReuseIdentifier: identifier)
+        }
+        
+        let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
+        
+        cell.textLabel.text = proCat.name
+        
+        
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
+        
+        let index = indexPath.row
+        
+        //select *from ZCX_PRODUCTS where ZSUBCATNAMEID = 'FORK GUIDE BOLT(130603)'
+
+        
+    }
+    
+    
+}
+
+
+

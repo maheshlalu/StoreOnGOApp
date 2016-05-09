@@ -26,7 +26,7 @@ class ViewController: UIViewController{
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationController?.navigationBarHidden = true
         self.designHeaderView()
-        CX_AppData.sharedInstance.dataDelegate = self
+        CXDBSettings.sharedInstance.dataDelegate = self
         CX_AppData.sharedInstance.getStoresData()
         self.setupCollectionView()
         // Do any additional setup after loading the view, typically from a nib.
@@ -175,7 +175,7 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
         let index = indexPath.row
         switch index {
         case 0  :
-            let productView = ProductsCnt.init()
+            let productView = ProductHomeCntl.init()
             self.navigationController?.pushViewController(productView, animated: true)
             break
         case 1 :
@@ -220,7 +220,7 @@ extension ViewController: DetailViewControllerDelegate {
 
 extension ViewController :AppDataDelegate {
     
-    func completedTheFetchingTheData(sender: CX_AppData) {
+    func completedTheFetchingTheData(sender: CXDBSettings) {
         self.getStores()
 
     }

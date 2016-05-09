@@ -7,10 +7,10 @@
 //
 
 import UIKit
-protocol AppDataDelegate {
-    func completedTheFetchingTheData(sender: CX_AppData)
-    
-}
+//protocol AppDataDelegate {
+//    func completedTheFetchingTheData(sender: CX_AppData)
+//    
+//}
 
 private var _SingletonSharedInstance:CX_AppData! = CX_AppData()
 
@@ -19,7 +19,7 @@ class CX_AppData: NSObject {
     
     private var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
-    var dataDelegate:AppDataDelegate?
+   // var dataDelegate:AppDataDelegate?
     
     class var sharedInstance : CX_AppData {
         return _SingletonSharedInstance
@@ -38,9 +38,6 @@ class CX_AppData: NSObject {
             CXDBSettings.sharedInstance.saveStoresInDB(responseDict.valueForKey("jobs")! as! NSArray)
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
-            self.dataDelegate?.completedTheFetchingTheData(self)
-        })
             self.parseTheProductSubCategory()
         
     }
@@ -70,7 +67,7 @@ class CX_AppData: NSObject {
     
     func parseTheProductsList(){
         
-        LoadingView.show("ProductList Loading....", animated: true)
+       // LoadingView.show("ProductList Loading....", animated: true)
         let fetchRequest = NSFetchRequest(entityName: "CX_Products")
         if    CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
@@ -89,13 +86,13 @@ class CX_AppData: NSObject {
     }
     
     func miscellaneousList(){
-        LoadingView.show("Miscellaneous Loading....", animated: true)
+       // LoadingView.show("Miscellaneous Loading....", animated: true)
             CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("miscellaneous").valueForKey("jobs")! as! NSArray, typeCategory: "Miscellaneous")
         
     }
     
     func parseTheProductSubCategory(){
-        LoadingView.show("Subcategory Loading....", animated: true)
+        //LoadingView.show("Subcategory Loading....", animated: true)
         let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
         if    TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest).count == 0 {
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {

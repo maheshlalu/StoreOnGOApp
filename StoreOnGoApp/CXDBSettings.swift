@@ -8,13 +8,18 @@
 
 import UIKit
 import CoreData
+protocol AppDataDelegate {
+    func completedTheFetchingTheData(sender: CXDBSettings)
+    
+}
 
 private var _SingletonSharedInstance:CXDBSettings! = CXDBSettings()
 
 class CXDBSettings: NSObject {
     private var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
-    
+     var dataDelegate:AppDataDelegate?
+
     class var sharedInstance : CXDBSettings {
         return _SingletonSharedInstance
     }
@@ -169,11 +174,21 @@ class CXDBSettings: NSObject {
                 let jsonString = CXConstant.sharedInstance.convertDictionayToString(storesItem as! NSDictionary)
                 storeEntity.json = jsonString as String
                 do {
+                    
                     try managedContext.save()
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.dataDelegate?.completedTheFetchingTheData(self)
+                    })
+
                 } catch let error as NSError  {
                     print("Could not save \(error), \(error.userInfo)")
                 }
                 
+            }else{
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.dataDelegate?.completedTheFetchingTheData(self)
+                })
             }
             
         }
@@ -209,6 +224,7 @@ class CXDBSettings: NSObject {
                     // enProduct.type = prod.valueForKey("jobTypeName") as? String
                     enProduct.type = typeCategory as String
                     enProduct.mallID = createByID
+                    enProduct.subCatNameID = prod.valueForKey("SubCategoryType") as? String
                 }
             }
             
