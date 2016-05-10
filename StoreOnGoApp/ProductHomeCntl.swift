@@ -13,7 +13,8 @@ class ProductHomeCntl: UIViewController {
     var searchBar: SearchBar!
     var productCollectionView: UICollectionView!
     var productCategories: NSArray!
-
+    var isProductCategory : Bool = Bool()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
@@ -22,11 +23,12 @@ class ProductHomeCntl: UIViewController {
         self.designSearchBar()
         self.setupCollectionView()
         let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
+        isProductCategory = true
         self.getProductSubCategory(predicate)
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -43,7 +45,7 @@ class ProductHomeCntl: UIViewController {
             [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
     
-   
+    
     func setupPager () {
         
         self.segmentedControl4 = HMSegmentedControl(frame: CGRectMake(0, 60, CXConstant.screenSize.width, 50))
@@ -53,7 +55,7 @@ class ProductHomeCntl: UIViewController {
         self.segmentedControl4.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
         self.segmentedControl4.selectedTitleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)]
         self.segmentedControl4.selectionIndicatorColor = UIColor.redColor()
-            self.segmentedControl4.selectionStyle = HMSegmentedControlSelectionStyleBox
+        self.segmentedControl4.selectionStyle = HMSegmentedControlSelectionStyleBox
         self.segmentedControl4.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationUp
         self.segmentedControl4.tag = 3
         segmentedControl4.addTarget(self, action: #selector(ProductHomeCntl.segmentedControlChangedValue(_:)), forControlEvents: .ValueChanged)
@@ -93,73 +95,110 @@ class ProductHomeCntl: UIViewController {
         //let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
         
         let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
-       let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
+        let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
         fetchRequest.predicate = predicate
         fetchRequest.entity = productEn
         self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
         self.productCollectionView.reloadData()
-
+        
         
     }
-    
-    //+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 
-    //self.beers = [[Beer findAllSortedBy:SORT_KEY_NAME ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"name contains[c] %@", searchText] inContext:[NSManagedObjectContext defaultContext]] mutableCopy];
-    //SELECT * FROM ZTABLE_PRODUCT_SUB_CATEGORIES WHERE ZMASTERCATEGORY = 'Products List(129121)'
-    //SELECT * FROM ZTABLE_PRODUCT_SUB_CATEGORIES WHERE ZMASTERCATEGORY = 'Miscellaneous(135918)'
-
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func segmentedControlChangedValue(segmentedControl: HMSegmentedControl) {
         NSLog("Selected index %ld (via UIControlEventValueChanged)", Int(segmentedControl.selectedSegmentIndex))
-        
         let index = Int(segmentedControl.selectedSegmentIndex)
-        
+        self.refreshSearchBar()
         switch index {
         case 0  :
             let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
             self.getProductSubCategory(predicate)
+            isProductCategory = true
             break
         case 1 :
             let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Miscellaneous(135918)")
             self.getProductSubCategory(predicate)
+            isProductCategory = false
             break
             
         default :
             break
         }
-
-     
+        
+        
     }
     
     func uisegmentedControlChangedValue(segmentedControl: UISegmentedControl) {
-        NSLog("Selected index %ld", Int(segmentedControl.selectedSegmentIndex))
-        
+       // NSLog("Selected index %ld", Int(segmentedControl.selectedSegmentIndex))
     }
 }
 
 extension ProductHomeCntl:UISearchBarDelegate{
     func searchBarSearchButtonClicked( searchBar: UISearchBar)
     {
-        
+        self.searchBar.resignFirstResponder()
+        self.doSearch()
     }
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        print("search string \(searchText)")
+       // print("search string \(searchText)")
+        if (self.searchBar.text!.characters.count > 0) {
+            self.doSearch()
+        } else {
+            self.loadDefaultList()
+        }
         
     }
-
+    
+    func loadDefaultList (){
+        
+        if isProductCategory {
+            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
+            self.getProductSubCategory(predicate)
+        }else{
+            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Miscellaneous(135918)")
+            self.getProductSubCategory(predicate)
+        }
+    }
+    
+    func refreshSearchBar (){
+        self.searchBar.resignFirstResponder()
+        // Clear search bar text
+        self.searchBar.text = "";
+        // Hide the cancel button
+        self.searchBar.showsCancelButton = false;
+        
+    }
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.refreshSearchBar()
+        // Do a default fetch of the beers
+        self.loadDefaultList()
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true;
+        
+    }
+    
+    func doSearch () {
+        let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+        let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
+        var predicate:NSPredicate = NSPredicate()
+        
+        if isProductCategory {
+            predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Products List(129121)",self.searchBar.text!)
+        }else{
+            predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Miscellaneous(135918)",self.searchBar.text!)
+        }
+        
+        fetchRequest.predicate = predicate
+        fetchRequest.entity = productEn
+        
+        self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
+        
+        self.productCollectionView.reloadData()
+        
+    }
+    
     
 }
 
@@ -196,74 +235,13 @@ extension ProductHomeCntl:UICollectionViewDelegate,UICollectionViewDataSource {
         let index = indexPath.row
         
         //select *from ZCX_PRODUCTS where ZSUBCATNAMEID = 'FORK GUIDE BOLT(130603)'
-
+        
         
     }
     
-   /* func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
-        
-        //CGSize(width:screenSize.width/3.8,height: 40)
-        
-        let cell = ProductCollectionCell(frame: CGRect(x: 0, y: 8, width: CXConstant.screenSize.width/3.8, height: 40))
-        let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
-
-        cell.textLabel.text = proCat.name
-
-         let font = UIFont(name: "Helvetica", size: 24)
-        
-            let fontAttributes = [NSFontAttributeName: font] // it says name, but a UIFont works
-            let myText = "Your Text Here"
-            let size = (myText as NSString).sizeWithAttributes(fontAttributes)
-        
-        return CGSizeMake(cell.textLabel.intrinsicContentSize().width+10, cell.textLabel.intrinsicContentSize().height+20)
-    }
-    */
     
     
 }
 
-/*#pragma mark - Search Bar Delegate
- - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-	if ([self.searchBar.text length] > 0) {
- [self doSearch];
-	} else {
- [self fetchAllBeers];
- [self.tableView reloadData];
-	}
- }
- 
- - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-	[self.searchBar resignFirstResponder];
-	// Clear search bar text
-	self.searchBar.text = @"";
-	// Hide the cancel button
-	self.searchBar.showsCancelButton = NO;
-	// Do a default fetch of the beers
-	[self fetchAllBeers];
-	[self.tableView reloadData];
- }
- 
- - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-	self.searchBar.showsCancelButton = YES;
- }
- 
- - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-	[self.searchBar resignFirstResponder];
-	[self doSearch];
- }
- 
- - (void)doSearch {
-	// 1. Get the text from the search bar.
-	NSString *searchText = self.searchBar.text;
-	// 2. Do a fetch on the beers that match Predicate criteria.
-	// In this case, if the name contains the string
-	self.beers = [[Beer findAllSortedBy:SORT_KEY_NAME
- ascending:YES
- withPredicate:[NSPredicate predicateWithFormat:@"name contains[c] %@", searchText]
- inContext:[NSManagedObjectContext defaultContext]] mutableCopy];
-	// 3. Reload the table to show the query results.
-	[self.tableView reloadData];
- }
-*/
 
 

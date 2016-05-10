@@ -14,6 +14,7 @@ protocol DetailViewControllerDelegate: class {
 
 class HeaderView: UIView {
     var btn: UIButton!
+    let appLogo : UIImageView = UIImageView()
 
     weak var delegate:DetailViewControllerDelegate?
 
@@ -35,13 +36,21 @@ class HeaderView: UIView {
    
     class  func customizeHeaderView(cartButtonVisible:Bool,headerTitle:NSString,backButtonVisible : Bool) -> HeaderView {
         
+        let appLogo = UIImageView(frame: CGRect(x: -60, y: 5, width: 65, height: 65))
+        appLogo.contentMode = UIViewContentMode.Left
+        // cellBackGroundView.addSubview(imageView)
+        appLogo.image = UIImage(named: "appLogo")
+        
+        
         let headerView : HeaderView = HeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, 70))
         headerView.backgroundColor = UIColor.redColor()
-        let headerLbl : UILabel = UILabel.init(frame: CGRectMake(50, 0, CXConstant.screenSize.width-50, 70))
+        let headerLbl : UILabel = UILabel.init(frame: CGRectMake(appLogo.frame.size.width+10, 0, CXConstant.screenSize.width-50, 70))
         headerLbl.text = headerTitle as String
         headerLbl.font = UIFont(name:"Roboto-Regular",size:18)
         headerLbl.textColor = UIColor.whiteColor()
         headerView.addSubview(headerLbl)
+        
+        headerLbl.addSubview(appLogo)
         
         let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
         backButton.backgroundColor = UIColor.greenColor()
