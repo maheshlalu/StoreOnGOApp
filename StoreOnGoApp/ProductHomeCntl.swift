@@ -104,7 +104,7 @@ class ProductHomeCntl: UIViewController {
     
     //+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 
-    
+    //self.beers = [[Beer findAllSortedBy:SORT_KEY_NAME ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"name contains[c] %@", searchText] inContext:[NSManagedObjectContext defaultContext]] mutableCopy];
     //SELECT * FROM ZTABLE_PRODUCT_SUB_CATEGORIES WHERE ZMASTERCATEGORY = 'Products List(129121)'
     //SELECT * FROM ZTABLE_PRODUCT_SUB_CATEGORIES WHERE ZMASTERCATEGORY = 'Miscellaneous(135918)'
 
@@ -222,5 +222,48 @@ extension ProductHomeCntl:UICollectionViewDelegate,UICollectionViewDataSource {
     
 }
 
+/*#pragma mark - Search Bar Delegate
+ - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+	if ([self.searchBar.text length] > 0) {
+ [self doSearch];
+	} else {
+ [self fetchAllBeers];
+ [self.tableView reloadData];
+	}
+ }
+ 
+ - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+	[self.searchBar resignFirstResponder];
+	// Clear search bar text
+	self.searchBar.text = @"";
+	// Hide the cancel button
+	self.searchBar.showsCancelButton = NO;
+	// Do a default fetch of the beers
+	[self fetchAllBeers];
+	[self.tableView reloadData];
+ }
+ 
+ - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+	self.searchBar.showsCancelButton = YES;
+ }
+ 
+ - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+	[self.searchBar resignFirstResponder];
+	[self doSearch];
+ }
+ 
+ - (void)doSearch {
+	// 1. Get the text from the search bar.
+	NSString *searchText = self.searchBar.text;
+	// 2. Do a fetch on the beers that match Predicate criteria.
+	// In this case, if the name contains the string
+	self.beers = [[Beer findAllSortedBy:SORT_KEY_NAME
+ ascending:YES
+ withPredicate:[NSPredicate predicateWithFormat:@"name contains[c] %@", searchText]
+ inContext:[NSManagedObjectContext defaultContext]] mutableCopy];
+	// 3. Reload the table to show the query results.
+	[self.tableView reloadData];
+ }
+*/
 
 
