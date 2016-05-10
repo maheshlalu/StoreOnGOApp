@@ -5,6 +5,7 @@
 //  Created by Rama kuppa on 03/05/16.
 //  Copyright © 2016 CX. All rights reserved.
 //
+//#import "MMSpreadsheetView.h"
 
 import UIKit
 
@@ -17,7 +18,8 @@ class ProductListCntl: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTheNavigationProperty()
-        self.designProductListTableView()
+        //self.designProductListTableView()
+        self.setUpTheSpreadSheetView()
         // Do any additional setup after loading the view.
     }
 
@@ -34,8 +36,16 @@ class ProductListCntl: UIViewController {
     
     func setUpTheSpreadSheetView (){
         
+       // let spreadSheet : MMSpreadsheetView = MMSpreadsheetView
         
-        
+        let spreadSheetView: MMSpreadsheetView = MMSpreadsheetView(numberOfHeaderRows: 1, numberOfHeaderColumns: 1, frame: CGRectMake(0, 70, CXConstant.screenSize.width, CXConstant.screenSize.height-70))
+        spreadSheetView.registerCellClass(ProductNameCell.self, forCellWithReuseIdentifier: "ProductNameCell")
+        spreadSheetView.registerCellClass(ProductQuantityCell.self, forCellWithReuseIdentifier: "ProductQuantityCell")
+        spreadSheetView.registerCellClass(ProductCartCell.self, forCellWithReuseIdentifier: "ProductCartCell")
+
+        spreadSheetView.dataSource = self
+        spreadSheetView.delegate = self
+        self.view.addSubview(spreadSheetView)
         
     }
     
@@ -98,7 +108,7 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 10;
+        return 30;
     }
     
      func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -108,8 +118,41 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        return 50
     }
 
     
+}
+
+extension ProductListCntl :MMSpreadsheetViewDataSource,MMSpreadsheetViewDelegate {
+    
+    func spreadsheetView(spreadsheetView: MMSpreadsheetView!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
+     
+        return CGSizeMake(100, 50)
+    }
+    
+    func numberOfRowsInSpreadsheetView(spreadsheetView: MMSpreadsheetView!) -> Int {
+        
+        return 25
+    }
+    
+    func numberOfColumnsInSpreadsheetView(spreadsheetView: MMSpreadsheetView!) -> Int {
+        
+        return 5
+    }
+    
+    func spreadsheetView(spreadsheetView: MMSpreadsheetView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
+        
+        //if indexPath.mmSpreadsheetRow() == 0 && indexPath.mmSpreadsheetColumn() == 0 {
+            
+        let identifier = "ProductNameCell"
+        let cell: ProductNameCell! = spreadsheetView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?ProductNameCell
+        //let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
+        
+        cell.textLabel.text = "Hello"
+        return cell
+        
+    //}
+  
+}
 }

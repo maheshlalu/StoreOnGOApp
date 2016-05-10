@@ -90,14 +90,20 @@ class ProductHomeCntl: UIViewController {
     
     
     func getProductSubCategory (predicate:NSPredicate){
-        let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
+        //let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
+        
+        let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+       let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
         fetchRequest.predicate = predicate
+        fetchRequest.entity = productEn
         self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
         self.productCollectionView.reloadData()
 
+        
     }
     
-    
+    //+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
+
     
     //SELECT * FROM ZTABLE_PRODUCT_SUB_CATEGORIES WHERE ZMASTERCATEGORY = 'Products List(129121)'
     //SELECT * FROM ZTABLE_PRODUCT_SUB_CATEGORIES WHERE ZMASTERCATEGORY = 'Miscellaneous(135918)'

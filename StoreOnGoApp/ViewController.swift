@@ -188,7 +188,7 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             
             break
         case 3  :
-            let aboutUs = AboutUsViewCnt.init()
+            let aboutUs = ProductListCntl.init()
             self.navigationController?.pushViewController(aboutUs, animated: true)
             
             break
