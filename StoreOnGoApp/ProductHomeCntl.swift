@@ -157,7 +157,9 @@ extension ProductHomeCntl:UISearchBarDelegate{
     }
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print("search string \(searchText)")
+        
     }
+
     
 }
 
@@ -197,6 +199,25 @@ extension ProductHomeCntl:UICollectionViewDelegate,UICollectionViewDataSource {
 
         
     }
+    
+   /* func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
+        
+        //CGSize(width:screenSize.width/3.8,height: 40)
+        
+        let cell = ProductCollectionCell(frame: CGRect(x: 0, y: 8, width: CXConstant.screenSize.width/3.8, height: 40))
+        let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
+
+        cell.textLabel.text = proCat.name
+
+         let font = UIFont(name: "Helvetica", size: 24)
+        
+            let fontAttributes = [NSFontAttributeName: font] // it says name, but a UIFont works
+            let myText = "Your Text Here"
+            let size = (myText as NSString).sizeWithAttributes(fontAttributes)
+        
+        return CGSizeMake(cell.textLabel.intrinsicContentSize().width+10, cell.textLabel.intrinsicContentSize().height+20)
+    }
+    */
     
     
 }

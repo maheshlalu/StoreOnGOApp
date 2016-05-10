@@ -143,16 +143,28 @@ extension ProductListCntl :MMSpreadsheetViewDataSource,MMSpreadsheetViewDelegate
     
     func spreadsheetView(spreadsheetView: MMSpreadsheetView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
         
-        //if indexPath.mmSpreadsheetRow() == 0 && indexPath.mmSpreadsheetColumn() == 0 {
-            
         let identifier = "ProductNameCell"
         let cell: ProductNameCell! = spreadsheetView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?ProductNameCell
+        if indexPath.mmSpreadsheetRow() == 0 && indexPath.mmSpreadsheetColumn() == 0 {
+            
+
+           let  textLabel: UILabel = UILabel(frame:CGRect(x: 0, y: 0, width: 100, height: 50) )
+            textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+            textLabel.textAlignment = .Center
+            textLabel.font = UIFont.boldSystemFontOfSize(10)
+            textLabel.textColor = UIColor.whiteColor()
+            textLabel.backgroundColor = CXConstant.collectionCellBgColor
+            cell.contentView.addSubview(textLabel)
+            textLabel.text = "Hello111"
+
+        }
+      
         //let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
         
         cell.textLabel.text = "Hello"
         return cell
         
-    //}
+    }
   
 }
-}
+

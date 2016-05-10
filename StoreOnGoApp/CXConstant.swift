@@ -56,7 +56,7 @@ class CXConstant: NSObject {
     static let DetailTableView_Width = UIScreen.mainScreen().bounds.width-20
     static let DetailCollectionCellSize :  CGSize = CGSize(width: screenSize.width/2.3+5,height: screenSize.width/2.3+5)
     
-    static let ProductCollectionCellSize :  CGSize = CGSize(width:120,height: 40)
+    static let ProductCollectionCellSize :  CGSize = CGSize(width:screenSize.width/3.455555,height: 40)
 
     // static let DetailCollectionCellSize :  CGSize = CGSize(width: 150,height: 150)
     
