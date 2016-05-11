@@ -21,7 +21,7 @@ class ProductNameCell: UICollectionViewCell {
     textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
     textLabel.textAlignment = .Center
     textLabel.font = UIFont.boldSystemFontOfSize(10)
-    contentView.addSubview(textLabel)
+   // contentView.addSubview(textLabel)
     //textLabel.text = "Mahesh Babu with muragadash"
     textLabel.textColor = UIColor.whiteColor()
     textLabel.backgroundColor = CXConstant.collectionCellBgColor

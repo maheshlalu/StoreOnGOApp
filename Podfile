@@ -5,7 +5,6 @@
 
 target 'StoreOnGoApp' do
 pod 'MagicalRecord/Shorthand'
-pod 'MMSpreadsheetView', '~> 0.0.3'
 pod 'HMSegmentedControl'
 
 end

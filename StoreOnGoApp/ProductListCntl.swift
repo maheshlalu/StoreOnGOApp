@@ -13,13 +13,15 @@ class ProductListCntl: UIViewController {
 
     var productsList : NSArray = NSArray()
     var predicate : NSPredicate = NSPredicate()
-    
+    let colomnList: [String] = ["ITEM CODE", "ITEM NAME","QUANTITY","EDIT TEXT","AddTOCard Button"]
+    //,EDIT TEXT, AddTOCard Button
+
     var productListTableView : UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTheNavigationProperty()
         //self.designProductListTableView()
-        self.setUpTheSpreadSheetView()
+       // self.setUpTheSpreadSheetView()
         // Do any additional setup after loading the view.
     }
 
@@ -34,11 +36,12 @@ class ProductListCntl: UIViewController {
     }
     
     
-    func setUpTheSpreadSheetView (){
+   /* func setUpTheSpreadSheetView (){
         
        // let spreadSheet : MMSpreadsheetView = MMSpreadsheetView
         
         let spreadSheetView: MMSpreadsheetView = MMSpreadsheetView(numberOfHeaderRows: 1, numberOfHeaderColumns: 1, frame: CGRectMake(0, 70, CXConstant.screenSize.width, CXConstant.screenSize.height-70))
+        
         spreadSheetView.registerCellClass(ProductNameCell.self, forCellWithReuseIdentifier: "ProductNameCell")
         spreadSheetView.registerCellClass(ProductQuantityCell.self, forCellWithReuseIdentifier: "ProductQuantityCell")
         spreadSheetView.registerCellClass(ProductCartCell.self, forCellWithReuseIdentifier: "ProductCartCell")
@@ -47,7 +50,7 @@ class ProductListCntl: UIViewController {
         spreadSheetView.delegate = self
         self.view.addSubview(spreadSheetView)
         
-    }
+    }*/
     
     func designProductListTableView(){
         self.productListTableView = UITableView.init(frame: self.view.frame)
@@ -124,47 +127,77 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     
 }
 
-extension ProductListCntl :MMSpreadsheetViewDataSource,MMSpreadsheetViewDelegate {
-    
-    func spreadsheetView(spreadsheetView: MMSpreadsheetView!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
-     
-        return CGSizeMake(100, 50)
-    }
-    
-    func numberOfRowsInSpreadsheetView(spreadsheetView: MMSpreadsheetView!) -> Int {
-        
-        return 25
-    }
-    
-    func numberOfColumnsInSpreadsheetView(spreadsheetView: MMSpreadsheetView!) -> Int {
-        
-        return 5
-    }
-    
-    func spreadsheetView(spreadsheetView: MMSpreadsheetView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
-        
-        let identifier = "ProductNameCell"
-        let cell: ProductNameCell! = spreadsheetView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?ProductNameCell
-        if indexPath.mmSpreadsheetRow() == 0 && indexPath.mmSpreadsheetColumn() == 0 {
-            
-
-           let  textLabel: UILabel = UILabel(frame:CGRect(x: 0, y: 0, width: 100, height: 50) )
-            textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
-            textLabel.textAlignment = .Center
-            textLabel.font = UIFont.boldSystemFontOfSize(10)
-            textLabel.textColor = UIColor.whiteColor()
-            textLabel.backgroundColor = CXConstant.collectionCellBgColor
-            cell.contentView.addSubview(textLabel)
-            textLabel.text = "Hello111"
-
-        }
-      
-        //let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
-        
-        cell.textLabel.text = "Hello"
-        return cell
-        
-    }
-  
-}
-
+//extension ProductListCntl :MMSpreadsheetViewDataSource,MMSpreadsheetViewDelegate {
+//    
+//    func spreadsheetView(spreadsheetView: MMSpreadsheetView!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
+//     
+//        if indexPath.mmSpreadsheetColumn() == 0 && indexPath.mmSpreadsheetRow() == 0 {
+//            //ITEM ID
+//            return CGSizeMake(50, 50)
+//        }else if indexPath.mmSpreadsheetColumn() == 1 && indexPath.mmSpreadsheetRow() == 0 {
+//            //ITEM NAME
+//            return CGSizeMake(150, 50)
+//        }else if indexPath.mmSpreadsheetColumn() == 2 && indexPath.mmSpreadsheetRow() == 0 {
+//            //QUANTITY
+//            return CGSizeMake(50, 50)
+//        }else if indexPath.mmSpreadsheetColumn() == 3 && indexPath.mmSpreadsheetRow() == 0 {
+//            //Text edit
+//            return CGSizeMake(70, 50)
+//        }
+//        //ADD to card button
+//        return CGSizeMake(100, 100)
+//    }
+//    
+//    func numberOfRowsInSpreadsheetView(spreadsheetView: MMSpreadsheetView!) -> Int {
+//        
+//        return 25
+//    }
+//    
+//    func numberOfColumnsInSpreadsheetView(spreadsheetView: MMSpreadsheetView!) -> Int {
+//        
+//        return self.colomnList.count
+//    }
+//    
+//    func spreadsheetView(spreadsheetView: MMSpreadsheetView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
+//        
+//        let identifier = "ProductNameCell"
+//        let cell: ProductNameCell! = spreadsheetView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as?ProductNameCell
+//    
+//        //&& indexPath.mmSpreadsheetColumn() == 0
+//        
+//        if indexPath.mmSpreadsheetColumn() == 0 && indexPath.mmSpreadsheetRow() == 0 {
+//            
+//            cell.backgroundColor = UIColor.blueColor()
+//        }
+//        
+//        if  indexPath.mmSpreadsheetRow() == 0  {
+//
+//            
+//            
+//           let  textLabel: UILabel = UILabel(frame:CGRect(x: 0, y: 0, width: 100, height: 50) )
+//            textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+//            textLabel.textAlignment = .Center
+//            textLabel.font = UIFont.boldSystemFontOfSize(10)
+//            textLabel.textColor = UIColor.whiteColor()
+//            textLabel.backgroundColor = CXConstant.collectionCellBgColor
+//            //cell.contentView.addSubview(textLabel)
+//            textLabel.text = self.colomnList[indexPath.row]
+//    
+//
+//        }else if indexPath.mmSpreadsheetColumn() == 1 && indexPath.mmSpreadsheetRow() > 0{
+//            //
+//        }
+//      
+//        //ITEM CODE ,ITEM NAME , QUANTITY,EDIT TEXT, AddTOCard Button
+//        
+//        //let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
+//        
+//       // cell.textLabel.text = "Hello"
+//        cell.backgroundColor = UIColor.blueColor()
+//
+//        return cell
+//        
+//    }
+//  
+//}
+//

@@ -11,7 +11,5 @@
 #import <CoreData+MagicalRecord.h>
 #import "KIImagePager.h"
 #import "HMSegmentedControl.h"
-#import "MMSpreadsheetView.h"
-#import "NSIndexPath+MMSpreadsheetView.h"
 
 #endif /* StoreOnGoApp_Bridging_Header_h */
