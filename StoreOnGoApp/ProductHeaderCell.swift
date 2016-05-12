@@ -50,12 +50,10 @@ class ProductHeaderCell: UITableViewCell {
         textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
         textLabel.font = UIFont.boldSystemFontOfSize(10)
-        contentView.addSubview(textLabel)
         textLabel.text = titleString as String
         textLabel.textColor = UIColor.whiteColor()
         textLabel.numberOfLines = 0
         textLabel.backgroundColor = CXConstant.collectionCellBgColor
-        
         return textLabel
     }
 

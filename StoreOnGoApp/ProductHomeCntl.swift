@@ -232,10 +232,13 @@ extension ProductHomeCntl:UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
         
-        let index = indexPath.row
-        
-        //select *from ZCX_PRODUCTS where ZSUBCATNAMEID = 'FORK GUIDE BOLT(130603)'
-        
+        let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.productCategories[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
+        let pID = proCat.id
+        let appendStr = proCat.name!+"("+pID!+")"
+        print("append string \(appendStr)")
+        let productListVc = ProductListCntl.init()
+         productListVc.predicate = NSPredicate(format: "subCatNameID = %@",appendStr )
+        self.navigationController?.pushViewController(productListVc, animated: true)
         
     }
     

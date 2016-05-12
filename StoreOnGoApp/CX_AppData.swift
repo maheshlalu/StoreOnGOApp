@@ -68,8 +68,8 @@ class CX_AppData: NSObject {
     func parseTheProductsList(){
         
        // LoadingView.show("ProductList Loading....", animated: true)
-        let fetchRequest = NSFetchRequest(entityName: "CX_Products")
-        if    CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
+       // let fetchRequest = NSFetchRequest(entityName: "CX_Products")
+     //   if    CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
                 //call your background operation.
                 let dataDic : NSDictionary = self.getTheDictionaryDataFromTextFile("productslist")
@@ -78,11 +78,11 @@ class CX_AppData: NSObject {
                 }
             })
                   self.miscellaneousList()
-        }else{
-            dispatch_async(dispatch_get_main_queue(), {
-                LoadingView.hide()
-            })
-        }
+//        }else{
+//            dispatch_async(dispatch_get_main_queue(), {
+//                LoadingView.hide()
+//            })
+//        }
     }
     
     func miscellaneousList(){

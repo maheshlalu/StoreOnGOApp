@@ -22,36 +22,28 @@ class ProductListCntl: UIViewController {
         super.viewDidLoad()
         self.setTheNavigationProperty()
         self.designProductListTableView()
-       // self.setUpTheSpreadSheetView()
+        self.getTheProductsList()
+
+        // self.setUpTheSpreadSheetView()
         // Do any additional setup after loading the view.
     }
 
+    func getTheProductsList(){
+        
+        let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+        let fetchRequest = CX_Products.MR_requestAllSortedBy("name", ascending: true)
+        fetchRequest.predicate = self.predicate
+        fetchRequest.entity = productEn
+        self.productsList =   CX_Products.MR_executeFetchRequest(fetchRequest)
+
+        self.productListTableView.reloadData()
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func getTheProductsList(){
-        
-        
-    }
-    
-    
-   /* func setUpTheSpreadSheetView (){
-        
-       // let spreadSheet : MMSpreadsheetView = MMSpreadsheetView
-        
-        let spreadSheetView: MMSpreadsheetView = MMSpreadsheetView(numberOfHeaderRows: 1, numberOfHeaderColumns: 1, frame: CGRectMake(0, 70, CXConstant.screenSize.width, CXConstant.screenSize.height-70))
-        
-        spreadSheetView.registerCellClass(ProductNameCell.self, forCellWithReuseIdentifier: "ProductNameCell")
-        spreadSheetView.registerCellClass(ProductQuantityCell.self, forCellWithReuseIdentifier: "ProductQuantityCell")
-        spreadSheetView.registerCellClass(ProductCartCell.self, forCellWithReuseIdentifier: "ProductCartCell")
-
-        spreadSheetView.dataSource = self
-        spreadSheetView.delegate = self
-        self.view.addSubview(spreadSheetView)
-        
-    }*/
     
     func designProductListTableView(){
         self.productListTableView = UITableView.init(frame: self.view.frame)
@@ -61,8 +53,6 @@ class ProductListCntl: UIViewController {
         //self.productListTableView.registerClass(CXDetailTableViewCell.self, forCellReuseIdentifier: "DetailCell")
         self.productListTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "DetailCell")
         self.productListTableView.registerClass(ProductHeaderCell.self, forCellReuseIdentifier: "HeaderCell")
-       // productListTableView.tableFooterView = UIView(frame: CGRectMake(0, 0, 0, 0))
-        //productListTableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 400, 300))
 
         self.view.addSubview(self.productListTableView)
         
@@ -95,7 +85,7 @@ class ProductListCntl: UIViewController {
 extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.productsList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -105,32 +95,48 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
         }
-       // cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
-        // cell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
         
-        //cell.headerLbl.text = self.detailItems[indexPath.row]
+        let proListData : CX_Products = self.productsList[indexPath.row] as! CX_Products
+        
+        cell.contentView.addSubview(self.createLabel(CXConstant.itemCodeLblFrame, titleString: proListData.itemCode!))
+        cell.contentView.addSubview(self.createLabel(CXConstant.itemNameLblFrame, titleString: proListData.name!))
+        cell.contentView.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: "Each"))
+        cell.contentView.addSubview(self.createLabel(CXConstant.itemtextFrame, titleString: ""))
+        cell.contentView.addSubview(self.createLabel(CXConstant.addtoCartFrame, titleString: "ADD TO CART"))
         
         return cell;
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60;
+        return 70;
     }
-
     
-   func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let  headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! ProductHeaderCell
-        headerCell.backgroundColor = UIColor.cyanColor()
+        headerCell.backgroundColor = UIColor.whiteColor()
         return headerCell
     }
     
-    
-    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
+        return 50
+    }
+    
+    
+    func createLabel(frame:CGRect ,titleString:NSString) -> UILabel {
+        
+        let textFrame =  frame
+        let  textLabel: UILabel = UILabel(frame: textFrame)
+        textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+        textLabel.textAlignment = .Center
+        textLabel.font = UIFont.boldSystemFontOfSize(10)
+        textLabel.text = titleString as String
+        textLabel.textColor = UIColor.blackColor()
+        textLabel.numberOfLines = 0
+        return textLabel
     }
 
-   
+    //MARK: Cell Detail Data
     
 }
 

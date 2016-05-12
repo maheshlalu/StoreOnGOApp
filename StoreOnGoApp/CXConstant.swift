@@ -68,16 +68,20 @@ class CXConstant: NSObject {
     
     //MARK:
     
-    static let itemCodeLblFrame : CGRect = CGRectMake(0, 0, 70, 50)
+    static let itemCodeLblFrame : CGRect = CGRectMake(0, 0, screenSize.width/6, 70) //8.28
     
-    static let itemNameLblFrame : CGRect = CGRectMake(itemCodeLblFrame.size.width+1, 0,150, 50)
+    static let itemNameLblFrame : CGRect = CGRectMake(itemCodeLblFrame.size.width+1, 0,screenSize.width/3.18, 70) //3.18
     
-    static let itemQuantityFrame : CGRect = CGRectMake(itemNameLblFrame.size.width+1+itemNameLblFrame.origin.x, 0, 70, 50)
+    static let itemQuantityFrame : CGRect = CGRectMake(itemNameLblFrame.size.width+1+itemNameLblFrame.origin.x, 0, screenSize.width/7, 70)//8.28
     
-    static let itemtextFrame : CGRect = CGRectMake(itemQuantityFrame.size.width+1+itemQuantityFrame.origin.x, 0, 60, 50)
+    static let itemtextFrame : CGRect = CGRectMake(itemQuantityFrame.size.width+1+itemQuantityFrame.origin.x, 0, screenSize.width/7, 70)//8.28
 
-    static let addtoCartFrame : CGRect = CGRectMake(itemtextFrame.size.width+1+itemtextFrame.origin.x, 0, 150, 50)
-
+    static let addtoCartFrame : CGRect = CGRectMake(itemtextFrame.size.width+1+itemtextFrame.origin.x, 0, screenSize.width/4.5+1, 70) //3.18
+    /*
+     iPhone 6s plus
+     - width : 414.0
+     - height : 736.0
+     */
     
     
     //MARK:
