@@ -66,6 +66,23 @@ class CXConstant: NSObject {
     
     static let DetailCollectionViewFrame : CGRect = CGRectMake(4, 30, DetailTableView_Width-8, tableViewHeigh-50)
     
+    //MARK:
+    
+    static let itemCodeLblFrame : CGRect = CGRectMake(0, 0, 70, 50)
+    
+    static let itemNameLblFrame : CGRect = CGRectMake(itemCodeLblFrame.size.width+1, 0,150, 50)
+    
+    static let itemQuantityFrame : CGRect = CGRectMake(itemNameLblFrame.size.width+1+itemNameLblFrame.origin.x, 0, 70, 50)
+    
+    static let itemtextFrame : CGRect = CGRectMake(itemQuantityFrame.size.width+1+itemQuantityFrame.origin.x, 0, 60, 50)
+
+    static let addtoCartFrame : CGRect = CGRectMake(itemtextFrame.size.width+1+itemtextFrame.origin.x, 0, 150, 50)
+
+    
+    
+    //MARK:
+    
+    
     //CGRectMake(8, 30, UIScreen.mainScreen().bounds.size.width-20, tableViewHeigh-50)
     
     static let HOME_BANNAER = "/133516651/AppHome"
