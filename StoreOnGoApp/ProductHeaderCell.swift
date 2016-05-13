@@ -45,11 +45,13 @@ class ProductHeaderCell: UITableViewCell {
     
     func createLabel(frame:CGRect ,titleString:NSString) -> UILabel {
         
-        let textFrame =  frame
+        let textFrame =  CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)
+
+        //let textFrame =  frame
         let  textLabel: UILabel = UILabel(frame: textFrame)
         textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
-        textLabel.font = UIFont.boldSystemFontOfSize(10)
+        textLabel.font = UIFont.boldSystemFontOfSize(13.0)
         textLabel.text = titleString as String
         textLabel.textColor = UIColor.whiteColor()
         textLabel.numberOfLines = 0

@@ -102,7 +102,7 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         cell.contentView.addSubview(self.createLabel(CXConstant.itemNameLblFrame, titleString: proListData.name!))
         cell.contentView.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: "Each"))
         cell.contentView.addSubview(self.createLabel(CXConstant.itemtextFrame, titleString: ""))
-        cell.contentView.addSubview(self.createLabel(CXConstant.addtoCartFrame, titleString: "ADD TO CART"))
+        cell.contentView.addSubview(self.createAddtoCartButton(CXConstant.addtoCartFrame, title: "Add To Cart",indexPtah: indexPath))
         
         return cell;
     }
@@ -119,25 +119,57 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 51
     }
     
     
     func createLabel(frame:CGRect ,titleString:NSString) -> UILabel {
         
-        let textFrame =  frame
+        let textFrame =  CGRectMake(frame.origin.x, frame.origin.y+5, frame.size.width, frame.size.height+20)
         let  textLabel: UILabel = UILabel(frame: textFrame)
         textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
-        textLabel.font = UIFont.boldSystemFontOfSize(10)
+        //textLabel.font = UIFont(name:"Roboto-Regular",size:8)
+        textLabel.font = UIFont.boldSystemFontOfSize(13.0)
         textLabel.text = titleString as String
         textLabel.textColor = UIColor.blackColor()
         textLabel.numberOfLines = 0
         return textLabel
     }
+    
+    func createAddtoCartButton(frame:CGRect,title : NSString ,indexPtah : NSIndexPath) -> UIButton {
+        
+        let button   = UIButton.init() as UIButton
+        button.frame = CGRectMake(frame.origin.x, 10, frame.size.width-5, 40)
+        button.backgroundColor = CXConstant.collectionCellBgColor
+        button.setTitle(title as String, forState: UIControlState.Normal)
+        button.tag = indexPtah.row
+       // button.titleLabel?.font =  UIFont(name:"Roboto-Regular",size:5)
+        button.titleLabel?.font = UIFont.boldSystemFontOfSize(8.0)
+        button.addTarget(self, action: #selector(ProductListCntl.addToCartButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button.layer.cornerRadius = 8.0
+        button.layer.borderWidth = 2.0
+        button.layer.borderColor = UIColor.whiteColor().CGColor
+        return button
+    }
+    
+
+    func addToCartButton (button : UIButton!){
+        
+        
+    }
+    
+    
+   
 
     //MARK: Cell Detail Data
     
 }
 
+extension UILabel{
+    dynamic var defaultFont: UIFont? {
+        get { return self.font }
+        set { self.font = newValue }
+    }
+}
 
