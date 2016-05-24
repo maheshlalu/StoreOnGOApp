@@ -13,7 +13,7 @@ class ProductListCntl: UIViewController {
 
     var productsList : NSArray = NSArray()
     var predicate : NSPredicate = NSPredicate()
-    let colomnList: [String] = ["ITEM CODE", "ITEM NAME","QUANTITY","EDIT TEXT","AddTOCard Button"]
+    let colomnList: [String] = ["ITEM CODE", "ITEM NAME","QUANTITY","",""]
     
     //,EDIT TEXT, AddTOCard Button
 
@@ -67,6 +67,27 @@ class ProductListCntl: UIViewController {
         navigationController!.navigationBar.barTintColor = UIColor.redColor()
         navigationController!.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        let cartBtn = MIBadgeButton()
+        cartBtn.setImage(UIImage(named: "cart"), forState: .Normal)
+        cartBtn.badgeString = "100"
+        cartBtn.frame = CGRectMake(0, 0, 30, 30)
+        cartBtn.addTarget(self, action: #selector(ProductListCntl.barButtonItemClicked(_:)), forControlEvents: .TouchUpInside)
+        let item2 = UIBarButtonItem()
+        item2.customView = cartBtn
+        cartBtn.badgeEdgeInsets = UIEdgeInsetsMake(10, 10, 0, 15)
+        cartBtn.badgeBackgroundColor = UIColor.greenColor()
+        
+        self.navigationItem.rightBarButtonItems = [item2]
+
+       // self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ProductListCntl.barButtonItemClicked(_:))), animated: true)
+
+    }
+    
+    func barButtonItemClicked(item:UIBarButtonItem){
+     
+        let cartView : CartViewCntl = CartViewCntl.init()
+        self.navigationController?.pushViewController(cartView, animated: false)
     }
     
     /*
@@ -95,13 +116,21 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
         }
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+
         let proListData : CX_Products = self.productsList[indexPath.row] as! CX_Products
         
         cell.contentView.addSubview(self.createLabel(CXConstant.itemCodeLblFrame, titleString: proListData.itemCode!))
         cell.contentView.addSubview(self.createLabel(CXConstant.itemNameLblFrame, titleString: proListData.name!))
         cell.contentView.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: "Each"))
-        cell.contentView.addSubview(self.createLabel(CXConstant.itemtextFrame, titleString: ""))
+        
+        var addToCart = ""
+        if ((proListData.quantity?.isEmpty) != nil) {
+            addToCart = proListData.quantity!
+        }
+        cell.contentView.addSubview(self.createTextFiled(CXConstant.itemtextFrame, title:addToCart,indexPtah: indexPath))
+        
+      
         cell.contentView.addSubview(self.createAddtoCartButton(CXConstant.addtoCartFrame, title: "Add To Cart",indexPtah: indexPath))
         
         return cell;
@@ -143,8 +172,7 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         button.frame = CGRectMake(frame.origin.x, 10, frame.size.width-5, 40)
         button.backgroundColor = CXConstant.collectionCellBgColor
         button.setTitle(title as String, forState: UIControlState.Normal)
-        button.tag = indexPtah.row
-       // button.titleLabel?.font =  UIFont(name:"Roboto-Regular",size:5)
+        button.tag = indexPtah.row+1
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(8.0)
         button.addTarget(self, action: #selector(ProductListCntl.addToCartButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         button.layer.cornerRadius = 8.0
@@ -157,9 +185,36 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
 
     func addToCartButton (button : UIButton!){
         
+        let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
+        let cell = self.productListTableView.cellForRowAtIndexPath(indexPath)
         
+        let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
+        print("button tag %d\(textField.text)")
+        if ((textField.text?.isEmpty) != nil) {
+            let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
+            CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!)
+           // CXDBSettings.sharedInstance.addToCartToItem(proListData.itemCode!, isAddToItem: true, quantityNumber: textField.text!)
+        }
+        textField.resignFirstResponder();
+        
+        print("button tag %d\(button.tag)")
     }
     
+    
+    func createTextFiled (frame :  CGRect,title : NSString ,indexPtah : NSIndexPath) -> UITextField {
+        
+        let sampleTextField = UITextField(frame: CGRectMake(frame.origin.x, 13, frame.size.width, 35))
+        sampleTextField.font = UIFont.systemFontOfSize(12.0)
+        sampleTextField.borderStyle = UITextBorderStyle.Bezel
+        sampleTextField.autocorrectionType = UITextAutocorrectionType.No
+        sampleTextField.keyboardType = UIKeyboardType.NumbersAndPunctuation
+        sampleTextField.returnKeyType = UIReturnKeyType.Done
+        sampleTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+        sampleTextField.delegate = self
+        sampleTextField.tag = indexPtah.row+1
+        sampleTextField.text = title as String
+        return sampleTextField
+    }
     
    
 
@@ -167,10 +222,61 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     
 }
 
-extension UILabel{
-    dynamic var defaultFont: UIFont? {
-        get { return self.font }
-        set { self.font = newValue }
+extension ProductListCntl : UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        print("TextField should begin editing method called")
+        return true;
     }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        print("TextField should clear method called")
+        return true;
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        print("TextField should snd editing method called")
+        return true;
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        print("While entering the characters this method gets called")
+        return true;
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    
+        if ((textField.text?.isEmpty) != nil) {
+        }
+
+        
+        print("button tag %d\(textField.tag)")
+        print("TextField should return method called")
+        textField.resignFirstResponder();
+        return true;
+    }
+    
+    
+    /*
+     let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+     let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
+     var predicate:NSPredicate = NSPredicate()
+     
+     if isProductCategory {
+     predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Products List(129121)",self.searchBar.text!)
+     }else{
+     predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Miscellaneous(135918)",self.searchBar.text!)
+     }
+     
+     fetchRequest.predicate = predicate
+     fetchRequest.entity = productEn
+     
+     self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
+     
+     self.productCollectionView.reloadData()
+
+     */
+    
 }
+
+
 

@@ -32,6 +32,82 @@ class CXDBSettings: NSObject {
         _SingletonSharedInstance = nil
     }
     
+    /*
+     @NSManaged var addToCart: String?
+     @NSManaged var itemCode: String?
+     @NSManaged var name: String?
+     @NSManaged var pID: String?
+     @NSManaged var quantity: String?
+     @NSManaged var storeID: String?
+     @NSManaged var subCatNameID: String?
+     @NSManaged var type: String?
+     */
+    func addToCart(product:CX_Products,quantityNumber : NSString){
+        
+        MagicalRecord.saveWithBlock({ (localContext : NSManagedObjectContext!) in
+            
+            let productEn = NSEntityDescription.entityForName("CX_Cart", inManagedObjectContext: localContext)
+            
+            let predicate:NSPredicate = NSPredicate(format: "pID = %@", product.pID!)
+            let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
+            fetchRequest.predicate = predicate
+            if CX_Cart.MR_executeFetchRequest(fetchRequest).count == 0 {
+                let enProduct = CX_Cart(entity: productEn!,insertIntoManagedObjectContext: localContext)
+                product.addToCart = "YES"
+                enProduct.itemCode = product.itemCode
+                enProduct.name =  product.name
+                enProduct.pID = product.pID
+                enProduct.quantity = quantityNumber as String
+                enProduct.storeID = product.storeID
+                enProduct.subCatNameID = product.subCatNameID
+                enProduct.type = product.name
+            }
+            
+            
+            }, completion: { (success : Bool, error : NSError!) in
+                
+                print("save the data >>>>>")
+                LoadingView.hide()
+                // This block runs in main thread
+        })
+        
+        
+        
+        
+    }
+    
+    
+    func addToCartToItem (itemCode : NSString, isAddToItem : Bool ,quantityNumber : NSString){
+        
+        let managedContext = self.appDelegate.managedObjectContext
+
+        let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+        let fetchRequest = CX_Products.MR_requestAllSortedBy("name", ascending: true)
+        var predicate:NSPredicate = NSPredicate()
+        predicate = NSPredicate(format: "itemCode = %@ ", itemCode)
+        fetchRequest.predicate = predicate
+        fetchRequest.entity = productEn
+        let productData :  NSArray  =   CX_Products.MR_executeFetchRequest(fetchRequest)
+        if productData.count != 0 {
+            let product : CX_Products = productData.firstObject as! CX_Products
+            if isAddToItem {
+                product.quantity = quantityNumber as String
+                product.addToCart = "YES"
+            }else{
+                
+            }
+        }
+        do {
+            try managedContext.save()
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
+
+        
+    }
+    //select * from ZCX_PRODUCTS where ZITEMCODE = 'NAJ0459'
+    
     
     func saveProductCategoriesInDB(productCategories:NSArray) {
         
@@ -225,6 +301,8 @@ class CXDBSettings: NSObject {
                     enProduct.type = typeCategory as String
                     enProduct.mallID = createByID
                     enProduct.subCatNameID = prod.valueForKey("SubCategoryType") as? String
+                    enProduct.p3rdCategory =  prod.valueForKey("P3rdCategory") as? String
+                    
                 }
             }
             
@@ -334,36 +412,4 @@ class CXDBSettings: NSObject {
         }
     }*/
 
-    /*
-     ▿ 28 elements
-     - [0] : MasterCategory
-     - [1] : Next_Job_Statuses
-     - [2] : jobTypeId
-     - [3] : jobTypeName
-     - [4] : jobComments
-     - [5] : Image
-     - [6] : createdOn
-     - [7] : hrsOfOperation
-     - [8] : Current_Job_StatusId
-     - [9] : Next_Seq_Nos
-     - [10] : overallRating
-     - [11] : publicURL
-     - [12] : createdById
-     - [13] : Name
-     - [14] : guestUserId
-     - [15] : Attachments
-     - [16] : guestUserEmail
-     - [17] : Current_Job_Status
-     - [18] : totalReviews
-     - [19] : Category_Mall
-     - [20] : PackageName
-     - [21] : id
-     - [22] : Additional_Details
-     - [23] : lastModifiedDate
-     - [24] : CreatedSubJobs
-     - [25] : Insights
-     - [26] : ItemCode
-     - [27] : createdByFullName
-*/
-    
 }

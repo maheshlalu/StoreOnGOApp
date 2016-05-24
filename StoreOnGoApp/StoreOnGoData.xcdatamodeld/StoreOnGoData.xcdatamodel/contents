@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+    <entity name="CX_Cart" representedClassName=".CX_Cart" syncable="YES">
+        <attribute name="addToCart" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="storeID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subCatNameID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CX_FeaturedProducts" representedClassName="CX_FeaturedProducts" syncable="YES">
         <attribute name="campaign_Jobs" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdByFullName" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,6 +49,7 @@
         <attribute name="json" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mallID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="p3rdCategory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="storeID" optional="YES" attributeType="String" syncable="YES"/>
@@ -75,10 +86,11 @@
         <attribute name="subCategoryType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CX_Products" positionX="-9" positionY="36" width="128" height="225"/>
+        <element name="CX_Cart" positionX="18" positionY="189" width="128" height="165"/>
+        <element name="CX_FeaturedProducts" positionX="36" positionY="81" width="128" height="165"/>
+        <element name="CX_Product_Category" positionX="18" positionY="63" width="128" height="330"/>
+        <element name="CX_Products" positionX="-9" positionY="36" width="128" height="240"/>
         <element name="CX_Stores" positionX="-9" positionY="36" width="128" height="270"/>
         <element name="TABLE_PRODUCT_SUB_CATEGORIES" positionX="0" positionY="45" width="128" height="195"/>
-        <element name="CX_Product_Category" positionX="18" positionY="63" width="128" height="330"/>
-        <element name="CX_FeaturedProducts" positionX="36" positionY="81" width="128" height="165"/>
     </elements>
 </model>

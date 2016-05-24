@@ -1,5 +1,5 @@
 //
-//  CX_Products+CoreDataProperties.swift
+//  CX_Cart+CoreDataProperties.swift
 //  StoreOnGoApp
 //
 //  Created by Rama kuppa on 24/05/16.
@@ -12,20 +12,15 @@
 import Foundation
 import CoreData
 
-extension CX_Products {
+extension CX_Cart {
 
     @NSManaged var addToCart: String?
-    @NSManaged var createdByID: String?
-    @NSManaged var favourite: String?
     @NSManaged var itemCode: String?
-    @NSManaged var json: String?
-    @NSManaged var mallID: String?
     @NSManaged var name: String?
     @NSManaged var pID: String?
     @NSManaged var quantity: String?
     @NSManaged var storeID: String?
     @NSManaged var subCatNameID: String?
     @NSManaged var type: String?
-    @NSManaged var p3rdCategory: String?
 
 }

@@ -31,7 +31,7 @@ class ProductHeaderCell: UITableViewCell {
         self.addSubview(self.createLabel(CXConstant.itemNameLblFrame, titleString: "ITEM NAME"))
         self.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: "QUANTITY"))
         self.addSubview(self.createLabel(CXConstant.itemtextFrame, titleString: ""))
-        self.addSubview(self.createLabel(CXConstant.addtoCartFrame, titleString: "ADD TO CART"))
+        self.addSubview(self.createLabel(CXConstant.addtoCartFrame, titleString: ""))
 
     }
     
