@@ -18,7 +18,6 @@ class CX_AppData: NSObject {
     
     
     private var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    
    // var dataDelegate:AppDataDelegate?
     
     class var sharedInstance : CX_AppData {
@@ -88,7 +87,13 @@ class CX_AppData: NSObject {
     func miscellaneousList(){
        // LoadingView.show("Miscellaneous Loading....", animated: true)
             CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("miscellaneous").valueForKey("jobs")! as! NSArray, typeCategory: "Miscellaneous")
+        self.parseStickersList()
         
+    }
+    
+    func parseStickersList(){
+        
+         CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("sticker").valueForKey("jobs")! as! NSArray, typeCategory: "sticker")
     }
     
     func parseTheProductSubCategory(){
@@ -147,3 +152,24 @@ class CX_AppData: NSObject {
     }
     
 }
+
+
+
+/*
+ when click on stickers get tha data using "select * from ZTABLE_PRODUCT_SUB_CATEGORIES where ZMASTERCATEGORY = 'Sticker(139455)'" query
+ 
+ 
+ click on sticker item check the contain string in colomn "SubCategory" (with ZNAME = KICK ASSY() in ZTABLE_PRODUCT_SUB_CATEGORIES) in  TABLE_PRODUCT_3RDLEVEL_CATEGORIES
+
+ 
+ 
+ 
+ select * from ZCX_PRODUCTS where ZP3RDCATEGORY = 'STICKER SET(140138)**( Name+id append in TABLE_PRODUCT_3RDLEVEL_CATEGORIES)**' 
+ 
+ and ZSUBCATNAMEID = (with ZNAME = KICK ASSY() in ZTABLE_PRODUCT_SUB_CATEGORIES
+ 
+ 
+ 
+ 
+ */
+

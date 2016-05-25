@@ -15,6 +15,7 @@ class CartViewCntl: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.grayColor()
         self.createCartTableView()
         self.getProductsList()
 
@@ -69,15 +70,20 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identifier = "CartITemCell"
         
-        var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(identifier) as? CartITemCell
+        var cell: CartITemCell! = tableView.dequeueReusableCellWithIdentifier(identifier) as? CartITemCell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
+            cell = CartITemCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
         }
         let proListData : CX_Cart = self.productsList[indexPath.row] as! CX_Cart
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.textLabel?.text = proListData.name
+        cell.cartItemNameLbl.text = proListData.name
+        
         return cell;
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 90
     }
 
 }

@@ -166,4 +166,20 @@ class CXConstant: NSObject {
         return jsonDict
     }
     
+    func createLabel(frame:CGRect ,titleString:NSString) -> UILabel {
+        
+        let textFrame =  CGRectMake(frame.origin.x, frame.origin.y+5, frame.size.width, frame.size.height+20)
+        let  textLabel: UILabel = UILabel(frame: textFrame)
+        //textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+        textLabel.textAlignment = .Center
+        //textLabel.font = UIFont(name:"Roboto-Regular",size:8)
+        textLabel.font = UIFont.boldSystemFontOfSize(10.0)
+        textLabel.text = titleString as String
+        textLabel.textColor = UIColor.blackColor()
+        textLabel.numberOfLines = 0
+    
+        //textLabel.sizeToFit()
+        return textLabel
+    }
+    
 }
