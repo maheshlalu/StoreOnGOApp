@@ -19,8 +19,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         setupCoreDate()
+        self.checkOutCartItems()
 
         return true
+    }
+    
+    
+    func checkOutCartItems(){
+        
+        
+        let productEn = NSEntityDescription.entityForName("CX_Cart", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+        let fetchRequest = CX_Cart.MR_requestAllSortedBy("name", ascending: true)
+        // fetchRequest.predicate = predicate
+        fetchRequest.entity = productEn
+        
+        var order: NSMutableDictionary = NSMutableDictionary()
+        
+        var orderItemId: NSMutableString = NSMutableString()
+        //NSMutableString* itemCode = [NSMutableString string];
+        var orderItemQuantity: NSMutableString = NSMutableString()
+        var orderItemName: NSMutableString = NSMutableString()
+        var orderSubTotal: NSMutableString = NSMutableString()
+        var orderItemMRP: NSMutableString = NSMutableString()
+        var total: Double = 0
+        
+        order["OrderItemId"] = orderItemId
+        //[order setObject:itemCode forKey:@"ItemCode"];
+        order["OrderItemQuantity"] = orderItemQuantity
+        order["OrderItemName"] = orderItemName
+        order["OrderItemSubTotal"] = orderSubTotal
+        order["OrderItemMRP"] = orderItemMRP
+        
+        order["Name"] = "name"
+        //should be replaced
+        order["Address"] = "address"
+        //should be replaced
+        order["Contact_Number"] = "phoneNumber"
+        //should be replaced
+        
+        for  cartItems in CX_Cart.MR_executeFetchRequest(fetchRequest) {
+            
+            let cart : CX_Cart = cartItems as! CX_Cart
+            
+            
+            
+        }
+        
+        
+        
+        /*
+         {
+         "list":[
+         {
+         "OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840",
+         "Total":"",
+         "OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840",
+         "OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840",
+         "OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840",
+         "Contact_Number":"7893335553",
+         "OrderItemMRP":"`13501630|`14075630|`14075740|`14075840",
+         "Address":"madhapur hyd",
+         "Name":"kushal"
+         }
+         ]
+         }
+         */
+        
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {
