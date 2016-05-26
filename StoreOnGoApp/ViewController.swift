@@ -28,9 +28,14 @@ class ViewController: UIViewController{
         self.designHeaderView()
         CXDBSettings.sharedInstance.dataDelegate = self
         CX_AppData.sharedInstance.getStoresData()
-        self.setupCollectionView()
+        //self.setupCollectionView()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.showPopupPressed()
     }
+    
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -220,8 +225,49 @@ extension ViewController: DetailViewControllerDelegate {
 extension ViewController :AppDataDelegate {
     
     func completedTheFetchingTheData(sender: CXDBSettings) {
-        self.getStores()
+        //self.getStores()
 
     }
 
 }
+
+extension ViewController : UITextFieldDelegate {
+    func showPopupPressed()
+    {
+        let contentView = UIView(frame: CGRectMake(0, 0, 250, 300))
+        self.view.addSubview(contentView)
+        
+        let textField = AutocompleteField(frame: CGRectMake(50, 120, contentView.frame.size.width, 30), suggestions: ["abraham"])
+        textField.placeholder = "Name"
+
+       contentView.addSubview(textField)
+
+    }
+ 
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        print("TextField should begin editing method called")
+        textField.becomeFirstResponder()
+        return true;
+    }
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        print("TextField should clear method called")
+        return true;
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        print("TextField should snd editing method called")
+        return true;
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        print("While entering the characters this method gets called")
+        return true;
+    }
+
+    
+
+}
+
+
+
+

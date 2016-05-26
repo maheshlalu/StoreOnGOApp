@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         setupCoreDate()
-        self.checkOutCartItems()
+        //self.checkOutCartItems()
 
         return true
     }
