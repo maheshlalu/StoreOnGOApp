@@ -33,15 +33,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // fetchRequest.predicate = predicate
         fetchRequest.entity = productEn
         
-        var order: NSMutableDictionary = NSMutableDictionary()
-        
-        var orderItemId: NSMutableString = NSMutableString()
+        let order: NSMutableDictionary = NSMutableDictionary()
+        let orderItemName: NSMutableString = NSMutableString()
         //NSMutableString* itemCode = [NSMutableString string];
-        var orderItemQuantity: NSMutableString = NSMutableString()
-        var orderItemName: NSMutableString = NSMutableString()
-        var orderSubTotal: NSMutableString = NSMutableString()
-        var orderItemMRP: NSMutableString = NSMutableString()
-        var total: Double = 0
+        let orderItemQuantity: NSMutableString = NSMutableString()
+        let orderSubTotal: NSMutableString = NSMutableString()
+        let orderItemId: NSMutableString = NSMutableString()
+        let orderItemMRP: NSMutableString = NSMutableString()
+        
+        let total: Double = 0
+        
+        order["Name"] = "kushal"
+        //should be replaced
+        order["Address"] = "madhapur hyd"
+        //should be replaced
+        order["Contact_Number"] = "7893335553"
+        //should be replaced
+        
+        
+        for (index, element) in CX_Cart.MR_executeFetchRequest(fetchRequest).enumerate() {
+            let cart : CX_Cart = element as! CX_Cart
+            if index != 0 {
+                orderItemName .appendString("|")
+                orderItemQuantity .appendString("|")
+                orderSubTotal .appendString("|")
+                orderItemId .appendString("|")
+                orderItemMRP .appendString("|")
+            }
+            orderItemName.appendString(cart.name! + "`" + cart.pID!)
+            orderItemQuantity.appendString(cart.quantity! + "`" + cart.pID!)
+            orderSubTotal.appendString(cart.name! + "`" + cart.pID!)
+            orderItemId.appendString(cart.itemCode! + "`" + cart.pID!)
+            orderItemMRP.appendString(cart.name! + "`" + cart.pID!)
+            print("Item \(index): \(cart)")
+        }
         
         order["OrderItemId"] = orderItemId
         //[order setObject:itemCode forKey:@"ItemCode"];
@@ -50,22 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         order["OrderItemSubTotal"] = orderSubTotal
         order["OrderItemMRP"] = orderItemMRP
         
-        order["Name"] = "name"
-        //should be replaced
-        order["Address"] = "address"
-        //should be replaced
-        order["Contact_Number"] = "phoneNumber"
-        //should be replaced
-        
-        for  cartItems in CX_Cart.MR_executeFetchRequest(fetchRequest) {
-            
-            let cart : CX_Cart = cartItems as! CX_Cart
-            
-            
-            
-        }
-        
-        
+        print("order dic \(order)")
         
         /*
          {

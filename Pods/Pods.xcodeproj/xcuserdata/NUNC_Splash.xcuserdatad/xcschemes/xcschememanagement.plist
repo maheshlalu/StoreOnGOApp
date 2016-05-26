@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MMSpreadsheetView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MagicalRecord.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,11 +22,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0671EDF94ED114C94066D5E7B73641AB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>2AB49797D14D57FA43A345254AFB9F18</key>
 		<dict>
 			<key>primary</key>
@@ -42,7 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BC470537C939A8B18C06D16DA0284E06</key>
+		<key>5D9EB8E18E894A3B74F7100813BFD31D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
