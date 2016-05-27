@@ -199,3 +199,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//http://stackoverflow.com/questions/25967792/how-to-integrate-splash-screen-for-all-types-of-iphones-in-xcode-6-1
