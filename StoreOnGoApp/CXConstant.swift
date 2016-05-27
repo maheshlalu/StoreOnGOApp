@@ -27,10 +27,13 @@ class CXConstant: NSObject {
     //MARK :
     static let screenSize = UIScreen.mainScreen().bounds.size
     
-    static let headerViewHeigh : CGFloat = 70
-    static let pagerHeight : CGFloat = screenSize.height/3
+    static let headerViewHeigh : CGFloat = 50
     
-    static let searchBarFrame : CGRect = CGRectMake(0, 110, UIScreen.mainScreen().bounds.size.width, headerViewHeigh-20)
+    
+    static let pagerHeight : CGFloat = screenSize.height/3
+    static let cartCellHeight : CGFloat = 50
+    static let segmentFrame : CGRect = CGRectMake(0, headerViewHeigh, CXConstant.screenSize.width, 35)
+    static let searchBarFrame : CGRect = CGRectMake(0, segmentFrame.origin.y+segmentFrame.size.height+1, UIScreen.mainScreen().bounds.size.width, headerViewHeigh-20)
     static let pagerFrame : CGRect = CGRectMake(0, headerViewHeigh+2, UIScreen.mainScreen().bounds.size.width, pagerHeight)
     static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y,screenSize.width, screenSize.height-pagerHeight-headerViewHeigh)
     
@@ -51,6 +54,12 @@ class CXConstant: NSObject {
     ///211,41,39
     static let collectionCellBgColor : UIColor = UIColor(red: 211.0/255.0, green: 41.0/255.0, blue: 39.0/255.0, alpha: 1.0)
     
+    //67,67,67
+    
+    static let keepShoppingBtnColor : UIColor = UIColor(red: 67.0/255.0, green: 67.0/255.0, blue: 67.0/255.0, alpha: 1.0)
+    static let checkOutBtnColor : UIColor = UIColor(red: 212.0/255.0, green: 56.0/255.0, blue: 56.0/255.0, alpha: 1.0)
+    static let cartViewBgClor : UIColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
+
     
     
     static let DetailTableView_Width = UIScreen.mainScreen().bounds.width-20
@@ -172,14 +181,30 @@ class CXConstant: NSObject {
         let  textLabel: UILabel = UILabel(frame: textFrame)
         //textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
-        //textLabel.font = UIFont(name:"Roboto-Regular",size:8)
-        textLabel.font = UIFont.boldSystemFontOfSize(10.0)
+        textLabel.font = UIFont(name:"Roboto-Regular",size:8)
+        //textLabel.font = UIFont.boldSystemFontOfSize(10.0)
         textLabel.text = titleString as String
         textLabel.textColor = UIColor.blackColor()
         textLabel.numberOfLines = 0
     
         //textLabel.sizeToFit()
         return textLabel
+    }
+    
+    func CrateButton(frame:CGRect , titleString : NSString ,backGroundColor : UIColor, font : UIFont) -> UIButton {
+        
+        let button   = UIButton.init() as UIButton
+        button.frame = frame // CGRectMake(frame.origin.x, 15, frame.size.width-5, 25)
+        button.backgroundColor = backGroundColor
+        button.setTitle(titleString as String, forState: UIControlState.Normal)
+        button.titleLabel?.font = font
+        //button.addTarget(self, action: #selector(ProductListCntl.addToCartButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button.layer.cornerRadius = 1.0
+        button.layer.borderWidth = 2.0
+        button.layer.borderColor = UIColor.whiteColor().CGColor
+        button.showsTouchWhenHighlighted = true
+        return button
+        
     }
     
 }

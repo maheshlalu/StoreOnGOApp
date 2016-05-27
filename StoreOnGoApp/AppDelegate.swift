@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         setupCoreDate()
         //self.checkOutCartItems()
-
+        //Roboto-Light
         return true
     }
     

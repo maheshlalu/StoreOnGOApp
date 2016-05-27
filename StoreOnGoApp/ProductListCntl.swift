@@ -64,19 +64,21 @@ class ProductListCntl: UIViewController {
         //self.designHeaderView()
         self.navigationController?.navigationBarHidden = false
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController!.navigationBar.barTintColor = UIColor.redColor()
+        navigationController!.navigationBar.barTintColor = UIColor.grayColor()
         navigationController!.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.whiteColor()]
+          self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Roboto-Regular", size: 15)!]
         
         let cartBtn = MIBadgeButton()
         cartBtn.setImage(UIImage(named: "cart"), forState: .Normal)
-        cartBtn.badgeString = "100"
+        cartBtn.badgeString = "1"
         cartBtn.frame = CGRectMake(0, 0, 30, 30)
         cartBtn.addTarget(self, action: #selector(ProductListCntl.barButtonItemClicked(_:)), forControlEvents: .TouchUpInside)
         let item2 = UIBarButtonItem()
         item2.customView = cartBtn
         cartBtn.badgeEdgeInsets = UIEdgeInsetsMake(10, 10, 0, 15)
-        cartBtn.badgeBackgroundColor = UIColor.greenColor()
+        cartBtn.badgeBackgroundColor = UIColor.whiteColor()
+        cartBtn.badgeTextColor = UIColor.redColor()
         
         self.navigationItem.rightBarButtonItems = [item2]
 
@@ -137,7 +139,7 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 70;
+        return 50;
     }
     
     
@@ -148,18 +150,18 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 51
+        return 40
     }
     
     
     func createLabel(frame:CGRect ,titleString:NSString) -> UILabel {
         
-        let textFrame =  CGRectMake(frame.origin.x, frame.origin.y+5, frame.size.width, frame.size.height+20)
+        let textFrame =  CGRectMake(frame.origin.x, frame.origin.y+5, frame.size.width, frame.size.height)
         let  textLabel: UILabel = UILabel(frame: textFrame)
-        textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+       // textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
-        //textLabel.font = UIFont(name:"Roboto-Regular",size:8)
-        textLabel.font = UIFont.boldSystemFontOfSize(13.0)
+        textLabel.font = UIFont(name:"Roboto-Regular",size:8)
+        //textLabel.font = UIFont.boldSystemFontOfSize(13.0)
         textLabel.text = titleString as String
         textLabel.textColor = UIColor.blackColor()
         textLabel.numberOfLines = 0
@@ -169,13 +171,13 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     func createAddtoCartButton(frame:CGRect,title : NSString ,indexPtah : NSIndexPath) -> UIButton {
         
         let button   = UIButton.init() as UIButton
-        button.frame = CGRectMake(frame.origin.x, 10, frame.size.width-5, 40)
+        button.frame = CGRectMake(frame.origin.x, 15, frame.size.width-5, 25)
         button.backgroundColor = CXConstant.collectionCellBgColor
         button.setTitle(title as String, forState: UIControlState.Normal)
         button.tag = indexPtah.row+1
-        button.titleLabel?.font = UIFont.boldSystemFontOfSize(8.0)
+        button.titleLabel?.font = UIFont(name:"Roboto-Regular",size:8)
         button.addTarget(self, action: #selector(ProductListCntl.addToCartButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        button.layer.cornerRadius = 8.0
+        button.layer.cornerRadius = 10.0
         button.layer.borderWidth = 2.0
         button.layer.borderColor = UIColor.whiteColor().CGColor
         button.showsTouchWhenHighlighted = true
@@ -203,8 +205,8 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     
     func createTextFiled (frame :  CGRect,title : NSString ,indexPtah : NSIndexPath) -> UITextField {
         
-        let sampleTextField = UITextField(frame: CGRectMake(frame.origin.x, 13, frame.size.width, 35))
-        sampleTextField.font = UIFont.systemFontOfSize(12.0)
+        let sampleTextField = UITextField(frame: CGRectMake(frame.origin.x, 13, frame.size.width, 25))
+        sampleTextField.font =  UIFont(name:"Roboto-Regular",size:12)
         sampleTextField.borderStyle = UITextBorderStyle.Bezel
         sampleTextField.autocorrectionType = UITextAutocorrectionType.No
         sampleTextField.keyboardType = UIKeyboardType.NumbersAndPunctuation

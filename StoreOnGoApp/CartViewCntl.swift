@@ -12,12 +12,17 @@ class CartViewCntl: UIViewController {
 
     var cartTableView :  UITableView = UITableView()
     var  productsList :  NSMutableArray = NSMutableArray()
-    
+    var keepShoppingBtn : UIButton = UIButton()
+    var chekOutBtn  : UIButton = UIButton()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.grayColor()
+        self.view.backgroundColor = CXConstant.cartViewBgClor
+        self.designCartActionButton()
         self.createCartTableView()
         self.getProductsList()
+        
+        //242,242,242
 
         // Do any additional setup after loading the view.
     }
@@ -28,13 +33,17 @@ class CartViewCntl: UIViewController {
     }
     
     func createCartTableView () {
-        self.cartTableView = UITableView.init(frame: self.view.frame)
+        self.cartTableView = UITableView.init(frame: CGRectMake(0, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-100))
         self.cartTableView.dataSource = self
         self.cartTableView.delegate = self
-        self.cartTableView.backgroundColor = UIColor.whiteColor()
+        self.cartTableView.backgroundColor = UIColor.clearColor()
         self.cartTableView.registerClass(CartITemCell.self, forCellReuseIdentifier: "CartITemCell")
         //self.cartTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "DetailCell")
         self.view.addSubview(self.cartTableView)
+        self.cartTableView.tableFooterView = UIView()
+        self.cartTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+
+
     }
     
     func getProductsList(){
@@ -152,13 +161,31 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.cartItemNameLbl.text = proListData.name
+        cell.quantityLbl.text = "Quantity :    " + proListData.quantity!
+
         
         return cell;
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 90
+        return CXConstant.cartCellHeight
     }
+    
+    func designCartActionButton(){
+        
+     
+        self.keepShoppingBtn = CXConstant.sharedInstance.CrateButton(CGRectMake(20, CXConstant.screenSize.height - 90, CXConstant.screenSize.width-40, 50), titleString: "Keep shopping", backGroundColor: CXConstant.keepShoppingBtnColor,font : UIFont(name:"Roboto-Regular",size:13)!)
+        
+        self.chekOutBtn = CXConstant.sharedInstance.CrateButton(CGRectMake(20, CXConstant.screenSize.height - 45, CXConstant.screenSize.width-40, 50), titleString: "Check out now", backGroundColor: CXConstant.checkOutBtnColor,font : UIFont(name:"Roboto-Regular",size:13)!)
+
+        self.view.addSubview(self.keepShoppingBtn)
+        self.view.addSubview(self.chekOutBtn)
+        
+        
+        
+    }
+    
+    
 
 }
 

@@ -28,10 +28,9 @@ class ViewController: UIViewController{
         self.designHeaderView()
         CXDBSettings.sharedInstance.dataDelegate = self
         CX_AppData.sharedInstance.getStoresData()
-        //self.setupCollectionView()
+        self.setupCollectionView()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.showPopupPressed()
     }
     
     
@@ -225,7 +224,7 @@ extension ViewController: DetailViewControllerDelegate {
 extension ViewController :AppDataDelegate {
     
     func completedTheFetchingTheData(sender: CXDBSettings) {
-        //self.getStores()
+        self.getStores()
 
     }
 

@@ -45,13 +45,13 @@ class ProductHeaderCell: UITableViewCell {
     
     func createLabel(frame:CGRect ,titleString:NSString) -> UILabel {
         
-        let textFrame =  CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)
+        let textFrame =  CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height-20)
 
         //let textFrame =  frame
         let  textLabel: UILabel = UILabel(frame: textFrame)
-        textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+        //textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
-        textLabel.font = UIFont.boldSystemFontOfSize(13.0)
+        textLabel.font = UIFont(name:"Roboto-Regular",size:8)
         textLabel.text = titleString as String
         textLabel.textColor = UIColor.whiteColor()
         textLabel.numberOfLines = 0

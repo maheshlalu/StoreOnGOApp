@@ -40,23 +40,26 @@ class ProductHomeCntl: UIViewController {
         //self.designHeaderView()
         self.navigationController?.navigationBarHidden = false
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController!.navigationBar.barTintColor = UIColor.redColor()
+        navigationController!.navigationBar.barTintColor = UIColor.grayColor()
         navigationController!.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Roboto-Regular", size: 15)!]
+        self.navigationController!.navigationBar.frame = CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh)
+
     }
     
     
     func setupPager () {
         
-        self.segmentedControl4 = HMSegmentedControl(frame: CGRectMake(0, 60, CXConstant.screenSize.width, 50))
+        self.segmentedControl4 = HMSegmentedControl(frame: CXConstant.segmentFrame)
         self.segmentedControl4.sectionTitles = ["PRODUCTS LIST", "MISCELLANEOUS"]
         self.segmentedControl4.selectedSegmentIndex = 0
         self.segmentedControl4.backgroundColor =  UIColor.whiteColor()
         self.segmentedControl4.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
         self.segmentedControl4.selectedTitleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)]
-        self.segmentedControl4.selectionIndicatorColor = UIColor.redColor()
-        self.segmentedControl4.selectionStyle = HMSegmentedControlSelectionStyleBox
-        self.segmentedControl4.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationUp
+        self.segmentedControl4.selectionIndicatorColor = CXConstant.homeCellBgColor
+        self.segmentedControl4.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
+        self.segmentedControl4.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentedControl4.tag = 3
         segmentedControl4.addTarget(self, action: #selector(ProductHomeCntl.segmentedControlChangedValue(_:)), forControlEvents: .ValueChanged)
         self.view.addSubview(self.segmentedControl4)
@@ -70,6 +73,7 @@ class ProductHomeCntl: UIViewController {
         self.searchBar = SearchBar.designSearchBar()
         self.searchBar.delegate = self
         self.searchBar.placeholder = "Search Products Categories"
+        
         self.view.addSubview(self.searchBar)
     }
     

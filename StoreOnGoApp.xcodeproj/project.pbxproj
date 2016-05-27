@@ -45,6 +45,14 @@
 		12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859581CD3E1CD007BE1D0 /* KICamera.png */; };
 		12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */; };
 		12F8595E1CD3E1CD007BE1D0 /* KIImagePager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8595B1CD3E1CD007BE1D0 /* KIImagePager.m */; };
+		12F9FC181CF76316004FE1F7 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D31CDA68DC00EF26C9 /* Roboto-Black.ttf */; };
+		12F9FC191CF76316004FE1F7 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D41CDA68DC00EF26C9 /* Roboto-Bold.ttf */; };
+		12F9FC1A1CF76316004FE1F7 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D51CDA68DC00EF26C9 /* Roboto-Italic.ttf */; };
+		12F9FC1B1CF76316004FE1F7 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D61CDA68DC00EF26C9 /* Roboto-Light.ttf */; };
+		12F9FC1C1CF76316004FE1F7 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D71CDA68DC00EF26C9 /* Roboto-Medium.ttf */; };
+		12F9FC1D1CF76316004FE1F7 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D81CDA68DC00EF26C9 /* Roboto-Regular.ttf */; };
+		12F9FC1E1CF76316004FE1F7 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D91CDA68DC00EF26C9 /* RobotoCondensed-Bold.ttf */; };
+		12F9FC1F1CF76316004FE1F7 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539DA1CDA68DC00EF26C9 /* RobotoCondensed-Light.ttf */; };
 		2775BE8CDB981C6877300A1C /* libPods-StoreOnGoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48D8902260F5236D3F97147A /* libPods-StoreOnGoApp.a */; };
 		AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01632E1CD2073B00EA1619 /* AppDelegate.swift */; };
 		AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163301CD2073B00EA1619 /* ViewController.swift */; };
@@ -548,6 +556,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12F9FC181CF76316004FE1F7 /* Roboto-Black.ttf in Resources */,
+				12F9FC191CF76316004FE1F7 /* Roboto-Bold.ttf in Resources */,
+				12F9FC1A1CF76316004FE1F7 /* Roboto-Italic.ttf in Resources */,
+				12F9FC1B1CF76316004FE1F7 /* Roboto-Light.ttf in Resources */,
+				12F9FC1C1CF76316004FE1F7 /* Roboto-Medium.ttf in Resources */,
+				12F9FC1D1CF76316004FE1F7 /* Roboto-Regular.ttf in Resources */,
+				12F9FC1E1CF76316004FE1F7 /* RobotoCondensed-Bold.ttf in Resources */,
+				12F9FC1F1CF76316004FE1F7 /* RobotoCondensed-Light.ttf in Resources */,
 				122329D61CF544EC00E93066 /* P3rdLevelCategories.txt in Resources */,
 				121EA6401CDB171B00A69A4C /* subcate.txt in Resources */,
 				12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */,

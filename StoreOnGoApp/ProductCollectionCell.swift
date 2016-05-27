@@ -36,9 +36,9 @@ class ProductCollectionCell: UICollectionViewCell {
         let textFrame = CGRect(x: 0, y: 0, width: CXConstant.ProductCollectionCellSize.width-2, height: 38)
 
         textLabel = UILabel(frame: textFrame)
-        textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+        textLabel.font = UIFont(name:"Roboto-Regular",size:8)
         textLabel.textAlignment = .Center
-        textLabel.font = UIFont.boldSystemFontOfSize(10)
+        //textLabel.font = UIFont.boldSystemFontOfSize(10)
         contentView.addSubview(textLabel)
         //textLabel.text = "Mahesh Babu with muragadash"
         textLabel.textColor = UIColor.whiteColor()

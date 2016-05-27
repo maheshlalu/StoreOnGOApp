@@ -79,7 +79,7 @@
     self.slideshowShouldCallScrollToDelegate = YES;
     self.captionBackgroundColor = [UIColor whiteColor];
     self.captionTextColor = [UIColor blackColor];
-    self.captionFont = [UIFont fontWithName:@"Helvetica-Light" size:12.0f];
+    self.captionFont = [UIFont fontWithName:@"Roboto-Regular" size:12.0f];
     self.hidePageControlForSinglePages = YES;
 
     [self initializeScrollView];

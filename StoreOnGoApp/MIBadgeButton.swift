@@ -59,7 +59,7 @@ public class MIBadgeButton: UIButton {
     private func setupBadgeViewWithString(badgeText badgeText: String?) {
         badgeLabel.clipsToBounds = true
         badgeLabel.text = badgeText
-        badgeLabel.font = UIFont.systemFontOfSize(12)
+        badgeLabel.font = UIFont(name:"Roboto-Regular",size:10)
         badgeLabel.textAlignment = .Center
         badgeLabel.sizeToFit()
         let badgeSize = badgeLabel.frame.size

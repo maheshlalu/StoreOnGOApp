@@ -32,7 +32,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
 
         self.titleLabel = UILabel.init(frame: CGRectMake(0, CXConstant.DetailCollectionCellSize.height-50, self.frame.size.width, 50))
         self.titleLabel.alpha = 0.7
-        self.titleLabel.font = UIFont(name:"Roboto-Regular",size:15)
+        self.titleLabel.font = UIFont(name:"Roboto-Regular",size:12)
         self.titleLabel.textAlignment = NSTextAlignment.Center
         self.titleLabel.textColor = UIColor.whiteColor()
         self.addSubview(self.titleLabel)

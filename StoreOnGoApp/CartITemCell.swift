@@ -39,21 +39,25 @@ class CartITemCell: UITableViewCell {
     
     func designCartCellView(){
         
-        let cartBackgroundView : UIView = UIView.init(frame: CGRectMake(10, 5, CXConstant.screenSize.width-20, 80))
+        let cartBackgroundView : UIView = UIView.init(frame: CGRectMake(10, 5, CXConstant.screenSize.width-20, CXConstant.cartCellHeight-5))
+        
         cartBackgroundView.layer.cornerRadius = 8.0
         cartBackgroundView.layer.borderWidth = 1.0
         cartBackgroundView.layer.borderColor = UIColor.grayColor().CGColor
         cartBackgroundView.backgroundColor = UIColor.whiteColor()
         self.contentView.addSubview(cartBackgroundView)
 
-        self.cartItemNameLbl = CXConstant.sharedInstance.createLabel(CGRectMake(0, 0, cartBackgroundView.frame.size.width , 35), titleString: "")
-        let lineView :  UIView = UIView.init(frame: CGRectMake(0, 40, cartBackgroundView.frame.size.width, 1))
-        lineView.backgroundColor = UIColor.grayColor()
-        cartBackgroundView.addSubview(lineView)
-        self.quantityLbl = CXConstant.sharedInstance.createLabel(CGRectMake(0, 41, cartBackgroundView.frame.size.width, 35), titleString: "")
+        self.cartItemNameLbl = CXConstant.sharedInstance.createLabel(CGRectMake(0, 0, cartBackgroundView.frame.size.width/2.5 , 35), titleString: "")
+
+        
+        self.quantityLbl = CXConstant.sharedInstance.createLabel(CGRectMake(self.cartItemNameLbl.frame.size.width+1, 0, cartBackgroundView.frame.size.width-self.cartItemNameLbl.frame.size.width-2, 35), titleString: "")
+        
+        self.quantityLbl.textColor = UIColor.redColor()
         cartBackgroundView.addSubview(self.cartItemNameLbl)
         cartBackgroundView.addSubview(self.quantityLbl)
         
     }
+    
+
 
 }

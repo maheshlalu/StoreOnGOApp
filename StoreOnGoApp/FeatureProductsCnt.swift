@@ -30,7 +30,7 @@ class FeatureProductsCnt: UIViewController {
         //self.designHeaderView()
         self.navigationController?.navigationBarHidden = false
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController!.navigationBar.barTintColor = UIColor.redColor()
+        navigationController!.navigationBar.barTintColor = UIColor.grayColor()
         navigationController!.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }

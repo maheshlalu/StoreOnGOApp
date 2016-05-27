@@ -36,15 +36,15 @@ class HeaderView: UIView {
    
     class  func customizeHeaderView(cartButtonVisible:Bool,headerTitle:NSString,backButtonVisible : Bool) -> HeaderView {
         
-        let appLogo = UIImageView(frame: CGRect(x: -60, y: 5, width: 65, height: 65))
+        let appLogo = UIImageView(frame: CGRect(x: -120, y: 5, width: CXConstant.headerViewHeigh-2, height: CXConstant.headerViewHeigh-2))
         appLogo.contentMode = UIViewContentMode.Left
         // cellBackGroundView.addSubview(imageView)
         appLogo.image = UIImage(named: "appLogo")
         
         
-        let headerView : HeaderView = HeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, 70))
+        let headerView : HeaderView = HeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh))
         headerView.backgroundColor = UIColor.grayColor()
-        let headerLbl : UILabel = UILabel.init(frame: CGRectMake(appLogo.frame.size.width+10, 0, CXConstant.screenSize.width-50, 70))
+        let headerLbl : UILabel = UILabel.init(frame: CGRectMake(appLogo.frame.size.width+10, 0, CXConstant.screenSize.width-50, CXConstant.headerViewHeigh-2))
         headerLbl.text = headerTitle as String
         headerLbl.font = UIFont(name:"Roboto-Regular",size:13)
         headerLbl.textColor = UIColor.whiteColor()
