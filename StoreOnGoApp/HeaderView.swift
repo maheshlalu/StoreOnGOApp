@@ -10,6 +10,7 @@ import UIKit
 
 protocol DetailViewControllerDelegate: class {
     func didFinishTask(sender: HeaderView)
+    //func cartButtonAction(sender: HeaderView)
 }
 
 class HeaderView: UIView {
@@ -61,6 +62,23 @@ class HeaderView: UIView {
             headerView.addSubview(backButton)
         }
         
+        let cartBtn = MIBadgeButton()
+        cartBtn.setImage(UIImage(named: "cart"), forState: .Normal)
+        cartBtn.badgeString = "1"
+        cartBtn.frame = CGRectMake(CXConstant.screenSize.width-60, 5, 40,40)
+        cartBtn.addTarget(self, action: #selector(HeaderView.barButtonItemClicked(_:)), forControlEvents: .TouchUpInside)
+        let item2 = UIBarButtonItem()
+        item2.customView = cartBtn
+        cartBtn.badgeEdgeInsets = UIEdgeInsetsMake(10, 10, 0, 15)
+        cartBtn.badgeBackgroundColor = UIColor.whiteColor()
+        cartBtn.badgeTextColor = UIColor.redColor()
+        
+
+        if cartButtonVisible {
+            headerView.addSubview(cartBtn)
+
+        }
+        
         return headerView
     }
     
@@ -68,6 +86,13 @@ class HeaderView: UIView {
     {
         delegate?.didFinishTask(self)
 
+        
+    }
+    
+    func barButtonItemClicked(sender:UIButton!)
+    {
+        //delegate?.cartButtonAction(self)
+        
         
     }
     

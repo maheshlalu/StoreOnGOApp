@@ -15,6 +15,7 @@ class CartITemCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     
@@ -28,9 +29,10 @@ class CartITemCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         //self.backgroundColor = UIColor.whiteColor()
         self.backgroundView?.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clearColor()
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.designCartCellView()
-
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

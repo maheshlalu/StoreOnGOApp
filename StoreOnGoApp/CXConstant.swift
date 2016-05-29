@@ -27,7 +27,7 @@ class CXConstant: NSObject {
     //MARK :
     static let screenSize = UIScreen.mainScreen().bounds.size
     
-    static let headerViewHeigh : CGFloat = 50
+    static let headerViewHeigh : CGFloat = 65
     
     
     static let pagerHeight : CGFloat = screenSize.height/3

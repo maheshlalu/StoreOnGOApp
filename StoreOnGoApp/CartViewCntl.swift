@@ -18,6 +18,7 @@ class CartViewCntl: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = CXConstant.cartViewBgClor
+        self.designHeaderView()
         self.designCartActionButton()
         self.createCartTableView()
         self.getProductsList()
@@ -33,7 +34,7 @@ class CartViewCntl: UIViewController {
     }
     
     func createCartTableView () {
-        self.cartTableView = UITableView.init(frame: CGRectMake(0, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-100))
+        self.cartTableView = UITableView.init(frame: CGRectMake(0, CXConstant.headerViewHeigh, self.view.frame.size.width, self.view.frame.size.height-CXConstant.headerViewHeigh-100))
         self.cartTableView.dataSource = self
         self.cartTableView.delegate = self
         self.cartTableView.backgroundColor = UIColor.clearColor()
@@ -46,6 +47,13 @@ class CartViewCntl: UIViewController {
 
     }
     
+    func designHeaderView (){
+        
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Cart List", andDelegate: self, backButtonVisible: true, cartBtnVisible: false)
+        
+        self.view.addSubview(heder)
+        
+    }
     func getProductsList(){
         
         //let   predicate :   NSPredicate   = NSPredicate(format: "addToCart = 'YES'")
@@ -173,11 +181,16 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
     
     func designCartActionButton(){
         
-     
-        self.keepShoppingBtn = CXConstant.sharedInstance.CrateButton(CGRectMake(20, CXConstant.screenSize.height - 90, CXConstant.screenSize.width-40, 50), titleString: "Keep shopping", backGroundColor: CXConstant.keepShoppingBtnColor,font : UIFont(name:"Roboto-Regular",size:13)!)
         
-        self.chekOutBtn = CXConstant.sharedInstance.CrateButton(CGRectMake(20, CXConstant.screenSize.height - 45, CXConstant.screenSize.width-40, 50), titleString: "Check out now", backGroundColor: CXConstant.checkOutBtnColor,font : UIFont(name:"Roboto-Regular",size:13)!)
-
+        self.keepShoppingBtn = CXConstant.sharedInstance.CrateButton(CGRectMake(20, CXConstant.screenSize.height - 110, CXConstant.screenSize.width-40, 50), titleString: "Keep shopping", backGroundColor: CXConstant.keepShoppingBtnColor,font : UIFont(name:"Roboto-Regular",size:13)!)
+        
+        keepShoppingBtn.addTarget(self, action: #selector(CartViewCntl.keepShoppingBtnAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
+        self.chekOutBtn = CXConstant.sharedInstance.CrateButton(CGRectMake(20, CXConstant.screenSize.height - 65, CXConstant.screenSize.width-40, 50), titleString: "Check out now", backGroundColor: CXConstant.checkOutBtnColor,font : UIFont(name:"Roboto-Regular",size:13)!)
+        chekOutBtn.addTarget(self, action: #selector(CartViewCntl.checkOutBtnAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
         self.view.addSubview(self.keepShoppingBtn)
         self.view.addSubview(self.chekOutBtn)
         
@@ -185,7 +198,34 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    func keepShoppingBtnAction(button : UIButton!){
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
+    
+    
+    func checkOutBtnAction(button : UIButton!){
+        
+        
+    }
+    
+    
     
 
+}
+
+
+extension CartViewCntl : HeaderViewDelegate {
+    
+    func backButtonAction (){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func cartButtonAction(){
+        let cartView : CartViewCntl = CartViewCntl.init()
+        self.navigationController?.pushViewController(cartView, animated: false)
+        
+    }
 }
 

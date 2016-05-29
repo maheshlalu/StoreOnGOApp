@@ -14,13 +14,15 @@ class ProductListCntl: UIViewController {
     var productsList : NSArray = NSArray()
     var predicate : NSPredicate = NSPredicate()
     let colomnList: [String] = ["ITEM CODE", "ITEM NAME","QUANTITY","",""]
+    var headerTitle :  NSString = NSString()
     
     //,EDIT TEXT, AddTOCard Button
 
     var productListTableView : UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setTheNavigationProperty()
+        //self.setTheNavigationProperty()
+        self.designHeaderView()
         self.designProductListTableView()
         self.getTheProductsList()
 
@@ -46,7 +48,7 @@ class ProductListCntl: UIViewController {
     }
     
     func designProductListTableView(){
-        self.productListTableView = UITableView.init(frame: self.view.frame)
+        self.productListTableView = UITableView.init(frame: CGRectMake(0, CXConstant.headerViewHeigh, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh))
         self.productListTableView.dataSource = self
         self.productListTableView.delegate = self
         self.productListTableView.backgroundColor = UIColor.whiteColor()
@@ -55,6 +57,14 @@ class ProductListCntl: UIViewController {
         self.productListTableView.registerClass(ProductHeaderCell.self, forCellReuseIdentifier: "HeaderCell")
 
         self.view.addSubview(self.productListTableView)
+        
+    }
+    
+    func designHeaderView (){
+        
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: self.headerTitle as String, andDelegate: self, backButtonVisible: true, cartBtnVisible: true)
+        
+        self.view.addSubview(heder)
         
     }
     
@@ -278,6 +288,19 @@ extension ProductListCntl : UITextFieldDelegate {
 
      */
     
+}
+
+extension ProductListCntl : HeaderViewDelegate {
+    
+    func backButtonAction (){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+      func cartButtonAction(){
+        let cartView : CartViewCntl = CartViewCntl.init()
+        self.navigationController?.pushViewController(cartView, animated: false)
+
+    }
 }
 
 

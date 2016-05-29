@@ -33,7 +33,10 @@
 		128564D21CE75CD0006210EA /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128564D11CE75CD0006210EA /* MIBadgeButton.swift */; };
 		128564D41CE7635B006210EA /* CartViewCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128564D31CE7635B006210EA /* CartViewCntl.swift */; };
 		128564D71CE8A6B1006210EA /* CartITemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128564D61CE8A6B1006210EA /* CartITemCell.swift */; };
+		12C91DE31CFAB70B001AD55A /* CXHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C91DE21CFAB70B001AD55A /* CXHeaderView.m */; };
 		12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */; };
+		12EF6BD81CFAF0C7009E17B6 /* MIBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EF6BD51CFAF0C7009E17B6 /* MIBadgeButton.m */; };
+		12EF6BD91CFAF0C7009E17B6 /* MIBadgeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EF6BD71CFAF0C7009E17B6 /* MIBadgeLabel.m */; };
 		12F10A2A1CDEF23D007C8F5B /* ProductHomeCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */; };
 		12F10A321CDF0C9B007C8F5B /* AboutUsViewCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */; };
 		12F10A341CDF0E0F007C8F5B /* MapViewCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */; };
@@ -118,7 +121,13 @@
 		128564D11CE75CD0006210EA /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeButton.swift; sourceTree = "<group>"; };
 		128564D31CE7635B006210EA /* CartViewCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewCntl.swift; sourceTree = "<group>"; };
 		128564D61CE8A6B1006210EA /* CartITemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartITemCell.swift; sourceTree = "<group>"; };
+		12C91DE11CFAB70B001AD55A /* CXHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHeaderView.h; sourceTree = "<group>"; };
+		12C91DE21CFAB70B001AD55A /* CXHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHeaderView.m; sourceTree = "<group>"; };
 		12C96E9B1CD51E9200E42A78 /* CX_AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_AppData.swift; sourceTree = "<group>"; };
+		12EF6BD41CFAF0C7009E17B6 /* MIBadgeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIBadgeButton.h; sourceTree = "<group>"; };
+		12EF6BD51CFAF0C7009E17B6 /* MIBadgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIBadgeButton.m; sourceTree = "<group>"; };
+		12EF6BD61CFAF0C7009E17B6 /* MIBadgeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIBadgeLabel.h; sourceTree = "<group>"; };
+		12EF6BD71CFAF0C7009E17B6 /* MIBadgeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIBadgeLabel.m; sourceTree = "<group>"; };
 		12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHomeCntl.swift; sourceTree = "<group>"; };
 		12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewCnt.swift; sourceTree = "<group>"; };
 		12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCntl.swift; sourceTree = "<group>"; };
@@ -229,6 +238,10 @@
 		1220DCD71CD4DC7900A78C3B /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				12EF6BD41CFAF0C7009E17B6 /* MIBadgeButton.h */,
+				12EF6BD51CFAF0C7009E17B6 /* MIBadgeButton.m */,
+				12EF6BD61CFAF0C7009E17B6 /* MIBadgeLabel.h */,
+				12EF6BD71CFAF0C7009E17B6 /* MIBadgeLabel.m */,
 				128564D11CE75CD0006210EA /* MIBadgeButton.swift */,
 				12F10A2B1CDEF291007C8F5B /* PageCntl */,
 				12F859581CD3E1CD007BE1D0 /* KICamera.png */,
@@ -372,6 +385,8 @@
 				12F64D8A1CD5B52F007D760C /* HeaderView.swift */,
 				12F64D8C1CD5B923007D760C /* SearchBar.swift */,
 				122805961CDE3C0D000343AC /* LoadingView.swift */,
+				12C91DE11CFAB70B001AD55A /* CXHeaderView.h */,
+				12C91DE21CFAB70B001AD55A /* CXHeaderView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -692,7 +707,10 @@
 				AAF679331CD2644F001E1238 /* CXDetailCollectionViewCell.swift in Sources */,
 				12F8595E1CD3E1CD007BE1D0 /* KIImagePager.m in Sources */,
 				126F827B1CDF6F57003C3DE4 /* CX_FeaturedProducts.swift in Sources */,
+				12EF6BD91CFAF0C7009E17B6 /* MIBadgeLabel.m in Sources */,
 				12100C341CD91C5E00A44C0D /* ProductHeaderCell.swift in Sources */,
+				12C91DE31CFAB70B001AD55A /* CXHeaderView.m in Sources */,
+				12EF6BD81CFAF0C7009E17B6 /* MIBadgeButton.m in Sources */,
 				AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */,
 				128564D41CE7635B006210EA /* CartViewCntl.swift in Sources */,
 				12F10A341CDF0E0F007C8F5B /* MapViewCntl.swift in Sources */,

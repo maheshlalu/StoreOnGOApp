@@ -15,10 +15,12 @@ class ProductHomeCntl: UIViewController {
     var productCategories: NSArray!
     var isProductCategory : Bool = Bool()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
-        self.setTheNavigationProperty()
+        //self.setTheNavigationProperty()
+        self.designHeaderView()
         self.setupPager()
         self.designSearchBar()
         self.setupCollectionView()
@@ -48,6 +50,13 @@ class ProductHomeCntl: UIViewController {
 
     }
     
+    func designHeaderView (){
+        
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Products List", andDelegate: self, backButtonVisible: true, cartBtnVisible: true)
+        
+        self.view.addSubview(heder)
+        
+    }
     
     func setupPager () {
         
@@ -84,7 +93,7 @@ class ProductHomeCntl: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 200, right: 10)
         layout.itemSize = CXConstant.ProductCollectionCellSize
         //self.view.frame
-        self.productCollectionView = UICollectionView(frame:CGRectMake(0,CXConstant.searchBarFrame.origin.y+CXConstant.searchBarFrame.size.height, CXConstant.screenSize.width, CXConstant.screenSize.height), collectionViewLayout: layout)
+        self.productCollectionView = UICollectionView(frame:CGRectMake(0,CXConstant.searchBarFrame.origin.y+CXConstant.searchBarFrame.size.height, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
         self.productCollectionView.showsHorizontalScrollIndicator = false
         self.productCollectionView.delegate = self
         self.productCollectionView.dataSource = self
@@ -242,11 +251,26 @@ extension ProductHomeCntl:UICollectionViewDelegate,UICollectionViewDataSource {
         print("append string \(appendStr)")
         let productListVc = ProductListCntl.init()
          productListVc.predicate = NSPredicate(format: "subCatNameID = %@",appendStr )
+        productListVc.headerTitle = proCat.name!
         self.navigationController?.pushViewController(productListVc, animated: true)
         
     }
     
     
+    
+}
+
+extension ProductHomeCntl : HeaderViewDelegate {
+    
+    func backButtonAction (){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func cartButtonAction(){
+        let cartView : CartViewCntl = CartViewCntl.init()
+        self.navigationController?.pushViewController(cartView, animated: false)
+        
+    }
     
 }
 

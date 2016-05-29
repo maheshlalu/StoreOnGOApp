@@ -13,8 +13,8 @@ class ViewController: UIViewController{
     
     var imagePager : KIImagePager = KIImagePager()
     var homeCollectionView: UICollectionView!
-    let homeList: [String] = ["products", "featuredProducts","offers","aboutUs"]
-    let homeListTitles: [String] = ["Products", "Feature Products","Offers","AboutUs"]
+    let homeList: [String] = ["products", "stickers","offers","aboutUs"]
+    let homeListTitles: [String] = ["Products", "Stickers","Offers","AboutUs"]
 
     var coverPageImagesList: NSMutableArray!
     var headerview: HeaderView!
@@ -49,6 +49,10 @@ class ViewController: UIViewController{
     //MARK : HeaderView
     func designHeaderView (){
         
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "WELOCOME TO NV AGENCIES", andDelegate: self, backButtonVisible: false, cartBtnVisible: true)
+  
+        self.view.addSubview(heder)
+        return
         self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
         self.view.addSubview(self.headerview)
         self.headerview.delegate = self
@@ -182,17 +186,17 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             self.navigationController?.pushViewController(productView, animated: true)
             break
         case 1 :
-            let fetureProductView = FeatureProductsCnt.init()
-            self.navigationController?.pushViewController(fetureProductView, animated: true)
+            //let fetureProductView = FeatureProductsCnt.init()
+            //self.navigationController?.pushViewController(fetureProductView, animated: true)
             break
         case 2  :
-            let mapView = MapViewCntl.init()
-            self.navigationController?.pushViewController(mapView, animated: true)
+            //let mapView = MapViewCntl.init()
+            //self.navigationController?.pushViewController(mapView, animated: true)
             
             break
         case 3  :
-            let aboutUs = ProductListCntl.init()
-            self.navigationController?.pushViewController(aboutUs, animated: true)
+            //let aboutUs = ProductListCntl.init()
+            //self.navigationController?.pushViewController(aboutUs, animated: true)
             
             break
         default :
@@ -267,6 +271,24 @@ extension ViewController : UITextFieldDelegate {
 
 }
 
+extension ViewController : HeaderViewDelegate {
+    
+    func backButtonAction (){
+        
+        
+        
+    }
+    
+    func cartButtonAction(){
+        let cartView : CartViewCntl = CartViewCntl.init()
+        self.navigationController?.pushViewController(cartView, animated: false)
+        
+    }
+
+        
+        
+
+}
 
 
 

@@ -93,6 +93,11 @@
       "scale" : "1x"
     },
     {
+      "idiom" : "ipad",
+      "size" : "72x72",
+      "scale" : "2x"
+    },
+    {
       "size" : "76x76",
       "idiom" : "ipad",
       "filename" : "Icon-76.png",
