@@ -36,18 +36,32 @@ class UserDetailsCnt: UIViewController {
     
     func sendTheCartItemsToServer(){
         
-        let reqUrl = CXConstant.addToCartItemUrl+self.checkOutCartItems()+"&dt=CAMPAIGNS&category=Services&userId="+CXConstant.MallID+"&consumerEmail="+"yernagulamahesh@gmail.com"
-            
-        print ("Req URL \(reqUrl)")
-            
-        SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
-             print ("stores   response   data \(responseDict) ")
-        }
+
         
+        var urlString : NSString = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder"
+        //"http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json="
+        
+        urlString = urlString.stringByAppendingString("&json=" + self.checkOutCartItems())
+        urlString = urlString.stringByAppendingString("&dt=CAMPAIGNS")
+        urlString = urlString.stringByAppendingString("&category=Services")
+        urlString = urlString.stringByAppendingString("&userId="+CXConstant.MallID)
+        urlString = urlString.stringByAppendingString("&consumerEmail="+"yernagulamahesh@gmail.com")
+
+        
+       // let reqUrl = CXConstant.addToCartItemUrl+self.checkOutCartItems()+"&dt=CAMPAIGNS&category=Services&userId="+CXConstant.MallID+"&consumerEmail="+"yernagulamahesh@gmail.com"
+            
+        //print ("Req URL \(reqUrl)")
+        
+//        SMSyncService.sharedInstance.startSyncProcessWithUrl(urlString as String) { (responseDict) -> Void in
+//             print ("stores   response   data \(responseDict) ")
+//        }
+        
+         SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
+        //startSyncWithUrl
       /*
          "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemId":"NAJ0906`135015","OrderItemQuantity":"2`135015","OrderItemSubTotal":"","OrderItemMRP":"","Address":"madhapur hyd","Contact_Number":"7893335553","Name":"kushal","OrderItemName":"ACC GRIP HOUSING LOWER HH/SPLENDOR`135015"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=yernagulamahesh@hmail.com"
          
-         
+         http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"Address":"madhapur hyd","OrderItemSubTotal":"","OrderItemMRP":"","Name":"kushal","Contact_Number":"7893335553","OrderItemId":"135033`135033","OrderItemQuantity":"33`135033","OrderItemName":"ACC GRIP TVS XL`135033"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=yernagulamahesh@gmail.com
          
          http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"Address":"madhapur hyd","OrderItemSubTotal":"","OrderItemMRP":"","Name":"kushal","Contact_Number":"7893335553","OrderItemId":"135033`135033","OrderItemQuantity":"33`135033","OrderItemName":"ACC GRIP TVS XL`135033"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=yernagulamahesh@gmail.com
          
@@ -77,27 +91,27 @@ class UserDetailsCnt: UIViewController {
         
         let total: Double = 0
         
-        order["Name"] = "kushal"
+        order["Name"] = ("\("kushal")")
         //should be replaced
-        order["Address"] = "madhapur hyd"
+        order["Address"] = ("\("madhapur hyd")")
         //should be replaced
-        order["Contact_Number"] = "7893335553"
+        order["Contact_Number"] = ("\("7893335553")")
         //should be replaced
         
         
         for (index, element) in CX_Cart.MR_executeFetchRequest(fetchRequest).enumerate() {
             let cart : CX_Cart = element as! CX_Cart
             if index != 0 {
-                orderItemName .appendString("|")
-                orderItemQuantity .appendString("|")
-                orderSubTotal .appendString("|")
-                orderItemId .appendString("|")
-                orderItemMRP .appendString("|")
+                orderItemName .appendString(("\("|")"))
+                orderItemQuantity .appendString(("\("|")"))
+                orderSubTotal .appendString(("\("|")"))
+                orderItemId .appendString(("\("|")"))
+                orderItemMRP .appendString(("\("|")"))
             }
-            orderItemName.appendString(cart.name! + "`" + cart.pID!)
-            orderItemQuantity.appendString(cart.quantity! + "`" + cart.pID!)
+            orderItemName.appendString("\(cart.name! + "`" + cart.pID!)")
+            orderItemQuantity.appendString("\(cart.quantity! + "`" + cart.pID!)")
             //orderSubTotal.appendString(cart.name! + "`" + cart.pID!)
-            orderItemId.appendString(cart.pID! + "`" + cart.pID!)
+            orderItemId.appendString("\(cart.pID! + "`" + cart.pID!)")
             //orderItemMRP.appendString(cart.name! + "`" + cart.pID!)
             print("Item \(index): \(cart)")
         }
@@ -106,8 +120,8 @@ class UserDetailsCnt: UIViewController {
         //[order setObject:itemCode forKey:@"ItemCode"];
         order["OrderItemQuantity"] = orderItemQuantity
         order["OrderItemName"] = orderItemName
-        order["OrderItemSubTotal"] = orderSubTotal
-        order["OrderItemMRP"] = orderItemMRP
+        order["OrderItemSubTotal"] = ("\(orderSubTotal)")
+        order["OrderItemMRP"] = ("\(orderItemMRP)")
         
         print("order dic \(order)")
         
@@ -116,20 +130,11 @@ class UserDetailsCnt: UIViewController {
         
         let cartJsonDict :NSMutableDictionary = NSMutableDictionary()
         cartJsonDict.setObject(listArray, forKey: "list")
-        
-        
-       // print("order dic \(cartJsonDict)")
-        
-        var error: NSError?
+    
+        let jsonString = cartJsonDict.JSONString()
 
-            
-            
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(cartJsonDict, options: NSJSONWritingOptions(rawValue: 0))
-        let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
-
-       // print("order dic \(jsonString)")
-        
-        let newString = jsonString.stringByReplacingOccurrencesOfString("'\'", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+       print("order dic \(jsonString)")
+    
 
         return jsonString
 

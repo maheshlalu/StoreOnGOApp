@@ -12,5 +12,6 @@
 #import "KIImagePager.h"
 #import "HMSegmentedControl.h"
 #import "CXHeaderView.h"
+#import "JSONKit.h"
 
 #endif /* StoreOnGoApp_Bridging_Header_h */

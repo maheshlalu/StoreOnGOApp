@@ -52,22 +52,22 @@ public class SMSyncService: NSObject , NSURLSessionDelegate{
         task.resume()
     }
         
-//    public func startSyncWithUrl(cUrl:String) {
-//        let urlPath: String = cUrl
-//        let url: NSURL = NSURL(string: urlPath)!
-//        let request1: NSURLRequest = NSURLRequest(URL: url)
-//        let session = NSURLSession.sharedSession()
-//        let task = session.dataTaskWithRequest(request1) { (resData:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
-//            var jsonData : NSDictionary = NSDictionary()
-//            do {
-//                jsonData = try NSJSONSerialization.JSONObjectWithData(resData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
-//            } catch {
-//                print("Error in parsing")
-//            }
-//            print("All Malls \(jsonData)")
-//        }
-//        task.resume()
-//    }
+    public func startSyncWithUrl(cUrl:String) {
+        let urlPath: String = cUrl
+        let url: NSURL = NSURL(string: cUrl)!
+        let request1: NSURLRequest = NSURLRequest(URL: url)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request1) { (resData:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+            var jsonData : NSDictionary = NSDictionary()
+            do {
+                jsonData = try NSJSONSerialization.JSONObjectWithData(resData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
+            } catch {
+                print("Error in parsing")
+            }
+            print("All Malls \(jsonData)")
+        }
+        task.resume()
+    }
     
     
     
