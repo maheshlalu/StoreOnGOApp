@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "EGOCache.h"
 
 typedef void(^KIImagePagerImageRequestBlock)(UIImage*image, NSError * error);
 
@@ -51,7 +52,7 @@ typedef void(^KIImagePagerImageRequestBlock)(UIImage*image, NSError * error);
 @property (weak) IBOutlet id <KIImagePagerDataSource> dataSource;
 @property (weak) IBOutlet id <KIImagePagerDelegate> delegate;
 @property (weak) IBOutlet id <KIImagePagerImageSource> imageSource;
-
+@property (nonatomic,strong) EGOCache *cacheData;
 
 // General
 @property (nonatomic) UIViewContentMode contentMode;

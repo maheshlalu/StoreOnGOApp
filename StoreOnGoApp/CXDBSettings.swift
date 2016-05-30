@@ -67,7 +67,10 @@ class CXDBSettings: NSObject {
             }, completion: { (success : Bool, error : NSError!) in
                 
                 print("save the data >>>>>")
-                LoadingView.hide()
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+
+                //LoadingView.hide()
                 // This block runs in main thread
         })
         

@@ -267,7 +267,7 @@ class LoadingView: UIView {
             
             let rotationAnimation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
             rotationAnimation.toValue = NSNumber(double: M_PI * 2.0)
-            rotationAnimation.duration = CFTimeInterval(speed!);
+            rotationAnimation.duration = CFTimeInterval(1);
             rotationAnimation.cumulative = true;
             rotationAnimation.repeatCount = HUGE;
             self.backgroundLayer?.addAnimation(rotationAnimation, forKey: "rotationAnimation")

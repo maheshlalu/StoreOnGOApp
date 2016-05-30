@@ -11,7 +11,6 @@
 #define kOverlayHeight      15
 
 #import "KIImagePager.h"
-
 @interface KIImagePagerDefaultImageSource : NSObject <KIImagePagerImageSource>
 @end
 
@@ -180,6 +179,9 @@
 
 - (void) loadData
 {
+    
+    
+
     NSArray *aImageUrls = (NSArray *)[_dataSource arrayWithImages:self];
     _activityIndicators = [NSMutableDictionary new];
 
@@ -223,6 +225,7 @@
                 [self.imageSource imageWithUrl:imageUrl
                                     completion:^(UIImage *image, NSError *error)
                  {
+                     
                      if(!error) [imageView setImage:image];//should we handle error?
                      else [imageView setImage:nil];
 
@@ -463,12 +466,16 @@
 
 -(void) imageWithUrl:(NSURL*)url completion:(KIImagePagerImageRequestBlock)completion
 {
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         dispatch_sync(dispatch_get_main_queue(), ^{
             if(completion) completion([UIImage imageWithData:imageData],nil);
         });
     });
 }
+
+
 
 @end

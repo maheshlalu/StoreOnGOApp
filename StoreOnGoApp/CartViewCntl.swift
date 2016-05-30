@@ -207,7 +207,10 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
     
     func checkOutBtnAction(button : UIButton!){
         
-        
+        let cartView : UserDetailsCnt = UserDetailsCnt.init()
+        self.navigationController?.pushViewController(cartView, animated: false)
+
+        //UserDetailsCnt
     }
     
     

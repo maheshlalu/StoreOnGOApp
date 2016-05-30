@@ -29,6 +29,7 @@
 
 - (void) setBadgeString:(NSString *)badgeString
 {
+    if (![badgeString isEqualToString:@""])
     _badgeString = badgeString;
     [self setupBadgeViewWithString:badgeString];
 }

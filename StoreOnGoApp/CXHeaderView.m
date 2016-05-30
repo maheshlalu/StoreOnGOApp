@@ -27,6 +27,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(updateCartBtnAction:)
+                                                     name:@"updateCartBtnAction"
+                                                   object:nil];
+        
         [self setBackgroundColor:[UIColor grayColor]];
         [self loadSubViewsandTitle:inTitle andDelegate:self backButtonVisible:isVisible cartBtnVisible:visible];
     }
@@ -34,6 +40,15 @@
 }
 
 
+-(void)updateCartBtnAction:(NSNotification *)notification {
+    
+    NSString *cartCount = [self cartCount];
+    if (![cartCount isEqualToString:@""]) {
+        [self.cartBtn setBadgeString:cartCount];
+        [self.cartBtn setBadgeBackgroundColor:[UIColor redColor]];
+        [self.cartBtn setBadgeTextColor:[UIColor whiteColor]];
+    }
+}
 
 - (void)loadSubViewsandTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible{
     
@@ -95,10 +110,17 @@
     [cartBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     // optional to change the default position of the badge
     [cartBtn setBadgeEdgeInsets:UIEdgeInsetsMake(20, 5, 0,20)];
-    [cartBtn setBadgeString:[self cartCount]];
-    [cartBtn setBadgeTextColor:[UIColor whiteColor]];
+    
+    NSString *cartCount = [self cartCount];
+    if (![cartCount isEqualToString:@""]) {
+        [cartBtn setBadgeString:cartCount];
+        [cartBtn setBadgeBackgroundColor:[UIColor redColor]];
+        [cartBtn setBadgeTextColor:[UIColor whiteColor]];
+    }
+    
+    
+
     cartBtn.showsTouchWhenHighlighted = YES;
-    [cartBtn setBadgeBackgroundColor:[UIColor redColor]];
 
     return cartBtn;
 }
@@ -142,8 +164,9 @@
         
         //Deal with success
     }
-
+    if (results.count !=0)
     return [NSString stringWithFormat:@"%lu",(unsigned long)results.count];
+    return @"";
 }
 
 
