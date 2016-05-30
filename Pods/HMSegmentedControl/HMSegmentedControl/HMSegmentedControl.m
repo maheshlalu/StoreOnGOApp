@@ -136,7 +136,7 @@
     
     self.selectedSegmentIndex = 0;
     self.segmentEdgeInset = UIEdgeInsetsMake(0, 5, 0, 5);
-    self.selectionIndicatorHeight = 2.0f;
+    self.selectionIndicatorHeight = 5.0f;
     self.selectionIndicatorEdgeInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
     self.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
     self.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationUp;
@@ -859,10 +859,10 @@
 
 - (NSDictionary *)resultingTitleTextAttributes {
     NSDictionary *defaults = @{
-        NSFontAttributeName : [UIFont fontWithName:@"Roboto-Regular" size:12.0f],
+        NSFontAttributeName : [UIFont systemFontOfSize:19.0f],
         NSForegroundColorAttributeName : [UIColor blackColor],
     };
-    //UIFont(name:"Roboto-Regular",size:8)
+    
     NSMutableDictionary *resultingAttrs = [NSMutableDictionary dictionaryWithDictionary:defaults];
     
     if (self.titleTextAttributes) {

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA01632A1CD2073B00EA1619"
-               BuildableName = "StoreOnGoApp.app"
+               BuildableName = "NV Agencies.app"
                BlueprintName = "StoreOnGoApp"
                ReferencedContainer = "container:StoreOnGoApp.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA01632A1CD2073B00EA1619"
-            BuildableName = "StoreOnGoApp.app"
+            BuildableName = "NV Agencies.app"
             BlueprintName = "StoreOnGoApp"
             ReferencedContainer = "container:StoreOnGoApp.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA01632A1CD2073B00EA1619"
-            BuildableName = "StoreOnGoApp.app"
+            BuildableName = "NV Agencies.app"
             BlueprintName = "StoreOnGoApp"
             ReferencedContainer = "container:StoreOnGoApp.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA01632A1CD2073B00EA1619"
-            BuildableName = "StoreOnGoApp.app"
+            BuildableName = "NV Agencies.app"
             BlueprintName = "StoreOnGoApp"
             ReferencedContainer = "container:StoreOnGoApp.xcodeproj">
          </BuildableReference>

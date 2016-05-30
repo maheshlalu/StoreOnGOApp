@@ -36,7 +36,7 @@ class UserDetailsCnt: UIViewController {
     
     func sendTheCartItemsToServer(){
         
-        let reqUrl = CXConstant.addToCartItemUrl+self.checkOutCartItems()+"&dt=CAMPAIGNS&category=Services&userId="+CXConstant.MallID+"&consumerEmail="+"yernagulamahesh@hmail.com"
+        let reqUrl = CXConstant.addToCartItemUrl+self.checkOutCartItems()+"&dt=CAMPAIGNS&category=Services&userId="+CXConstant.MallID+"&consumerEmail="+"yernagulamahesh@gmail.com"
             
         print ("Req URL \(reqUrl)")
             
@@ -46,6 +46,12 @@ class UserDetailsCnt: UIViewController {
         
       /*
          "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemId":"NAJ0906`135015","OrderItemQuantity":"2`135015","OrderItemSubTotal":"","OrderItemMRP":"","Address":"madhapur hyd","Contact_Number":"7893335553","Name":"kushal","OrderItemName":"ACC GRIP HOUSING LOWER HH/SPLENDOR`135015"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=yernagulamahesh@hmail.com"
+         
+         
+         
+         http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"Address":"madhapur hyd","OrderItemSubTotal":"","OrderItemMRP":"","Name":"kushal","Contact_Number":"7893335553","OrderItemId":"135033`135033","OrderItemQuantity":"33`135033","OrderItemName":"ACC GRIP TVS XL`135033"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=yernagulamahesh@gmail.com
+         
+         
          */
         
                 /* http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840","Total":"","OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840","OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840","OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840","Contact_Number":"7893335553","OrderItemMRP":"`13501630|`14075630|`14075740|`14075840","Address":"madhapur hyd","Name":"kushal"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=cxsample@gmail.com*/
@@ -91,7 +97,7 @@ class UserDetailsCnt: UIViewController {
             orderItemName.appendString(cart.name! + "`" + cart.pID!)
             orderItemQuantity.appendString(cart.quantity! + "`" + cart.pID!)
             //orderSubTotal.appendString(cart.name! + "`" + cart.pID!)
-            orderItemId.appendString(cart.itemCode! + "`" + cart.pID!)
+            orderItemId.appendString(cart.pID! + "`" + cart.pID!)
             //orderItemMRP.appendString(cart.name! + "`" + cart.pID!)
             print("Item \(index): \(cart)")
         }
@@ -112,18 +118,23 @@ class UserDetailsCnt: UIViewController {
         cartJsonDict.setObject(listArray, forKey: "list")
         
         
-        print("order dic \(cartJsonDict)")
+       // print("order dic \(cartJsonDict)")
         
-        
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(cartJsonDict, options: NSJSONWritingOptions())
+        var error: NSError?
+
+            
+            
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(cartJsonDict, options: NSJSONWritingOptions(rawValue: 0))
         let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as! String
 
-        print("order dic \(jsonString)")
+       // print("order dic \(jsonString)")
         
         let newString = jsonString.stringByReplacingOccurrencesOfString("'\'", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
 
-        return newString
+        return jsonString
 
+       
+       // println("JSON string = \(theJSONText!)")
 
         /*
          {
