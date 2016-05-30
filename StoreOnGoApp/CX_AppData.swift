@@ -45,6 +45,8 @@ class CX_AppData: NSObject {
         
     }
     
+    
+    
     func getProductCategory(){
         
         let reqUrl = CXConstant.PRODUCT_CATEGORY_URL + CXConstant.MallID

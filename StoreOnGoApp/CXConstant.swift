@@ -122,6 +122,12 @@ class CXConstant: NSObject {
     static let FEATUREDPRODUCT_URL = "http://storeongo.com:8081/Services/getMasters?type=featured%20products&mallId="
     
     
+    static let addToCartItemUrl = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json="
+    
+    
+    
+    //%@&dt=CAMPAIGNS&category=Services&userId=%@&consumerEmail=%@"
+
     //http://storeongo.com:8081/Services/getMasters?type=productCategories&mallId=4452
     
     
