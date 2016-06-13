@@ -382,6 +382,9 @@ class CXDBSettings: NSObject {
         })
         
     }
+    
+
+    
    /* func actionShowLoader() {
         
         var config : SwiftLoader.Config = SwiftLoader.Config()

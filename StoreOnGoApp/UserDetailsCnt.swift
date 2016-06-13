@@ -10,12 +10,50 @@ import UIKit
 
 class UserDetailsCnt: UIViewController {
 
+    var userNameText : UITextField = UITextField()
+    var emailText : UITextField = UITextField()
+    var address1Text   : UITextField = UITextField()
+    var addres2Text : UITextField = UITextField()
+    var phoneText : UITextField = UITextField()
+    var cartTableView :  UITableView = UITableView()
+    let productsList: [String] = ["Name", "Email address","Address line1","Address line2","Phone number",""]
+
+    
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.sendTheCartItemsToServer()
+        //self.sendTheCartItemsToServer()
+        self.view.backgroundColor = CXConstant.cartViewBgClor
+        self.designHeaderView()
+        self.createCartTableView()
         // Do any additional setup after loading the view.
     }
+    
+    func designHeaderView (){
+        
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "User Details", andDelegate: self, backButtonVisible: true, cartBtnVisible: false)
+        
+        self.view.addSubview(heder)
+    }
+    func creationTextField(){
+        
+        
+        
+    }
 
+    func createCartTableView () {
+        self.cartTableView = UITableView.init(frame: CGRectMake(0, CXConstant.headerViewHeigh, self.view.frame.size.width, self.view.frame.size.height-CXConstant.headerViewHeigh-100))
+        self.cartTableView.dataSource = self
+        self.cartTableView.delegate = self
+        self.cartTableView.backgroundColor = UIColor.clearColor()
+        //self.cartTableView.registerClass(uita.self, forCellReuseIdentifier: "CartITemCell")
+        self.cartTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "DetailCell")
+        self.view.addSubview(self.cartTableView)
+        self.cartTableView.tableFooterView = UIView()
+        self.cartTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+    }
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
@@ -36,44 +74,24 @@ class UserDetailsCnt: UIViewController {
     
     func sendTheCartItemsToServer(){
         
-
-        
         var urlString : NSString = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder"
         //"http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json="
         
-        urlString = urlString.stringByAppendingString("&json=" + self.checkOutCartItems())
+        urlString = urlString.stringByAppendingString("&json=" + (self.checkOutCartItems() as! String))
         urlString = urlString.stringByAppendingString("&dt=CAMPAIGNS")
         urlString = urlString.stringByAppendingString("&category=Services")
         urlString = urlString.stringByAppendingString("&userId="+CXConstant.MallID)
         urlString = urlString.stringByAppendingString("&consumerEmail="+"yernagulamahesh@gmail.com")
-
         
-       // let reqUrl = CXConstant.addToCartItemUrl+self.checkOutCartItems()+"&dt=CAMPAIGNS&category=Services&userId="+CXConstant.MallID+"&consumerEmail="+"yernagulamahesh@gmail.com"
-            
-        //print ("Req URL \(reqUrl)")
-        
-//        SMSyncService.sharedInstance.startSyncProcessWithUrl(urlString as String) { (responseDict) -> Void in
-//             print ("stores   response   data \(responseDict) ")
-//        }
-        
-         SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
+        SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
         //startSyncWithUrl
-      /*
-         "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemId":"NAJ0906`135015","OrderItemQuantity":"2`135015","OrderItemSubTotal":"","OrderItemMRP":"","Address":"madhapur hyd","Contact_Number":"7893335553","Name":"kushal","OrderItemName":"ACC GRIP HOUSING LOWER HH/SPLENDOR`135015"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=yernagulamahesh@hmail.com"
-         
-         http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"Address":"madhapur hyd","OrderItemSubTotal":"","OrderItemMRP":"","Name":"kushal","Contact_Number":"7893335553","OrderItemId":"135033`135033","OrderItemQuantity":"33`135033","OrderItemName":"ACC GRIP TVS XL`135033"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=yernagulamahesh@gmail.com
-         
-         http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"Address":"madhapur hyd","OrderItemSubTotal":"","OrderItemMRP":"","Name":"kushal","Contact_Number":"7893335553","OrderItemId":"135033`135033","OrderItemQuantity":"33`135033","OrderItemName":"ACC GRIP TVS XL`135033"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=yernagulamahesh@gmail.com
-         
-         
-         */
         
-                /* http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840","Total":"","OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840","OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840","OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840","Contact_Number":"7893335553","OrderItemMRP":"`13501630|`14075630|`14075740|`14075840","Address":"madhapur hyd","Name":"kushal"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=cxsample@gmail.com*/
+        /* http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840","Total":"","OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840","OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840","OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840","Contact_Number":"7893335553","OrderItemMRP":"`13501630|`14075630|`14075740|`14075840","Address":"madhapur hyd","Name":"kushal"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=cxsample@gmail.com*/
         
     }
     
     
-    func checkOutCartItems()-> String{
+    func checkOutCartItems()-> AnyObject{
         
         
         let productEn = NSEntityDescription.entityForName("CX_Cart", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
@@ -136,7 +154,7 @@ class UserDetailsCnt: UIViewController {
        print("order dic \(jsonString)")
     
 
-        return jsonString
+        return cartJsonDict
 
        
        // println("JSON string = \(theJSONText!)")
@@ -166,3 +184,136 @@ class UserDetailsCnt: UIViewController {
     }
 
 }
+
+
+extension  UserDetailsCnt : UITableViewDelegate,UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.productsList.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("DetailCell", forIndexPath: indexPath) as UITableViewCell
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("DetailCell") as UITableViewCell!
+        if (cell == nil) {
+            cell = UITableViewCell(style:.Default, reuseIdentifier: "DetailCell")
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.backgroundView?.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clearColor()
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        switch indexPath.row {
+        case 0:
+              self.userNameText = self.createTextFiled(CGRectMake(10, 0, tableView.frame.size.width-25, 50), title: "", indexPtah: indexPath, placeHolder: productsList[indexPath.row])
+              [cell.contentView .addSubview(self.userNameText)];
+            break
+        case 1:
+            self.emailText = self.createTextFiled(CGRectMake(10, 0, tableView.frame.size.width-25, 50), title: "", indexPtah: indexPath, placeHolder: productsList[indexPath.row])
+            [cell.contentView .addSubview(self.emailText)];
+            break
+        case 2:
+            self.address1Text = self.createTextFiled(CGRectMake(10, 0, tableView.frame.size.width-25, 50), title: "", indexPtah: indexPath, placeHolder: productsList[indexPath.row])
+            [cell.contentView .addSubview(self.address1Text)];
+            break
+        case 3:
+            self.addres2Text = self.createTextFiled(CGRectMake(10, 0, tableView.frame.size.width-25, 50), title: "", indexPtah: indexPath, placeHolder: productsList[indexPath.row])
+            [cell.contentView .addSubview(self.addres2Text)];
+            break
+        case 4:
+            self.phoneText = self.createTextFiled(CGRectMake(10, 0, tableView.frame.size.width-25, 50), title: "", indexPtah: indexPath, placeHolder: productsList[indexPath.row])
+            [cell.contentView .addSubview(self.phoneText)];
+            break
+        case 5:
+            let okButton : UIButton = CXConstant.sharedInstance.CrateButton(CGRectMake(10, 0, tableView.frame.size.width-25, 50), titleString: "OK", backGroundColor: CXConstant.keepShoppingBtnColor,font : UIFont(name:"Roboto-Regular",size:13)!)
+            [cell.contentView .addSubview(okButton)];
+            okButton.addTarget(self, action: #selector(UserDetailsCnt.okButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            break
+        default: break
+            
+        }
+        
+        
+        return cell;
+    }
+    
+    func okButtonAction (button : UIButton!){
+        self.sendTheCartItemsToServer()
+       // self.navigationController?.popViewControllerAnimated(true)
+
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
+    }
+    
+    
+    func createTextFiled (frame :  CGRect,title : NSString ,indexPtah : NSIndexPath,placeHolder :  NSString) -> UITextField {
+        
+        let sampleTextField = UITextField(frame: CGRectMake(frame.origin.x, 10, frame.size.width, frame.size.height))
+        sampleTextField.font =  UIFont(name:"Roboto-Regular",size:13)
+        sampleTextField.borderStyle = UITextBorderStyle.Bezel
+        sampleTextField.autocorrectionType = UITextAutocorrectionType.No
+        sampleTextField.keyboardType = UIKeyboardType.NumbersAndPunctuation
+        sampleTextField.returnKeyType = UIReturnKeyType.Done
+        sampleTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+        sampleTextField.delegate = self
+        sampleTextField.tag = indexPtah.row+1
+        sampleTextField.placeholder = placeHolder as String
+        sampleTextField.text = title as String
+        return sampleTextField
+    }
+    
+    
+    
+    
+}
+
+extension UserDetailsCnt : UITextFieldDelegate{
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        print("TextField should begin editing method called")
+        return true;
+    }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        print("TextField should clear method called")
+        return true;
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        print("TextField should snd editing method called")
+        return true;
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        print("While entering the characters this method gets called")
+        return true;
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        if ((textField.text?.isEmpty) != nil) {
+        }
+        
+        
+        print("button tag %d\(textField.tag)")
+        print("TextField should return method called")
+        textField.resignFirstResponder();
+        return true;
+    }
+}
+
+
+extension UserDetailsCnt : HeaderViewDelegate {
+    
+    func backButtonAction (){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func cartButtonAction(){
+       
+        
+    }
+}
+
