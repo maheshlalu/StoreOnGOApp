@@ -81,7 +81,7 @@ class CX_CollectionViewController: UICollectionViewController {
         
         let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.stickersList[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
         
-        cell.productNameLbl.text = proCat.name!
+       // cell.productNameLbl.text = proCat.name!
     
         // Configure the cell
     
