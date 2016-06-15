@@ -41,6 +41,9 @@
 		12F10A2A1CDEF23D007C8F5B /* ProductHomeCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */; };
 		12F10A321CDF0C9B007C8F5B /* AboutUsViewCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */; };
 		12F10A341CDF0E0F007C8F5B /* MapViewCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */; };
+		12F42B7F1D11021400C3BA63 /* CX_CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F42B7E1D11021400C3BA63 /* CX_CollectionViewController.swift */; };
+		12F42B821D11053600C3BA63 /* CX_StickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F42B801D11053600C3BA63 /* CX_StickerCell.swift */; };
+		12F42B831D11053600C3BA63 /* CX_StickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12F42B811D11053600C3BA63 /* CX_StickerCell.xib */; };
 		12F64D8B1CD5B52F007D760C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8A1CD5B52F007D760C /* HeaderView.swift */; };
 		12F64D8D1CD5B923007D760C /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8C1CD5B923007D760C /* SearchBar.swift */; };
 		12F64D8F1CD6389C007D760C /* FeatureProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8E1CD6389C007D760C /* FeatureProductsCnt.swift */; };
@@ -133,6 +136,9 @@
 		12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHomeCntl.swift; sourceTree = "<group>"; };
 		12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewCnt.swift; sourceTree = "<group>"; };
 		12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCntl.swift; sourceTree = "<group>"; };
+		12F42B7E1D11021400C3BA63 /* CX_CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_CollectionViewController.swift; sourceTree = "<group>"; };
+		12F42B801D11053600C3BA63 /* CX_StickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CX_StickerCell.swift; sourceTree = "<group>"; };
+		12F42B811D11053600C3BA63 /* CX_StickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CX_StickerCell.xib; sourceTree = "<group>"; };
 		12F539D31CDA68DC00EF26C9 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		12F539D41CDA68DC00EF26C9 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		12F539D51CDA68DC00EF26C9 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
@@ -226,6 +232,8 @@
 			children = (
 				12FD98F21CE1061A00C39F52 /* ProductsCells */,
 				12100C331CD91C5E00A44C0D /* ProductHeaderCell.swift */,
+				12F42B801D11053600C3BA63 /* CX_StickerCell.swift */,
+				12F42B811D11053600C3BA63 /* CX_StickerCell.xib */,
 			);
 			name = HeaderCell;
 			sourceTree = "<group>";
@@ -407,6 +415,7 @@
 				12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */,
 				12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */,
 				AA5A46941CE0C326007E01A4 /* Station.swift */,
+				12F42B7E1D11021400C3BA63 /* CX_CollectionViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -583,6 +592,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12F42B831D11053600C3BA63 /* CX_StickerCell.xib in Resources */,
 				12F9FC181CF76316004FE1F7 /* Roboto-Black.ttf in Resources */,
 				12F9FC191CF76316004FE1F7 /* Roboto-Bold.ttf in Resources */,
 				12F9FC1A1CF76316004FE1F7 /* Roboto-Italic.ttf in Resources */,
@@ -709,8 +719,10 @@
 				12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */,
 				128564D21CE75CD0006210EA /* MIBadgeButton.swift in Sources */,
 				121311121CF413F7003DFCE2 /* CX_Cart.swift in Sources */,
+				12F42B821D11053600C3BA63 /* CX_StickerCell.swift in Sources */,
 				1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */,
 				12EF6BDC1CFB485F009E17B6 /* EGOCache.m in Sources */,
+				12F42B7F1D11021400C3BA63 /* CX_CollectionViewController.swift in Sources */,
 				AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */,
 				126F827A1CDF6F57003C3DE4 /* CX_FeaturedProducts+CoreDataProperties.swift in Sources */,
 				126F827D1CDF6F57003C3DE4 /* CX_Stores.swift in Sources */,

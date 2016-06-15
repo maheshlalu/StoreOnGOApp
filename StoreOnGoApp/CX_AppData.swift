@@ -32,8 +32,8 @@ class CX_AppData: NSObject {
         
         
 
-        self.configure()
-        LoadingView.show("Loading", animated: true)
+        //self.configure()
+        //LoadingView.show("Loading", animated: true)
 
         let reqUrl = CXConstant.STORES_URL + CXConstant.MallID
         SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
@@ -82,7 +82,10 @@ class CX_AppData: NSObject {
                     CXDBSettings.sharedInstance.saveProductsInDB(dataDic.valueForKey("jobs")! as! NSArray, typeCategory: "Products List")
                 }
             })
-                  self.miscellaneousList()
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+            self.miscellaneousList()
+        })
 //        }else{
 //            dispatch_async(dispatch_get_main_queue(), {
 //                LoadingView.hide()
@@ -93,7 +96,9 @@ class CX_AppData: NSObject {
     func miscellaneousList(){
        // LoadingView.show("Miscellaneous Loading....", animated: true)
             CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("miscellaneous").valueForKey("jobs")! as! NSArray, typeCategory: "Miscellaneous")
-        self.parseStickersList()
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+            self.parseStickersList()
+        })
         
     }
     
