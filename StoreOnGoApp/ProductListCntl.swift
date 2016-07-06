@@ -190,6 +190,7 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         button.layer.cornerRadius = 10.0
         button.layer.borderWidth = 2.0
         button.layer.borderColor = UIColor.whiteColor().CGColor
+        button.layer.masksToBounds = false
         button.showsTouchWhenHighlighted = true
         return button
     }

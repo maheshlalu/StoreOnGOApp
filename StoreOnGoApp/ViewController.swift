@@ -23,7 +23,7 @@ class ViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = CXConstant.homeBackGroundColr
         self.navigationController?.navigationBarHidden = true
         self.designHeaderView()
         CXDBSettings.sharedInstance.dataDelegate = self
@@ -48,21 +48,18 @@ class ViewController: UIViewController{
     
     //MARK : HeaderView
     func designHeaderView (){
-        
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "WELOCOME TO NV AGENCIES", andDelegate: self, backButtonVisible: false, cartBtnVisible: true)
-  
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "NV Agencies", andDelegate: self, backButtonVisible: false, cartBtnVisible: true)
         self.view.addSubview(heder)
         return
-        self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
+      /*  self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
         self.view.addSubview(self.headerview)
-        self.headerview.delegate = self
+        self.headerview.delegate = self*/
         //self.designSearchBar()
         
     }
     
     //MARK : SearchBar
     func designSearchBar (){
-     
         self.searchBar = SearchBar.designSearchBar()
         self.searchBar.delegate = self
         self.view.addSubview(self.searchBar)
@@ -70,7 +67,6 @@ class ViewController: UIViewController{
 
     //MARK: Get Stores
     func getStores(){
-        
         let fetchRequest = NSFetchRequest(entityName: "CX_Stores")
         if CX_Stores.MR_executeFetchRequest(fetchRequest).count != 0 {
             let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
@@ -190,7 +186,6 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
 //            self.navigationController?.pushViewController(fetureProductView, animated: true)
             
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)//TabBarID
-            
             let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CX_CollectionView") as! CX_CollectionViewController
             self.navigationController?.pushViewController(nextViewController, animated: true)
 
@@ -278,12 +273,9 @@ extension ViewController : UITextFieldDelegate {
 }
 
 extension ViewController : HeaderViewDelegate {
-    
     func backButtonAction (){
         
-        
-        
-    }
+        }
     
     func cartButtonAction(){
         let cartView : CartViewCntl = CartViewCntl.init()

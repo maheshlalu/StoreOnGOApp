@@ -30,14 +30,15 @@ class CXConstant: NSObject {
     static let headerViewHeigh : CGFloat = 65
     
     
-    static let pagerHeight : CGFloat = screenSize.height/3
+    static let pagerHeight : CGFloat = screenSize.height/2.8
     static let cartCellHeight : CGFloat = 50
     static let segmentFrame : CGRect = CGRectMake(0, headerViewHeigh, CXConstant.screenSize.width, 35)
     static let searchBarFrame : CGRect = CGRectMake(0, segmentFrame.origin.y+segmentFrame.size.height+1, UIScreen.mainScreen().bounds.size.width, headerViewHeigh-20)
-    static let pagerFrame : CGRect = CGRectMake(0, headerViewHeigh+2, UIScreen.mainScreen().bounds.size.width, pagerHeight)
+    static let pagerFrame : CGRect = CGRectMake(5, headerViewHeigh+2, UIScreen.mainScreen().bounds.size.width-10, pagerHeight)
     static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y,screenSize.width, screenSize.height-pagerHeight-headerViewHeigh)
     
     static let homeCellBgColor : UIColor = UIColor(red: 236.0/255.0, green: 50.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+    static let homeBackGroundColr : UIColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
     
     //MARK :
     //2.15
@@ -63,7 +64,7 @@ class CXConstant: NSObject {
     
     
     static let DetailTableView_Width = UIScreen.mainScreen().bounds.width-20
-    static let DetailCollectionCellSize :  CGSize = CGSize(width: screenSize.width/2.3+5,height: screenSize.width/2.3+5)
+    static let DetailCollectionCellSize :  CGSize = CGSize(width: screenSize.width/2.3+5.5,height: screenSize.width/2.3+5.5)
     
     static let ProductCollectionCellSize :  CGSize = CGSize(width:screenSize.width/3.455555,height: 40)
 

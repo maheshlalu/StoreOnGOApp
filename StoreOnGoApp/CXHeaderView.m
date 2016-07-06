@@ -73,10 +73,10 @@
     [self addSubview:backBtn];
     
     
-    UILabel *titileLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 300, 40)];
+    UILabel *titileLbl = [[UILabel alloc] initWithFrame:CGRectMake(backBtn.frame.size.width+15, 20, 300, 40)];
     titileLbl.text = inTitle;
     titileLbl.textColor = [UIColor whiteColor];
-    titileLbl.textAlignment = NSTextAlignmentCenter;
+    titileLbl.textAlignment = NSTextAlignmentLeft;
     titileLbl.font = [UIFont fontWithName:@"Roboto-Bold" size:15.0f];
     [self addSubview:titileLbl];
     

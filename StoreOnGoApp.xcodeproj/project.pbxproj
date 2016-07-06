@@ -48,6 +48,7 @@
 		12F64D8D1CD5B923007D760C /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8C1CD5B923007D760C /* SearchBar.swift */; };
 		12F64D8F1CD6389C007D760C /* FeatureProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D8E1CD6389C007D760C /* FeatureProductsCnt.swift */; };
 		12F64D911CD63A08007D760C /* CXDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F64D901CD63A08007D760C /* CXDetailTableViewCell.swift */; };
+		12F75CB31D2CD326009A9F4F /* StickersViewCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F75CB21D2CD326009A9F4F /* StickersViewCnt.swift */; };
 		12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */; };
 		12F8595C1CD3E1CD007BE1D0 /* KICamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859581CD3E1CD007BE1D0 /* KICamera.png */; };
 		12F8595D1CD3E1CD007BE1D0 /* KICamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */; };
@@ -151,6 +152,7 @@
 		12F64D8C1CD5B923007D760C /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		12F64D8E1CD6389C007D760C /* FeatureProductsCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureProductsCnt.swift; sourceTree = "<group>"; };
 		12F64D901CD63A08007D760C /* CXDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDetailTableViewCell.swift; sourceTree = "<group>"; };
+		12F75CB21D2CD326009A9F4F /* StickersViewCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersViewCnt.swift; sourceTree = "<group>"; };
 		12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionCell.swift; sourceTree = "<group>"; };
 		12F8594B1CD3DE6E007BE1D0 /* StoreOnGoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StoreOnGoApp-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		12F859581CD3E1CD007BE1D0 /* KICamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KICamera.png; sourceTree = "<group>"; };
@@ -297,6 +299,14 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		12F75CB11D2CD284009A9F4F /* Stickers */ = {
+			isa = PBXGroup;
+			children = (
+				12F75CB21D2CD326009A9F4F /* StickersViewCnt.swift */,
+			);
+			name = Stickers;
+			sourceTree = "<group>";
+		};
 		12FD98F21CE1061A00C39F52 /* ProductsCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +415,7 @@
 		AA0163611CD20BC300EA1619 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				12F75CB11D2CD284009A9F4F /* Stickers */,
 				128564D51CE8A67F006210EA /* Cart */,
 				AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */,
 				AA0163301CD2073B00EA1619 /* ViewController.swift */,
@@ -736,6 +747,7 @@
 				12EF6BD81CFAF0C7009E17B6 /* MIBadgeButton.m in Sources */,
 				AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */,
 				128564D41CE7635B006210EA /* CartViewCntl.swift in Sources */,
+				12F75CB31D2CD326009A9F4F /* StickersViewCnt.swift in Sources */,
 				12F10A341CDF0E0F007C8F5B /* MapViewCntl.swift in Sources */,
 				128564D71CE8A6B1006210EA /* CartITemCell.swift in Sources */,
 				126F82791CDF6F57003C3DE4 /* CX_Product_Category.swift in Sources */,
