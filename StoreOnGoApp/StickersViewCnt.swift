@@ -15,6 +15,10 @@ class StickersViewCnt: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCollectionView()
+        self.view.backgroundColor = UIColor.greenColor()
+        //Get The Stickers
+        let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Sticker(139455)")
+       self.getStickers(predicate)
         // Do any additional setup after loading the view.
     }
 
@@ -23,11 +27,28 @@ class StickersViewCnt: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    func setupCollectionView(){
+    func getStickers(predicate:NSPredicate){
         
-        func setupCollectionView (){
+            //let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
             
+            let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+            let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
+            fetchRequest.predicate = predicate
+            fetchRequest.entity = productEn
+            print("stickers %d",TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest).count)
+            self.stickersList =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
+          self.stickersCollectionView.reloadData()
+        
+      /*  for (index, element) in self.stickersList.enumerate() {
+            let cart : TABLE_PRODUCT_SUB_CATEGORIES = element as! TABLE_PRODUCT_SUB_CATEGORIES
+            print("product name %@",cart.name)
+            print("product name %@",cart.icon_URL)
+        }*/
+           // self.stickersList.reloadData()
+            
+    }
+
+        func setupCollectionView (){
             let layout = UICollectionViewFlowLayout()
             layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
             layout.itemSize = CXConstant.DetailCollectionCellSize
@@ -37,8 +58,8 @@ class StickersViewCnt: UIViewController {
             self.stickersCollectionView.registerClass(CX_StickerCell.self, forCellWithReuseIdentifier: "CX_StickerCell")
             self.stickersCollectionView.backgroundColor = UIColor.clearColor()
             self.view.addSubview(self.stickersCollectionView)
-            //self.setCollectionViewDataSourceDelegate(self, forRow: 0)
-            
+            self.stickersCollectionView.delegate = self
+            self.setCollectionViewDataSourceDelegate(self, forRow: 0)
         }
         
         func setCollectionViewDataSourceDelegate<D: protocol<UICollectionViewDataSource, UICollectionViewDelegate>>(dataSourceDelegate: D, forRow row: Int) {
@@ -47,7 +68,7 @@ class StickersViewCnt: UIViewController {
             self.stickersCollectionView.reloadData()
         }
 
-    }
+    
     
     /*
     // MARK: - Navigation
@@ -67,7 +88,6 @@ extension StickersViewCnt:UICollectionViewDelegate,UICollectionViewDataSource {
                         numberOfItemsInSection section: Int) -> Int {
         // let prodCategory:CX_Product_Category = self.mallProductCategories[collectionView.tag] as! CX_Product_Category
         // let products:NSArray = self.getProducts(prodCategory)
-        
         return stickersList.count;
     }
     
@@ -80,8 +100,9 @@ extension StickersViewCnt:UICollectionViewDelegate,UICollectionViewDataSource {
             collectionView.registerNib(UINib(nibName: "CX_StickerCell", bundle: nil), forCellWithReuseIdentifier: identifier)
         }
         // cell.backgroundColor = UIColor.redColor()
-       // cell.titleLabel.text = stickersList[indexPath.row]
-       // cell.iconImageView.image = UIImage(named: stickersList[indexPath.row])
+        let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.stickersList[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
+        cell.productNameLbl?.text = proCat.name
+        cell.product_imageView?.image = UIImage(named: proCat.icon_URL!)
         return cell
    }
 }

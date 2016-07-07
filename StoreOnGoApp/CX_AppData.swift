@@ -115,6 +115,7 @@ class CX_AppData: NSObject {
                 //call your background operation.
                 let dataDic : NSDictionary = self.getTheDictionaryDataFromTextFile("subcate")
                 if (dataDic.valueForKey("jobs") != nil) {
+                   // print("sub cat Dic %@",dataDic)
                     CXDBSettings.sharedInstance.savetheSubCategoryData(dataDic.valueForKey("jobs")! as! NSArray)
                 }
             })

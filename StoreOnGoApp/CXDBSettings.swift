@@ -278,6 +278,7 @@ class CXDBSettings: NSObject {
     func saveProductsInDB(products:NSArray,typeCategory:NSString) {
         
          MagicalRecord.saveWithBlock({ (localContext : NSManagedObjectContext!) in
+            
             let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: localContext)
 
             for prod in products {
@@ -371,6 +372,7 @@ class CXDBSettings: NSObject {
                     enProduct.createdById = CXConstant.sharedInstance.resultString(prod.valueForKey("createdById")!)
                     enProduct.descriptionData = prod.valueForKey("Description") as? String
                     enProduct.masterCategory = prod.valueForKey("MasterCategory") as? String
+                    enProduct.icon_URL =  prod.valueForKey("Image_URL") as? String
                     
                 }
             }

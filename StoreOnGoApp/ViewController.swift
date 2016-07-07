@@ -191,8 +191,8 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
 
             break
         case 2  :
-            //let mapView = MapViewCntl.init()
-            //self.navigationController?.pushViewController(mapView, animated: true)
+            let mapView = StickersViewCnt.init()
+            self.navigationController?.pushViewController(mapView, animated: true)
             
             break
         case 3  :
