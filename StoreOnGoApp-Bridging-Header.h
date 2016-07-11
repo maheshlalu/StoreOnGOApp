@@ -13,5 +13,5 @@
 #import "HMSegmentedControl.h"
 #import "CXHeaderView.h"
 #import "JSONKit.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 #endif /* StoreOnGoApp_Bridging_Header_h */
