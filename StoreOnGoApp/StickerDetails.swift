@@ -18,6 +18,7 @@ class StickerDetails: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.designHeaderView()
+        self.designSearchBar()
         self.setupCollectionView()
         self.getTheProductsList()
         self.view.backgroundColor = CXConstant.homeBackGroundColr
@@ -33,11 +34,12 @@ class StickerDetails: UIViewController {
     
     //MARK : SearchBar
     func designSearchBar (){
-        
         self.searchBar = SearchBar.designSearchBar()
+        self.searchBar.frame.origin.y =  CXConstant.headerViewHeigh
+        // CXConstant.searchBarFrame
+        //  self.searchBar.frame = CGRectMake(0, CXConstant.headerViewHeigh, self.searchBar.size.width,  self.searchBar.size.hieght)
         self.searchBar.delegate = self
-        self.searchBar.placeholder = "Search Products Categories"
-        
+        self.searchBar.placeholder = "Search Stickers"
         self.view.addSubview(self.searchBar)
     }
     
@@ -46,7 +48,7 @@ class StickerDetails: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
         layout.itemSize = CXConstant.DetailCollectionCellSize
-        self.stickersCollectionView = UICollectionView(frame: CGRectMake(0, CXConstant.headerViewHeigh,screenSize.width, screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
+        self.stickersCollectionView = UICollectionView(frame: CGRectMake(0, CXConstant.headerViewHeigh+self.searchBar.frame.size.height,screenSize.width, screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
         self.stickersCollectionView.showsHorizontalScrollIndicator = false
         layout.scrollDirection = UICollectionViewScrollDirection.Vertical
         // self.stickersCollectionView.registerClass(CX_StickerCell.self, forCellWithReuseIdentifier: "CX_StickerCell")
@@ -186,22 +188,21 @@ extension StickerDetails:UISearchBarDelegate{
     }
     
     func doSearch () {
-      /*  let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
-        let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
-        var predicate:NSPredicate = NSPredicate()
         
-        if isProductCategory {
-            predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Products List(129121)",self.searchBar.text!)
-        }else{
-            predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Miscellaneous(135918)",self.searchBar.text!)
-        }
-        
-        fetchRequest.predicate = predicate
+        let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+        let fetchRequest = CX_Products.MR_requestAllSortedBy("name", ascending: true)
+        fetchRequest.predicate = self.predicate
         fetchRequest.entity = productEn
+        self.stickersList =   CX_Products.MR_executeFetchRequest(fetchRequest)
         
-        self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
         
-        self.productCollectionView.reloadData()*/
+       /* NSString *modelName = @"honda";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"model == %@", modelName];
+        NSArray *filteredArray = [results filteredArrayUsingPredicate:predicate];*/
+        
+        self.stickersCollectionView.reloadData()
+        
+    
         
     }
     

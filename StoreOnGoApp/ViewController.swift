@@ -182,18 +182,12 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             self.navigationController?.pushViewController(productView, animated: true)
             break
         case 1 :
-//            let fetureProductView = CX_CollectionViewController.init()
-//            self.navigationController?.pushViewController(fetureProductView, animated: true)
-            
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)//TabBarID
-            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CX_CollectionView") as! CX_CollectionViewController
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-
+            let mapView = StickersViewCnt.init()
+            self.navigationController?.pushViewController(mapView, animated: true)
             break
         case 2  :
             let mapView = StickersViewCnt.init()
             self.navigationController?.pushViewController(mapView, animated: true)
-            
             break
         case 3  :
             //let aboutUs = ProductListCntl.init()

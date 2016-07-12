@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "offersx40.png",
+      "filename" : "offers40x40.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "offersx80.png",
+      "filename" : "offers80x80.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "offers-1.png",
+      "filename" : "offers120x120.png",
       "scale" : "3x"
     }
   ],

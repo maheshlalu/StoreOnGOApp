@@ -55,7 +55,7 @@
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="EBX-kp-e9b">
                         <rect key="frame" x="7" y="121" width="125" height="30"/>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
                         <state key="normal" title="AddToCart">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
