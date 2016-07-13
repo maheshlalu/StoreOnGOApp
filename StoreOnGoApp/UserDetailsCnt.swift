@@ -77,6 +77,9 @@ class UserDetailsCnt: UIViewController {
         var urlString : NSString = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder"
         //"http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json="
         
+       
+
+        
         urlString = urlString.stringByAppendingString("&json=" + (self.checkOutCartItems() as! String))
         urlString = urlString.stringByAppendingString("&dt=CAMPAIGNS")
         urlString = urlString.stringByAppendingString("&category=Services")
@@ -150,11 +153,12 @@ class UserDetailsCnt: UIViewController {
         cartJsonDict.setObject(listArray, forKey: "list")
     
         let jsonString = cartJsonDict.JSONString()
+        
 
        print("order dic \(jsonString)")
     
 
-        return cartJsonDict
+        return jsonString
 
        
        // println("JSON string = \(theJSONText!)")
