@@ -86,7 +86,25 @@ class UserDetailsCnt: UIViewController {
         urlString = urlString.stringByAppendingString("&userId="+CXConstant.MallID)
         urlString = urlString.stringByAppendingString("&consumerEmail="+"yernagulamahesh@gmail.com")
         
-        SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
+       // SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
+        
+        
+        
+        
+        let url: NSURL = NSURL(string: urlString as String)!
+        let request1: NSURLRequest = NSURLRequest(URL: url)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request1) { (resData:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+            var jsonData : NSDictionary = NSDictionary()
+            do {
+                jsonData = try NSJSONSerialization.JSONObjectWithData(resData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
+            } catch {
+                print("Error in parsing")
+            }
+            print("All Malls \(jsonData)")
+        }
+        task.resume()
+        
         //startSyncWithUrl
         
         /* http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840","Total":"","OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840","OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840","OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840","Contact_Number":"7893335553","OrderItemMRP":"`13501630|`14075630|`14075740|`14075840","Address":"madhapur hyd","Name":"kushal"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=cxsample@gmail.com*/
@@ -110,13 +128,17 @@ class UserDetailsCnt: UIViewController {
         let orderItemId: NSMutableString = NSMutableString()
         let orderItemMRP: NSMutableString = NSMutableString()
         
-        let total: Double = 0
-        
-        order["Name"] = ("\("kushal")")
+        //let total: Double = 0
+        order.setValue("kushal", forKey: "Name")
+        //order["Name"] = ("\("kushal")")
         //should be replaced
-        order["Address"] = ("\("madhapur hyd")")
+       // order["Address"] = ("\("madhapur hyd")")
+        order.setValue("madhapur hyd", forKey: "Address")
+
         //should be replaced
-        order["Contact_Number"] = ("\("7893335553")")
+        //order["Contact_Number"] = ("\("7893335553")")
+        order.setValue("7893335553", forKey: "Contact_Number")
+
         //should be replaced
         
         
@@ -137,12 +159,22 @@ class UserDetailsCnt: UIViewController {
             print("Item \(index): \(cart)")
         }
         
-        order["OrderItemId"] = orderItemId
+      //  order["OrderItemId"] = orderItemId
+        order.setValue(orderItemId, forKey: "OrderItemId")
+
         //[order setObject:itemCode forKey:@"ItemCode"];
-        order["OrderItemQuantity"] = orderItemQuantity
-        order["OrderItemName"] = orderItemName
-        order["OrderItemSubTotal"] = ("\(orderSubTotal)")
-        order["OrderItemMRP"] = ("\(orderItemMRP)")
+        //order["OrderItemQuantity"] = orderItemQuantity
+        order.setValue(orderItemQuantity, forKey: "OrderItemQuantity")
+
+       // order["OrderItemName"] = orderItemName
+        order.setValue(orderItemName, forKey: "OrderItemName")
+
+        //order["OrderItemSubTotal"] = ("\(orderSubTotal)")
+        order.setValue(orderSubTotal, forKey: "OrderItemSubTotal")
+
+       // order["OrderItemMRP"] = ("\(orderItemMRP)")
+        order.setValue(orderItemMRP, forKey: "OrderItemMRP")
+
         
         print("order dic \(order)")
         
@@ -153,10 +185,16 @@ class UserDetailsCnt: UIViewController {
         cartJsonDict.setObject(listArray, forKey: "list")
     
         let jsonString = cartJsonDict.JSONString()
-        
-
+        var jsonData : NSData = NSData()
+        do {
+             jsonData = try NSJSONSerialization.dataWithJSONObject(cartJsonDict, options: NSJSONWritingOptions.PrettyPrinted)
+            // here "jsonData" is the dictionary encoded in JSON data
+        } catch let error as NSError {
+            print(error)
+        }
        print("order dic \(jsonString)")
     
+        print("order dic \(jsonData)")
 
         return jsonString
 

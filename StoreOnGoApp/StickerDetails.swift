@@ -14,6 +14,7 @@ class StickerDetails: UIViewController {
     var predicate : NSPredicate = NSPredicate()
     var headerTitle :  NSString = NSString()
     var searchBar: SearchBar!
+    var predicateString : NSString = NSString()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -191,10 +192,9 @@ extension StickerDetails:UISearchBarDelegate{
         
         let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
         let fetchRequest = CX_Products.MR_requestAllSortedBy("name", ascending: true)
-        fetchRequest.predicate = self.predicate
+        fetchRequest.predicate = NSPredicate(format: "subCatNameID = %@ AND name contains[c] %@", self.predicateString,self.searchBar.text!)
         fetchRequest.entity = productEn
         self.stickersList =   CX_Products.MR_executeFetchRequest(fetchRequest)
-        
         
        /* NSString *modelName = @"honda";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"model == %@", modelName];
