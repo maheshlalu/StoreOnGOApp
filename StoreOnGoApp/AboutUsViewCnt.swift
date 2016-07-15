@@ -58,7 +58,7 @@ class AboutUsViewCnt: UIViewController {
         if CXDBSettings.sharedInstance.getTableData("CX_Stores").count != 0 {
             let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
             self.coverPageImagesList = storesData.attachments as? NSMutableArray
-            print("data array \(storesData.attachments)")
+            //print("data array \(storesData.attachments)")
             self.setupPagenator()
         }
 

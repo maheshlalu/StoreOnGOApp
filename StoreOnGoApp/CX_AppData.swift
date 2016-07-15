@@ -43,6 +43,7 @@ class CX_AppData: NSObject {
         
             self.parseTheProductSubCategory()
         
+        
     }
     
     

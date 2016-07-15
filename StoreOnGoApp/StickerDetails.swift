@@ -116,8 +116,11 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
         let proListData : CX_Products = self.stickersList[indexPath.row] as! CX_Products
         cell.itemNameLbl.text = proListData.name
         cell.itemCodeLbl.text = proListData.itemCode
+        cell.addToCartBtn.tag = indexPath.row+1
+        cell.quantityTxt.tag = indexPath.row+1
+        cell.addToCartBtn.selected = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!)
+        cell.addToCartBtn.addTarget(self, action: #selector(StickerDetails.addToCartButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
-        
        /* let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.stickersList[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
         cell.productNameLbl?.text = proCat.name
         cell.product_imageView.sd_setImageWithURL(NSURL(string: proCat.icon_URL!), placeholderImage: nil)*/
@@ -130,6 +133,22 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
         return CGSize(width: 140, height: 160)
         
     }
+    
+    func addToCartButton (button : UIButton!){
+        
+        let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
+        let cell = self.stickersCollectionView.cellForItemAtIndexPath(indexPath)
+        let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
+        print("button tag %d\(textField.text)")
+        if ((textField.text?.isEmpty) != nil) {
+            let proListData : CX_Products = self.stickersList[button.tag-1] as! CX_Products
+            CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!)
+        }
+        textField.resignFirstResponder();
+        
+        print("button tag %d\(button.tag)")
+    }
+    
 }
 
 extension StickerDetails : HeaderViewDelegate {
@@ -163,10 +182,7 @@ extension StickerDetails:UISearchBarDelegate{
     }
     
     func loadDefaultList (){
-        
-       // self.getProductSubCategory(predicate)
-
-        
+        self.getTheProductsList()
     }
     
     func refreshSearchBar (){
@@ -175,7 +191,6 @@ extension StickerDetails:UISearchBarDelegate{
         self.searchBar.text = "";
         // Hide the cancel button
         self.searchBar.showsCancelButton = false;
-        
     }
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.refreshSearchBar()
@@ -185,27 +200,19 @@ extension StickerDetails:UISearchBarDelegate{
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         self.searchBar.showsCancelButton = true;
-        
     }
     
     func doSearch () {
-        
         let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
         let fetchRequest = CX_Products.MR_requestAllSortedBy("name", ascending: true)
         fetchRequest.predicate = NSPredicate(format: "subCatNameID = %@ AND name contains[c] %@", self.predicateString,self.searchBar.text!)
         fetchRequest.entity = productEn
         self.stickersList =   CX_Products.MR_executeFetchRequest(fetchRequest)
-        
        /* NSString *modelName = @"honda";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"model == %@", modelName];
         NSArray *filteredArray = [results filteredArrayUsingPredicate:predicate];*/
-        
         self.stickersCollectionView.reloadData()
-        
-    
-        
     }
-    
     
 }
 

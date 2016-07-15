@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cart40x40.png",
+      "filename" : "cartwhite40x40.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cart80x80.png",
+      "filename" : "cartwhite80x80.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cart120x120.png",
+      "filename" : "cartwhite120x120.png",
       "scale" : "3x"
     }
   ],

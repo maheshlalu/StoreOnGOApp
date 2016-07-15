@@ -119,7 +119,7 @@ extension StickersViewCnt:UICollectionViewDelegate,UICollectionViewDataSource {
         print("append string \(appendStr)")
         let productListVc = StickerDetails.init()
         productListVc.predicate = NSPredicate(format: "subCatNameID = %@",appendStr )
-        productListVc.predicateString = NSString(format:"subCatNameID = %@",appendStr)
+        productListVc.predicateString = appendStr
         productListVc.headerTitle = proCat.name!
         self.navigationController?.pushViewController(productListVc, animated: true)
         

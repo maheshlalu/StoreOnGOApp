@@ -42,6 +42,17 @@ class CXDBSettings: NSObject {
      @NSManaged var subCatNameID: String?
      @NSManaged var type: String?
      */
+    
+    func isAddToCart(productID : NSString) -> Bool {
+        let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
+        fetchRequest.predicate = NSPredicate(format: "pID = %@", productID)
+        if CX_Cart.MR_executeFetchRequest(fetchRequest).count == 0 {
+            return false
+        }else{
+            return true
+        }
+    }
+    
     func addToCart(product:CX_Products,quantityNumber : NSString){
         
         MagicalRecord.saveWithBlock({ (localContext : NSManagedObjectContext!) in
@@ -314,6 +325,10 @@ class CXDBSettings: NSObject {
                 
                 print("save the data >>>>>")
                 LoadingView.hide()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.dataDelegate?.completedTheFetchingTheData(self)
+                })
+                
                 // This block runs in main thread
         })
         
