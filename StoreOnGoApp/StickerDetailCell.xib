@@ -61,9 +61,6 @@
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <state key="selected" title="AddedToCart"/>
-                        <connections>
-                            <action selector="addToCartButtonAction:" destination="X2f-fW-KNO" eventType="touchUpInside" id="FR9-H3-Ke5"/>
-                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

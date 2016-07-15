@@ -43,13 +43,15 @@ class CXDBSettings: NSObject {
      @NSManaged var type: String?
      */
     
-    func isAddToCart(productID : NSString) -> Bool {
+    func isAddToCart(productID : NSString) -> (isAdded:Bool, totalCount:NSString) {
         let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
         fetchRequest.predicate = NSPredicate(format: "pID = %@", productID)
-        if CX_Cart.MR_executeFetchRequest(fetchRequest).count == 0 {
-            return false
+        let cartsDataArrya : NSArray = CX_Cart.MR_executeFetchRequest(fetchRequest)
+        if cartsDataArrya.count != 0 {
+            let  cart = cartsDataArrya.lastObject as?CX_Cart
+            return (true,(cart?.quantity)!)
         }else{
-            return true
+            return (false,"")
         }
     }
     

@@ -118,7 +118,8 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
         cell.itemCodeLbl.text = proListData.itemCode
         cell.addToCartBtn.tag = indexPath.row+1
         cell.quantityTxt.tag = indexPath.row+1
-        cell.addToCartBtn.selected = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!)
+        cell.addToCartBtn.selected = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).isAdded
+        cell.quantityTxt.text = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).totalCount as String
         cell.addToCartBtn.addTarget(self, action: #selector(StickerDetails.addToCartButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
        /* let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.stickersList[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
