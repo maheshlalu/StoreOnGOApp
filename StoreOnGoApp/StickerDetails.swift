@@ -117,14 +117,21 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
         cell.itemNameLbl.text = proListData.name
         cell.itemCodeLbl.text = proListData.itemCode
         cell.addToCartBtn.tag = indexPath.row+1
+        cell.quantityTxt.delegate = self
         cell.quantityTxt.tag = indexPath.row+1
         cell.addToCartBtn.selected = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).isAdded
+        cell.addToCartBtn.backgroundColor = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).isAdded ? CXConstant.checkOutBtnColor: UIColor.whiteColor()
+
         cell.quantityTxt.text = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).totalCount as String
         cell.addToCartBtn.addTarget(self, action: #selector(StickerDetails.addToCartButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
        /* let proCat : TABLE_PRODUCT_SUB_CATEGORIES = self.stickersList[indexPath.row] as! TABLE_PRODUCT_SUB_CATEGORIES
         cell.productNameLbl?.text = proCat.name
         cell.product_imageView.sd_setImageWithURL(NSURL(string: proCat.icon_URL!), placeholderImage: nil)*/
+        //
+        
+
+        
         return cell
     }
     
@@ -136,18 +143,20 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
     }
     
     func addToCartButton (button : UIButton!){
-        
+        if(!button.selected){
         let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
         let cell = self.stickersCollectionView.cellForItemAtIndexPath(indexPath)
         let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
         print("button tag %d\(textField.text)")
-        if ((textField.text?.isEmpty) != nil) {
+        if (!((textField.text?.isEmpty)!)) {
             let proListData : CX_Products = self.stickersList[button.tag-1] as! CX_Products
             CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!)
         }
         textField.resignFirstResponder();
-        
-        print("button tag %d\(button.tag)")
+        }else{
+            let proListData : CX_Products = self.stickersList[button.tag-1] as! CX_Products
+            CXDBSettings.sharedInstance.deleteCartItem(proListData.pID!)
+        }
     }
     
 }
@@ -214,6 +223,63 @@ extension StickerDetails:UISearchBarDelegate{
         NSArray *filteredArray = [results filteredArrayUsingPredicate:predicate];*/
         self.stickersCollectionView.reloadData()
     }
+    
+}
+
+extension StickerDetails : UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        print("TextField should begin editing method called")
+        return true;
+    }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        print("TextField should clear method called")
+        return true;
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        print("TextField should snd editing method called")
+        return true;
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let aSet = NSCharacterSet(charactersInString:"0123456789").invertedSet
+        let compSepByCharInSet = string.componentsSeparatedByCharactersInSet(aSet)
+        let numberFiltered = compSepByCharInSet.joinWithSeparator("")
+        return string == numberFiltered    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        if ((textField.text?.isEmpty) != nil) {
+        }
+        
+        
+        print("button tag %d\(textField.tag)")
+        print("TextField should return method called")
+        textField.resignFirstResponder();
+        return true;
+    }
+    
+    
+    /*
+     let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+     let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
+     var predicate:NSPredicate = NSPredicate()
+     
+     if isProductCategory {
+     predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Products List(129121)",self.searchBar.text!)
+     }else{
+     predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Miscellaneous(135918)",self.searchBar.text!)
+     }
+     
+     fetchRequest.predicate = predicate
+     fetchRequest.entity = productEn
+     
+     self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
+     
+     self.productCollectionView.reloadData()
+     
+     */
     
 }
 

@@ -55,6 +55,18 @@ class CXDBSettings: NSObject {
         }
     }
     
+    func deleteCartItem(productId : NSString){
+        let predicate:NSPredicate = NSPredicate(format: "pID = %@",productId)
+        let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
+        fetchRequest.predicate = predicate
+        let cartsDataArrya : NSArray = CX_Cart.MR_executeFetchRequest(fetchRequest)
+        NSManagedObjectContext.MR_contextForCurrentThread().deleteObject((cartsDataArrya.lastObject as?CX_Cart)!)
+         NSManagedObjectContext.MR_contextForCurrentThread().MR_saveOnlySelfAndWait()
+        NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+
+        
+    }
+    
     func addToCart(product:CX_Products,quantityNumber : NSString){
         
         MagicalRecord.saveWithBlock({ (localContext : NSManagedObjectContext!) in

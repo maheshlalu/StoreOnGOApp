@@ -253,7 +253,10 @@ extension ProductListCntl : UITextFieldDelegate {
     }
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         print("While entering the characters this method gets called")
-        return true;
+        let aSet = NSCharacterSet(charactersInString:"0123456789").invertedSet
+        let compSepByCharInSet = string.componentsSeparatedByCharactersInSet(aSet)
+        let numberFiltered = compSepByCharInSet.joinWithSeparator("")
+        return string == numberFiltered
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

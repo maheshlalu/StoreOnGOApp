@@ -17,9 +17,9 @@ class StickerDetailCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.addToCartBtn.layer.cornerRadius = 8.0
+        self.addToCartBtn.layer.cornerRadius = 2.0
         self.addToCartBtn.layer.borderColor = UIColor.grayColor().CGColor
-        self.addToCartBtn.layer.borderWidth = 2.0
+        self.addToCartBtn.layer.borderWidth = 1.0
         self.addToCartBtn.layer.masksToBounds = true
     }
 
