@@ -29,9 +29,7 @@ class CX_AppData: NSObject {
     }
     
     func getStoresData(){
-        
-        
-
+         return
         //self.configure()
         //LoadingView.show("Loading", animated: true)
 
@@ -40,13 +38,10 @@ class CX_AppData: NSObject {
             // print ("stores   response   data \(responseDict.valueForKey("jobs")! as! NSArray) ")
             CXDBSettings.sharedInstance.saveStoresInDB(responseDict.valueForKey("jobs")! as! NSArray)
         }
-        
             self.parseTheProductSubCategory()
         
-        
     }
-    
-    
+
     
     func getProductCategory(){
         
@@ -74,8 +69,8 @@ class CX_AppData: NSObject {
     func parseTheProductsList(){
         
        // LoadingView.show("ProductList Loading....", animated: true)
-       // let fetchRequest = NSFetchRequest(entityName: "CX_Products")
-     //   if    CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
+        let fetchRequest = NSFetchRequest(entityName: "CX_Products")
+        if    CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
                 //call your background operation.
                 let dataDic : NSDictionary = self.getTheDictionaryDataFromTextFile("productslist")
@@ -84,14 +79,11 @@ class CX_AppData: NSObject {
                 }
             })
         
+        }
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
             self.miscellaneousList()
         })
-//        }else{
-//            dispatch_async(dispatch_get_main_queue(), {
-//                LoadingView.hide()
-//            })
-//        }
+
     }
     
     func miscellaneousList(){
@@ -116,12 +108,9 @@ class CX_AppData: NSObject {
                 //call your background operation.
                 let dataDic : NSDictionary = self.getTheDictionaryDataFromTextFile("subcate")
                 if (dataDic.valueForKey("jobs") != nil) {
-                   // print("sub cat Dic %@",dataDic)
                     CXDBSettings.sharedInstance.savetheSubCategoryData(dataDic.valueForKey("jobs")! as! NSArray)
                 }
             })
-        }else{
-           
         }
 
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {

@@ -32,17 +32,6 @@ class CXDBSettings: NSObject {
         _SingletonSharedInstance = nil
     }
     
-    /*
-     @NSManaged var addToCart: String?
-     @NSManaged var itemCode: String?
-     @NSManaged var name: String?
-     @NSManaged var pID: String?
-     @NSManaged var quantity: String?
-     @NSManaged var storeID: String?
-     @NSManaged var subCatNameID: String?
-     @NSManaged var type: String?
-     */
-    
     func isAddToCart(productID : NSString) -> (isAdded:Bool, totalCount:NSString) {
         let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
         fetchRequest.predicate = NSPredicate(format: "pID = %@", productID)
@@ -67,7 +56,7 @@ class CXDBSettings: NSObject {
         
     }
     
-    func addToCart(product:CX_Products,quantityNumber : NSString){
+    func addToCart(product:CX_Products,quantityNumber : NSString , completionHandler: (Bool) -> ()) {
         
         MagicalRecord.saveWithBlock({ (localContext : NSManagedObjectContext!) in
             
@@ -94,6 +83,7 @@ class CXDBSettings: NSObject {
                 print("save the data >>>>>")
                 
                 NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+                completionHandler(success)
 
                 //LoadingView.hide()
                 // This block runs in main thread

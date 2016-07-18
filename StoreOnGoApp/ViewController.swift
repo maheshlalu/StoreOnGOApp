@@ -28,6 +28,7 @@ class ViewController: UIViewController{
         self.designHeaderView()
         CXDBSettings.sharedInstance.dataDelegate = self
         CX_AppData.sharedInstance.getStoresData()
+        self.getStores()
         self.setupCollectionView()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -72,7 +73,7 @@ class ViewController: UIViewController{
             let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
             self.coverPageImagesList = storesData.attachments as? NSMutableArray
             //print("data array \(storesData.attachments)")
-            //self.setupPagenator()
+            self.setupPagenator()
         }
     }
     

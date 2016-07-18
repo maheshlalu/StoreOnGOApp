@@ -55,7 +55,7 @@ class ProductListCntl: UIViewController {
         //self.productListTableView.registerClass(CXDetailTableViewCell.self, forCellReuseIdentifier: "DetailCell")
         self.productListTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "DetailCell")
         self.productListTableView.registerClass(ProductHeaderCell.self, forCellReuseIdentifier: "HeaderCell")
-
+        self.productListTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.view.addSubview(self.productListTableView)
         
     }
@@ -136,15 +136,10 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         cell.contentView.addSubview(self.createLabel(CXConstant.itemNameLblFrame, titleString: proListData.name!))
         cell.contentView.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: "Each"))
         
-        var addToCart = ""
-        if ((proListData.quantity?.isEmpty) != nil) {
-            addToCart = proListData.quantity!
-        }
-        cell.contentView.addSubview(self.createTextFiled(CXConstant.itemtextFrame, title:addToCart,indexPtah: indexPath))
+        cell.contentView.addSubview(self.createTextFiled(CXConstant.itemtextFrame, title:CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).totalCount as String,indexPtah: indexPath))
         
-      
-        cell.contentView.addSubview(self.createAddtoCartButton(CXConstant.addtoCartFrame, title: "Add To Cart",indexPtah: indexPath))
-        
+        cell.contentView.addSubview(self.createAddtoCartButton(CXConstant.addtoCartFrame, products: proListData, indexPtah: indexPath))
+
         return cell;
     }
     
@@ -178,13 +173,17 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         return textLabel
     }
     
-    func createAddtoCartButton(frame:CGRect,title : NSString ,indexPtah : NSIndexPath) -> UIButton {
+    
+    func createAddtoCartButton(frame:CGRect, products : CX_Products ,indexPtah : NSIndexPath) -> UIButton {
         
         let button   = UIButton.init() as UIButton
         button.frame = CGRectMake(frame.origin.x, 15, frame.size.width-5, 25)
         button.backgroundColor = CXConstant.collectionCellBgColor
-        button.setTitle(title as String, forState: UIControlState.Normal)
+        button.setTitle("AddToCart", forState: UIControlState.Normal)
+        button.setTitle("AddedToCart", forState: UIControlState.Selected)
         button.tag = indexPtah.row+1
+        button.selected = CXDBSettings.sharedInstance.isAddToCart(products.pID!).isAdded
+       // button.backgroundColor = CXDBSettings.sharedInstance.isAddToCart(products.pID!).isAdded ? CXConstant.checkOutBtnColor: UIColor.whiteColor()
         button.titleLabel?.font = UIFont(name:"Roboto-Regular",size:8)
         button.addTarget(self, action: #selector(ProductListCntl.addToCartButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         button.layer.cornerRadius = 10.0
@@ -199,19 +198,25 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     func addToCartButton (button : UIButton!){
         
         let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
-        let cell = self.productListTableView.cellForRowAtIndexPath(indexPath)
-        
-        let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
-        print("button tag %d\(textField.text)")
-        if ((textField.text?.isEmpty) != nil) {
+        if(!button.selected){
+            let cell = self.productListTableView.cellForRowAtIndexPath(indexPath)
+            let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
+            print("button tag %d\(textField.text)")
+            if (!((textField.text?.isEmpty)!)) {
+                let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
+                CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!, completionHandler: { (added) in
+                    self.productListTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                })
+            }
+            textField.resignFirstResponder();
+        }else{
             let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
-            CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!)
-           // CXDBSettings.sharedInstance.addToCartToItem(proListData.itemCode!, isAddToItem: true, quantityNumber: textField.text!)
+            CXDBSettings.sharedInstance.deleteCartItem(proListData.pID!)
+            self.productListTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
-        textField.resignFirstResponder();
-        
-        print("button tag %d\(button.tag)")
     }
+
+    
     
     
     func createTextFiled (frame :  CGRect,title : NSString ,indexPtah : NSIndexPath) -> UITextField {

@@ -161,16 +161,19 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identifier = "CartITemCell"
         
-        var cell: CartITemCell! = tableView.dequeueReusableCellWithIdentifier(identifier) as? CartITemCell
+        var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(identifier) as? CartITemCell
         if cell == nil {
-            cell = CartITemCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
         }
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         let proListData : CX_Cart = self.productsList[indexPath.row] as! CX_Cart
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.cartItemNameLbl.text = proListData.name
-        cell.quantityLbl.text = "Quantity :    " + proListData.quantity!
+        cell.contentView.addSubview(self.createLabel(CXConstant.itemCodeLblFrame, titleString: proListData.itemCode!))
+        cell.contentView.addSubview(self.createLabel(CXConstant.itemNameLblFrame, titleString: proListData.name!))
+        cell.contentView.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: "Qty"))
+        cell.contentView.addSubview(self.createTextFiled(CXConstant.itemtextFrame, title:CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).totalCount as String,indexPtah: indexPath))
 
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell;
     }
@@ -178,6 +181,37 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CXConstant.cartCellHeight
     }
+    
+    func createTextFiled (frame :  CGRect,title : NSString ,indexPtah : NSIndexPath) -> UITextField {
+        
+        let sampleTextField = UITextField(frame: CGRectMake(frame.origin.x, 13, frame.size.width, 25))
+        sampleTextField.font =  UIFont(name:"Roboto-Regular",size:12)
+        sampleTextField.borderStyle = UITextBorderStyle.Bezel
+        sampleTextField.autocorrectionType = UITextAutocorrectionType.No
+        sampleTextField.keyboardType = UIKeyboardType.NumbersAndPunctuation
+        sampleTextField.returnKeyType = UIReturnKeyType.Done
+        sampleTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+        sampleTextField.delegate = self
+        sampleTextField.tag = indexPtah.row+1
+        sampleTextField.text = title as String
+        return sampleTextField
+    }
+    
+    
+    func createLabel(frame:CGRect ,titleString:NSString) -> UILabel {
+        
+        let textFrame =  CGRectMake(frame.origin.x, frame.origin.y+5, frame.size.width, frame.size.height)
+        let  textLabel: UILabel = UILabel(frame: textFrame)
+        // textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+        textLabel.textAlignment = .Center
+        textLabel.font = UIFont(name:"Roboto-Regular",size:8)
+        //textLabel.font = UIFont.boldSystemFontOfSize(13.0)
+        textLabel.text = titleString as String
+        textLabel.textColor = UIColor.blackColor()
+        textLabel.numberOfLines = 0
+        return textLabel
+    }
+    
     
     func designCartActionButton(){
         
@@ -231,4 +265,65 @@ extension CartViewCntl : HeaderViewDelegate {
         
     }
 }
+
+extension CartViewCntl : UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        print("TextField should begin editing method called")
+        return true;
+    }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        print("TextField should clear method called")
+        return true;
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        print("TextField should snd editing method called")
+        return true;
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        print("While entering the characters this method gets called")
+        let aSet = NSCharacterSet(charactersInString:"0123456789").invertedSet
+        let compSepByCharInSet = string.componentsSeparatedByCharactersInSet(aSet)
+        let numberFiltered = compSepByCharInSet.joinWithSeparator("")
+        return string == numberFiltered
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        if ((textField.text?.isEmpty) != nil) {
+        }
+        
+        
+        print("button tag %d\(textField.tag)")
+        print("TextField should return method called")
+        textField.resignFirstResponder();
+        return true;
+    }
+    
+    
+    /*
+     let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+     let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
+     var predicate:NSPredicate = NSPredicate()
+     
+     if isProductCategory {
+     predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Products List(129121)",self.searchBar.text!)
+     }else{
+     predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Miscellaneous(135918)",self.searchBar.text!)
+     }
+     
+     fetchRequest.predicate = predicate
+     fetchRequest.entity = productEn
+     
+     self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
+     
+     self.productCollectionView.reloadData()
+     
+     */
+    
+}
+
+
 

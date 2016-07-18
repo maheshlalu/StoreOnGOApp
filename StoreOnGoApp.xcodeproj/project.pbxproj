@@ -64,7 +64,8 @@
 		12F9FC1D1CF76316004FE1F7 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D81CDA68DC00EF26C9 /* Roboto-Regular.ttf */; };
 		12F9FC1E1CF76316004FE1F7 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539D91CDA68DC00EF26C9 /* RobotoCondensed-Bold.ttf */; };
 		12F9FC1F1CF76316004FE1F7 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12F539DA1CDA68DC00EF26C9 /* RobotoCondensed-Light.ttf */; };
-		2775BE8CDB981C6877300A1C /* libPods-StoreOnGoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48D8902260F5236D3F97147A /* libPods-StoreOnGoApp.a */; };
+		12FBC0141D3CAF3200C8EBFE /* orderItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBC0121D3CAF3200C8EBFE /* orderItemCell.swift */; };
+		12FBC0151D3CAF3200C8EBFE /* orderItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12FBC0131D3CAF3200C8EBFE /* orderItemCell.xib */; };
 		AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01632E1CD2073B00EA1619 /* AppDelegate.swift */; };
 		AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163301CD2073B00EA1619 /* ViewController.swift */; };
 		AA0163341CD2073B00EA1619 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA0163321CD2073B00EA1619 /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		AA811DFC1CFC7ACC00A13F98 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AA811DFB1CFC7ACC00A13F98 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AAF679331CD2644F001E1238 /* CXDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF679321CD2644F001E1238 /* CXDetailCollectionViewCell.swift */; };
 		AAFDDAA68C54C910736A9062 /* Pods_StoreOnGoAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */; };
+		DD294C7579384ECEDC306916 /* libPods-StoreOnGoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B89FEE5B5A058470CE52CD3 /* libPods-StoreOnGoApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,7 +167,9 @@
 		12F859591CD3E1CD007BE1D0 /* KICamera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KICamera@2x.png"; sourceTree = "<group>"; };
 		12F8595A1CD3E1CD007BE1D0 /* KIImagePager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIImagePager.h; sourceTree = "<group>"; };
 		12F8595B1CD3E1CD007BE1D0 /* KIImagePager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIImagePager.m; sourceTree = "<group>"; };
-		48D8902260F5236D3F97147A /* libPods-StoreOnGoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		12FBC0121D3CAF3200C8EBFE /* orderItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = orderItemCell.swift; sourceTree = "<group>"; };
+		12FBC0131D3CAF3200C8EBFE /* orderItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = orderItemCell.xib; sourceTree = "<group>"; };
+		3B89FEE5B5A058470CE52CD3 /* libPods-StoreOnGoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		639A3E67E26A3965EB6B1BC6 /* Pods-StoreOnGoAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA01632B1CD2073B00EA1619 /* NV Agencies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NV Agencies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01632E1CD2073B00EA1619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -200,7 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA5A46931CE0C2CA007E01A4 /* MapKit.framework in Frameworks */,
-				2775BE8CDB981C6877300A1C /* libPods-StoreOnGoApp.a in Frameworks */,
+				DD294C7579384ECEDC306916 /* libPods-StoreOnGoApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +283,8 @@
 				128564D31CE7635B006210EA /* CartViewCntl.swift */,
 				128564D61CE8A6B1006210EA /* CartITemCell.swift */,
 				AA65A72B1CF7354800696A63 /* UserDetailsCnt.swift */,
+				12FBC0121D3CAF3200C8EBFE /* orderItemCell.swift */,
+				12FBC0131D3CAF3200C8EBFE /* orderItemCell.xib */,
 			);
 			name = Cart;
 			sourceTree = "<group>";
@@ -498,7 +504,7 @@
 			children = (
 				AA5A46921CE0C2CA007E01A4 /* MapKit.framework */,
 				E325A9DD4C7D9F06B5210077 /* Pods_StoreOnGoAppUITests.framework */,
-				48D8902260F5236D3F97147A /* libPods-StoreOnGoApp.a */,
+				3B89FEE5B5A058470CE52CD3 /* libPods-StoreOnGoApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -617,6 +623,7 @@
 				12F9FC191CF76316004FE1F7 /* Roboto-Bold.ttf in Resources */,
 				1216D88C1D3125880040F1E7 /* StickerDetailCell.xib in Resources */,
 				12F9FC1A1CF76316004FE1F7 /* Roboto-Italic.ttf in Resources */,
+				12FBC0151D3CAF3200C8EBFE /* orderItemCell.xib in Resources */,
 				12F9FC1B1CF76316004FE1F7 /* Roboto-Light.ttf in Resources */,
 				12F9FC1C1CF76316004FE1F7 /* Roboto-Medium.ttf in Resources */,
 				12F9FC1D1CF76316004FE1F7 /* Roboto-Regular.ttf in Resources */,
@@ -783,6 +790,7 @@
 				126F82781CDF6F57003C3DE4 /* CX_Product_Category+CoreDataProperties.swift in Sources */,
 				12F64D8F1CD6389C007D760C /* FeatureProductsCnt.swift in Sources */,
 				1216D8881D3108DE0040F1E7 /* StickerDetails.swift in Sources */,
+				12FBC0141D3CAF3200C8EBFE /* orderItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

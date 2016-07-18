@@ -31,7 +31,7 @@ class CartITemCell: UITableViewCell {
         self.backgroundView?.backgroundColor = UIColor.clearColor()
         self.backgroundColor = UIColor.clearColor()
         self.selectionStyle = UITableViewCellSelectionStyle.None
-        self.designCartCellView()
+       // self.designCartCellView()
         
     }
     

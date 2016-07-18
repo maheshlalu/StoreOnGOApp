@@ -143,19 +143,23 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
     }
     
     func addToCartButton (button : UIButton!){
-        if(!button.selected){
         let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
+        if(!button.selected){
         let cell = self.stickersCollectionView.cellForItemAtIndexPath(indexPath)
         let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
         print("button tag %d\(textField.text)")
         if (!((textField.text?.isEmpty)!)) {
             let proListData : CX_Products = self.stickersList[button.tag-1] as! CX_Products
-            CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!)
+            CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!, completionHandler: { (added) in
+                self.stickersCollectionView.reloadItemsAtIndexPaths([indexPath])
+            })
         }
         textField.resignFirstResponder();
         }else{
             let proListData : CX_Products = self.stickersList[button.tag-1] as! CX_Products
             CXDBSettings.sharedInstance.deleteCartItem(proListData.pID!)
+            self.stickersCollectionView.reloadItemsAtIndexPaths([indexPath])
+
         }
     }
     
