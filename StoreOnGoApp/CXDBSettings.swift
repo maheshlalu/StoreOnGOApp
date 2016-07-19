@@ -230,6 +230,12 @@ class CXDBSettings: NSObject {
         return NSArray()
     }
     
+    func loadView(){
+        dispatch_async(dispatch_get_main_queue(), {
+            self.dataDelegate?.completedTheFetchingTheData(self)
+        })
+    }
+    
     func saveStoresInDB(stores:NSArray) {
         
         //let predicate:NSPredicate = NSPredicate(format: "createdById = %@", catID)

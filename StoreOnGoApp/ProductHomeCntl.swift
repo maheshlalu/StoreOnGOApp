@@ -252,7 +252,7 @@ extension ProductHomeCntl:UICollectionViewDelegate,UICollectionViewDataSource {
         let productListVc = ProductListCntl.init()
          productListVc.predicate = NSPredicate(format: "subCatNameID = %@",appendStr )
         productListVc.headerTitle = proCat.name!
-        self.navigationController?.pushViewController(productListVc, animated: true)
+        self.navigationController?.pushViewController(productListVc, animated: false)
         
     }
     

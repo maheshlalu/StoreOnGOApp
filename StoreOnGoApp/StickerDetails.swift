@@ -18,11 +18,14 @@ class StickerDetails: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.designHeaderView()
-        self.designSearchBar()
-        self.setupCollectionView()
-        self.getTheProductsList()
-        self.view.backgroundColor = CXConstant.homeBackGroundColr
+        dispatch_async(dispatch_get_main_queue(),{
+            self.designHeaderView()
+            self.designSearchBar()
+            self.setupCollectionView()
+            self.getTheProductsList()
+            self.view.backgroundColor = CXConstant.homeBackGroundColr
+        })
+
 
         // Do any additional setup after loading the view.
     }

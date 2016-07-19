@@ -22,9 +22,14 @@ class ProductListCntl: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.setTheNavigationProperty()
-        self.designHeaderView()
-        self.designProductListTableView()
-        self.getTheProductsList()
+        
+        dispatch_async(dispatch_get_main_queue(),{
+            self.designHeaderView()
+            self.designProductListTableView()
+            self.getTheProductsList()
+            
+        })
+
 
         // self.setUpTheSpreadSheetView()
         // Do any additional setup after loading the view.

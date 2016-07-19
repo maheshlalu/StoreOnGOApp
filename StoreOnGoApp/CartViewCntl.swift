@@ -159,7 +159,7 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let identifier = "CartITemCell"
+        let identifier = "CartITemCell1222"
         
         var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(identifier) as? CartITemCell
         if cell == nil {
@@ -167,11 +167,13 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
         }
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         let proListData : CX_Cart = self.productsList[indexPath.row] as! CX_Cart
+        
 
-        cell.contentView.addSubview(self.createLabel(CXConstant.itemCodeLblFrame, titleString: proListData.itemCode!))
-        cell.contentView.addSubview(self.createLabel(CXConstant.itemNameLblFrame, titleString: proListData.name!))
-        cell.contentView.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: "Qty"))
-        cell.contentView.addSubview(self.createTextFiled(CXConstant.itemtextFrame, title:CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).totalCount as String,indexPtah: indexPath))
+        
+        cell.contentView.addSubview(self.createLabel(CXConstant.cartItemCodeLblFrame, titleString: proListData.itemCode!))
+        cell.contentView.addSubview(self.createLabel(CXConstant.cartItemNameLblFrame, titleString: proListData.name!))
+        cell.contentView.addSubview(self.createLabel(CXConstant.cartItemQuantityFrame, titleString: "Qty"))
+        cell.contentView.addSubview(self.createTextFiled(CXConstant.cartItemtextFrame, title:CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).totalCount as String,indexPtah: indexPath))
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         

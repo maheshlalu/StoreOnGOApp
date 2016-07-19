@@ -28,7 +28,7 @@ class ViewController: UIViewController{
         self.designHeaderView()
         CXDBSettings.sharedInstance.dataDelegate = self
         CX_AppData.sharedInstance.getStoresData()
-        self.getStores()
+        //self.getStores()
         self.setupCollectionView()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -68,13 +68,18 @@ class ViewController: UIViewController{
 
     //MARK: Get Stores
     func getStores(){
-        let fetchRequest = NSFetchRequest(entityName: "CX_Stores")
-        if CX_Stores.MR_executeFetchRequest(fetchRequest).count != 0 {
-            let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
-            self.coverPageImagesList = storesData.attachments as? NSMutableArray
-            //print("data array \(storesData.attachments)")
-            self.setupPagenator()
-        }
+        
+        dispatch_async(dispatch_get_main_queue(),{
+            let fetchRequest = NSFetchRequest(entityName: "CX_Stores")
+            if CX_Stores.MR_executeFetchRequest(fetchRequest).count != 0 {
+                let storesData : CX_Stores = CXDBSettings.sharedInstance.getTableData("CX_Stores").lastObject as! CX_Stores
+                self.coverPageImagesList = storesData.attachments as? NSMutableArray
+                //print("data array \(storesData.attachments)")
+                self.setupPagenator()
+            }
+
+        })
+
     }
     
     // MARK: - SetUp Paginater
@@ -185,12 +190,9 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             self.navigationController?.pushViewController(mapView, animated: true)
             break
         case 2  :
-            let mapView = StickersViewCnt.init()
-            self.navigationController?.pushViewController(mapView, animated: true)
+            
             break
         case 3  :
-            //let aboutUs = ProductListCntl.init()
-            //self.navigationController?.pushViewController(aboutUs, animated: true)
             
             break
         default :
@@ -223,7 +225,7 @@ extension ViewController :AppDataDelegate {
     
     func completedTheFetchingTheData(sender: CXDBSettings) {
         self.getStores()
-
+        LoadingView.hide()
     }
 
 }

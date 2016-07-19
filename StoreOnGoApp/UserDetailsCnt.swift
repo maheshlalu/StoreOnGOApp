@@ -84,7 +84,7 @@ class UserDetailsCnt: UIViewController {
         urlString = urlString.stringByAppendingString("&dt=CAMPAIGNS")
         urlString = urlString.stringByAppendingString("&category=Services")
         urlString = urlString.stringByAppendingString("&userId="+CXConstant.MallID)
-        urlString = urlString.stringByAppendingString("&consumerEmail="+"yernagulamahesh@gmail.com")
+        urlString = urlString.stringByAppendingString("&consumerEmail=" + self.emailText.text!)
         
        // SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
         
@@ -281,7 +281,14 @@ extension  UserDetailsCnt : UITableViewDelegate,UITableViewDataSource {
     }
     
     func okButtonAction (button : UIButton!){
-        self.sendTheCartItemsToServer()
+        
+        
+        if !(self.userNameText.text?.isEmpty)! && !(self.emailText.text?.isEmpty)! && !(self.address1Text.text?.isEmpty)! && !(self.addres2Text.text?.isEmpty)! && !(self.phoneText.text?.isEmpty)!{
+            //self.sendTheCartItemsToServer()
+        }else{
+            
+        }
+        
        // self.navigationController?.popViewControllerAnimated(true)
 
     }

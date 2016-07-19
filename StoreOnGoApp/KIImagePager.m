@@ -215,6 +215,7 @@
                 activityIndicator.center = (CGPoint){_scrollView.frame.size.width/2, _scrollView.frame.size.height/2};
                 activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
                 [imageView addSubview:activityIndicator];
+                activityIndicator.color = [UIColor redColor];
                 [activityIndicator startAnimating];
                 [_activityIndicators setObject:activityIndicator forKey:[NSString stringWithFormat:@"%d", i]];
 
@@ -231,6 +232,7 @@
 
                      // Stop and Remove Activity Indicator
                      UIActivityIndicatorView *indicatorView = (UIActivityIndicatorView *)[_activityIndicators objectForKey:[NSString stringWithFormat:@"%d", i]];
+                     indicatorView.color = [UIColor redColor];
                      if (indicatorView) {
                          [indicatorView stopAnimating];
                          [_activityIndicators removeObjectForKey:[NSString stringWithFormat:@"%d", i]];

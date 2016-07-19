@@ -29,93 +29,137 @@ class CX_AppData: NSObject {
     }
     
     func getStoresData(){
-         return
-        //self.configure()
-        //LoadingView.show("Loading", animated: true)
+      //   return
+        self.configure()
+        LoadingView.show("Loading", animated: true)
+        CXDBSettings.sharedInstance.loadView()
 
-        let reqUrl = CXConstant.STORES_URL + CXConstant.MallID
-        SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
-            // print ("stores   response   data \(responseDict.valueForKey("jobs")! as! NSArray) ")
-            CXDBSettings.sharedInstance.saveStoresInDB(responseDict.valueForKey("jobs")! as! NSArray)
+        let quees1 = dispatch_queue_create(
+            "com.parsedata.category", DISPATCH_QUEUE_CONCURRENT)
+        dispatch_barrier_async(quees1) { // 1
+            let reqUrl = CXConstant.STORES_URL + CXConstant.MallID
+            SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
+                // print ("stores   response   data \(responseDict.valueForKey("jobs")! as! NSArray) ")
+                CXDBSettings.sharedInstance.saveStoresInDB(responseDict.valueForKey("jobs")! as! NSArray)
+            }
         }
-            self.parseTheProductSubCategory()
         
+        
+        let quees2 = dispatch_queue_create(
+            "com.quees2.category", DISPATCH_QUEUE_CONCURRENT)
+
+        dispatch_barrier_async(quees2) { // 1
+            self.parseTheProductSubCategory()
+        }
+        
+        let quees3 = dispatch_queue_create(
+            "com.quees3.category", DISPATCH_QUEUE_CONCURRENT)
+        dispatch_barrier_async(quees3) { // 1
+            self.getProductCategory()
+        }
+        
+        let quees4 = dispatch_queue_create(
+            "com.quees4.category", DISPATCH_QUEUE_CONCURRENT)
+        dispatch_barrier_async(quees4) { // 1
+            self.getFeaturedProducts()
+        }
+        
+        let quees5 = dispatch_queue_create(
+            "com.quees5.category", DISPATCH_QUEUE_CONCURRENT)
+        dispatch_barrier_async(quees5) { // 1
+            self.parseTheProductsList()
+        }
+        
+        let quees6 = dispatch_queue_create(
+            "com.quees6.category", DISPATCH_QUEUE_CONCURRENT)
+        dispatch_barrier_async(quees6) { // 1
+            self.miscellaneousList()
+        }
+        
+        let quees7 = dispatch_queue_create(
+            "com.quees7.category", DISPATCH_QUEUE_CONCURRENT)
+        dispatch_barrier_async(quees7) { // 1
+            self.parseStickersList()
+        }
+        
+
     }
+    
 
     
     func getProductCategory(){
-        
-        let reqUrl = CXConstant.PRODUCT_CATEGORY_URL + CXConstant.MallID
-        SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
-           // print ("Product category response \(responseDict)")
-            CXDBSettings.sharedInstance.saveProductCategoriesInDB(responseDict.valueForKey("jobs")! as! NSArray)
+        let fetchRequest = NSFetchRequest(entityName: "CX_Product_Category")
+        if    CX_Product_Category.MR_executeFetchRequest(fetchRequest).count == 0 {
+            let reqUrl = CXConstant.PRODUCT_CATEGORY_URL + CXConstant.MallID
+            SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
+                // print ("Product category response \(responseDict)")
+                CXDBSettings.sharedInstance.saveProductCategoriesInDB(responseDict.valueForKey("jobs")! as! NSArray)
+            }
         }
-            self.getFeaturedProducts()
         
     }
     
     func getFeaturedProducts(){
         
-        let reqUrl = CXConstant.FEATUREDPRODUCT_URL + CXConstant.MallID
-        SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
-           // print ("Featured Product  response \(responseDict)")
-            CXDBSettings.sharedInstance.saveFeaturedProducts(responseDict.valueForKey("jobs")! as! NSArray)
+        //CX_FeaturedProducts
+        
+        let fetchRequest = NSFetchRequest(entityName: "CX_FeaturedProducts")
+        if    CX_FeaturedProducts.MR_executeFetchRequest(fetchRequest).count == 0 {
+            let reqUrl = CXConstant.FEATUREDPRODUCT_URL + CXConstant.MallID
+            SMSyncService.sharedInstance.startSyncProcessWithUrl(reqUrl) { (responseDict) -> Void in
+                // print ("Featured Product  response \(responseDict)")
+                CXDBSettings.sharedInstance.saveFeaturedProducts(responseDict.valueForKey("jobs")! as! NSArray)
+            }
         }
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
-            self.parseTheProductsList()
-        })
+
     }
     
     func parseTheProductsList(){
         
-       // LoadingView.show("ProductList Loading....", animated: true)
+        // LoadingView.show("ProductList Loading....", animated: true)
         let fetchRequest = NSFetchRequest(entityName: "CX_Products")
+        fetchRequest.predicate = NSPredicate(format: "type = %@", "Products List")
         if    CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
-                //call your background operation.
-                let dataDic : NSDictionary = self.getTheDictionaryDataFromTextFile("productslist")
-                if (dataDic.valueForKey("jobs") != nil) {
-                    CXDBSettings.sharedInstance.saveProductsInDB(dataDic.valueForKey("jobs")! as! NSArray, typeCategory: "Products List")
-                }
-            })
-        
+            let dataDic : NSDictionary = self.getTheDictionaryDataFromTextFile("productslist")
+            if (dataDic.valueForKey("jobs") != nil) {
+                CXDBSettings.sharedInstance.saveProductsInDB(dataDic.valueForKey("jobs")! as! NSArray, typeCategory: "Products List")
+            }
         }
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
-            self.miscellaneousList()
-        })
-
+        
+        
     }
     
     func miscellaneousList(){
-       // LoadingView.show("Miscellaneous Loading....", animated: true)
+        let fetchRequest = NSFetchRequest(entityName: "CX_Products")
+        fetchRequest.predicate = NSPredicate(format: "type = %@", "Miscellaneous")
+        if    CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
             CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("miscellaneous").valueForKey("jobs")! as! NSArray, typeCategory: "Miscellaneous")
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
-            self.parseStickersList()
-        })
-        
+        }
     }
     
     func parseStickersList(){
         
-         CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("sticker").valueForKey("jobs")! as! NSArray, typeCategory: "sticker")
+        let fetchRequest = NSFetchRequest(entityName: "CX_Products")
+        fetchRequest.predicate = NSPredicate(format: "type = %@", "sticker")
+        if    CX_Products.MR_executeFetchRequest(fetchRequest).count == 0 {
+            CXDBSettings.sharedInstance.saveProductsInDB(self.getTheDictionaryDataFromTextFile("sticker").valueForKey("jobs")! as! NSArray, typeCategory: "sticker")
+        }
+        
     }
     
     func parseTheProductSubCategory(){
         //LoadingView.show("Subcategory Loading....", animated: true)
         let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
         if    TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest).count == 0 {
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+           // dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
                 //call your background operation.
                 let dataDic : NSDictionary = self.getTheDictionaryDataFromTextFile("subcate")
                 if (dataDic.valueForKey("jobs") != nil) {
                     CXDBSettings.sharedInstance.savetheSubCategoryData(dataDic.valueForKey("jobs")! as! NSArray)
                 }
-            })
+           // })
         }
 
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
-        self.getProductCategory()
-        })
     }
     
     func getTheDictionaryDataFromTextFile(testFileName:String)-> NSDictionary{
