@@ -100,7 +100,11 @@ class UserDetailsCnt: UIViewController {
             } catch {
                 print("Error in parsing")
             }
-            print("All Malls \(jsonData)")
+            let string = jsonData.valueForKeyPath("myHashMap.status")
+            if ((string?.rangeOfString("1")) != nil){
+                print("All Malls \(jsonData)")
+
+            }
         }
         task.resume()
         
@@ -156,15 +160,15 @@ class UserDetailsCnt: UIViewController {
         let orderItemMRP: NSMutableString = NSMutableString()
         
         //let total: Double = 0
-        order.setValue("kushal", forKey: "Name")
+        order.setValue(self.userNameText.text, forKey: "Name")
         //order["Name"] = ("\("kushal")")
         //should be replaced
        // order["Address"] = ("\("madhapur hyd")")
-        order.setValue("kushal", forKey: "Address")
+        order.setValue(self.address1Text.text, forKey: "Address")
 
         //should be replaced
         //order["Contact_Number"] = ("\("7893335553")")
-       order.setValue("kushal", forKey: "Contact_Number")
+       order.setValue(self.phoneText.text, forKey: "Contact_Number")
 
         //should be replaced
         
@@ -212,7 +216,7 @@ class UserDetailsCnt: UIViewController {
         let cartJsonDict :NSMutableDictionary = NSMutableDictionary()
         cartJsonDict.setObject(listArray, forKey: "list")
     
-        let jsonString = cartJsonDict.JSONString()
+        //let jsonString = cartJsonDict.JSONString()
         var jsonData : NSData = NSData()
         do {
              jsonData = try NSJSONSerialization.dataWithJSONObject(cartJsonDict, options: NSJSONWritingOptions.PrettyPrinted)
@@ -220,10 +224,11 @@ class UserDetailsCnt: UIViewController {
         } catch let error as NSError {
             print(error)
         }
-       print("order dic \(jsonString as String)")
-       print("order dic \(jsonData)")
+        let jsonStringFormat = String(data: jsonData, encoding: NSUTF8StringEncoding)
+       print("order dic \(jsonStringFormat)")
 
-        return jsonString
+        return jsonStringFormat!
+        
 
        
        // println("JSON string = \(theJSONText!)")
@@ -393,35 +398,188 @@ extension UserDetailsCnt : HeaderViewDelegate {
     }
 }
 
-//extension String {
-//    func URLEncodedString() -> String? {
-//        let customAllowedSet =  NSCharacterSet.URLQueryAllowedCharacterSet()
-//        let escapedString = self.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)
-//        return escapedString
-//    }
-//    static func queryStringFromParameters(parameters: Dictionary<String,String>) -> String? {
-//        if (parameters.count == 0)
-//        {
-//            return nil
-//        }
-//        var queryString : String? = nil
-//        for (key, value) in parameters {
-//            if let encodedKey = key.URLEncodedString() {
-//                if let encodedValue = value.URLEncodedString() {
-//                    if queryString == nil
-//                    {
-//                        queryString = "?"
-//                    }
-//                    else
-//                    {
-//                        queryString! += "&"
-//                    }
-//                    queryString! += encodedKey + "=" + encodedValue
-//                }
-//            }
-//        }
-//        return queryString
-//    }
-//}
-
+/*
+ All Malls {
+ myHashMap =     {
+ jobId = 162116;
+ jobInfo =         {
+ "Additional_Details" =             {
+ };
+ Address = weuriow;
+ Attachments =             (
+ );
+ "Contact_Number" = jqiefwqf;
+ CreatedSubJobs =             (
+ );
+ "Current_Job_Status" = Submitted;
+ "Current_Job_StatusId" = 132731;
+ Insights =             (
+ {
+ Pinterest = 0;
+ points = "0.0";
+ },
+ {
+ Twitter = 0;
+ points = "0.0";
+ },
+ {
+ Hangouts = 0;
+ points = "0.0";
+ },
+ {
+ Instagram = 0;
+ points = "0.0";
+ },
+ {
+ Linkedin = 0;
+ points = "0.0";
+ },
+ {
+ Messaging = 0;
+ points = "0.0";
+ },
+ {
+ "Google+" = 0;
+ points = "0.0";
+ },
+ {
+ Gmail = 0;
+ points = "0.0";
+ },
+ {
+ Facebook = 0;
+ points = "0.0";
+ },
+ {
+ Skype = 0;
+ points = "0.0";
+ },
+ {
+ "Campaigns Comment" = 0;
+ points = "0.0";
+ },
+ {
+ WhatsApp = 0;
+ points = "0.0";
+ },
+ {
+ "Campaigns Share" = 0;
+ points = "0.0";
+ },
+ {
+ "Campaigns Favorite" = 0;
+ points = "0.0";
+ },
+ {
+ "Campaigns View" = 0;
+ points = "0.0";
+ },
+ {
+ "Services Comment" = 0;
+ points = "0.0";
+ },
+ {
+ "Services Share" = 0;
+ points = "0.0";
+ },
+ {
+ "Services Favorite" = 0;
+ points = "0.0";
+ },
+ {
+ "Services View" = 0;
+ points = "0.0";
+ },
+ {
+ "Offers Comment" = 0;
+ points = "0.0";
+ },
+ {
+ "Offers Favorite" = 0;
+ points = "0.0";
+ },
+ {
+ "Offers Share" = 0;
+ points = "0.0";
+ },
+ {
+ "Offers View" = 0;
+ points = "0.0";
+ },
+ {
+ "Products Comment" = 0;
+ points = "0.0";
+ },
+ {
+ "Products Buy" = 0;
+ points = "0.0";
+ },
+ {
+ "Products Cart" = 0;
+ points = "0.0";
+ },
+ {
+ "Products Share" = 0;
+ points = "0.0";
+ },
+ {
+ "Products Favorite" = 0;
+ points = "0.0";
+ },
+ {
+ "Products View" = 0;
+ points = "0.0";
+ },
+ {
+ Login = 0;
+ points = "0.0";
+ },
+ {
+ Register = 0;
+ points = "0.0";
+ }
+ );
+ ItemCode = "e49098a7-95ec-4946-8196-becded7022d1";
+ Name = mashdio;
+ "Next_Job_Statuses" =             (
+ {
+ SeqNo = 2;
+ "Status_Id" = 132732;
+ "Status_Name" = Approve;
+ "Sub_Jobtype_Forms" =                     (
+ );
+ },
+ {
+ SeqNo = 3;
+ "Status_Id" = 132734;
+ "Status_Name" = Reject;
+ "Sub_Jobtype_Forms" =                     (
+ );
+ }
+ );
+ "Next_Seq_Nos" = "2,3";
+ OrderItemId = 146736;
+ OrderItemName = "STICKER H.L.FIRING GLASS BAJAJ CT100";
+ OrderItemQuantity = 44;
+ PackageName = "";
+ createdByFullName = yernagulamahesh;
+ createdById = 717;
+ createdOn = "15:54 Jul 21, 2016";
+ hrsOfOperation =             (
+ );
+ id = 162116;
+ jobComments =             (
+ );
+ jobTypeId = 56953;
+ jobTypeName = PlaceOrder;
+ lastModifiedDate = "21-7-2016 15:54:29:224";
+ overallRating = "0.0";
+ publicURL = "http://storeongo.com/app/4452/Services;PlaceOrder;162116;_;SingleProduct";
+ totalReviews = 0;
+ };
+ message = "Jobs saved";
+ status = 1;
+ };
+ }
+ */
 
