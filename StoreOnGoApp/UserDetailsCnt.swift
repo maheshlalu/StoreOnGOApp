@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class UserDetailsCnt: UIViewController {
 
@@ -73,25 +74,23 @@ class UserDetailsCnt: UIViewController {
 
     
     func sendTheCartItemsToServer(){
-        
-        var urlString : NSString = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder"
+        var urlString : String = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder"
         //"http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json="
         
-       
-
-        
-        urlString = urlString.stringByAppendingString("&json=" + (self.checkOutCartItems() as! String))
+        urlString = urlString.stringByAppendingString("&json="+(self.checkOutCartItems()))
         urlString = urlString.stringByAppendingString("&dt=CAMPAIGNS")
         urlString = urlString.stringByAppendingString("&category=Services")
         urlString = urlString.stringByAppendingString("&userId="+CXConstant.MallID)
-        urlString = urlString.stringByAppendingString("&consumerEmail=" + self.emailText.text!)
+        urlString = urlString.stringByAppendingString("&consumerEmail="+self.emailText.text!)
+    //{"list":[{"Address":"madhapur hyd","Name":"kushal","Contact_Number":"7893335553"}]})
         
-       // SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
+        //print("Url Encoded string is \(urlString.URLEncodedString)")
+        let url: NSURL = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+
         
+         //SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
         
-        
-        
-        let url: NSURL = NSURL(string: urlString as String)!
+        //let url: NSURL = NSURL(string: urlString as String)!
         let request1: NSURLRequest = NSURLRequest(URL: url)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request1) { (resData:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
@@ -110,18 +109,47 @@ class UserDetailsCnt: UIViewController {
         
     }
     
+    func checkOutItems() -> String {
+        var requestDictionary:NSMutableDictionary = NSMutableDictionary()
+        var listItemsArray: NSMutableArray = NSMutableArray()
+        
+        let orderItemsDictionary : NSMutableDictionary = NSMutableDictionary()
+        orderItemsDictionary.setValue("kushal", forKey: "Name")
+        orderItemsDictionary.setValue("madhapur hyd", forKey: "Address")
+        orderItemsDictionary.setValue("7893335553", forKey: "Contact_Number")
+        
+        listItemsArray.addObject(orderItemsDictionary)
+        requestDictionary.setValue(listItemsArray, forKey: "list")
+        
+        var jsonData : NSData = NSData()
+        do {
+            jsonData = try NSJSONSerialization.dataWithJSONObject(requestDictionary, options: NSJSONWritingOptions.PrettyPrinted)
+            // here "jsonData" is the dictionary encoded in JSON data
+        } catch let error as NSError {
+            print(error)
+        }
+        let theJSONText = NSString(data: jsonData,encoding: NSASCIIStringEncoding)
+        print("JSON string = \(theJSONText!)")
+        
+        let jsonReqString = String(data: jsonData, encoding: NSUTF8StringEncoding)
+        print("Data string is \(jsonReqString)");
+        let jsonString = requestDictionary.JSONString()
+        print("Requested \(jsonString))")
+        return jsonReqString!
+        
+        
+    }
     
-    func checkOutCartItems()-> AnyObject{
-        
-        
+    
+    
+    func checkOutCartItems()-> String{
         let productEn = NSEntityDescription.entityForName("CX_Cart", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
         let fetchRequest = CX_Cart.MR_requestAllSortedBy("name", ascending: true)
         // fetchRequest.predicate = predicate
         fetchRequest.entity = productEn
         
         let order: NSMutableDictionary = NSMutableDictionary()
-        let orderItemName: NSMutableString = NSMutableString()
-        //NSMutableString* itemCode = [NSMutableString string];
+        var orderItemName: NSMutableString = NSMutableString()
         let orderItemQuantity: NSMutableString = NSMutableString()
         let orderSubTotal: NSMutableString = NSMutableString()
         let orderItemId: NSMutableString = NSMutableString()
@@ -132,11 +160,11 @@ class UserDetailsCnt: UIViewController {
         //order["Name"] = ("\("kushal")")
         //should be replaced
        // order["Address"] = ("\("madhapur hyd")")
-        order.setValue("madhapur hyd", forKey: "Address")
+        order.setValue("kushal", forKey: "Address")
 
         //should be replaced
         //order["Contact_Number"] = ("\("7893335553")")
-        order.setValue("7893335553", forKey: "Contact_Number")
+       order.setValue("kushal", forKey: "Contact_Number")
 
         //should be replaced
         
@@ -144,7 +172,7 @@ class UserDetailsCnt: UIViewController {
         for (index, element) in CX_Cart.MR_executeFetchRequest(fetchRequest).enumerate() {
             let cart : CX_Cart = element as! CX_Cart
             if index != 0 {
-                orderItemName .appendString(("\("|")"))
+                orderItemName.appendString(("\("|")"))
                 orderItemQuantity .appendString(("\("|")"))
                 orderSubTotal .appendString(("\("|")"))
                 orderItemId .appendString(("\("|")"))
@@ -178,6 +206,7 @@ class UserDetailsCnt: UIViewController {
         print("order dic \(order)")
         
         let listArray : NSMutableArray = NSMutableArray()
+        
         listArray.addObject(order)
         
         let cartJsonDict :NSMutableDictionary = NSMutableDictionary()
@@ -191,9 +220,8 @@ class UserDetailsCnt: UIViewController {
         } catch let error as NSError {
             print(error)
         }
-       print("order dic \(jsonString)")
-    
-        print("order dic \(jsonData)")
+       print("order dic \(jsonString as String)")
+       print("order dic \(jsonData)")
 
         return jsonString
 
@@ -281,10 +309,10 @@ extension  UserDetailsCnt : UITableViewDelegate,UITableViewDataSource {
     }
     
     func okButtonAction (button : UIButton!){
-        
+
         
         if !(self.userNameText.text?.isEmpty)! && !(self.emailText.text?.isEmpty)! && !(self.address1Text.text?.isEmpty)! && !(self.addres2Text.text?.isEmpty)! && !(self.phoneText.text?.isEmpty)!{
-            //self.sendTheCartItemsToServer()
+            self.sendTheCartItemsToServer()
         }else{
             
         }
@@ -364,4 +392,36 @@ extension UserDetailsCnt : HeaderViewDelegate {
         
     }
 }
+
+//extension String {
+//    func URLEncodedString() -> String? {
+//        let customAllowedSet =  NSCharacterSet.URLQueryAllowedCharacterSet()
+//        let escapedString = self.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)
+//        return escapedString
+//    }
+//    static func queryStringFromParameters(parameters: Dictionary<String,String>) -> String? {
+//        if (parameters.count == 0)
+//        {
+//            return nil
+//        }
+//        var queryString : String? = nil
+//        for (key, value) in parameters {
+//            if let encodedKey = key.URLEncodedString() {
+//                if let encodedValue = value.URLEncodedString() {
+//                    if queryString == nil
+//                    {
+//                        queryString = "?"
+//                    }
+//                    else
+//                    {
+//                        queryString! += "&"
+//                    }
+//                    queryString! += encodedKey + "=" + encodedValue
+//                }
+//            }
+//        }
+//        return queryString
+//    }
+//}
+
 
