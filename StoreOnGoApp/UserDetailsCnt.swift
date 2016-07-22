@@ -19,9 +19,6 @@ class UserDetailsCnt: UIViewController {
     var cartTableView :  UITableView = UITableView()
     let productsList: [String] = ["Name", "Email address","Address line1","Address line2","Phone number",""]
 
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.sendTheCartItemsToServer()
@@ -103,7 +100,17 @@ class UserDetailsCnt: UIViewController {
             let string = jsonData.valueForKeyPath("myHashMap.status")
             if ((string?.rangeOfString("1")) != nil){
                 print("All Malls \(jsonData)")
-
+                
+                let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
+                let cartsDataArrya : NSArray = CX_Cart.MR_executeFetchRequest(fetchRequest)
+                
+                for (index, element) in cartsDataArrya.enumerate() {
+                    let cart : CX_Cart = element as! CX_Cart
+                    NSManagedObjectContext.MR_contextForCurrentThread().deleteObject(cart)
+                    NSManagedObjectContext.MR_contextForCurrentThread().MR_saveOnlySelfAndWait()
+                }
+                NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+                self.navigationController?.popViewControllerAnimated(true)
             }
         }
         task.resume()
@@ -354,21 +361,21 @@ extension  UserDetailsCnt : UITableViewDelegate,UITableViewDataSource {
 extension UserDetailsCnt : UITextFieldDelegate{
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        print("TextField should begin editing method called")
+        //print("TextField should begin editing method called")
         return true;
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
-        print("TextField should clear method called")
+        //print("TextField should clear method called")
         return true;
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        print("TextField should snd editing method called")
+        //print("TextField should snd editing method called")
         return true;
     }
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        print("While entering the characters this method gets called")
+        //print("While entering the characters this method gets called")
         return true;
     }
     
@@ -378,8 +385,8 @@ extension UserDetailsCnt : UITextFieldDelegate{
         }
         
         
-        print("button tag %d\(textField.tag)")
-        print("TextField should return method called")
+        //print("button tag %d\(textField.tag)")
+        //print("TextField should return method called")
         textField.resignFirstResponder();
         return true;
     }
@@ -397,189 +404,3 @@ extension UserDetailsCnt : HeaderViewDelegate {
         
     }
 }
-
-/*
- All Malls {
- myHashMap =     {
- jobId = 162116;
- jobInfo =         {
- "Additional_Details" =             {
- };
- Address = weuriow;
- Attachments =             (
- );
- "Contact_Number" = jqiefwqf;
- CreatedSubJobs =             (
- );
- "Current_Job_Status" = Submitted;
- "Current_Job_StatusId" = 132731;
- Insights =             (
- {
- Pinterest = 0;
- points = "0.0";
- },
- {
- Twitter = 0;
- points = "0.0";
- },
- {
- Hangouts = 0;
- points = "0.0";
- },
- {
- Instagram = 0;
- points = "0.0";
- },
- {
- Linkedin = 0;
- points = "0.0";
- },
- {
- Messaging = 0;
- points = "0.0";
- },
- {
- "Google+" = 0;
- points = "0.0";
- },
- {
- Gmail = 0;
- points = "0.0";
- },
- {
- Facebook = 0;
- points = "0.0";
- },
- {
- Skype = 0;
- points = "0.0";
- },
- {
- "Campaigns Comment" = 0;
- points = "0.0";
- },
- {
- WhatsApp = 0;
- points = "0.0";
- },
- {
- "Campaigns Share" = 0;
- points = "0.0";
- },
- {
- "Campaigns Favorite" = 0;
- points = "0.0";
- },
- {
- "Campaigns View" = 0;
- points = "0.0";
- },
- {
- "Services Comment" = 0;
- points = "0.0";
- },
- {
- "Services Share" = 0;
- points = "0.0";
- },
- {
- "Services Favorite" = 0;
- points = "0.0";
- },
- {
- "Services View" = 0;
- points = "0.0";
- },
- {
- "Offers Comment" = 0;
- points = "0.0";
- },
- {
- "Offers Favorite" = 0;
- points = "0.0";
- },
- {
- "Offers Share" = 0;
- points = "0.0";
- },
- {
- "Offers View" = 0;
- points = "0.0";
- },
- {
- "Products Comment" = 0;
- points = "0.0";
- },
- {
- "Products Buy" = 0;
- points = "0.0";
- },
- {
- "Products Cart" = 0;
- points = "0.0";
- },
- {
- "Products Share" = 0;
- points = "0.0";
- },
- {
- "Products Favorite" = 0;
- points = "0.0";
- },
- {
- "Products View" = 0;
- points = "0.0";
- },
- {
- Login = 0;
- points = "0.0";
- },
- {
- Register = 0;
- points = "0.0";
- }
- );
- ItemCode = "e49098a7-95ec-4946-8196-becded7022d1";
- Name = mashdio;
- "Next_Job_Statuses" =             (
- {
- SeqNo = 2;
- "Status_Id" = 132732;
- "Status_Name" = Approve;
- "Sub_Jobtype_Forms" =                     (
- );
- },
- {
- SeqNo = 3;
- "Status_Id" = 132734;
- "Status_Name" = Reject;
- "Sub_Jobtype_Forms" =                     (
- );
- }
- );
- "Next_Seq_Nos" = "2,3";
- OrderItemId = 146736;
- OrderItemName = "STICKER H.L.FIRING GLASS BAJAJ CT100";
- OrderItemQuantity = 44;
- PackageName = "";
- createdByFullName = yernagulamahesh;
- createdById = 717;
- createdOn = "15:54 Jul 21, 2016";
- hrsOfOperation =             (
- );
- id = 162116;
- jobComments =             (
- );
- jobTypeId = 56953;
- jobTypeName = PlaceOrder;
- lastModifiedDate = "21-7-2016 15:54:29:224";
- overallRating = "0.0";
- publicURL = "http://storeongo.com/app/4452/Services;PlaceOrder;162116;_;SingleProduct";
- totalReviews = 0;
- };
- message = "Jobs saved";
- status = 1;
- };
- }
- */
-
