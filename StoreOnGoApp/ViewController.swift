@@ -25,7 +25,7 @@ class ViewController: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = CXConstant.homeBackGroundColr
         self.navigationController?.navigationBarHidden = true
-        self.designHeaderView()
+        //self.designHeaderView()
         CXDBSettings.sharedInstance.dataDelegate = self
         CX_AppData.sharedInstance.getStoresData()
         //self.getStores()
@@ -44,6 +44,7 @@ class ViewController: UIViewController{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = true
+        self.designHeaderView()
     }
 
     
@@ -190,16 +191,26 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             self.navigationController?.pushViewController(mapView, animated: true)
             break
         case 2  :
-            
+            self.alertWithMessage("Comming Soon!!")
             break
         case 3  :
-            
+            self.alertWithMessage("Comming Soon!!")
             break
         default :
             break
         }
         
     }
+    
+    
+    func alertWithMessage(alertMessage:String){
+        
+        let alert = UIAlertController(title: "Alert", message:alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+
     
 }
 
@@ -266,6 +277,13 @@ extension ViewController : UITextFieldDelegate {
     
 
 }
+/*
+ let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
+ alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+ self.presentViewController(alert, animated: true, completion: nil)*/
+
+
+
 
 extension ViewController : HeaderViewDelegate {
     func backButtonAction (){
@@ -278,9 +296,7 @@ extension ViewController : HeaderViewDelegate {
         
     }
 
-        
-        
-
+    
 }
 
 

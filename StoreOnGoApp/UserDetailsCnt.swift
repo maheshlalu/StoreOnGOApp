@@ -107,12 +107,16 @@ class UserDetailsCnt: UIViewController {
                 for (index, element) in cartsDataArrya.enumerate() {
                     let cart : CX_Cart = element as! CX_Cart
                     NSManagedObjectContext.MR_contextForCurrentThread().deleteObject(cart)
-                    NSManagedObjectContext.MR_contextForCurrentThread().MR_saveOnlySelfAndWait()
+                    NSManagedObjectContext.MR_contextForCurrentThread().MR_saveToPersistentStoreAndWait()
                 }
                 NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
-                self.navigationController?.popViewControllerAnimated(true)
+
+                
             }
         }
+        self.navigationController?.popToRootViewControllerAnimated(true)
+       // NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+
         task.resume()
         
         //startSyncWithUrl
