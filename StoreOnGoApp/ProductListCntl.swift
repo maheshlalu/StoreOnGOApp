@@ -15,14 +15,16 @@ class ProductListCntl: UIViewController {
     var predicate : NSPredicate = NSPredicate()
     let colomnList: [String] = ["ITEM CODE", "ITEM NAME","QUANTITY","",""]
     var headerTitle :  NSString = NSString()
-    
+    var presentWindow : UIWindow?
+
     //,EDIT TEXT, AddTOCard Button
 
     var productListTableView : UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.setTheNavigationProperty()
-        
+        presentWindow = UIApplication.sharedApplication().keyWindow
+
         dispatch_async(dispatch_get_main_queue(),{
             self.designHeaderView()
             self.designProductListTableView()
@@ -203,22 +205,27 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
     func addToCartButton (button : UIButton!){
         
         let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
-        if(!button.selected){
-            let cell = self.productListTableView.cellForRowAtIndexPath(indexPath)
-            let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
-            print("button tag %d\(textField.text)")
-            if (!((textField.text?.isEmpty)!)) {
+        let cell = self.productListTableView.cellForRowAtIndexPath(indexPath)
+        let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
+        if (!((textField.text?.isEmpty)!)) {
+            if(!button.selected){
+                print("button tag %d\(textField.text)")
+                if (!((textField.text?.isEmpty)!)) {
+                    let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
+                    CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!, completionHandler: { (added) in
+                        self.productListTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    })
+                }
+                textField.resignFirstResponder();
+            }else{
                 let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
-                CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!, completionHandler: { (added) in
-                    self.productListTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                })
+                CXDBSettings.sharedInstance.deleteCartItem(proListData.pID!)
+                self.productListTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
-            textField.resignFirstResponder();
         }else{
-            let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
-            CXDBSettings.sharedInstance.deleteCartItem(proListData.pID!)
-            self.productListTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            presentWindow?.makeToast(message: "Please enter quantity value")
         }
+
     }
 
     
@@ -248,12 +255,19 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
 extension ProductListCntl : UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        
+       /* let indexPath = NSIndexPath(forRow: textField.tag-1, inSection: 0)
         print("TextField should begin editing method called")
+        self.productListTableView.frame = CGRectMake(self.productListTableView.frame.origin.x, self.productListTableView.frame.origin.y, self.productListTableView.frame.size.width, self.productListTableView.frame.size.height-190)
+        self.productListTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)*/
         return true;
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
-        print("TextField should clear method called")
+       /* let indexPath = NSIndexPath(forRow: textField.tag-1, inSection: 0)
+        self.productListTableView.frame = CGRectMake(self.productListTableView.frame.origin.x, self.productListTableView.frame.origin.y, self.productListTableView.frame.size.width, self.productListTableView.frame.size.height)
+        self.productListTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+        print("TextField should clear method called")*/
         return true;
     }
     
@@ -272,8 +286,8 @@ extension ProductListCntl : UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
     
         if ((textField.text?.isEmpty) != nil) {
+            
         }
-
         
         print("button tag %d\(textField.tag)")
         print("TextField should return method called")
