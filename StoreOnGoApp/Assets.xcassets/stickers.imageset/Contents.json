@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "yamaha40x40.png",
+      "filename" : "150x170stickers-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "yamaha80x80.png",
+      "filename" : "150x170stickers-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "yamaha120x120.png",
+      "filename" : "150x170stickers.png",
       "scale" : "3x"
     }
   ],

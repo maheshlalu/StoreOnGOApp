@@ -7,12 +7,17 @@
 //
 
 import UIKit
-
+var IPHONE_4S = "iPhone_4s"
+var IPHONE_5S = "iPhone_5s"
+var IPHONE_6 = "iPhone_6"
+var IPHONE_6PLUS = "iPhone_6Plus"
+var NOT_IPHONE = "Not_iPhone"
 private var _SingletonSharedInstance:CXConstant! = CXConstant()
 
 class CXConstant: NSObject {
     
     class var sharedInstance : CXConstant {
+        
         return _SingletonSharedInstance
     }
     
@@ -30,12 +35,12 @@ class CXConstant: NSObject {
     static let headerViewHeigh : CGFloat = 65
     
     
-    static let pagerHeight : CGFloat = screenSize.height/2.8
+    static let pagerHeight : CGFloat = screenSize.height/3.3
     static let cartCellHeight : CGFloat = 50
     static let segmentFrame : CGRect = CGRectMake(0, headerViewHeigh, CXConstant.screenSize.width, 35)
     static let searchBarFrame : CGRect = CGRectMake(0, segmentFrame.origin.y+segmentFrame.size.height+1, UIScreen.mainScreen().bounds.size.width, headerViewHeigh-20)
-    static let pagerFrame : CGRect = CGRectMake(5, headerViewHeigh+2, UIScreen.mainScreen().bounds.size.width-10, pagerHeight)
-    static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y,screenSize.width, screenSize.height-pagerHeight-headerViewHeigh)
+    static let pagerFrame : CGRect = CGRectMake(2, headerViewHeigh+2, UIScreen.mainScreen().bounds.size.width-4, pagerHeight)
+    static let collectionFram : CGRect = CGRectMake(0, pagerHeight+pagerFrame.origin.y-10,screenSize.width, screenSize.height-pagerHeight-headerViewHeigh)
     
     static let homeCellBgColor : UIColor = UIColor(red: 236.0/255.0, green: 50.0/255.0, blue: 55.0/255.0, alpha: 1.0)
     static let homeBackGroundColr : UIColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
@@ -64,9 +69,11 @@ class CXConstant: NSObject {
     
     
     static let DetailTableView_Width = UIScreen.mainScreen().bounds.width-20
-    static let DetailCollectionCellSize :  CGSize = CGSize(width: screenSize.width/2.3+5.5,height: screenSize.width/2.3+5.5)
+    static let DetailCollectionCellSize :  CGSize = CGSize(width: screenSize.width/2.3+18,height: screenSize.width/2)
     
-    static let ProductCollectionCellSize :  CGSize = CGSize(width:screenSize.width/3.455555,height: 40)
+
+
+    static let ProductCollectionCellSize :  CGSize = CGSize(width:screenSize.width/3.455555+15,height: 43)
 
     // static let DetailCollectionCellSize :  CGSize = CGSize(width: 150,height: 150)
     
@@ -227,6 +234,31 @@ class CXConstant: NSObject {
         
     }
     
+    static func currentDeviceScreen() -> String {
+        let bounds = UIScreen.mainScreen().bounds
+        let height = bounds.size.height
+        
+        switch height {
+        case 480.0:
+            print("iPhone 3,4")
+            return IPHONE_4S
+        case 568.0:
+            print("iPhone 5")
+            return IPHONE_5S
+        case 667.0:
+            print("iPhone 6")
+            return IPHONE_6
+        case 736.0:
+            print("iPhone 6+")
+            return IPHONE_6PLUS
+            
+        default:
+            print("not an iPhone")
+            return NOT_IPHONE
+        }
+    }
 
+    
+    
     
 }

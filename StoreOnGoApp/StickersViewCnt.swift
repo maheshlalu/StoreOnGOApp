@@ -54,8 +54,10 @@ class StickersViewCnt: UIViewController {
 
         func setupCollectionView (){
             let layout = UICollectionViewFlowLayout()
-            layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
+            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 50, right: 5)
            // layout.itemSize = CXConstant.DetailCollectionCellSize
+            layout.minimumInteritemSpacing = 2
+            layout.minimumLineSpacing = 6
             self.stickersCollectionView = UICollectionView(frame: CGRectMake(0, CXConstant.headerViewHeigh,screenSize.width, screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
             self.stickersCollectionView.showsHorizontalScrollIndicator = false
             layout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -127,7 +129,8 @@ extension StickersViewCnt:UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 140, height: 160)
+        
+        return CGSize(width: screenSize.width/3.1555, height: screenSize.width/3)
         
     }
     

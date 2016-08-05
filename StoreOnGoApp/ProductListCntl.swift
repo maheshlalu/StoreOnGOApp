@@ -25,12 +25,12 @@ class ProductListCntl: UIViewController {
         //self.setTheNavigationProperty()
         presentWindow = UIApplication.sharedApplication().keyWindow
 
-        dispatch_async(dispatch_get_main_queue(),{
+     //   dispatch_async(dispatch_get_main_queue(),{
             self.designHeaderView()
             self.designProductListTableView()
             self.getTheProductsList()
             
-        })
+       // })
 
 
         // self.setUpTheSpreadSheetView()

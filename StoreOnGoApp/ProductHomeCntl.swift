@@ -90,9 +90,25 @@ class ProductHomeCntl: UIViewController {
     func setupCollectionView (){
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 200, right: 10)
-        layout.itemSize = CXConstant.ProductCollectionCellSize
+        layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 200, right: 2)
+        
+        if (CXConstant.currentDeviceScreen() == IPHONE_6) {
+           layout.itemSize = CGSize(width:screenSize.width/3.455555+15,height: 40)
+        }else if(CXConstant.currentDeviceScreen() == IPHONE_6PLUS){
+            layout.itemSize = CGSize(width:screenSize.width/3.455555+16,height: 41)
+        }else if(CXConstant.currentDeviceScreen() == IPHONE_5S){
+            layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 200, right: 7)
+            layout.itemSize = CGSize(width:screenSize.width/3.455555+7.3,height: 40)
+        }else if(CXConstant.currentDeviceScreen() == IPHONE_4S){
+            layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 200, right: 7)
+            layout.itemSize = CGSize(width:screenSize.width/3.455555+7,height: 38.5)
+        }else{
+            layout.itemSize = CXConstant.ProductCollectionCellSize
+        }
+        
         //self.view.frame
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         self.productCollectionView = UICollectionView(frame:CGRectMake(0,CXConstant.searchBarFrame.origin.y+CXConstant.searchBarFrame.size.height, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
         self.productCollectionView.showsHorizontalScrollIndicator = false
         self.productCollectionView.delegate = self
@@ -108,12 +124,12 @@ class ProductHomeCntl: UIViewController {
         //let fetchRequest = NSFetchRequest(entityName: "TABLE_PRODUCT_SUB_CATEGORIES")
         
         let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
-        let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
+        let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("id", ascending: false)
         fetchRequest.predicate = predicate
         fetchRequest.entity = productEn
         self.productCategories =   TABLE_PRODUCT_SUB_CATEGORIES.MR_executeFetchRequest(fetchRequest)
         self.productCollectionView.reloadData()
-        
+        //id
         
     }
 
@@ -194,7 +210,7 @@ extension ProductHomeCntl:UISearchBarDelegate{
     
     func doSearch () {
         let productEn = NSEntityDescription.entityForName("TABLE_PRODUCT_SUB_CATEGORIES", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
-        let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("name", ascending: true)
+        let fetchRequest = TABLE_PRODUCT_SUB_CATEGORIES.MR_requestAllSortedBy("id", ascending: false)
         var predicate:NSPredicate = NSPredicate()
         
         if isProductCategory {
@@ -256,6 +272,11 @@ extension ProductHomeCntl:UICollectionViewDelegate,UICollectionViewDataSource {
         
     }
     
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        
+//        return CXConstant.ProductCollectionCellSize
+//        
+//    }
     
     
 }

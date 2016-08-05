@@ -8,11 +8,15 @@
 
 import UIKit
 
+
+
 class ProductsCnt: UIViewController {
     var productCollectionView: UICollectionView!
     var productCategories: NSMutableArray!
     var headerview: HeaderView!
 
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +52,9 @@ class ProductsCnt: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CXConstant.ProductCollectionCellSize
+
+            layout.itemSize = CXConstant.ProductCollectionCellSize
+    
         //self.view.frame
         self.productCollectionView = UICollectionView(frame:CGRectMake(0,0, CXConstant.screenSize.width, CXConstant.screenSize.height), collectionViewLayout: layout)
         self.productCollectionView.showsHorizontalScrollIndicator = false

@@ -18,13 +18,13 @@ class StickerDetails: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dispatch_async(dispatch_get_main_queue(),{
+      //  dispatch_async(dispatch_get_main_queue(),{
             self.designHeaderView()
             self.designSearchBar()
             self.setupCollectionView()
             self.getTheProductsList()
             self.view.backgroundColor = CXConstant.homeBackGroundColr
-        })
+      //  })
 
 
         // Do any additional setup after loading the view.
@@ -50,8 +50,10 @@ class StickerDetails: UIViewController {
     
     func setupCollectionView (){
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 10, bottom: 50, right: 10)
         layout.itemSize = CXConstant.DetailCollectionCellSize
+        layout.minimumLineSpacing = 6
+        layout.minimumInteritemSpacing = 2
         self.stickersCollectionView = UICollectionView(frame: CGRectMake(0, CXConstant.headerViewHeigh+self.searchBar.frame.size.height,screenSize.width, screenSize.height-CXConstant.headerViewHeigh), collectionViewLayout: layout)
         self.stickersCollectionView.showsHorizontalScrollIndicator = false
         layout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -138,20 +140,29 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView,
+    func collectionView(collectionView: UICollectionView,                                                                                                                                                                                                                                                                                                                                                                               
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 140, height: 160)
-        
+        if (CXConstant.currentDeviceScreen() == IPHONE_5S) {
+            return CGSize(width: screenSize.width/2.1555, height: screenSize.width/2)
+        }else if (CXConstant.currentDeviceScreen() == IPHONE_4S){
+            return CGSize(width: screenSize.width/2.1555, height: screenSize.width/2)
+        }else if(CXConstant.currentDeviceScreen() == IPHONE_6PLUS){
+            return CGSize(width: screenSize.width/2.1555, height: screenSize.width/2.52)
+        }else if(CXConstant.currentDeviceScreen() == IPHONE_6){
+            return CGSize(width: screenSize.width/2.1555, height: screenSize.width/2.37)
+        }
+        return CGSize(width: screenSize.width/2.1555, height: screenSize.width/2)
+
     }
     
     func addToCartButton (button : UIButton!){
         let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
         if(!button.selected){
         let cell = self.stickersCollectionView.cellForItemAtIndexPath(indexPath)
-        let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
+        let textField : UITextField = cell?.contentView.viewWithTag((button?.tag)!) as! UITextField
         print("button tag %d\(textField.text)")
-        if (!((textField.text?.isEmpty)!)) {
+        if (!(textField.text?.isEmpty)!) {
             let proListData : CX_Products = self.stickersList[button.tag-1] as! CX_Products
             CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!, completionHandler: { (added) in
                 self.stickersCollectionView.reloadItemsAtIndexPaths([indexPath])

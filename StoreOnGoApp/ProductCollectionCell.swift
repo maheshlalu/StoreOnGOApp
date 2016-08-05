@@ -38,6 +38,7 @@ class ProductCollectionCell: UICollectionViewCell {
         textLabel = UILabel(frame: textFrame)
         textLabel.font = UIFont(name:"Roboto-Regular",size:8)
         textLabel.textAlignment = .Center
+        textLabel.numberOfLines = 0
         //textLabel.font = UIFont.boldSystemFontOfSize(10)
         contentView.addSubview(textLabel)
         //textLabel.text = "Mahesh Babu with muragadash"

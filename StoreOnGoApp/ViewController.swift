@@ -50,7 +50,7 @@ class ViewController: UIViewController{
     
     //MARK : HeaderView
     func designHeaderView (){
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "NV Agencies", andDelegate: self, backButtonVisible: false, cartBtnVisible: true)
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Home", andDelegate: self, backButtonVisible: false, cartBtnVisible: true)
         self.view.addSubview(heder)
         return
       /*  self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
@@ -104,8 +104,14 @@ class ViewController: UIViewController{
     func setupCollectionView (){
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
+       
+        layout.sectionInset = UIEdgeInsets(top: 2, left: 7, bottom: 50, right: 7)
+        if (CXConstant.currentDeviceScreen() == IPHONE_6PLUS) {
+            layout.sectionInset = UIEdgeInsets(top: 2, left: 8, bottom: 50, right: 8)
+        }
         layout.itemSize = CXConstant.DetailCollectionCellSize
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 2.2
         self.homeCollectionView = UICollectionView(frame: CXConstant.collectionFram, collectionViewLayout: layout)
         self.homeCollectionView.showsHorizontalScrollIndicator = false
         layout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -144,7 +150,7 @@ extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
     
     func contentModeForImage(image: UInt, inPager pager: KIImagePager!) -> UIViewContentMode {
         
-        return .ScaleAspectFill
+        return .ScaleToFill
     }
     
     func arrayWithImages(pager: KIImagePager!) -> [AnyObject]! {
@@ -155,6 +161,16 @@ extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
 
 
 extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
+    
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//         if(CXConstant.currentDeviceScreen() == IPHONE_6PLUS){
+//            return CGSize(width: screenSize.width/2.15552, height: screenSize.width/2)
+//        }
+        return CGSize(width: screenSize.width/2.15552, height: screenSize.width/2)
+        
+    }
     
     func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
@@ -172,10 +188,11 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             collectionView.registerNib(UINib(nibName: "HomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
         }
        // cell.backgroundColor = UIColor.redColor()
-        cell.titleLabel.text = homeListTitles[indexPath.row]
+       // cell.titleLabel.text = homeListTitles[indexPath.row]
         cell.iconImageView.image = UIImage(named: homeList[indexPath.row])
         return cell
     }
+    
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
