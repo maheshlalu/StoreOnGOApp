@@ -9,7 +9,10 @@
 #import "CXHeaderView.h"
 #import <CoreData+MagicalRecord.h>
 
-@implementation CXHeaderView
+@implementation CXHeaderView{
+
+    UILabel *titileLbl;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -33,7 +36,7 @@
                                                      name:@"updateCartBtnAction"
                                                    object:nil];
         
-        [self setBackgroundColor:[UIColor grayColor]];
+        [self setBackgroundColor:[UIColor colorWithRed:114.0f/255.0f green:114.0f/255.0f blue:114.0f/255.0f alpha:1.0f]];
         [self loadSubViewsandTitle:inTitle andDelegate:self backButtonVisible:isVisible cartBtnVisible:visible];
     }
     return self;
@@ -61,11 +64,18 @@
     
     CGRect  screenSize  = [[UIScreen mainScreen] bounds];
     UIButton *backBtn = [self createButtonWithFrame:CGRectMake(10, 20, 35, 40) backroundImageView:[UIImage imageNamed:@"appLogo"] isCartButton:NO];
+    [backBtn setBackgroundColor:[UIColor clearColor]];
     self.cartBtn= [self cartButtonCreationWithFrame:CGRectMake(screenSize.size.width-60, 15, 50, 50) backroundImageView:[UIImage imageNamed:@"cart"] isCartButton:YES];
     
     if (isVisible) {
         [backBtn addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
         [backBtn setBackgroundImage:[UIImage imageNamed:@"backImg"] forState:UIControlStateNormal];
+        
+        UIImageView *dot =[[UIImageView alloc] initWithFrame:CGRectMake(backBtn.frame.size.width + 5, 20, 35, 40)];
+        dot.image=[UIImage imageNamed:@"appLogo"];
+        [self addSubview:dot];
+        
+        
         
     }else{
         backBtn.userInteractionEnabled = NO;
@@ -77,12 +87,15 @@
     //imageView.tint = [UIColor redColor];
     [self addSubview:backBtn];
     
-    
-    UILabel *titileLbl = [[UILabel alloc] initWithFrame:CGRectMake(backBtn.frame.size.width+15, 20, 300, 40)];
+   
+    titileLbl = [[UILabel alloc] initWithFrame:CGRectMake(backBtn.frame.size.width+20+35+5, 20, 200, 40)];
     titileLbl.text = inTitle;
     titileLbl.textColor = [UIColor whiteColor];
     titileLbl.textAlignment = NSTextAlignmentLeft;
     titileLbl.font = [UIFont fontWithName:@"Roboto-Bold" size:15.0f];
+    if (!isVisible) {
+        titileLbl.frame = CGRectMake(backBtn.frame.size.width+20, 20, 200, 40);
+    }
     [self addSubview:titileLbl];
     
     

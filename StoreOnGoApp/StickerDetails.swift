@@ -123,7 +123,7 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
         cell.itemCodeLbl.text = proListData.itemCode
         cell.addToCartBtn.tag = indexPath.row+1
         cell.quantityTxt.delegate = self
-        cell.quantityTxt.tag = indexPath.row+1
+        cell.quantityTxt.tag = indexPath.row+2
         cell.addToCartBtn.selected = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).isAdded
         cell.addToCartBtn.backgroundColor = CXDBSettings.sharedInstance.isAddToCart(proListData.pID!).isAdded ? CXConstant.checkOutBtnColor: UIColor.whiteColor()
 
@@ -160,7 +160,7 @@ extension StickerDetails:UICollectionViewDelegate,UICollectionViewDataSource {
         let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
         if(!button.selected){
         let cell = self.stickersCollectionView.cellForItemAtIndexPath(indexPath)
-        let textField : UITextField = cell?.contentView.viewWithTag((button?.tag)!) as! UITextField
+        let textField : UITextField = cell?.contentView.viewWithTag((button.tag+1)) as! UITextField
         print("button tag %d\(textField.text)")
         if (!(textField.text?.isEmpty)!) {
             let proListData : CX_Products = self.stickersList[button.tag-1] as! CX_Products
