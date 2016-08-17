@@ -14,7 +14,8 @@ var IPHONE_6PLUS = "iPhone_6Plus"
 var NOT_IPHONE = "Not_iPhone"
 private var _SingletonSharedInstance:CXConstant! = CXConstant()
 
-class CXConstant: NSObject {
+class CXConstant: NSObject, UIActionSheetDelegate{
+    
     
     class var sharedInstance : CXConstant {
         
@@ -97,13 +98,13 @@ class CXConstant: NSObject {
     
     //MARK: Cart
     
-    static let cartItemCodeLblFrame : CGRect = CGRectMake(0, 0, screenSize.width/7-1, 50) //8.28
+    static let cartItemCodeLblFrame : CGRect = CGRectMake(20, 0, screenSize.width/7-1, 50) //8.28
     
-    static let cartItemNameLblFrame : CGRect = CGRectMake(cartItemCodeLblFrame.size.width+1, 0,screenSize.width/3.18, 50) //3.18
+    static let cartItemNameLblFrame : CGRect = CGRectMake(cartItemCodeLblFrame.size.width+35, 0,screenSize.width/3.18, 50) //3.18
     
-    static let cartItemQuantityFrame : CGRect = CGRectMake(cartItemNameLblFrame.size.width+1+cartItemNameLblFrame.origin.x, 0, screenSize.width/7, 50)//8.28
+    static let cartItemQuantityFrame : CGRect = CGRectMake(cartItemNameLblFrame.size.width+25+cartItemNameLblFrame.origin.x, 0, screenSize.width/7, 50)//8.28
     
-    static let cartItemtextFrame : CGRect = CGRectMake(cartItemQuantityFrame.size.width+1+cartItemQuantityFrame.origin.x, 0, screenSize.width/7, 50)//8.28
+    static let cartItemtextFrame : CGRect = CGRectMake(cartItemQuantityFrame.size.width+15+cartItemQuantityFrame.origin.x, 0, screenSize.width/7, 50)//8.28
     
 
     
@@ -258,6 +259,29 @@ class CXConstant: NSObject {
         }
     }
 
+    func profileAction(titleString:NSString, itemsArray:NSArray, isLogoutVisible:Bool) -> UIAlertController{
+
+        let actionSheet = UIAlertController(title: titleString as String, message: nil, preferredStyle: .ActionSheet)
+        let profileBtn = UIAlertAction(title: itemsArray[0] as? String, style: .Default, handler: { (action) -> Void in
+            print("Ok Button Pressed")
+        })
+        let logoutBtn = UIAlertAction(title: itemsArray[1] as? String, style: .Default, handler: { (action) -> Void in
+            print("Cancel Button Pressed")
+        })
+        let  cancel = UIAlertAction(title: "Delete", style: .Cancel) { (action) -> Void in
+            print("Delete Button Pressed")
+        }
+        if isLogoutVisible == true {
+            actionSheet.addAction(profileBtn)
+            actionSheet.addAction(logoutBtn)
+            actionSheet.addAction(cancel)
+        }else{
+        actionSheet.addAction(profileBtn)
+        actionSheet.addAction(cancel)
+        }
+        
+        return actionSheet
+    }
     
     
     

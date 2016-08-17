@@ -307,14 +307,21 @@ extension ViewController : HeaderViewDelegate {
         
         }
     
+    func presentViewController(popUpView: CAPopUpViewController!) {
+        self.presentViewController(popUpView, animated: true) { 
+            
+        }
+    }
+    
     func cartButtonAction(){
         let cartView : CartViewCntl = CartViewCntl.init()
         self.navigationController?.pushViewController(cartView, animated: false)
         
     }
-
     
+    func navigationProfileandLogout(isProfile: Bool) {
+//        let cartView : cxsig = CartViewCntl.init()
+//        self.navigationController?.pushViewController(cartView, animated: false)
+    }
+
 }
-
-
-

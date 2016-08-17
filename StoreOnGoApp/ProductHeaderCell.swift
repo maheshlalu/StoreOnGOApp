@@ -29,8 +29,8 @@ class ProductHeaderCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(self.createLabel(CXConstant.itemCodeLblFrame, titleString: "ITEM CODE"))
         self.addSubview(self.createLabel(CXConstant.itemNameLblFrame, titleString: "ITEM NAME"))
-        self.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: "QUANTITY"))
-        self.addSubview(self.createLabel(CXConstant.itemtextFrame, titleString: ""))
+        self.addSubview(self.createLabel(CXConstant.itemQuantityFrame, titleString: ""))
+        self.addSubview(self.createLabel(CXConstant.itemtextFrame, titleString: "QUANTITY"))
         self.addSubview(self.createLabel(CXConstant.addtoCartFrame, titleString: ""))
 
     }

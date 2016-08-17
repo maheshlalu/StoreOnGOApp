@@ -142,11 +142,18 @@ extension StickersViewCnt : HeaderViewDelegate {
     func backButtonAction (){
         self.navigationController?.popViewControllerAnimated(true)
     }
+    func presentViewController(popUpView: CAPopUpViewController!) {
+        self.presentViewController(popUpView, animated: true) {
+            
+        }
+    }
+    
     
     func cartButtonAction(){
         let cartView : CartViewCntl = CartViewCntl.init()
         self.navigationController?.pushViewController(cartView, animated: false)
-        
     }
+    
+
     
 }

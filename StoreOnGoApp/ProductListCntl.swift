@@ -324,11 +324,18 @@ extension ProductListCntl : HeaderViewDelegate {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-      func cartButtonAction(){
+    func presentViewController(popUpView: CAPopUpViewController!) {
+        self.presentViewController(popUpView, animated: true) {
+            
+        }
+    }
+    
+    func cartButtonAction(){
         let cartView : CartViewCntl = CartViewCntl.init()
         self.navigationController?.pushViewController(cartView, animated: false)
-
+        
     }
+    
 }
 
 

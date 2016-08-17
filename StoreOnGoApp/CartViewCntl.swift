@@ -206,7 +206,7 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
         let  textLabel: UILabel = UILabel(frame: textFrame)
         // textLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
         textLabel.textAlignment = .Center
-        textLabel.font = UIFont(name:"Roboto-Regular",size:8)
+        textLabel.font = UIFont(name:"Roboto-Regular",size:10)
         //textLabel.font = UIFont.boldSystemFontOfSize(13.0)
         textLabel.text = titleString as String
         textLabel.textColor = UIColor.blackColor()
@@ -260,12 +260,18 @@ extension CartViewCntl : HeaderViewDelegate {
     func backButtonAction (){
         self.navigationController?.popViewControllerAnimated(true)
     }
+    func presentViewController(popUpView: CAPopUpViewController!) {
+        self.presentViewController(popUpView, animated: true) {
+            
+        }
+    }
     
     func cartButtonAction(){
         let cartView : CartViewCntl = CartViewCntl.init()
         self.navigationController?.pushViewController(cartView, animated: false)
-        
     }
+
+    
 }
 
 extension CartViewCntl : UITextFieldDelegate {

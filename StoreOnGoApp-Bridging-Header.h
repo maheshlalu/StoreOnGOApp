@@ -14,4 +14,5 @@
 #import "CXHeaderView.h"
 #import "JSONKit.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "CAPopUpViewController.h"
 #endif /* StoreOnGoApp_Bridging_Header_h */

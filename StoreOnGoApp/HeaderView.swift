@@ -50,7 +50,6 @@ class HeaderView: UIView {
         headerLbl.font = UIFont(name:"Roboto-Regular",size:13)
         headerLbl.textColor = UIColor.whiteColor()
         headerView.addSubview(headerLbl)
-        
         headerLbl.addSubview(appLogo)
         
         let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
@@ -72,6 +71,9 @@ class HeaderView: UIView {
         cartBtn.badgeEdgeInsets = UIEdgeInsetsMake(10, 10, 0, 15)
         cartBtn.badgeBackgroundColor = UIColor.whiteColor()
         cartBtn.badgeTextColor = UIColor.redColor()
+        
+        
+        
         
 
         if cartButtonVisible {

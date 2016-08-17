@@ -68,6 +68,10 @@
 		12FBC0141D3CAF3200C8EBFE /* orderItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBC0121D3CAF3200C8EBFE /* orderItemCell.swift */; };
 		12FBC0151D3CAF3200C8EBFE /* orderItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12FBC0131D3CAF3200C8EBFE /* orderItemCell.xib */; };
 		3B191ED41D4F29E8006360C5 /* HRToast+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B191ED31D4F29E8006360C5 /* HRToast+UIView.swift */; };
+		435D89FB1D64668E00D54175 /* CAPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 435D89FA1D64668E00D54175 /* CAPopUpViewController.m */; };
+		435D8A3E1D64944400D54175 /* CXSignInSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D8A3C1D64944400D54175 /* CXSignInSignUpViewController.swift */; };
+		435D8A3F1D64944400D54175 /* CXSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D8A3D1D64944400D54175 /* CXSignUpViewController.swift */; };
+		435D8A411D64983900D54175 /* UIColor+SMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D8A401D64983900D54175 /* UIColor+SMColor.swift */; };
 		480F395D238FF629935C353B /* libPods-StoreOnGoAppUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC03F50242D4DA5D822A301 /* libPods-StoreOnGoAppUITests.a */; };
 		AA01632F1CD2073B00EA1619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01632E1CD2073B00EA1619 /* AppDelegate.swift */; };
 		AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0163301CD2073B00EA1619 /* ViewController.swift */; };
@@ -174,6 +178,11 @@
 		3B191ED31D4F29E8006360C5 /* HRToast+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HRToast+UIView.swift"; sourceTree = "<group>"; };
 		3B89FEE5B5A058470CE52CD3 /* libPods-StoreOnGoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC03F50242D4DA5D822A301 /* libPods-StoreOnGoAppUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoAppUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		435D89F91D64668E00D54175 /* CAPopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPopUpViewController.h; sourceTree = "<group>"; };
+		435D89FA1D64668E00D54175 /* CAPopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPopUpViewController.m; sourceTree = "<group>"; };
+		435D8A3C1D64944400D54175 /* CXSignInSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSignInSignUpViewController.swift; sourceTree = "<group>"; };
+		435D8A3D1D64944400D54175 /* CXSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSignUpViewController.swift; sourceTree = "<group>"; };
+		435D8A401D64983900D54175 /* UIColor+SMColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+SMColor.swift"; sourceTree = "<group>"; };
 		44088E14120EE125DF2D6B15 /* Pods-StoreOnGoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppTests/Pods-StoreOnGoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		639A3E67E26A3965EB6B1BC6 /* Pods-StoreOnGoAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreOnGoAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StoreOnGoAppUITests/Pods-StoreOnGoAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		727D4928F4885D686A3E9D43 /* libPods-StoreOnGoAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,6 +276,7 @@
 		1220DCD71CD4DC7900A78C3B /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				435D89F81D64668100D54175 /* PopUp */,
 				AA811DF91CFC7AC300A13F98 /* Json */,
 				12EF6BDA1CFB485F009E17B6 /* EGOCache.h */,
 				12EF6BDB1CFB485F009E17B6 /* EGOCache.m */,
@@ -357,6 +367,15 @@
 			name = ToastMessage;
 			sourceTree = "<group>";
 		};
+		435D89F81D64668100D54175 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				435D89F91D64668E00D54175 /* CAPopUpViewController.h */,
+				435D89FA1D64668E00D54175 /* CAPopUpViewController.m */,
+			);
+			name = PopUp;
+			sourceTree = "<group>";
+		};
 		AA0163221CD2073B00EA1619 = {
 			isa = PBXGroup;
 			children = (
@@ -435,10 +454,13 @@
 				12100C321CD91C1D00A44C0D /* HeaderCell */,
 				12F64D901CD63A08007D760C /* CXDetailTableViewCell.swift */,
 				12F859491CD3D80B007BE1D0 /* ProductCollectionCell.swift */,
+				435D8A401D64983900D54175 /* UIColor+SMColor.swift */,
 				1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */,
 				12F64D8A1CD5B52F007D760C /* HeaderView.swift */,
 				12F64D8C1CD5B923007D760C /* SearchBar.swift */,
 				122805961CDE3C0D000343AC /* LoadingView.swift */,
+				435D8A3C1D64944400D54175 /* CXSignInSignUpViewController.swift */,
+				435D8A3D1D64944400D54175 /* CXSignUpViewController.swift */,
 				12C91DE11CFAB70B001AD55A /* CXHeaderView.h */,
 				12C91DE21CFAB70B001AD55A /* CXHeaderView.m */,
 			);
@@ -808,11 +830,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				126F82771CDF6F57003C3DE4 /* TABLE_PRODUCT_SUB_CATEGORIES.swift in Sources */,
+				435D8A3E1D64944400D54175 /* CXSignInSignUpViewController.swift in Sources */,
 				126F82691CDF6F24003C3DE4 /* StoreOnGoData.xcdatamodeld in Sources */,
 				126F82761CDF6F57003C3DE4 /* TABLE_PRODUCT_SUB_CATEGORIES+CoreDataProperties.swift in Sources */,
 				AA0163311CD2073B00EA1619 /* ViewController.swift in Sources */,
 				12C96E9C1CD51E9200E42A78 /* CX_AppData.swift in Sources */,
 				128564D21CE75CD0006210EA /* MIBadgeButton.swift in Sources */,
+				435D8A411D64983900D54175 /* UIColor+SMColor.swift in Sources */,
 				121311121CF413F7003DFCE2 /* CX_Cart.swift in Sources */,
 				12F42B821D11053600C3BA63 /* CX_StickerCell.swift in Sources */,
 				1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */,
@@ -843,6 +867,7 @@
 				12F8594A1CD3D80B007BE1D0 /* ProductCollectionCell.swift in Sources */,
 				AA811DFC1CFC7ACC00A13F98 /* JSONKit.m in Sources */,
 				12F10A321CDF0C9B007C8F5B /* AboutUsViewCnt.swift in Sources */,
+				435D89FB1D64668E00D54175 /* CAPopUpViewController.m in Sources */,
 				12F10A2A1CDEF23D007C8F5B /* ProductHomeCntl.swift in Sources */,
 				AA65A72A1CF71D7D00696A63 /* AutocompleteField.swift in Sources */,
 				126F82741CDF6F57003C3DE4 /* CX_Products+CoreDataProperties.swift in Sources */,
@@ -851,6 +876,7 @@
 				12100C311CD90F1900A44C0D /* ProductListCntl.swift in Sources */,
 				126F827C1CDF6F57003C3DE4 /* CX_Stores+CoreDataProperties.swift in Sources */,
 				AA65A72D1CF7354800696A63 /* UserDetailsCnt.swift in Sources */,
+				435D8A3F1D64944400D54175 /* CXSignUpViewController.swift in Sources */,
 				121311111CF413F7003DFCE2 /* CX_Cart+CoreDataProperties.swift in Sources */,
 				12F64D8D1CD5B923007D760C /* SearchBar.swift in Sources */,
 				122805971CDE3C0D000343AC /* LoadingView.swift in Sources */,

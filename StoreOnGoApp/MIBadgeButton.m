@@ -99,12 +99,12 @@
     self.badgeTextColor = [UIColor whiteColor];
     [badgeLabel setFont:[UIFont fontWithName:@"Roboto-Bold" size:15.0f]];
     CGSize badgeSize = [badgeLabel sizeThatFits:CGSizeMake(320, FLT_MAX)];
-    badgeSize.width = badgeSize.width < 20 ? 25 : badgeSize.width + 5;
+    badgeSize.width = badgeSize.width < 10 ? 15 : badgeSize.width + 5;
 
     int vertical = self.badgeEdgeInsets.top - self.badgeEdgeInsets.bottom;
     int horizontal = self.badgeEdgeInsets.left - self.badgeEdgeInsets.right;
     
-    [badgeLabel setFrame:CGRectMake(self.bounds.size.width - 10 + horizontal, -(badgeSize.height / 2) - 10 + vertical, badgeSize.width,  badgeSize.width > 25 ? badgeSize.height : badgeSize.width)];
+    [badgeLabel setFrame:CGRectMake(self.bounds.size.width + horizontal, -(badgeSize.height / 2) - 10 + vertical, badgeSize.width,  badgeSize.width > 25 ? badgeSize.height : badgeSize.width)];
     [self setupBadgeStyle];
     [self addSubview:badgeLabel];
     

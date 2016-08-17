@@ -9,9 +9,10 @@
 #import "CXHeaderView.h"
 #import <CoreData+MagicalRecord.h>
 
-@implementation CXHeaderView{
+@implementation CXHeaderView {
 
     UILabel *titileLbl;
+
 }
 
 /*
@@ -65,8 +66,9 @@
     CGRect  screenSize  = [[UIScreen mainScreen] bounds];
     UIButton *backBtn = [self createButtonWithFrame:CGRectMake(10, 20, 35, 40) backroundImageView:[UIImage imageNamed:@"appLogo"] isCartButton:NO];
     [backBtn setBackgroundColor:[UIColor clearColor]];
-    self.cartBtn= [self cartButtonCreationWithFrame:CGRectMake(screenSize.size.width-60, 15, 50, 50) backroundImageView:[UIImage imageNamed:@"cart"] isCartButton:YES];
-    
+    self.cartBtn= [self cartButtonCreationWithFrame:CGRectMake(screenSize.size.width-50, 26, 30, 30) backroundImageView:[UIImage imageNamed:@"cart"] isCartButton:YES];//90
+   // self.profileBtn= [self createProfileBtnWithFrame:CGRectMake(screenSize.size.width-50, 26, 30, 30) backroundImageView:[UIImage imageNamed:@"profileBtn"]];
+
     if (isVisible) {
         [backBtn addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
         [backBtn setBackgroundImage:[UIImage imageNamed:@"backImg"] forState:UIControlStateNormal];
@@ -117,6 +119,48 @@
     
 }
 
+- (void)profileBtnAction:(UIButton*)btn{
+    
+//    if ([self.delegate respondsToSelector:@selector(backButtonAction)]) {
+//        [self.delegate profileBtnAction];
+//    }
+    NSString *sendName = [[NSBundle mainBundle] localizedStringForKey:@"Profile" value:@"" table:nil];
+    NSString *schuName = [[NSBundle mainBundle] localizedStringForKey:@"Logout" value:@"" table:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CAPopUpViewController *popup = [[CAPopUpViewController alloc] init];
+        popup.itemsArray = @[sendName, schuName];
+        popup.sourceView = btn;
+        popup.backgroundColor = [UIColor whiteColor];
+        popup.backgroundImage = nil;
+        popup.itemTitleColor = [UIColor blackColor];
+        popup.itemSelectionColor = [UIColor lightGrayColor];
+        popup.arrowDirections = UIPopoverArrowDirectionAny;
+        popup.arrowColor = [UIColor whiteColor];
+        [popup setPopCellBlock:^(CAPopUpViewController *popupVC, UITableViewCell *popupCell, NSInteger row, NSInteger section) {
+            if ([popupCell.textLabel.text isEqualToString:sendName]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [popupVC dismissViewControllerAnimated:YES completion:^{
+                        //[self.delegate navigationProfileandLogout:YES];
+                    }];
+                });
+                
+            } else if ([popupCell.textLabel.text isEqualToString:schuName]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [popupVC dismissViewControllerAnimated:YES completion:^{
+                        
+                    }];
+                });
+            }
+        }];
+        [self.delegate presentViewController:popup];
+        
+    });
+    
+}
+
+
 
 - (MIBadgeButton*)cartButtonCreationWithFrame:(CGRect)frame backroundImageView:(UIImage*)inImage isCartButton:(BOOL)isCartBtn{
     
@@ -157,6 +201,16 @@
     
 }
 
+- (UIButton*)createProfileBtnWithFrame:(CGRect)frame backroundImageView:(UIImage*)inImage{
+    
+    UIButton *profileBtn = [[UIButton alloc] initWithFrame:frame];
+    profileBtn.showsTouchWhenHighlighted = YES;
+    profileBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [profileBtn setBackgroundImage:inImage forState:UIControlStateNormal];
+    [profileBtn addTarget:self action:@selector(profileBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:profileBtn];
+    return profileBtn;
+}
 
 - (NSString*)cartCount{
     
