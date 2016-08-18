@@ -28,13 +28,12 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
     
     var signInBtn:UIButton!
     var signUpBtn: UIButton!
-    
+    var heder: UIView!
     var orgID:String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.grayColor()
-        self.setTheNavigationProperty()
+        self.view.backgroundColor = UIColor.whiteColor()
         self.designHeaderView()
         self.customizeMainView()
     }
@@ -43,64 +42,24 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func setTheNavigationProperty(){
-        super.viewDidLoad()
-        self.title = "WELOCOME TO NV AGENCIES"
-        //self.designHeaderView()
-        self.navigationController?.navigationBarHidden = false
-        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController!.navigationBar.barTintColor = UIColor.grayColor()
-        navigationController!.navigationBar.titleTextAttributes =
-            [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Roboto-Regular", size: 15)!]
-        self.navigationController!.navigationBar.frame = CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh)
-        
-    }
-    
-    
+
     func designHeaderView (){
         
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: true)
+        heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false,profileBtnVisible: false)
         
         self.view.addSubview(heder)
         
     }
-//
-//    func customizeHeaderView() {
-//        self.navigationController?.navigationBar.translucent = false;
-//        self.navigationController?.navigationBar.barTintColor = UIColor.navBarColor()
-//        
-//        let lImage = UIImage(named: "left_aarow.png") as UIImage?
-//        let button = UIButton (type: UIButtonType.Custom) as UIButton
-//        button.frame = CGRectMake(0, 0, 40, 40)
-//        button.setImage(lImage, forState: .Normal)
-//        button.backgroundColor = UIColor.clearColor()
-//        button.addTarget(self, action: #selector(CXSignUpViewController.backAction), forControlEvents: .TouchUpInside)
-//        
-//        let navSpacer: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.FixedSpace,target: nil, action: nil)
-//        navSpacer.width = -16;
-//        self.navigationItem.leftBarButtonItems = [navSpacer,UIBarButtonItem.init(customView: button)]
-//        
-//        
-//        let tLabel : UILabel = UILabel()
-//        tLabel.frame = CGRectMake(0, 0, 120, 40);
-//        tLabel.backgroundColor = UIColor.clearColor()
-//        tLabel.font = UIFont.init(name: "Roboto-Bold", size: 18)
-//        tLabel.text = "Sign up"
-//        tLabel.textAlignment = NSTextAlignment.Center
-//        tLabel.textColor = UIColor.whiteColor()
-//        self.navigationItem.titleView = tLabel
-//    }
-    
+
     func customizeMainView() {
-        self.cScrollView = UIScrollView.init(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-65))
-        self.cScrollView.contentSize = CGSizeMake(self.view.frame.size.width, 600)
+        self.cScrollView = UIScrollView.init(frame: CGRectMake(0, CXConstant.headerViewHeigh+20, self.view.frame.size.width, (self.view.frame.size.height - CXConstant.headerViewHeigh)))
+        self.cScrollView.backgroundColor = UIColor.clearColor()
+        // self.cScrollView.contentSize = CGSizeMake(self.view.frame.size.width,600)
         self.view.addSubview(self.cScrollView)
         
-        let signUpLbl = UILabel.createHeaderLabel(CGRectMake(20, 0, self.cScrollView.frame.size.width-40, 40), text: "Sign Up",font:UIFont.init(name: "Roboto-Bold", size: 18)!)
+        let signUpLbl = UILabel.createHeaderLabel(CGRectMake(20, 0, self.cScrollView.frame.size.width-40, 50), text: "Sign Up",font:UIFont.init(name: "Roboto-Regular", size: 40)!)
         self.cScrollView.addSubview(signUpLbl)
-        let signUpSubLbl = UILabel.createHeaderLabel(CGRectMake(20, signUpLbl.frame.origin.y+signUpLbl.frame.size.height, self.cScrollView.frame.size.width-40, 40), text: "Sign up with email address",font:UIFont.init(name: "Roboto-Regular", size: 14)!)
+        let signUpSubLbl = UILabel.createHeaderLabel(CGRectMake(20, signUpLbl.frame.origin.y+signUpLbl.frame.size.height-10, self.cScrollView.frame.size.width-40, 40), text: "Sign up with email address",font:UIFont.init(name: "Roboto-Regular", size: 14)!)
         self.cScrollView.addSubview(signUpSubLbl)
         
         self.firstNameField = self.createField(CGRectMake(30, signUpSubLbl.frame.size.height+signUpSubLbl.frame.origin.y+20, self.cScrollView.frame.size.width-60, 40), tag: 1, placeHolder: "First Name")
@@ -122,11 +81,13 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
         self.passwordField.secureTextEntry = true
         self.cScrollView.addSubview(self.passwordField)
         
-        self.signUpBtn = self.createButton(CGRectMake(25, self.passwordField.frame.size.height+self.passwordField.frame.origin.y+30, self.view.frame.size.width-50, 40), title: "SIGN UP", tag: 3, bgColor: UIColor.signUpColor())
+        self.signUpBtn = self.createButton(CGRectMake(25, self.passwordField.frame.size.height+self.passwordField.frame.origin.y+30, self.view.frame.size.width-50, 50), title: "SIGN UP", tag: 3, bgColor: UIColor.signUpColor())
+        self.signUpBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         //self.signUpBtn.addTarget(self, action: #selector(CXSignUpViewController.signUpBtnAction), forControlEvents: .TouchUpInside)
         self.cScrollView.addSubview(self.signUpBtn)
         
-        self.signInBtn = self.createButton(CGRectMake(25, self.signUpBtn.frame.size.height+self.signUpBtn.frame.origin.y+30, self.view.frame.size.width-50, 40), title: "SIGN IN", tag: 3, bgColor: UIColor.signInColor())
+        self.signInBtn = self.createButton(CGRectMake(25, self.signUpBtn.frame.size.height+self.signUpBtn.frame.origin.y+20, self.view.frame.size.width-50, 50), title: "SIGN IN", tag: 3, bgColor: UIColor.signInColor())
+        self.signInBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.signInBtn.addTarget(self, action: #selector(CXSignUpViewController.signInBtnAction), forControlEvents: .TouchUpInside)
         self.cScrollView.addSubview(self.signInBtn)
         
@@ -316,4 +277,27 @@ extension UILabel {
         cLabel.textColor = UIColor.darkGrayColor()
         return cLabel
     }
+    
+
+}
+
+extension CXSignUpViewController : HeaderViewDelegate {
+    func backButtonAction (){
+        let viewController: UIViewController = self.navigationController!.viewControllers[1]
+        self.navigationController!.popToViewController(viewController, animated: true)
+    }
+    
+    func presentViewController(popUpView: CAPopUpViewController!) {
+        self.presentViewController(popUpView, animated: true) {
+
+        }
+    }
+    
+    func cartButtonAction(){
+        
+    }
+    func navigationProfileandLogout(isProfile: Bool) {
+
+    }
+    
 }

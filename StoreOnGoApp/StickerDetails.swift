@@ -31,7 +31,7 @@ class StickerDetails: UIViewController {
     }
 
     func designHeaderView (){
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true)
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true ,profileBtnVisible: true)
         self.view.addSubview(heder)
         
     }
@@ -194,6 +194,10 @@ extension StickerDetails : HeaderViewDelegate {
         let cartView : CartViewCntl = CartViewCntl.init()
         self.navigationController?.pushViewController(cartView, animated: false)
         
+    }
+    func navigationProfileandLogout(isProfile: Bool) {
+        let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+        self.navigationController?.pushViewController(profile, animated: false)
     }
 
     

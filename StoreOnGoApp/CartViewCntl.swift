@@ -49,7 +49,7 @@ class CartViewCntl: UIViewController {
     
     func designHeaderView (){
         
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Cart List", andDelegate: self, backButtonVisible: true, cartBtnVisible: false)
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Cart List", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true)
         
         self.view.addSubview(heder)
         
@@ -270,7 +270,11 @@ extension CartViewCntl : HeaderViewDelegate {
         let cartView : CartViewCntl = CartViewCntl.init()
         self.navigationController?.pushViewController(cartView, animated: false)
     }
-
+    
+    func navigationProfileandLogout(isProfile: Bool) {
+        let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+        self.navigationController?.pushViewController(profile, animated: false)
+    }
     
 }
 

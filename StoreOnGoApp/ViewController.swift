@@ -50,7 +50,7 @@ class ViewController: UIViewController{
     
     //MARK : HeaderView
     func designHeaderView (){
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Home", andDelegate: self, backButtonVisible: false, cartBtnVisible: true)
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Home", andDelegate: self, backButtonVisible: false, cartBtnVisible: true,profileBtnVisible: true)
         self.view.addSubview(heder)
         return
       /*  self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
@@ -312,7 +312,7 @@ extension ViewController : HeaderViewDelegate {
             
         }
     }
-    
+
     func cartButtonAction(){
         let cartView : CartViewCntl = CartViewCntl.init()
         self.navigationController?.pushViewController(cartView, animated: false)
@@ -320,8 +320,9 @@ extension ViewController : HeaderViewDelegate {
     }
     
     func navigationProfileandLogout(isProfile: Bool) {
-//        let cartView : cxsig = CartViewCntl.init()
-//        self.navigationController?.pushViewController(cartView, animated: false)
+        let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+        self.navigationController?.pushViewController(profile, animated: false)
     }
+
 
 }

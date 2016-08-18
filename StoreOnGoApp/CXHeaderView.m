@@ -25,7 +25,7 @@
 }
 
 
-- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible;
+- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear;
 {
     self.delegate = delegate;
     self = [super initWithFrame:frame];
@@ -38,7 +38,7 @@
                                                    object:nil];
         
         [self setBackgroundColor:[UIColor colorWithRed:114.0f/255.0f green:114.0f/255.0f blue:114.0f/255.0f alpha:1.0f]];
-        [self loadSubViewsandTitle:inTitle andDelegate:self backButtonVisible:isVisible cartBtnVisible:visible];
+        [self loadSubViewsandTitle:inTitle andDelegate:self backButtonVisible:isVisible cartBtnVisible:visible profileBtnVisible:appear];
     }
     return self;
 }
@@ -59,7 +59,7 @@
     }
 }
 
-- (void)loadSubViewsandTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible{
+- (void)loadSubViewsandTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear{
     
   //  UILabel *titleLbl = [];
     
@@ -67,7 +67,7 @@
     UIButton *backBtn = [self createButtonWithFrame:CGRectMake(10, 20, 35, 40) backroundImageView:[UIImage imageNamed:@"appLogo"] isCartButton:NO];
     [backBtn setBackgroundColor:[UIColor clearColor]];
     self.cartBtn= [self cartButtonCreationWithFrame:CGRectMake(screenSize.size.width-50, 26, 30, 30) backroundImageView:[UIImage imageNamed:@"cart"] isCartButton:YES];//90
-   // self.profileBtn= [self createProfileBtnWithFrame:CGRectMake(screenSize.size.width-50, 26, 30, 30) backroundImageView:[UIImage imageNamed:@"profileBtn"]];
+   // self.profileBtn= [self createProfileBtnWithFrame:CGRectMake(screenSize.size.width-50, 26, 30, 30) backroundImageView:[UIImage imageNamed:@"profileBtn"] isProfileButton:YES];
 
     if (isVisible) {
         [backBtn addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -77,6 +77,7 @@
         dot.image=[UIImage imageNamed:@"appLogo"];
         [self addSubview:dot];
         
+        [self addSubview:self.profileBtn];
         
         
     }else{
@@ -84,6 +85,9 @@
     }
     if (visible) {
         [self addSubview:self.cartBtn];
+    }else if (appear == NO){
+        self.cartBtn.frame = CGRectMake(screenSize.size.width-50, 26, 30, 30);
+        self.profileBtn.hidden = YES;
     }
 
     //imageView.tint = [UIColor redColor];
@@ -121,15 +125,19 @@
 
 - (void)profileBtnAction:(UIButton*)btn{
     
-//    if ([self.delegate respondsToSelector:@selector(backButtonAction)]) {
-//        [self.delegate profileBtnAction];
-//    }
     NSString *sendName = [[NSBundle mainBundle] localizedStringForKey:@"Profile" value:@"" table:nil];
     NSString *schuName = [[NSBundle mainBundle] localizedStringForKey:@"Logout" value:@"" table:nil];
+    NSString *forgotpass = [[NSBundle mainBundle] localizedStringForKey:@"Forgot Password?" value:@"" table:nil];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         CAPopUpViewController *popup = [[CAPopUpViewController alloc] init];
-        popup.itemsArray = @[sendName, schuName];
+        if (self.isLogout) {
+            popup.itemsArray = @[sendName, schuName];
+        }else if(self.isSignInUp){
+            popup.itemsArray = @[forgotpass];
+        }else{
+            popup.itemsArray = @[sendName];
+        }
         popup.sourceView = btn;
         popup.backgroundColor = [UIColor whiteColor];
         popup.backgroundImage = nil;
@@ -141,13 +149,12 @@
             if ([popupCell.textLabel.text isEqualToString:sendName]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [popupVC dismissViewControllerAnimated:YES completion:^{
-                        //[self.delegate navigationProfileandLogout:YES];
+                        [self.delegate navigationProfileandLogout:self.isLogout];
                     }];
                 });
                 
             } else if ([popupCell.textLabel.text isEqualToString:schuName]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     [popupVC dismissViewControllerAnimated:YES completion:^{
                         
                     }];
@@ -191,8 +198,6 @@
 
     UIButton *backBtn = [[UIButton alloc] initWithFrame:frame];
     backBtn.showsTouchWhenHighlighted = YES;
-    //backBtn.titleLabel.text = @"Back";
-    //backBtn.imageView.image = inImage;
     backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [backBtn setBackgroundImage:inImage forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -201,7 +206,7 @@
     
 }
 
-- (UIButton*)createProfileBtnWithFrame:(CGRect)frame backroundImageView:(UIImage*)inImage{
+- (UIButton*)createProfileBtnWithFrame:(CGRect)frame backroundImageView:(UIImage*)inImage isProfileButton:(BOOL)isProfileBtn{
     
     UIButton *profileBtn = [[UIButton alloc] initWithFrame:frame];
     profileBtn.showsTouchWhenHighlighted = YES;

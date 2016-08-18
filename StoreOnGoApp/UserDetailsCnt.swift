@@ -30,7 +30,7 @@ class UserDetailsCnt: UIViewController {
     
     func designHeaderView (){
         
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "User Details", andDelegate: self, backButtonVisible: true, cartBtnVisible: false)
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "User Details", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true)
         
         self.view.addSubview(heder)
     }
@@ -412,6 +412,9 @@ extension UserDetailsCnt : HeaderViewDelegate {
        
         
     }
-
+    func navigationProfileandLogout(isProfile: Bool) {
+        let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+        self.navigationController?.pushViewController(profile, animated: false)
+    }
     
 }
