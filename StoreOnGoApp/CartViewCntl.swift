@@ -14,7 +14,7 @@ class CartViewCntl: UIViewController {
     var  productsList :  NSMutableArray = NSMutableArray()
     var keepShoppingBtn : UIButton = UIButton()
     var chekOutBtn  : UIButton = UIButton()
-
+    var presentWindow : UIWindow?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = CXConstant.cartViewBgClor
@@ -35,6 +35,7 @@ class CartViewCntl: UIViewController {
     
     func createCartTableView () {
         self.cartTableView = UITableView.init(frame: CGRectMake(0, CXConstant.headerViewHeigh, self.view.frame.size.width, self.view.frame.size.height-CXConstant.headerViewHeigh-100))
+        self.cartTableView.contentInset =  UIEdgeInsetsMake(0, 0, 100, 0)
         self.cartTableView.dataSource = self
         self.cartTableView.delegate = self
         self.cartTableView.backgroundColor = UIColor.clearColor()
@@ -49,7 +50,7 @@ class CartViewCntl: UIViewController {
     
     func designHeaderView (){
         
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Cart List", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true)
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Cart List", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true, isForgot: false)
         
         self.view.addSubview(heder)
         
@@ -303,13 +304,17 @@ extension CartViewCntl : UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
         if ((textField.text?.isEmpty) != nil) {
+            let indexPath = NSIndexPath(forRow: textField.tag-1, inSection: 0)
+            let cell = self.cartTableView.cellForRowAtIndexPath(indexPath)
+            let textField : UITextField = cell?.contentView.viewWithTag(textField.tag) as! UITextField
+            let cartData : CX_Cart = self.productsList[indexPath.row] as! CX_Cart
+            cartData.quantity = textField.text!
+            NSManagedObjectContext.MR_contextForCurrentThread().MR_saveOnlySelfAndWait()
+            self.cartTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }else{
+            presentWindow?.makeToast(message: "Please enter quantity value")
         }
-        
-        
-        print("button tag %d\(textField.tag)")
-        print("TextField should return method called")
         textField.resignFirstResponder();
         return true;
     }

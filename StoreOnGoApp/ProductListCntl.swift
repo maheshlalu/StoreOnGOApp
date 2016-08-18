@@ -209,7 +209,7 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         let textField : UITextField = cell?.contentView.viewWithTag(button.tag) as! UITextField
         if (!((textField.text?.isEmpty)!)) {
             if(!button.selected){
-                print("button tag %d\(textField.text)")
+               // print("button tag %d\(textField.text)")
                 if (!((textField.text?.isEmpty)!)) {
                     let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
                     CXDBSettings.sharedInstance.addToCart(proListData, quantityNumber: textField.text!, completionHandler: { (added) in
@@ -218,9 +218,24 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
                 }
                 textField.resignFirstResponder();
             }else{
+                //Check the cart quantity value
+               /* if (!((textField.text?.isEmpty)!)) {
+                    //Update The quantity Value
+                    let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
+                    let predicate:NSPredicate = NSPredicate(format: "pID = %@", proListData.pID!)
+                    let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
+                    fetchRequest.predicate = predicate
+                    let cartItem : NSArray = CX_Cart.MR_executeFetchRequest(fetchRequest)
+                    let cartData : CX_Cart = (cartItem.lastObject as? CX_Cart)!
+                    cartData.quantity = textField.text!
+                    NSManagedObjectContext.MR_contextForCurrentThread().MR_saveOnlySelfAndWait()
+                    self.productListTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
+                }else{*/
                 let proListData : CX_Products = self.productsList[button.tag-1] as! CX_Products
                 CXDBSettings.sharedInstance.deleteCartItem(proListData.pID!)
                 self.productListTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+               // }
             }
         }else{
             presentWindow?.makeToast(message: "Please enter quantity value")
