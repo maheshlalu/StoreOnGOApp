@@ -1,6 +1,6 @@
 //
 //  CXSignInSignUpViewController.swift
-//  Silly Monks
+//  NV Agencies
 //
 //  Created by Sarath on 07/04/16.
 //  Copyright © 2016 Sarath. All rights reserved.
@@ -24,7 +24,7 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
     var cScrollView:UIScrollView!
     var keyboardIsShown:Bool!
     
-    //var orgID:String! = CXConstant.MALL_ID
+    var orgID:String! = CXConstant.MallID
     var profileImageStr:String!
     var profileImagePic:UIImageView!
     var delegate:CXSingInDelegate?
@@ -42,8 +42,7 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
     
     func designHeaderView (){
         
-        self.heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign in or Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true)
-        
+        self.heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign in or Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true, isForgot: true)
         self.view.addSubview(heder)
         
     }
@@ -69,7 +68,7 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
         self.cScrollView.addSubview(self.passwordField)
         
         self.signInBtn = self.createButton(CGRectMake(25, self.passwordField.frame.size.height+self.passwordField.frame.origin.y+30, self.view.frame.size.width-50, 50), title: "SIGN IN", tag: 3, bgColor: UIColor.signInColor())
-        //  self.signInBtn.addTarget(self, action: #selector(CXSignInSignUpViewController.signInBtnAction), forControlEvents: .TouchUpInside)
+          self.signInBtn.addTarget(self, action: #selector(CXSignInSignUpViewController.signInAction), forControlEvents: .TouchUpInside)
         self.cScrollView.addSubview(self.signInBtn)
         
         self.signUpBtn = self.createButton(CGRectMake(25, self.signInBtn.frame.size.height+self.signInBtn.frame.origin.y+20, self.view.frame.size.width-50, 50), title: "SIGN UP", tag: 3, bgColor: UIColor.signUpColor())
@@ -79,60 +78,6 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
       
         
     }
-//    
-//    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-//        print("Response \(result)")
-//        FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields":"first_name,email,last_name,gender,picture.type(large),id"]).startWithCompletionHandler { (connection, result, error) -> Void in
-//            print ("FB Result is \(result)")
-//            if result != nil {
-//                let strFirstName: String = (result.objectForKey("first_name") as? String)!
-//                let strLastName: String = (result.objectForKey("last_name") as? String)!
-//                let userID: String = (result.objectForKey("id") as? String)!
-//                let gender: String = (result.objectForKey("gender") as? String)!
-//                let email: String = (result.objectForKey("email") as? String)!
-//
-//
-//                self.profileImageStr = (result.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as? String)!
-//                print("Welcome, \(strFirstName) \(strLastName) \(userID)")
-//                
-//                NSUserDefaults.standardUserDefaults().setObject(userID, forKey: "USER_ID")
-//                NSUserDefaults.standardUserDefaults().setObject(email, forKey: "USER_EMAIL")
-//                NSUserDefaults.standardUserDefaults().setObject(strFirstName, forKey: "FIRST_NAME")
-//                NSUserDefaults.standardUserDefaults().setObject(strLastName, forKey: "LAST_NAME")
-//                NSUserDefaults.standardUserDefaults().setObject(gender, forKey: "GENDER")
-//                NSUserDefaults.standardUserDefaults().setObject(self.profileImageStr, forKey: "PROFILE_PIC")
-//                NSUserDefaults.standardUserDefaults().synchronize()
-//                self.showAlertView("Login successfully.", status: 1)
-//            }
-//                NSNotificationCenter.defaultCenter().postNotificationName("UpdateProfilePic", object: nil)
-//        }
-//    }
-//    
-//    
-//    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-//        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
-//        loginManager.logOut()
-//    }
-//    
-//    
-//    // Google
-//    
-//    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
-//        //  myActivityIndicator.stopAnimating()
-//    }
-//    
-//    // Present a view that prompts the user to sign in with Google
-//    func signIn(signIn: GIDSignIn!,
-//                presentViewController viewController: UIViewController!) {
-//        self.presentViewController(viewController, animated: true, completion: nil)
-//    }
-//    
-//    // Dismiss the "Sign in with Google" view
-//    func signIn(signIn: GIDSignIn!,
-//                dismissViewController viewController: UIViewController!) {
-//        self.dismissViewControllerAnimated(true, completion: nil)
-//    }
-//    
     
     func  createPlainTextButton(frame:CGRect,title: String,tag:Int) -> UIButton {
         let button: UIButton = UIButton()
@@ -145,24 +90,15 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
         return button
         
     }
-//    
-//    func googleSignUp(notification: NSNotification){
-//          self.showAlertView("Login successfully", status: 1)
-//        //Take Action on Notification
-//    }
-//    
-//    
+  
     func showAlertView(message:String, status:Int) {
         dispatch_async(dispatch_get_main_queue(), {
             let alert = UIAlertController(title: "NV Agencies", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) {
                 UIAlertAction in
                 if status == 1 {
-                    if self.backButton.hidden {
-                        //self.skipAction()
-                    }else{
-                        self.navigationController?.popViewControllerAnimated(true)
-                    }
+                    //It should leads to Profile Screen
+                   self.navigationController?.popViewControllerAnimated(true)
                 }
             }
             alert.addAction(okAction)
@@ -170,47 +106,66 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
         })
     }
     
-//    func sendSignDetails() {
-//        let signInUrl = "http://sillymonksapp.com:8081/MobileAPIs/loginConsumerForOrg?orgId="+orgID+"&email="+self.emailAddressField.text!+"&dt=DEVICES&password="+self.passwordField.text!
-//        SMSyncService.sharedInstance.startSyncProcessWithUrl(signInUrl) { (responseDict) in
-//            // print("Login response \(responseDict)")
-//            
-//            let status: Int = Int(responseDict.valueForKey("status") as! String)!
-//            
-//            if status == 1 {
-//                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("UserId"), forKey: "USER_ID")
-//                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("emailId"), forKey: "USER_EMAIL")
-//                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("firstName"), forKey: "FIRST_NAME")
-//                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("lastName"), forKey: "LAST_NAME")
-//                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("gender"), forKey: "GENDER")
-//                NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "PROFILE_PIC")
-//                NSUserDefaults.standardUserDefaults().synchronize()
-//                self.showAlertView("Login successfully", status: status)
-//                
-//            } else {
-//                self.showAlertView("Please enter valid credentials", status: status)
-//            }
-//        }
-//    }
+    func sendSignDetails() {
+        /*return getHostUrl(mContext) + "/MobileAPIs/loginConsumerForOrg?";
+         / storeongo admin /
+         / orgId=199&email=test1@sog.com&dt=DEVICES&password=123 /
+         
+         
+         "http://52.74.102.199:8081/MobileAPIs/loginConsumerForOrg?orgId=4452&email=dearsureshkumar93@gmail.com&dt=DEVICES&password=Aa@123"
+         */
+        let signInUrl = "http://storeongo.com:8081/MobileAPIs/loginConsumerForOrg?orgId="+orgID+"&email="+self.emailAddressField.text!+"&dt=DEVICES&password="+self.passwordField.text!
+        SMSyncService.sharedInstance.startSyncProcessWithUrl(signInUrl) { (responseDict) in
+            // print("Login response \(responseDict)")
+            let status: Int = Int(responseDict.valueForKey("status") as! String)!
+            if status == 1 {
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("state"), forKey: "STATE")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("emailId"), forKey: "USER_EMAIL")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("firstName"), forKey: "FIRST_NAME")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("lastName"), forKey: "LAST_NAME")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("userBannerPath"), forKey: "USER_BANNER_PATH")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("gender"), forKey: "GENDER")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("userImagePath"), forKey: "USER_IMAGE_PATH")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("UserId"), forKey: "USER_ID")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("macId"), forKey: "MAC_ID")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("mobile"), forKey: "MOBILE")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("address"), forKey: "ADDRESS")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("fullName"), forKey: "FULL_NAME")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("city"), forKey: "CITY")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("orgId"), forKey: "ORG_ID")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("macIdJobId"), forKey: "MACID_JOBID")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("organisation"), forKey: "ORGANIZATION")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("msg"), forKey: "MESSAGE")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("status"), forKey: "STATUS")
+                NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("country"), forKey: "COUNTRY")
+                NSUserDefaults.standardUserDefaults().synchronize()
+                
+                self.showAlertView("Login successfully", status: status)
+                
+            } else {
+                self.showAlertView("Please enter valid credentials", status: status)
+            }
+        }
+    }
     
-//    func signInAction() {
-//        // print ("Sign In action")
-//        self.view.endEditing(true)
-//        if self.isValidEmail(self.emailAddressField.text!) {
-//            self.sendSignDetails()
-//        } else {
-//                let alert = UIAlertController(title: "Silly Monks", message: "Please enter valid email.", preferredStyle: UIAlertControllerStyle.Alert)
-//                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-//                self.presentViewController(alert, animated: true, completion: nil)
-//                //print("Please enter valid email")
-//        }
-//    }
+    func signInAction() {
+        // print ("Sign In action")
+        self.view.endEditing(true)
+        if self.isValidEmail(self.emailAddressField.text!) {
+            self.sendSignDetails()
+        } else {
+                let alert = UIAlertController(title: "NV Agencies", message: "Please enter valid email.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                //print("Please enter valid email")
+        }
+    }
     
     func signUpAction() {
         print ("Sign Up action")
         self.view.endEditing(true)
         let signUpView = CXSignUpViewController.init()
-        //signUpView.orgID = self.orgID
+        signUpView.orgID = self.orgID
         self.navigationController?.pushViewController(signUpView, animated: true)
     }
     
@@ -285,7 +240,8 @@ extension CXSignInSignUpViewController : HeaderViewDelegate {
     }
     
     func navigationProfileandLogout(isProfile: Bool) {
-    
+        let forgotPsw : CXForgotPassword = CXForgotPassword.init()
+        self.navigationController?.pushViewController(forgotPsw, animated: false)
         
     }
     

@@ -33,7 +33,7 @@
 @property (nonatomic,strong) MIBadgeButton *cartBtn;
 @property (nonatomic,strong) UIButton *profileBtn;
 
-- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear;
+- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes;
 
 @property (nonnull,assign) id <HeaderViewDelegate> delegate;
 @property (assign)  BOOL isLogout;

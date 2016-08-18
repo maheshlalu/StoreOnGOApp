@@ -25,7 +25,7 @@
 }
 
 
-- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear;
+- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes;
 {
     self.delegate = delegate;
     self = [super initWithFrame:frame];
@@ -38,7 +38,7 @@
                                                    object:nil];
         
         [self setBackgroundColor:[UIColor colorWithRed:114.0f/255.0f green:114.0f/255.0f blue:114.0f/255.0f alpha:1.0f]];
-        [self loadSubViewsandTitle:inTitle andDelegate:self backButtonVisible:isVisible cartBtnVisible:visible profileBtnVisible:appear];
+        [self loadSubViewsandTitle:inTitle andDelegate:self backButtonVisible:isVisible cartBtnVisible:visible profileBtnVisible:appear isForgot:yes];
     }
     return self;
 }
@@ -59,15 +59,15 @@
     }
 }
 
-- (void)loadSubViewsandTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear{
+- (void)loadSubViewsandTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes{
     
   //  UILabel *titleLbl = [];
     
     CGRect  screenSize  = [[UIScreen mainScreen] bounds];
     UIButton *backBtn = [self createButtonWithFrame:CGRectMake(10, 20, 35, 40) backroundImageView:[UIImage imageNamed:@"appLogo"] isCartButton:NO];
     [backBtn setBackgroundColor:[UIColor clearColor]];
-    self.cartBtn= [self cartButtonCreationWithFrame:CGRectMake(screenSize.size.width-50, 26, 30, 30) backroundImageView:[UIImage imageNamed:@"cart"] isCartButton:YES];//90
-   // self.profileBtn= [self createProfileBtnWithFrame:CGRectMake(screenSize.size.width-50, 26, 30, 30) backroundImageView:[UIImage imageNamed:@"profileBtn"] isProfileButton:YES];
+    self.cartBtn= [self cartButtonCreationWithFrame:CGRectMake(screenSize.size.width-60, 26, 30, 30) backroundImageView:[UIImage imageNamed:@"cart"] isCartButton:YES];//90
+    self.profileBtn= [self createProfileBtnWithFrame:CGRectMake(screenSize.size.width-25, 32, 20, 20) backroundImageView:[UIImage imageNamed:@"profileBtn"] isProfileButton:YES];
 
     if (isVisible) {
         [backBtn addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -88,6 +88,8 @@
     }else if (appear == NO){
         self.cartBtn.frame = CGRectMake(screenSize.size.width-50, 26, 30, 30);
         self.profileBtn.hidden = YES;
+    }else if (yes == YES){
+        self.isSignInUp = YES;
     }
 
     //imageView.tint = [UIColor redColor];
@@ -124,6 +126,7 @@
 }
 
 - (void)profileBtnAction:(UIButton*)btn{
+    NSLog(@"signinup: %d",self.isSignInUp);
     
     NSString *sendName = [[NSBundle mainBundle] localizedStringForKey:@"Profile" value:@"" table:nil];
     NSString *schuName = [[NSBundle mainBundle] localizedStringForKey:@"Logout" value:@"" table:nil];
@@ -157,6 +160,12 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [popupVC dismissViewControllerAnimated:YES completion:^{
                         
+                    }];
+                });
+            } else if ([popupCell.textLabel.text isEqualToString:forgotpass]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [popupVC dismissViewControllerAnimated:YES completion:^{
+                        [self.delegate navigationProfileandLogout:self.isLogout];
                     }];
                 });
             }

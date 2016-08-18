@@ -31,7 +31,7 @@ class StickerDetails: UIViewController {
     }
 
     func designHeaderView (){
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true ,profileBtnVisible: true)
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true ,profileBtnVisible: true, isForgot: false)
         self.view.addSubview(heder)
         
     }

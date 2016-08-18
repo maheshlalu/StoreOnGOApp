@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.frame = CGRectMake(0, 0, 100, (self.itemsArray.count*44));
-    self.preferredContentSize = CGSizeMake(100, (self.itemsArray.count*44));
+    self.view.frame = CGRectMake(0, 0, 200, (self.itemsArray.count*44));
+    self.preferredContentSize = CGSizeMake(200, (self.itemsArray.count*44));
     self.popoverPresentationController.sourceView = self.sourceView;
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.tableView.delegate = self;

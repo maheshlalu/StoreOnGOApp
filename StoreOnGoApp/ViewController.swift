@@ -50,7 +50,7 @@ class ViewController: UIViewController{
     
     //MARK : HeaderView
     func designHeaderView (){
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Home", andDelegate: self, backButtonVisible: false, cartBtnVisible: true,profileBtnVisible: true)
+        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Home", andDelegate: self, backButtonVisible: false, cartBtnVisible: true,profileBtnVisible: true, isForgot: false)
         self.view.addSubview(heder)
         return
       /*  self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
