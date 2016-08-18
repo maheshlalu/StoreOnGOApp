@@ -68,6 +68,7 @@
 		12FBC0141D3CAF3200C8EBFE /* orderItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBC0121D3CAF3200C8EBFE /* orderItemCell.swift */; };
 		12FBC0151D3CAF3200C8EBFE /* orderItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12FBC0131D3CAF3200C8EBFE /* orderItemCell.xib */; };
 		3B191ED41D4F29E8006360C5 /* HRToast+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B191ED31D4F29E8006360C5 /* HRToast+UIView.swift */; };
+		432DE7E51D65EFF10081FC80 /* CXForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432DE7E41D65EFF10081FC80 /* CXForgotPassword.swift */; };
 		435D89FB1D64668E00D54175 /* CAPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 435D89FA1D64668E00D54175 /* CAPopUpViewController.m */; };
 		435D8A3E1D64944400D54175 /* CXSignInSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D8A3C1D64944400D54175 /* CXSignInSignUpViewController.swift */; };
 		435D8A3F1D64944400D54175 /* CXSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D8A3D1D64944400D54175 /* CXSignUpViewController.swift */; };
@@ -178,6 +179,7 @@
 		3B191ED31D4F29E8006360C5 /* HRToast+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HRToast+UIView.swift"; sourceTree = "<group>"; };
 		3B89FEE5B5A058470CE52CD3 /* libPods-StoreOnGoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC03F50242D4DA5D822A301 /* libPods-StoreOnGoAppUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreOnGoAppUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		432DE7E41D65EFF10081FC80 /* CXForgotPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXForgotPassword.swift; sourceTree = "<group>"; };
 		435D89F91D64668E00D54175 /* CAPopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPopUpViewController.h; sourceTree = "<group>"; };
 		435D89FA1D64668E00D54175 /* CAPopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPopUpViewController.m; sourceTree = "<group>"; };
 		435D8A3C1D64944400D54175 /* CXSignInSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSignInSignUpViewController.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				12F64D8C1CD5B923007D760C /* SearchBar.swift */,
 				122805961CDE3C0D000343AC /* LoadingView.swift */,
 				435D8A3C1D64944400D54175 /* CXSignInSignUpViewController.swift */,
+				432DE7E41D65EFF10081FC80 /* CXForgotPassword.swift */,
 				435D8A3D1D64944400D54175 /* CXSignUpViewController.swift */,
 				12C91DE11CFAB70B001AD55A /* CXHeaderView.h */,
 				12C91DE21CFAB70B001AD55A /* CXHeaderView.m */,
@@ -840,6 +843,7 @@
 				121311121CF413F7003DFCE2 /* CX_Cart.swift in Sources */,
 				12F42B821D11053600C3BA63 /* CX_StickerCell.swift in Sources */,
 				1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */,
+				432DE7E51D65EFF10081FC80 /* CXForgotPassword.swift in Sources */,
 				12EF6BDC1CFB485F009E17B6 /* EGOCache.m in Sources */,
 				12F42B7F1D11021400C3BA63 /* CX_CollectionViewController.swift in Sources */,
 				AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */,

@@ -127,6 +127,7 @@ class CXConstant: NSObject, UIActionSheetDelegate{
     static let KOLLYWOOD_BANNAER = "/133516651/AppKollyBanner"
     static let MOLLYWOOD_BANNAER = "/133516651/AppMollyBanner"
     static let SANDALWOOD_BANNAER = "/133516651/AppSandalBanner"
+    static let MALL_ID = "4452"
     
     
     // BrightCove Directives
@@ -282,7 +283,17 @@ class CXConstant: NSObject, UIActionSheetDelegate{
         
         return actionSheet
     }
-    
-    
-    
+
+
 }
+
+
+extension String {
+    
+    func urlEncoding() -> String {
+        let escapedString = self.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
+        //print("escapedString: \(escapedString)")
+        return escapedString!
+}
+}
+

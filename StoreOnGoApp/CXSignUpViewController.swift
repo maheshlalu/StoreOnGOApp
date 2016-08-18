@@ -1,6 +1,6 @@
 //
 //  CXSignUpViewController.swift
-//  Silly Monks
+//  NV Agencies
 //
 //  Created by NUNC on 5/19/16.
 //  Copyright © 2016 Sarath. All rights reserved.
@@ -45,7 +45,7 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
 
     func designHeaderView (){
         
-        heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false,profileBtnVisible: false)
+        heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false,profileBtnVisible: false, isForgot: false)
         
         self.view.addSubview(heder)
         
@@ -83,7 +83,7 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
         
         self.signUpBtn = self.createButton(CGRectMake(25, self.passwordField.frame.size.height+self.passwordField.frame.origin.y+30, self.view.frame.size.width-50, 50), title: "SIGN UP", tag: 3, bgColor: UIColor.signUpColor())
         self.signUpBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        //self.signUpBtn.addTarget(self, action: #selector(CXSignUpViewController.signUpBtnAction), forControlEvents: .TouchUpInside)
+        self.signUpBtn.addTarget(self, action: #selector(CXSignUpViewController.signUpBtnAction), forControlEvents: .TouchUpInside)
         self.cScrollView.addSubview(self.signUpBtn)
         
         self.signInBtn = self.createButton(CGRectMake(25, self.signUpBtn.frame.size.height+self.signUpBtn.frame.origin.y+20, self.view.frame.size.width-50, 50), title: "SIGN IN", tag: 3, bgColor: UIColor.signInColor())
@@ -117,75 +117,87 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-//    func sendSignUpDetails() {
-//        //http://sillymonksapp.com:8081/MobileAPIs/regAndloyaltyAPI?orgId=3&userEmailId
-//        
-//        //        NSLog("Print values orgid: %@ email: %@ firstname: %@ lastname: %@ psw: %@ ", orgID, self.emailAddressField.text, self.firstNameField.text, self.lastNameField.text, self.passwordField.text)
-//        let signUpUrl = "http://sillymonksapp.com:8081/MobileAPIs/regAndloyaltyAPI?orgId="+orgID+"&userEmailId="+self.emailAddressField.text!+"&dt=DEVICES&firstName="+self.firstNameField.text!.urlEncoding()+"&lastName="+self.lastNameField.text!.urlEncoding()+"&password="+self.passwordField.text!.urlEncoding()
-//        SMSyncService.sharedInstance.startSyncProcessWithUrl(signUpUrl) { (responseDict) in
-//            print("Sign up response \(responseDict)")
-//            
-//            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("UserId"), forKey: "USER_ID")
-//            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("emailId"), forKey: "USER_EMAIL")
-//            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("firstName"), forKey: "FIRST_NAME")
-//            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("lastName"), forKey: "LAST_NAME")
-//            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("gender"), forKey: "GENDER")
-//            NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "PROFILE_PIC")
-//            NSUserDefaults.standardUserDefaults().synchronize()
-//            
-//            let message = responseDict.valueForKey("msg") as? String
-//            dispatch_async(dispatch_get_main_queue(), {
-//                let alert = UIAlertController(title: "Silly Monks", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-//                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
-//                    //self.moveBackView()
-//                    self.navigationController?.popViewControllerAnimated(true)
-//                    
-//                }))
-//                self.presentViewController(alert, animated: true, completion: nil)
-//            })
-//        }
-//    }
+    func sendSignUpDetails() {
+        //http://sillymonksapp.com:8081/MobileAPIs/regAndloyaltyAPI?orgId=3&userEmailId
+
+        let signUpUrl = "http://storeongo.com:8081/MobileAPIs/regAndloyaltyAPI?orgId="+orgID+"&userEmailId="+self.emailAddressField.text!+"&dt=DEVICES&firstName="+self.firstNameField.text!.urlEncoding()+"&lastName="+self.lastNameField.text!.urlEncoding()+"&password="+self.passwordField.text!.urlEncoding()
+        SMSyncService.sharedInstance.startSyncProcessWithUrl(signUpUrl) { (responseDict) in
+            print("Sign up response \(responseDict)")
+            
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("state"), forKey: "STATE")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("emailId"), forKey: "USER_EMAIL")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("firstName"), forKey: "FIRST_NAME")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("lastName"), forKey: "LAST_NAME")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("userBannerPath"), forKey: "USER_BANNER_PATH")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("gender"), forKey: "GENDER")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("userImagePath"), forKey: "USER_IMAGE_PATH")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("UserId"), forKey: "USER_ID")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("macId"), forKey: "MAC_ID")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("mobile"), forKey: "MOBILE")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("address"), forKey: "ADDRESS")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("fullName"), forKey: "FULL_NAME")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("city"), forKey: "CITY")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("orgId"), forKey: "ORG_ID")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("macIdJobId"), forKey: "MACID_JOBID")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("organisation"), forKey: "ORGANIZATION")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("msg"), forKey: "MESSAGE")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("status"), forKey: "STATUS")
+            NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("country"), forKey: "COUNTRY")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            let message = responseDict.valueForKey("msg") as? String
+            dispatch_async(dispatch_get_main_queue(), {
+                let alert = UIAlertController(title: "NV Agencies", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                    //self.moveBackView()
+                    self.navigationController?.popViewControllerAnimated(true)
+                    
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            })
+        }
+    }
     
-//    func moveBackView() {
-//        let navControllers:NSArray = (self.navigationController?.viewControllers)!
-//        let prevController = navControllers.objectAtIndex(navControllers.count-3)
-//        self.navigationController?.popToViewController(prevController as! UIViewController, animated: true)
-//    }
+    func moveBackView() {
+        let navControllers:NSArray = (self.navigationController?.viewControllers)!
+        let prevController = navControllers.objectAtIndex(navControllers.count-3)
+        self.navigationController?.popToViewController(prevController as! UIViewController, animated: true)
+    }
     
-//    func signUpBtnAction() {
-//        self.view.endEditing(true)
-//        if self.firstNameField.text?.characters.count > 0
-//            && self.lastNameField.text?.characters.count > 0
-//            && self.emailAddressField.text?.characters.count > 0
-//            && self.passwordField.text?.characters.count > 0 &&
-//            self.mobileNumField.text?.characters.count > 0 {
-//            if !self.isValidEmail(self.emailAddressField.text!) {
-//                let alert = UIAlertController(title: "Silly Monks", message: "Please enter valid email address.", preferredStyle: UIAlertControllerStyle.Alert)
-//                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-//                self.presentViewController(alert, animated: true, completion: nil)
-//                return
-//            }
-//            
-//            if self.mobileNumField.text?.characters.count < 10 {
-//                let alert = UIAlertController(title: "Silly Monks", message: "Please enter valid Phone number.", preferredStyle: UIAlertControllerStyle.Alert)
-//                let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) {
-//                    UIAlertAction in
-//                    //self.navigationController?.popViewControllerAnimated(true)
-//                    
-//                }
-//                alert.addAction(okAction)
-//                self.presentViewController(alert, animated: true, completion: nil)
-//                
-//                return
-//            }
-//            //self.sendSignUpDetails()
-//            
-//        } else {
-//            let alert = UIAlertController(title: "Silly Monks", message: "All fields are mandatory. Please enter all fields.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-//            self.presentViewController(alert, animated: true, completion: nil)
-//        }
-//    }
+    func signUpBtnAction() {
+        self.view.endEditing(true)
+        if self.firstNameField.text?.characters.count > 0
+            && self.lastNameField.text?.characters.count > 0
+            && self.emailAddressField.text?.characters.count > 0
+            && self.passwordField.text?.characters.count > 0 &&
+            self.mobileNumField.text?.characters.count > 0 {
+            if !self.isValidEmail(self.emailAddressField.text!) {
+                let alert = UIAlertController(title: "NV Agencies", message: "Please enter valid email address.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if self.mobileNumField.text?.characters.count < 10 {
+                let alert = UIAlertController(title: "NV Agencies", message: "Please enter valid Phone number.", preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) {
+                    UIAlertAction in
+                    //self.navigationController?.popViewControllerAnimated(true)
+                    
+                }
+                alert.addAction(okAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                return
+            }
+            self.sendSignUpDetails()
+            
+        } else {
+            let alert = UIAlertController(title: "NV Agencies", message: "All fields are mandatory. Please enter all fields.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
     
     func signInBtnAction() {
         self.view.endEditing(true)
