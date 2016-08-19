@@ -19,6 +19,8 @@ class ViewController: UIViewController{
     var coverPageImagesList: NSMutableArray!
     var headerview: HeaderView!
     var searchBar: SearchBar!
+    
+    var heder: UIView!
 
 
     override func viewDidLoad() {
@@ -50,7 +52,11 @@ class ViewController: UIViewController{
     
     //MARK : HeaderView
     func designHeaderView (){
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Home", andDelegate: self, backButtonVisible: false, cartBtnVisible: true,profileBtnVisible: true, isForgot: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") != nil{
+        heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Home", andDelegate: self, backButtonVisible: false, cartBtnVisible: true,profileBtnVisible: true, isForgot: false ,isLogout:true)
+        }else{
+        heder = CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Home", andDelegate: self, backButtonVisible: false, cartBtnVisible: true,profileBtnVisible: true, isForgot: false,isLogout:false)
+        }
         self.view.addSubview(heder)
         return
       /*  self.headerview = HeaderView.customizeHeaderView(true, headerTitle: "WELOCOME TO NV AGENCIES",backButtonVisible: false)
@@ -222,8 +228,8 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
     
     func alertWithMessage(alertMessage:String){
         
-        let alert = UIAlertController(title: "Alert", message:alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+        let alert = UIAlertController(title: "NV Agencies", message:alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
@@ -322,6 +328,18 @@ extension ViewController : HeaderViewDelegate {
     func navigationProfileandLogout(isProfile: Bool) {
         let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
         self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func navigateToProfilepage() {
+        let profile : CXProfilePageView = CXProfilePageView.init()
+        self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func userLogout() {
+        alertWithMessage("User Logout Successfully!")
+        designHeaderView()
+//        let viewController: UIViewController = self.navigationController!.viewControllers[1]
+//        self.navigationController!.popToViewController(viewController, animated: true)
     }
 
 

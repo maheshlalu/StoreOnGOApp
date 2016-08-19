@@ -41,8 +41,12 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
     }
     
     func designHeaderView (){
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") != nil{
+        self.heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign in or Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true, isForgot: true ,isLogout:true)
+        }else{
+        self.heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign in or Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true, isForgot: true ,isLogout:false)
         
-        self.heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign in or Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true, isForgot: true)
+        }
         self.view.addSubview(heder)
         
     }
@@ -106,6 +110,15 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
         })
     }
     
+    
+    func moveBackView() {
+        let navControllers:NSArray = (self.navigationController?.viewControllers)!
+        let prevController = navControllers.objectAtIndex(navControllers.count-1)
+        self.navigationController?.popToViewController(prevController as! UIViewController, animated: true)
+    }
+    
+    
+    
     func sendSignDetails() {
         /*return getHostUrl(mContext) + "/MobileAPIs/loginConsumerForOrg?";
          / storeongo admin /
@@ -116,7 +129,7 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
          */
         let signInUrl = "http://storeongo.com:8081/MobileAPIs/loginConsumerForOrg?orgId="+orgID+"&email="+self.emailAddressField.text!+"&dt=DEVICES&password="+self.passwordField.text!
         SMSyncService.sharedInstance.startSyncProcessWithUrl(signInUrl) { (responseDict) in
-            // print("Login response \(responseDict)")
+             print("Login response \(responseDict)")
             let status: Int = Int(responseDict.valueForKey("status") as! String)!
             if status == 1 {
                 NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("state"), forKey: "STATE")
@@ -243,6 +256,15 @@ extension CXSignInSignUpViewController : HeaderViewDelegate {
         let forgotPsw : CXForgotPassword = CXForgotPassword.init()
         self.navigationController?.pushViewController(forgotPsw, animated: false)
         
+    }
+    
+    func navigateToProfilepage() {
+        let profile : CXProfilePageView = CXProfilePageView.init()
+        self.navigationController?.pushViewController(profile, animated: false)
+    }
+    func userLogout() {
+//        let viewController: UIViewController = self.navigationController!.viewControllers[1]
+//        self.navigationController!.popToViewController(viewController, animated: true)
     }
     
 }

@@ -18,7 +18,7 @@ class UserDetailsCnt: UIViewController {
     var phoneText : UITextField = UITextField()
     var cartTableView :  UITableView = UITableView()
     let productsList: [String] = ["Name", "Email address","Address line1","Address line2","Phone number",""]
-
+    var heder: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.sendTheCartItemsToServer()
@@ -30,7 +30,11 @@ class UserDetailsCnt: UIViewController {
     
     func designHeaderView (){
         
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "User Details", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true, isForgot: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") != nil{
+            heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "User Details", andDelegate: self, backButtonVisible: true, cartBtnVisible: true,profileBtnVisible: true, isForgot: false ,isLogout:true)
+        }else{
+            heder = CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "User Details", andDelegate: self, backButtonVisible: true, cartBtnVisible: true,profileBtnVisible: true, isForgot: false,isLogout:false)
+        }
         
         self.view.addSubview(heder)
     }
@@ -324,6 +328,14 @@ extension  UserDetailsCnt : UITableViewDelegate,UITableViewDataSource {
         return cell;
     }
     
+    func alertWithMessage(alertMessage:String){
+        
+        let alert = UIAlertController(title: "NV Agencies", message:alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
     func okButtonAction (button : UIButton!){
 
         
@@ -415,6 +427,16 @@ extension UserDetailsCnt : HeaderViewDelegate {
     func navigationProfileandLogout(isProfile: Bool) {
         let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
         self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func navigateToProfilepage() {
+        let profile : CXProfilePageView = CXProfilePageView.init()
+        self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func userLogout() {
+        alertWithMessage("User Logout Successfully!")
+        designHeaderView()
     }
     
 }

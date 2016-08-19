@@ -17,4 +17,3 @@ end
 target 'StoreOnGoAppUITests' do
 
 end
-

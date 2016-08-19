@@ -15,7 +15,7 @@ class StickerDetails: UIViewController {
     var headerTitle :  NSString = NSString()
     var searchBar: SearchBar!
     var predicateString : NSString = NSString()
-
+    var heder: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
       //  dispatch_async(dispatch_get_main_queue(),{
@@ -31,7 +31,11 @@ class StickerDetails: UIViewController {
     }
 
     func designHeaderView (){
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true ,profileBtnVisible: true, isForgot: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") != nil{
+            heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true,profileBtnVisible: true, isForgot: false ,isLogout:true)
+        }else{
+            heder = CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true,profileBtnVisible: true, isForgot: false,isLogout:false)
+        }
         self.view.addSubview(heder)
         
     }
@@ -47,7 +51,13 @@ class StickerDetails: UIViewController {
         self.view.addSubview(self.searchBar)
     }
     
-    
+    func alertWithMessage(alertMessage:String){
+        
+        let alert = UIAlertController(title: "NV Agencies", message:alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
     func setupCollectionView (){
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 5, left: 10, bottom: 50, right: 10)
@@ -200,6 +210,16 @@ extension StickerDetails : HeaderViewDelegate {
         self.navigationController?.pushViewController(profile, animated: false)
     }
 
+    func navigateToProfilepage() {
+        let profile : CXProfilePageView = CXProfilePageView.init()
+        self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func userLogout() {
+        designHeaderView()
+        alertWithMessage("User Logout Successfully!")
+        
+    }
     
 }
 

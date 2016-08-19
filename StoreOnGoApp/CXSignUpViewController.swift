@@ -45,7 +45,7 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
 
     func designHeaderView (){
         
-        heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false,profileBtnVisible: false, isForgot: false)
+        heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Sign up", andDelegate: self, backButtonVisible: true, cartBtnVisible: false,profileBtnVisible: false, isForgot: false,isLogout: false)
         
         self.view.addSubview(heder)
         
@@ -100,7 +100,13 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
     func doneNumberPadAction() {
         self.view.endEditing(true)
     }
-    
+    func alertWithMessage(alertMessage:String){
+        
+        let alert = UIAlertController(title: "NV Agencies", message:alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
     func addAccessoryViewToField(mTextField:UITextField) {
         let numToolBar = UIToolbar.init(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
         numToolBar.barStyle = UIBarStyle.BlackTranslucent
@@ -117,13 +123,32 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    func showAlertView(message:String, status:Int) {
+        dispatch_async(dispatch_get_main_queue(), {
+            let alert = UIAlertController(title: "NV Agencies", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                if status == 1 {
+                    //It should leads to Profile Screen
+                    //self.navigationController?.popViewControllerAnimated(true)
+                    
+                    let viewController: UIViewController = self.navigationController!.viewControllers[1]
+                    self.navigationController!.popToViewController(viewController, animated: true)
+                }
+            }
+            alert.addAction(okAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        })
+    }
+    
     func sendSignUpDetails() {
         //http://sillymonksapp.com:8081/MobileAPIs/regAndloyaltyAPI?orgId=3&userEmailId
 
         let signUpUrl = "http://storeongo.com:8081/MobileAPIs/regAndloyaltyAPI?orgId="+orgID+"&userEmailId="+self.emailAddressField.text!+"&dt=DEVICES&firstName="+self.firstNameField.text!.urlEncoding()+"&lastName="+self.lastNameField.text!.urlEncoding()+"&password="+self.passwordField.text!.urlEncoding()
         SMSyncService.sharedInstance.startSyncProcessWithUrl(signUpUrl) { (responseDict) in
             print("Sign up response \(responseDict)")
-            
+            let status: Int = Int(responseDict.valueForKey("status") as! String)!
+            if status == 1{
             NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("state"), forKey: "STATE")
             NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("emailId"), forKey: "USER_EMAIL")
             NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("firstName"), forKey: "FIRST_NAME")
@@ -145,6 +170,9 @@ class CXSignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewD
             NSUserDefaults.standardUserDefaults().setObject(responseDict.valueForKey("country"), forKey: "COUNTRY")
             NSUserDefaults.standardUserDefaults().synchronize()
             
+                self.showAlertView("User Registered Successfully", status: status)
+                
+            }
             let message = responseDict.valueForKey("msg") as? String
             dispatch_async(dispatch_get_main_queue(), {
                 let alert = UIAlertController(title: "NV Agencies", message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -309,6 +337,13 @@ extension CXSignUpViewController : HeaderViewDelegate {
         
     }
     func navigationProfileandLogout(isProfile: Bool) {
+
+    }
+    func navigateToProfilepage() {
+        let profile : CXProfilePageView = CXProfilePageView.init()
+        self.navigationController?.pushViewController(profile, animated: false)    }
+    
+    func userLogout() {
 
     }
     

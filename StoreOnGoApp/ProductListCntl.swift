@@ -16,6 +16,7 @@ class ProductListCntl: UIViewController {
     let colomnList: [String] = ["ITEM CODE", "ITEM NAME","QUANTITY","",""]
     var headerTitle :  NSString = NSString()
     var presentWindow : UIWindow?
+    var heder: UIView!
 
     //,EDIT TEXT, AddTOCard Button
 
@@ -69,7 +70,11 @@ class ProductListCntl: UIViewController {
     
     func designHeaderView (){
         
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Cart List", andDelegate: self, backButtonVisible: true, cartBtnVisible: false ,profileBtnVisible: true, isForgot: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") != nil{
+            heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Cart List", andDelegate: self, backButtonVisible: true, cartBtnVisible: true,profileBtnVisible: true, isForgot: false ,isLogout:true)
+        }else{
+            heder = CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Cart List", andDelegate: self, backButtonVisible: true, cartBtnVisible: true,profileBtnVisible: true, isForgot: false,isLogout:false)
+        }
         
         self.view.addSubview(heder)
         
@@ -201,7 +206,13 @@ extension ProductListCntl : UITableViewDelegate,UITableViewDataSource {
         return button
     }
     
-
+    func alertWithMessage(alertMessage:String){
+        
+        let alert = UIAlertController(title: "NV Agencies", message:alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
     func addToCartButton (button : UIButton!){
         
         let indexPath = NSIndexPath(forRow: button.tag-1, inSection: 0)
@@ -353,6 +364,16 @@ extension ProductListCntl : HeaderViewDelegate {
     func navigationProfileandLogout(isProfile: Bool) {
         let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
         self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func navigateToProfilepage() {
+        let profile : CXProfilePageView = CXProfilePageView.init()
+        self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func userLogout() {
+        alertWithMessage("User Logout Successfully!")
+        designHeaderView()
     }
     
 }

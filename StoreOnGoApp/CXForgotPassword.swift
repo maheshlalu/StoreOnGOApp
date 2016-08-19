@@ -26,7 +26,7 @@ class CXForgotPassword: UIViewController,UITextFieldDelegate {
     }
     func designHeaderView (){
         
-        heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Forgot password", andDelegate: self, backButtonVisible: true, cartBtnVisible: false,profileBtnVisible: false, isForgot: false)
+        heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Forgot password", andDelegate: self, backButtonVisible: true, cartBtnVisible: false,profileBtnVisible: false, isForgot: false,isLogout: false)
         self.view.addSubview(heder)
         
     }
@@ -139,6 +139,16 @@ extension CXForgotPassword : HeaderViewDelegate {
     }
     func navigationProfileandLogout(isProfile: Bool) {
         
+    }
+    
+    func navigateToProfilepage() {
+        let profile : CXProfilePageView = CXProfilePageView.init()
+        self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func userLogout() {
+//        let viewController: UIViewController = self.navigationController!.viewControllers[1]
+//        self.navigationController!.popToViewController(viewController, animated: true)
     }
     
 }

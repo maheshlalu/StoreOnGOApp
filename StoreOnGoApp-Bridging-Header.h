@@ -8,6 +8,7 @@
 
 #ifndef StoreOnGoApp_Bridging_Header_h
 #define StoreOnGoApp_Bridging_Header_h
+
 #import <CoreData+MagicalRecord.h>
 #import "KIImagePager.h"
 #import "HMSegmentedControl.h"
@@ -15,4 +16,5 @@
 #import "JSONKit.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "CAPopUpViewController.h"
+
 #endif /* StoreOnGoApp_Bridging_Header_h */

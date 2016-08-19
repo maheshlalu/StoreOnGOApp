@@ -12,7 +12,8 @@ let screenSize = UIScreen.mainScreen().bounds.size
 class StickersViewCnt: UIViewController {
     var stickersCollectionView: UICollectionView!
     var stickersList : NSArray = NSArray()
-
+    var heder: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.designHeaderView()
@@ -29,7 +30,11 @@ class StickersViewCnt: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func designHeaderView (){
-        let heder: UIView =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true ,profileBtnVisible: true, isForgot: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") != nil{
+            heder =  CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true,profileBtnVisible: true, isForgot: false ,isLogout:true)
+        }else{
+            heder = CXHeaderView.init(frame: CGRectMake(0, 0, CXConstant.screenSize.width, CXConstant.headerViewHeigh), andTitle: "Stickers", andDelegate: self, backButtonVisible: true, cartBtnVisible: true,profileBtnVisible: true, isForgot: false,isLogout:false)
+        }
         self.view.addSubview(heder)
         
     }
@@ -75,7 +80,13 @@ class StickersViewCnt: UIViewController {
             self.stickersCollectionView.reloadData()
         }
 
-    
+    func alertWithMessage(alertMessage:String){
+        
+        let alert = UIAlertController(title: "NV Agencies", message:alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
     
     /*
     // MARK: - Navigation
@@ -152,9 +163,18 @@ extension StickersViewCnt : HeaderViewDelegate {
         self.navigationController?.pushViewController(cartView, animated: false)
     }
     func navigationProfileandLogout(isProfile: Bool) {
-        let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+    }
+    
+    func navigateToProfilepage() {
+        let profile : CXProfilePageView = CXProfilePageView.init()
         self.navigationController?.pushViewController(profile, animated: false)
     }
-
+    func userLogout() {
+        designHeaderView()
+        alertWithMessage("User Logout Successfully!")
+        
+    }
     
 }

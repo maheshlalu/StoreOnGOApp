@@ -24,8 +24,19 @@
     // Drawing code
 }
 
+//-(id)initWithSegmentedBarFrame:(CGRect)frame andTitle:(NSArray*)titlesArr andDelegate:(id)delegate currentViewVisible:(BOOL)isVisible{
+//    
+//    self.segmentedDelegate = delegate;
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        // Initialization code
+//        [self loadSegmentedViewWithTitleArray:titlesArr andDelegate:delegate currentViewVisible:isVisible];
+//    }
+//    return self;
+//
+//}
 
-- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes;
+- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes isLogout:(BOOL)yesLogout;
 {
     self.delegate = delegate;
     self = [super initWithFrame:frame];
@@ -38,7 +49,7 @@
                                                    object:nil];
         
         [self setBackgroundColor:[UIColor colorWithRed:114.0f/255.0f green:114.0f/255.0f blue:114.0f/255.0f alpha:1.0f]];
-        [self loadSubViewsandTitle:inTitle andDelegate:self backButtonVisible:isVisible cartBtnVisible:visible profileBtnVisible:appear isForgot:yes];
+        [self loadSubViewsandTitle:inTitle andDelegate:self backButtonVisible:isVisible cartBtnVisible:visible profileBtnVisible:appear isForgot:yes isLogout:yesLogout];
     }
     return self;
 }
@@ -59,7 +70,25 @@
     }
 }
 
-- (void)loadSubViewsandTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes{
+//-(void)loadSegmentedViewWithTitleArray:(NSArray*)titlesArr andDelegate:(id)delegate currentViewVisible:(BOOL)isVisible{
+//    //CGRect  screenSize  = [[UIScreen mainScreen] bounds];
+//    UIButton *viewBtn = [self createSegmentedBtnWithFrame:CGRectMake(5, 10, 40, 10)];
+//    [viewBtn setBackgroundColor:[UIColor blueColor]];
+//    
+//    UIImageView *separator =[[UIImageView alloc] initWithFrame:CGRectMake(viewBtn.frame.size.width+5,10,2,viewBtn.frame.size.height)];
+//    separator.image=[UIImage imageNamed:@"separator"];
+//    [self addSubview:separator];
+//    
+//    
+//    if (isVisible) {
+//        viewBtn.titleLabel.textColor = [UIColor redColor];
+//    }
+//    
+//    
+//    
+//}
+
+- (void)loadSubViewsandTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes isLogout:(BOOL)yesLogout{
     
   //  UILabel *titleLbl = [];
     
@@ -83,6 +112,7 @@
     }else{
         backBtn.userInteractionEnabled = NO;
     }
+    
     if (visible) {
         [self addSubview:self.cartBtn];
     }else if (appear == NO){
@@ -90,6 +120,10 @@
         self.profileBtn.hidden = YES;
     }else if (yes == YES){
         self.isSignInUp = YES;
+    }else{}
+    
+    if (yesLogout == YES){
+        self.isLogout = YES;
     }
 
     //imageView.tint = [UIColor redColor];
@@ -125,8 +159,18 @@
     
 }
 
+//- (void)segmentedButtonAction{
+//    
+//    if ([self.segmentedDelegate respondsToSelector:@selector(segmentedButtonAction)]) {
+//        [self.segmentedDelegate segmentedButtonAction];
+//    }
+//    
+//}
+
+
 - (void)profileBtnAction:(UIButton*)btn{
     NSLog(@"signinup: %d",self.isSignInUp);
+    NSLog(@"signinup: %d",self.isLogout);
     
     NSString *sendName = [[NSBundle mainBundle] localizedStringForKey:@"Profile" value:@"" table:nil];
     NSString *schuName = [[NSBundle mainBundle] localizedStringForKey:@"Logout" value:@"" table:nil];
@@ -152,14 +196,19 @@
             if ([popupCell.textLabel.text isEqualToString:sendName]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [popupVC dismissViewControllerAnimated:YES completion:^{
+                        if (self.isLogout) {
+                            [self.delegate navigateToProfilepage];
+                        }else{
                         [self.delegate navigationProfileandLogout:self.isLogout];
+                        }
                     }];
                 });
                 
             } else if ([popupCell.textLabel.text isEqualToString:schuName]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [popupVC dismissViewControllerAnimated:YES completion:^{
-                        
+                        [self logout];
+                        [self.delegate userLogout];
                     }];
                 });
             } else if ([popupCell.textLabel.text isEqualToString:forgotpass]) {
@@ -225,6 +274,18 @@
     [self addSubview:profileBtn];
     return profileBtn;
 }
+//
+//- (UIButton*)createSegmentedBtnWithFrame:(CGRect)frame{
+//    
+//    UIButton *profileBtn = [[UIButton alloc] initWithFrame:frame];
+//    profileBtn.showsTouchWhenHighlighted = YES;
+//    profileBtn.titleLabel.font = [UIFont fontWithName:@"Roboto-Bold" size:15.0f];
+//    profileBtn.titleLabel.textColor = [UIColor blackColor];
+//    profileBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    [profileBtn addTarget:self action:@selector(segmentedButtonAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:profileBtn];
+//    return profileBtn;
+//}
 
 - (NSString*)cartCount{
     
@@ -255,6 +316,27 @@
     return @"";
 }
 
+-(void)logout{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"STATE"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"USER_EMAIL"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FIRST_NAME"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"LAST_NAME"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"USER_BANNER_PATH"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"GENDER"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"USER_IMAGE_PATH"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"USER_ID"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MAC_ID"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MOBILE"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ADDRESS"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FULL_NAME"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"CITY"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ORG_ID"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MACID_JOBID"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ORGANIZATION"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MESSAGE"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"COUNTRY"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 
 

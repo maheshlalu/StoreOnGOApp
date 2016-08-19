@@ -16,16 +16,13 @@
 - (void)cartButtonAction;
 - (void)presentViewController:(CAPopUpViewController*)popUpView;
 - (void)navigationProfileandLogout:(BOOL)isProfile;
-//-(void)presentViewController:(CAPopUpViewController*)popUpView animated:(BOOL)isSignInUp completion:(void (^ _Nullable)(void))completion;
-
-
-//- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
-//+ (void)myMethod:(UIView *)exampleView completion:(void (^)(BOOL finished))completion {
-//if (completion) {
-//    completion(finished);
-//}
-
+- (void)navigateToProfilepage;
+-(void)userLogout;
 @end
+//
+//@protocol HeaderViewSegmentedDelegate <NSObject>
+//-(void)segmentedButtonAction;
+//@end
 
 @interface CXHeaderView : UIView <UIActionSheetDelegate>{
 }
@@ -33,9 +30,12 @@
 @property (nonatomic,strong) MIBadgeButton *cartBtn;
 @property (nonatomic,strong) UIButton *profileBtn;
 
-- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes;
+- (id)initWithFrame:(CGRect)frame andTitle:(NSString*)inTitle andDelegate:(id)delegate backButtonVisible:(BOOL)isVisible cartBtnVisible:(BOOL)visible profileBtnVisible:(BOOL)appear isForgot:(BOOL)yes isLogout:(BOOL)yesLogout;
+
+//-(id)initWithSegmentedBarFrame:(CGRect)frame andTitle:(NSArray*)titlesArr andDelegate:(id)delegate currentViewVisible:(BOOL)isVisible;
 
 @property (nonnull,assign) id <HeaderViewDelegate> delegate;
+//@property (nonnull,assign) id <HeaderViewSegmentedDelegate> segmentedDelegate;
 @property (assign)  BOOL isLogout;
 @property (assign)  BOOL isSignInUp;
 @end
