@@ -7,7 +7,7 @@ target 'StoreOnGoApp' do
 pod 'MagicalRecord/Shorthand'
 pod 'HMSegmentedControl'
 pod 'SDWebImage', '~> 3.8'
-
+pod 'CarbonKit', '~> 2.1'
 end
 
 target 'StoreOnGoAppTests' do

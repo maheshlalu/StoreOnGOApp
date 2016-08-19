@@ -16,5 +16,5 @@
 #import "JSONKit.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "CAPopUpViewController.h"
-
+#import "CarbonKit.h"
 #endif /* StoreOnGoApp_Bridging_Header_h */

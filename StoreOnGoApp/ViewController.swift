@@ -21,6 +21,7 @@ class ViewController: UIViewController{
     var searchBar: SearchBar!
     
     var heder: UIView!
+    var presentWindow : UIWindow?
 
 
     override func viewDidLoad() {
@@ -31,6 +32,8 @@ class ViewController: UIViewController{
         CXDBSettings.sharedInstance.dataDelegate = self
         CX_AppData.sharedInstance.getStoresData()
         //self.getStores()
+        presentWindow = UIApplication.sharedApplication().keyWindow
+
         self.setupCollectionView()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -214,10 +217,14 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             self.navigationController?.pushViewController(mapView, animated: true)
             break
         case 2  :
-            self.alertWithMessage("Comming Soon!!")
+           // self.alertWithMessage("Comming Soon!!")
+            presentWindow?.makeToast(message: "Comming Soon!!")
+
             break
         case 3  :
-            self.alertWithMessage("Comming Soon!!")
+           // self.alertWithMessage("Comming Soon!!")
+            presentWindow?.makeToast(message: "Comming Soon!!")
+
             break
         default :
             break
@@ -326,13 +333,15 @@ extension ViewController : HeaderViewDelegate {
     }
     
     func navigationProfileandLogout(isProfile: Bool) {
-        let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        //alertWithMessage("User Logout Successfully!")
+        presentWindow?.makeToast(message: "Comming Soon!!")
+
+        //let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+        //self.navigationController?.pushViewController(profile, animated: false)
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        presentWindow?.makeToast(message: "Comming Soon!!")
     }
     
     func userLogout() {
