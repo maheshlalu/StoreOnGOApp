@@ -102,8 +102,8 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
                 UIAlertAction in
                 if status == 1 {
                     //It should leads to Profile Screen
-                   self.navigationController?.popViewControllerAnimated(true)
-                }
+                    let home : ViewController = ViewController.init()
+                    self.navigationController?.pushViewController(home, animated: false)                }
             }
             alert.addAction(okAction)
             self.presentViewController(alert, animated: true, completion: nil)
