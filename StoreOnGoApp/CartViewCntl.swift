@@ -16,6 +16,14 @@ class CartViewCntl: UIViewController {
     var chekOutBtn  : UIButton = UIButton()
     var presentWindow : UIWindow?
     
+    let country:String = NSUserDefaults.standardUserDefaults().valueForKey("COUNTRY") as! String
+    let city:String = NSUserDefaults.standardUserDefaults().valueForKey("CITY") as! String
+    let fullname:String = NSUserDefaults.standardUserDefaults().valueForKey("FULL_NAME") as! String
+    let mobile:String = NSUserDefaults.standardUserDefaults().valueForKey("MOBILE") as! String
+    let address:String = NSUserDefaults.standardUserDefaults().valueForKey("ADDRESS") as! String
+    let email:String = NSUserDefaults.standardUserDefaults().valueForKey("USER_EMAIL") as! String
+    let state:String = NSUserDefaults.standardUserDefaults().valueForKey("STATE") as! String
+
     var heder: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,77 +90,6 @@ class CartViewCntl: UIViewController {
     */
     
     
-    func checkOutCartItems(){
-        
-        
-        let productEn = NSEntityDescription.entityForName("CX_Cart", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
-        let fetchRequest = CX_Cart.MR_requestAllSortedBy("name", ascending: true)
-        // fetchRequest.predicate = predicate
-        fetchRequest.entity = productEn
-        
-        let order: NSMutableDictionary = NSMutableDictionary()
-        let orderItemName: NSMutableString = NSMutableString()
-        //NSMutableString* itemCode = [NSMutableString string];
-        let orderItemQuantity: NSMutableString = NSMutableString()
-        let orderSubTotal: NSMutableString = NSMutableString()
-        let orderItemId: NSMutableString = NSMutableString()
-        let orderItemMRP: NSMutableString = NSMutableString()
-        
-        let total: Double = 0
-        
-        order["Name"] = "kushal"
-        //should be replaced
-        order["Address"] = "madhapur hyd"
-        //should be replaced
-        order["Contact_Number"] = "7893335553"
-        //should be replaced
-        
-        
-        for (index, element) in CX_Cart.MR_executeFetchRequest(fetchRequest).enumerate() {
-            let cart : CX_Cart = element as! CX_Cart
-            if index != 0 {
-                orderItemName .appendString("|")
-                orderItemQuantity .appendString("|")
-                orderSubTotal .appendString("|")
-                orderItemId .appendString("|")
-                orderItemMRP .appendString("|")
-            }
-            orderItemName.appendString(cart.name! + "`" + cart.pID!)
-            orderItemQuantity.appendString(cart.quantity! + "`" + cart.pID!)
-            //orderSubTotal.appendString(cart.name! + "`" + cart.pID!)
-            orderItemId.appendString(cart.itemCode! + "`" + cart.pID!)
-            //orderItemMRP.appendString(cart.name! + "`" + cart.pID!)
-            print("Item \(index): \(cart)")
-        }
-        
-        order["OrderItemId"] = orderItemId
-        //[order setObject:itemCode forKey:@"ItemCode"];
-        order["OrderItemQuantity"] = orderItemQuantity
-        order["OrderItemName"] = orderItemName
-        order["OrderItemSubTotal"] = orderSubTotal
-        order["OrderItemMRP"] = orderItemMRP
-        
-        print("order dic \(order)")
-        
-        /*
-         {
-         "list":[
-         {
-         "OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840",
-         "Total":"",
-         "OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840",
-         "OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840",
-         "OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840",
-         "Contact_Number":"7893335553",
-         "OrderItemMRP":"`13501630|`14075630|`14075740|`14075840",
-         "Address":"madhapur hyd",
-         "Name":"kushal"
-         }
-         ]
-         }
-         */
-        
-    }
 
 }
 
@@ -248,10 +185,12 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
     
     
     func checkOutBtnAction(button : UIButton!){
-        
-        let cartView : UserDetailsCnt = UserDetailsCnt.init()
-        self.navigationController?.pushViewController(cartView, animated: false)
-
+         if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") != nil{
+            self.sendTheCartItemsToServer()
+         }else{
+            let signUp : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(signUp, animated: false)
+        }
         //UserDetailsCnt
     }
     
@@ -262,7 +201,175 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
+
     
+    func sendTheCartItemsToServer(){
+        var urlString : String = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder"
+        //"http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json="
+        
+        urlString = urlString.stringByAppendingString("&json="+(self.checkOutCartItems()))
+        urlString = urlString.stringByAppendingString("&dt=CAMPAIGNS")
+        urlString = urlString.stringByAppendingString("&category=Services")
+        urlString = urlString.stringByAppendingString("&userId="+CXConstant.MallID)
+        urlString = urlString.stringByAppendingString("&consumerEmail="+self.email)
+        //{"list":[{"Address":"madhapur hyd","Name":"kushal","Contact_Number":"7893335553"}]})
+        
+        //print("Url Encoded string is \(urlString.URLEncodedString)")
+        let url: NSURL = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+        
+        
+        //SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
+        
+        //let url: NSURL = NSURL(string: urlString as String)!
+        let request1: NSURLRequest = NSURLRequest(URL: url)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request1) { (resData:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+            var jsonData : NSDictionary = NSDictionary()
+            do {
+                jsonData = try NSJSONSerialization.JSONObjectWithData(resData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
+            } catch {
+                print("Error in parsing")
+            }
+            let string = jsonData.valueForKeyPath("myHashMap.status")
+            if ((string?.rangeOfString("1")) != nil){
+                print("All Malls \(jsonData)")
+                
+                let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
+                let cartsDataArrya : NSArray = CX_Cart.MR_executeFetchRequest(fetchRequest)
+                
+                for (index, element) in cartsDataArrya.enumerate() {
+                    let cart : CX_Cart = element as! CX_Cart
+                    NSManagedObjectContext.MR_contextForCurrentThread().deleteObject(cart)
+                    NSManagedObjectContext.MR_contextForCurrentThread().MR_saveToPersistentStoreAndWait()
+                }
+                 dispatch_async(dispatch_get_main_queue(), {
+                NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+                })
+                
+            }
+        }
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        // NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+        
+        task.resume()
+        
+        //startSyncWithUrl
+        /* http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840","Total":"","OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840","OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840","OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840","Contact_Number":"7893335553","OrderItemMRP":"`13501630|`14075630|`14075740|`14075840","Address":"madhapur hyd","Name":"kushal"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=cxsample@gmail.com*/
+        
+    }
+
+    
+    func checkOutCartItems()-> String{
+        let productEn = NSEntityDescription.entityForName("CX_Cart", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+        let fetchRequest = CX_Cart.MR_requestAllSortedBy("name", ascending: true)
+        // fetchRequest.predicate = predicate
+        fetchRequest.entity = productEn
+        
+        let order: NSMutableDictionary = NSMutableDictionary()
+        var orderItemName: NSMutableString = NSMutableString()
+        let orderItemQuantity: NSMutableString = NSMutableString()
+        let orderSubTotal: NSMutableString = NSMutableString()
+        let orderItemId: NSMutableString = NSMutableString()
+        let orderItemMRP: NSMutableString = NSMutableString()
+        
+        //let total: Double = 0
+        order.setValue(self.fullname, forKey: "Name")
+        //order["Name"] = ("\("kushal")")
+        //should be replaced
+        // order["Address"] = ("\("madhapur hyd")")
+        order.setValue(self.address, forKey: "Address")
+        
+        //should be replaced
+        //order["Contact_Number"] = ("\("7893335553")")
+        order.setValue(self.mobile, forKey: "Contact_Number")
+        
+        //should be replaced
+        
+        
+        for (index, element) in CX_Cart.MR_executeFetchRequest(fetchRequest).enumerate() {
+            let cart : CX_Cart = element as! CX_Cart
+            if index != 0 {
+                orderItemName.appendString(("\("|")"))
+                orderItemQuantity .appendString(("\("|")"))
+                orderSubTotal .appendString(("\("|")"))
+                orderItemId .appendString(("\("|")"))
+                orderItemMRP .appendString(("\("|")"))
+            }
+            orderItemName.appendString("\(cart.name! + "`" + cart.pID!)")
+            orderItemQuantity.appendString("\(cart.quantity! + "`" + cart.pID!)")
+            //orderSubTotal.appendString(cart.name! + "`" + cart.pID!)
+            orderItemId.appendString("\(cart.pID! + "`" + cart.pID!)")
+            //orderItemMRP.appendString(cart.name! + "`" + cart.pID!)
+            print("Item \(index): \(cart)")
+        }
+        
+        //  order["OrderItemId"] = orderItemId
+        order.setValue(orderItemId, forKey: "OrderItemId")
+        
+        //[order setObject:itemCode forKey:@"ItemCode"];
+        //order["OrderItemQuantity"] = orderItemQuantity
+        order.setValue(orderItemQuantity, forKey: "OrderItemQuantity")
+        
+        // order["OrderItemName"] = orderItemName
+        order.setValue(orderItemName, forKey: "OrderItemName")
+        
+        //order["OrderItemSubTotal"] = ("\(orderSubTotal)")
+        order.setValue(orderSubTotal, forKey: "OrderItemSubTotal")
+        
+        // order["OrderItemMRP"] = ("\(orderItemMRP)")
+        order.setValue(orderItemMRP, forKey: "OrderItemMRP")
+        
+        
+        print("order dic \(order)")
+        
+        let listArray : NSMutableArray = NSMutableArray()
+        
+        listArray.addObject(order)
+        
+        let cartJsonDict :NSMutableDictionary = NSMutableDictionary()
+        cartJsonDict.setObject(listArray, forKey: "list")
+        
+        //let jsonString = cartJsonDict.JSONString()
+        var jsonData : NSData = NSData()
+        do {
+            jsonData = try NSJSONSerialization.dataWithJSONObject(cartJsonDict, options: NSJSONWritingOptions.PrettyPrinted)
+            // here "jsonData" is the dictionary encoded in JSON data
+        } catch let error as NSError {
+            print(error)
+        }
+        let jsonStringFormat = String(data: jsonData, encoding: NSUTF8StringEncoding)
+        print("order dic \(jsonStringFormat)")
+        
+        return jsonStringFormat!
+        
+        
+        
+        // println("JSON string = \(theJSONText!)")
+        
+        /*
+         {
+         "list":[
+         {
+         "OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840",
+         "Total":"",
+         "OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840",
+         "OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840",
+         "OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840",
+         "Contact_Number":"7893335553",
+         "OrderItemMRP":"`13501630|`14075630|`14075740|`14075840",
+         "Address":"madhapur hyd",
+         "Name":"kushal"
+         }
+         ]
+         }
+         
+         
+         http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840","Total":"","OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840","OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840","OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840","Contact_Number":"7893335553","OrderItemMRP":"`13501630|`14075630|`14075740|`14075840","Address":"madhapur hyd","Name":"kushal"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=cxsample@gmail.com
+         
+         */
+        
+    }
+
     
 
 }

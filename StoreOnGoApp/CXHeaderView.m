@@ -63,7 +63,7 @@
         [self.cartBtn setBadgeBackgroundColor:[UIColor redColor]];
         [self.cartBtn setBadgeTextColor:[UIColor whiteColor]];
     }else{
-        [self.cartBtn setBadgeString:nil];
+        [self.cartBtn setBadgeString:@""];
         [self.cartBtn setBadgeBackgroundColor:[UIColor clearColor]];
         [self.cartBtn setBadgeTextColor:[UIColor clearColor]];
         
