@@ -72,8 +72,8 @@ class ProductHomeCntl: UIViewController {
         self.segmentedControl4.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
         self.segmentedControl4.selectedTitleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)]
         self.segmentedControl4.selectionIndicatorColor = CXConstant.homeCellBgColor
-        self.segmentedControl4.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
-        self.segmentedControl4.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+        self.segmentedControl4.selectionStyle = HMSegmentedControlSelectionStyle.FullWidthStripe
+        self.segmentedControl4.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocation.Down
         self.segmentedControl4.tag = 3
         segmentedControl4.addTarget(self, action: #selector(ProductHomeCntl.segmentedControlChangedValue(_:)), forControlEvents: .ValueChanged)
         self.view.addSubview(self.segmentedControl4)

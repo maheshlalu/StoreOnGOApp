@@ -15,27 +15,40 @@ class CartViewCntl: UIViewController {
     var keepShoppingBtn : UIButton = UIButton()
     var chekOutBtn  : UIButton = UIButton()
     var presentWindow : UIWindow?
-    
-    let country:String = NSUserDefaults.standardUserDefaults().valueForKey("COUNTRY") as! String
-    let city:String = NSUserDefaults.standardUserDefaults().valueForKey("CITY") as! String
-    let fullname:String = NSUserDefaults.standardUserDefaults().valueForKey("FULL_NAME") as! String
-    let mobile:String = NSUserDefaults.standardUserDefaults().valueForKey("MOBILE") as! String
-    let address:String = NSUserDefaults.standardUserDefaults().valueForKey("ADDRESS") as! String
-    let email:String = NSUserDefaults.standardUserDefaults().valueForKey("USER_EMAIL") as! String
-    let state:String = NSUserDefaults.standardUserDefaults().valueForKey("STATE") as! String
+ 
+    var country:String!
+    var city:String!
+    var fullname:String!
+    var mobile:String!
+    var address:String!
+    var email:String!
+    var state:String!
 
+    
     var heder: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = CXConstant.cartViewBgClor
         self.designHeaderView()
         self.designCartActionButton()
         self.createCartTableView()
         self.getProductsList()
         
-        //242,242,242
-
-        // Do any additional setup after loading the view.
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            print("Plese Login")
+        }else{
+            print("it has an user id")
+            country =  NSUserDefaults.standardUserDefaults().valueForKey("COUNTRY") as! String?
+            city = NSUserDefaults.standardUserDefaults().valueForKey("CITY") as! String
+            fullname = NSUserDefaults.standardUserDefaults().valueForKey("FULL_NAME") as! String
+            mobile = NSUserDefaults.standardUserDefaults().valueForKey("MOBILE") as! String
+            address = NSUserDefaults.standardUserDefaults().valueForKey("ADDRESS") as! String
+            email = NSUserDefaults.standardUserDefaults().valueForKey("USER_EMAIL") as! String
+            state = NSUserDefaults.standardUserDefaults().valueForKey("STATE") as! String
+        }
+        
+     
     }
 
     override func didReceiveMemoryWarning() {
@@ -211,7 +224,7 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
         urlString = urlString.stringByAppendingString("&dt=CAMPAIGNS")
         urlString = urlString.stringByAppendingString("&category=Services")
         urlString = urlString.stringByAppendingString("&userId="+CXConstant.MallID)
-        urlString = urlString.stringByAppendingString("&consumerEmail="+self.email)
+        urlString = urlString.stringByAppendingString("&consumerEmail="+self.email)//self.email
         //{"list":[{"Address":"madhapur hyd","Name":"kushal","Contact_Number":"7893335553"}]})
         
         //print("Url Encoded string is \(urlString.URLEncodedString)")
