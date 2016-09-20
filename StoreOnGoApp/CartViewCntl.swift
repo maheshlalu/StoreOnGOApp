@@ -34,6 +34,7 @@ class CartViewCntl: UIViewController {
         self.designCartActionButton()
         self.createCartTableView()
         self.getProductsList()
+        presentWindow = UIApplication.sharedApplication().keyWindow
         
         if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
             print("Plese Login")
@@ -410,8 +411,12 @@ extension CartViewCntl : HeaderViewDelegate {
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     
     func userLogout() {

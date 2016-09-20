@@ -17,7 +17,7 @@ class ProductListCntl: UIViewController {
     var headerTitle :  NSString = NSString()
     var presentWindow : UIWindow?
     var heder: UIView!
-
+ 
     //,EDIT TEXT, AddTOCard Button
 
     var productListTableView : UITableView!
@@ -367,8 +367,12 @@ extension ProductListCntl : HeaderViewDelegate {
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     
     func userLogout() {

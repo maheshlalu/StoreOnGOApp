@@ -16,6 +16,7 @@ class CXProfilePageView: UIViewController,EVTabBar{
     var subviewControllers: [UIViewController] = []
     var shadowView = UIImageView(image: UIImage(imageLiteral: "filter-background-image"))
     var heder: UIView!
+    var presentWindow : UIWindow?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class CXProfilePageView: UIViewController,EVTabBar{
         setupConstraints()
         self.title = "Profile"
         self.view.backgroundColor = UIColor.whiteColor()
+        presentWindow = UIApplication.sharedApplication().keyWindow
+
         // Do any additional setup after loading the view.
     }
 
@@ -89,8 +92,12 @@ extension CXProfilePageView : HeaderViewDelegate {
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     
     func userLogout() {

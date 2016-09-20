@@ -14,11 +14,13 @@ class CXForgotPassword: UIViewController,UITextFieldDelegate {
     var emailAddressField: UITextField!
     var sendBtn:UIButton!
     var heder: UIView!
+    var presentWindow:UIWindow?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor();
         self.designHeaderView()
+        presentWindow = UIApplication.sharedApplication().keyWindow
         self.customizeMainView()
         
         
@@ -32,7 +34,7 @@ class CXForgotPassword: UIViewController,UITextFieldDelegate {
     }
     
     func customizeMainView() {
-        let signUpLbl = UILabel.createHeaderLabel(CGRectMake(20, CXConstant.headerViewHeigh+50, self.view.frame.size.width-40, 50), text: "Forgot password",font:UIFont.init(name: "Roboto-Regular", size: 40)!)
+        let signUpLbl = UILabel.createHeaderLabel(CGRectMake(20, CXConstant.headerViewHeigh+50, self.view.frame.size.width-40, 40), text: "Forgot password",font:UIFont.init(name: "Roboto-Regular", size: 30)!)
         self.view.addSubview(signUpLbl)
         
         let signUpSubLbl = UILabel.createHeaderLabel(CGRectMake(20, signUpLbl.frame.origin.y+signUpLbl.frame.size.height-10, self.view.frame.size.width-40, 40), text: "Get your password",font:UIFont.init(name: "Roboto-Regular", size: 14)!)
@@ -142,8 +144,12 @@ extension CXForgotPassword : HeaderViewDelegate {
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     
     func userLogout() {

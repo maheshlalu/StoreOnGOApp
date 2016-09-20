@@ -217,13 +217,11 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
             self.navigationController?.pushViewController(mapView, animated: true)
             break
         case 2  :
-           // self.alertWithMessage("Comming Soon!!")
-            presentWindow?.makeToast(message: "Comming Soon!!")
+            presentWindow?.makeToast(message: "Coming Soon!!")
 
             break
         case 3  :
-           // self.alertWithMessage("Comming Soon!!")
-            presentWindow?.makeToast(message: "Comming Soon!!")
+            presentWindow?.makeToast(message: "Coming Soon!!")
 
             break
         default :
@@ -333,15 +331,20 @@ extension ViewController : HeaderViewDelegate {
     }
     
     func navigationProfileandLogout(isProfile: Bool) {
-        //alertWithMessage("User Logout Successfully!")
-        presentWindow?.makeToast(message: "Comming Soon!!")
+//        //alertWithMessage("User Logout Successfully!")
+//        presentWindow?.makeToast(message: "Coming Soon!!")
 
-        //let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
-        //self.navigationController?.pushViewController(profile, animated: false)
+        let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+        self.navigationController?.pushViewController(profile, animated: false)
     }
     
     func navigateToProfilepage() {
-        presentWindow?.makeToast(message: "Comming Soon!!")
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     
     func userLogout() {

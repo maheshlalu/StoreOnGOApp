@@ -16,6 +16,7 @@ class StickerDetails: UIViewController {
     var searchBar: SearchBar!
     var predicateString : NSString = NSString()
     var heder: UIView!
+    var presentWindow : UIWindow?
     override func viewDidLoad() {
         super.viewDidLoad()
       //  dispatch_async(dispatch_get_main_queue(),{
@@ -24,6 +25,8 @@ class StickerDetails: UIViewController {
             self.setupCollectionView()
             self.getTheProductsList()
             self.view.backgroundColor = CXConstant.homeBackGroundColr
+        presentWindow = UIApplication.sharedApplication().keyWindow
+
       //  })
 
 
@@ -211,8 +214,12 @@ extension StickerDetails : HeaderViewDelegate {
     }
 
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     
     func userLogout() {

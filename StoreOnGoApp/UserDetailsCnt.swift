@@ -19,12 +19,14 @@ class UserDetailsCnt: UIViewController {
     var cartTableView :  UITableView = UITableView()
     let productsList: [String] = ["Name", "Email address","Address line1","Address line2","Phone number",""]
     var heder: UIView!
+    var presentWindow : UIWindow?
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.sendTheCartItemsToServer()
         self.view.backgroundColor = CXConstant.cartViewBgClor
         self.designHeaderView()
         self.createCartTableView()
+        presentWindow = UIApplication.sharedApplication().keyWindow
         // Do any additional setup after loading the view.
     }
     
@@ -430,8 +432,12 @@ extension UserDetailsCnt : HeaderViewDelegate {
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     
     func userLogout() {

@@ -15,6 +15,7 @@ class ProductHomeCntl: UIViewController {
     var productCategories: NSArray!
     var isProductCategory : Bool = Bool()
     var heder: UIView!
+    var presentWindow : UIWindow?
     
     
     override func viewDidLoad() {
@@ -28,7 +29,8 @@ class ProductHomeCntl: UIViewController {
         let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
         isProductCategory = true
         self.getProductSubCategory(predicate)
-        
+        presentWindow = UIApplication.sharedApplication().keyWindow
+
         // Do any additional setup after loading the view.
     }
     
@@ -315,8 +317,12 @@ extension ProductHomeCntl : HeaderViewDelegate {
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     
     func userLogout() {

@@ -30,6 +30,8 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
     var delegate:CXSingInDelegate?
     var heder: UIView!
     
+    var presentWindow : UIWindow?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,8 @@ class CXSignInSignUpViewController: UIViewController,UITextFieldDelegate {
         self.keyboardIsShown = false
         self.designHeaderView()
         self.customizeMainView()
+        presentWindow = UIApplication.sharedApplication().keyWindow
+
         
     }
     
@@ -259,8 +263,12 @@ extension CXSignInSignUpViewController : HeaderViewDelegate {
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     func userLogout() {
 //        let viewController: UIViewController = self.navigationController!.viewControllers[1]

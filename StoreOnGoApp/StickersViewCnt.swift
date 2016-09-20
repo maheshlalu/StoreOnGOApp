@@ -13,6 +13,7 @@ class StickersViewCnt: UIViewController {
     var stickersCollectionView: UICollectionView!
     var stickersList : NSArray = NSArray()
     var heder: UIView!
+    var presentWindow : UIWindow?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class StickersViewCnt: UIViewController {
         self.view.backgroundColor = CXConstant.homeBackGroundColr
         let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Sticker(139455)")
        self.getStickers(predicate)
+        presentWindow = UIApplication.sharedApplication().keyWindow
         // Do any additional setup after loading the view.
     }
 
@@ -168,8 +170,12 @@ extension StickersViewCnt : HeaderViewDelegate {
     }
     
     func navigateToProfilepage() {
-        let profile : CXProfilePageView = CXProfilePageView.init()
-        self.navigationController?.pushViewController(profile, animated: false)
+        if NSUserDefaults.standardUserDefaults().valueForKey("USER_ID") == nil{
+            let profile : CXSignInSignUpViewController = CXSignInSignUpViewController.init()
+            self.navigationController?.pushViewController(profile, animated: false)
+        }else{
+            presentWindow?.makeToast(message: "Coming Soon!!")
+        }
     }
     func userLogout() {
         designHeaderView()
