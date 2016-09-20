@@ -102,7 +102,7 @@ class SMProfileViewController: UIViewController {
     }
     
     func showAlertView(message:String, status:Int) {
-        let alert = UIAlertController(title: "Silly Monks", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "NV Agencies", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         //alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
         let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) {
             UIAlertAction in
