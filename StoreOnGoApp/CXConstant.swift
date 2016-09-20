@@ -242,20 +242,15 @@ class CXConstant: NSObject, UIActionSheetDelegate{
         
         switch height {
         case 480.0:
-            print("iPhone 3,4")
             return IPHONE_4S
         case 568.0:
-            print("iPhone 5")
             return IPHONE_5S
         case 667.0:
-            print("iPhone 6")
             return IPHONE_6
         case 736.0:
-            print("iPhone 6+")
             return IPHONE_6PLUS
             
         default:
-            print("not an iPhone")
             return NOT_IPHONE
         }
     }
