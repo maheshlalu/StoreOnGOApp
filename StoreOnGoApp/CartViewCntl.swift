@@ -218,35 +218,55 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
 
     
     func sendTheCartItemsToServer(){
-        var urlString : String = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder"
+        
+        LoadingView.show("Loading", animated: true)
+        
+        // var urlString : String = "http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder"
         //"http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json="
         
+        var urlString : String = String()
+        urlString = urlString.stringByAppendingString("type=PlaceOrder")
         urlString = urlString.stringByAppendingString("&json="+(self.checkOutCartItems()))
         urlString = urlString.stringByAppendingString("&dt=CAMPAIGNS")
         urlString = urlString.stringByAppendingString("&category=Services")
         urlString = urlString.stringByAppendingString("&userId="+CXConstant.MallID)
         urlString = urlString.stringByAppendingString("&consumerEmail="+self.email)//self.email
         //{"list":[{"Address":"madhapur hyd","Name":"kushal","Contact_Number":"7893335553"}]})
+        let baseUrl : NSURL = NSURL(string: "http://storeongo.com:8081/MobileAPIs/postedJobs")!
         
-        //print("Url Encoded string is \(urlString.URLEncodedString)")
-        let url: NSURL = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+        let request = NSMutableURLRequest(URL: baseUrl)
+        request.HTTPMethod = "POST"
         
+        //  str = str.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         
-        //SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
+        let postString = urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         
-        //let url: NSURL = NSURL(string: urlString as String)!
-        let request1: NSURLRequest = NSURLRequest(URL: url)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request1) { (resData:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+        request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        print(postString.dataUsingEncoding(NSUTF8StringEncoding))
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        let task1 = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                // print("response = \(response)")
+            }
+            
+            let responseString = String(data: data!, encoding: NSUTF8StringEncoding)
+            // print("responseString = \(responseString)")
+            
             var jsonData : NSDictionary = NSDictionary()
             do {
-                jsonData = try NSJSONSerialization.JSONObjectWithData(resData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
+                jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
             } catch {
                 print("Error in parsing")
             }
             let string = jsonData.valueForKeyPath("myHashMap.status")
             if ((string?.rangeOfString("1")) != nil){
-                print("All Malls \(jsonData)")
+                // print("All Malls \(jsonData)")
                 
                 let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
                 let cartsDataArrya : NSArray = CX_Cart.MR_executeFetchRequest(fetchRequest)
@@ -256,22 +276,86 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
                     NSManagedObjectContext.MR_contextForCurrentThread().deleteObject(cart)
                     NSManagedObjectContext.MR_contextForCurrentThread().MR_saveToPersistentStoreAndWait()
                 }
-                 dispatch_async(dispatch_get_main_queue(), {
-                NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+                dispatch_async(dispatch_get_main_queue(), {
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+                    LoadingView.hide()
+                    self.navigationController?.popToRootViewControllerAnimated(true)
                 })
                 
             }
+            
+            
         }
-        self.navigationController?.popToRootViewControllerAnimated(true)
-        // NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+        task1.resume()
         
-        task.resume()
         
-        //startSyncWithUrl
-        /* http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840","Total":"","OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840","OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840","OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840","Contact_Number":"7893335553","OrderItemMRP":"`13501630|`14075630|`14075740|`14075840","Address":"madhapur hyd","Name":"kushal"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=cxsample@gmail.com*/
+        return
+        
         
     }
 
+    /*
+     //SMSyncService.sharedInstance.startSyncWithUrl(urlString as String)
+     
+     //let url: NSURL = NSURL(string: urlString as String)!
+     let request1: NSMutableURLRequest = NSMutableURLRequest(URL: baseUrl)
+     
+     var post: String = urlString
+     //  var postData: NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
+     var postData: NSData = post.dataUsingEncoding(NSUTF8StringEncoding)!
+     
+     var postLength: String = "\(postData.length)"
+     
+     request1.HTTPMethod = "POST"
+     request1.setValue(postLength, forHTTPHeaderField:"Content-Length")
+     //request1.setValue("application/json", forHTTPHeaderField:"Accept")
+     request1.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField:"Content-Type")
+     request1.HTTPBody = postData
+     request1.timeoutInterval = 180
+     
+     
+     //        var str: String = NSString(data: urlData, encoding: NSUTF8StringEncoding)
+     
+     
+     
+     let session = NSURLSession.sharedSession()
+     let task = session.dataTaskWithRequest(request1) { (resData:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+     print(resData)
+     print(error)
+     print(response)
+     
+     var jsonData : NSDictionary = NSDictionary()
+     do {
+     jsonData = try NSJSONSerialization.JSONObjectWithData(resData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
+     } catch {
+     print("Error in parsing")
+     }
+     let string = jsonData.valueForKeyPath("myHashMap.status")
+     if ((string?.rangeOfString("1")) != nil){
+     print("All Malls \(jsonData)")
+     
+     let fetchRequest = NSFetchRequest(entityName: "CX_Cart")
+     let cartsDataArrya : NSArray = CX_Cart.MR_executeFetchRequest(fetchRequest)
+     
+     for (index, element) in cartsDataArrya.enumerate() {
+     let cart : CX_Cart = element as! CX_Cart
+     NSManagedObjectContext.MR_contextForCurrentThread().deleteObject(cart)
+     NSManagedObjectContext.MR_contextForCurrentThread().MR_saveToPersistentStoreAndWait()
+     }
+     dispatch_async(dispatch_get_main_queue(), {
+     NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+     })
+     
+     }
+     }
+     self.navigationController?.popToRootViewControllerAnimated(true)
+     // NSNotificationCenter.defaultCenter().postNotificationName("updateCartBtnAction", object: nil)
+     
+     task.resume()
+     
+     //startSyncWithUrl
+     /* http://storeongo.com:8081/MobileAPIs/postedJobs?type=PlaceOrder&json={"list":[{"OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840","Total":"","OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840","OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840","OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840","Contact_Number":"7893335553","OrderItemMRP":"`13501630|`14075630|`14075740|`14075840","Address":"madhapur hyd","Name":"kushal"}]}&dt=CAMPAIGNS&category=Services&userId=4452&consumerEmail=cxsample@gmail.com*/
+*/
     
     func checkOutCartItems()-> String{
         let productEn = NSEntityDescription.entityForName("CX_Cart", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
@@ -305,16 +389,20 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
             if index != 0 {
                 orderItemName.appendString(("\("|")"))
                 orderItemQuantity .appendString(("\("|")"))
-                orderSubTotal .appendString(("\("|")"))
+               //orderSubTotal .appendString(("\("|")"))
                 orderItemId .appendString(("\("|")"))
-                orderItemMRP .appendString(("\("|")"))
+               // orderItemMRP .appendString(("\("|")"))
             }
-            orderItemName.appendString("\(cart.name! + "`" + cart.pID!)")
+            
+            //let cartName : String = cart.name!
+           // cartName.stringByReplacingOccurrencesOfString("", withString: "")
+            
+            orderItemName.appendString("\(cart.name!.escapeStr() + "`" + cart.pID!)")
             orderItemQuantity.appendString("\(cart.quantity! + "`" + cart.pID!)")
             //orderSubTotal.appendString(cart.name! + "`" + cart.pID!)
             orderItemId.appendString("\(cart.pID! + "`" + cart.pID!)")
             //orderItemMRP.appendString(cart.name! + "`" + cart.pID!)
-            print("Item \(index): \(cart)")
+            //print("Item \(index): \(cart)")
         }
         
         //  order["OrderItemId"] = orderItemId
@@ -334,7 +422,7 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
         order.setValue(orderItemMRP, forKey: "OrderItemMRP")
         
         
-        print("order dic \(order)")
+        //print("order dic \(order)")
         
         let listArray : NSMutableArray = NSMutableArray()
         
@@ -352,7 +440,7 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
             print(error)
         }
         let jsonStringFormat = String(data: jsonData, encoding: NSUTF8StringEncoding)
-        print("order dic \(jsonStringFormat)")
+       // print("order dic \(jsonStringFormat)")
         
         return jsonStringFormat!
         
@@ -424,6 +512,18 @@ extension CartViewCntl : HeaderViewDelegate {
         designHeaderView()
     }
     
+}
+
+extension String {
+    
+    func escapeStr() -> (String) {
+        var raw: NSString = self
+        var str = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,raw,"[].",":/?&=;+!@#$()',*",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding))
+        
+        
+
+        return str as (String)
+    }
 }
 
 extension CartViewCntl : UITextFieldDelegate {

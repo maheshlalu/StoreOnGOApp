@@ -10,6 +10,8 @@
 #define StoreOnGoApp_Bridging_Header_h
 
 #import <CoreData+MagicalRecord.h>
+#import <AFNetworking.h>
+
 #import "KIImagePager.h"
 #import "HMSegmentedControl.h"
 #import "CXHeaderView.h"
@@ -17,4 +19,5 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "CAPopUpViewController.h"
 #import "CarbonKit.h"
+#import "NSString+URLEncode.h"
 #endif /* StoreOnGoApp_Bridging_Header_h */
