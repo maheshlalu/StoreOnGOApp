@@ -1009,7 +1009,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "4483d60c-00a7-4b2c-9220-96556e3592ae";
+				PROVISIONING_PROFILE = "969cca81-dd21-4070-953b-d0b14482ffd5";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1048,7 +1048,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "4483d60c-00a7-4b2c-9220-96556e3592ae";
+				PROVISIONING_PROFILE = "969cca81-dd21-4070-953b-d0b14482ffd5";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1068,9 +1068,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.storeongo.avagencies;
 				PRODUCT_NAME = "NV Agencies";
-				PROVISIONING_PROFILE = "4483d60c-00a7-4b2c-9220-96556e3592ae";
+				PROVISIONING_PROFILE = "969cca81-dd21-4070-953b-d0b14482ffd5";
 				SWIFT_OBJC_BRIDGING_HEADER = "StoreOnGoApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1088,8 +1089,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.storeongo.avagencies;
 				PRODUCT_NAME = "NV Agencies";
-				PROVISIONING_PROFILE = "4483d60c-00a7-4b2c-9220-96556e3592ae";
+				PROVISIONING_PROFILE = "969cca81-dd21-4070-953b-d0b14482ffd5";
 				SWIFT_OBJC_BRIDGING_HEADER = "StoreOnGoApp-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
