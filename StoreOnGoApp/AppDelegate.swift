@@ -18,86 +18,86 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
         setupCoreDate()
+
+        checkTheBuildVersion()
         //self.checkOutCartItems()
         //Roboto-Light
         return true
     }
     
-    
-    func checkOutCartItems(){
+    func checkTheBuildVersion(){
+         let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")
+        print(version)
         
-        
-        let productEn = NSEntityDescription.entityForName("CX_Cart", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
-        let fetchRequest = CX_Cart.MR_requestAllSortedBy("name", ascending: true)
-        // fetchRequest.predicate = predicate
-        fetchRequest.entity = productEn
-        
-        let order: NSMutableDictionary = NSMutableDictionary()
-        let orderItemName: NSMutableString = NSMutableString()
-        //NSMutableString* itemCode = [NSMutableString string];
-        let orderItemQuantity: NSMutableString = NSMutableString()
-        let orderSubTotal: NSMutableString = NSMutableString()
-        let orderItemId: NSMutableString = NSMutableString()
-        let orderItemMRP: NSMutableString = NSMutableString()
-        
-        let total: Double = 0
-        
-        order["Name"] = "kushal"
-        //should be replaced
-        order["Address"] = "madhapur hyd"
-        //should be replaced
-        order["Contact_Number"] = "7893335553"
-        //should be replaced
-        
-        
-        for (index, element) in CX_Cart.MR_executeFetchRequest(fetchRequest).enumerate() {
-            let cart : CX_Cart = element as! CX_Cart
-            if index != 0 {
-                orderItemName .appendString("|")
-                orderItemQuantity .appendString("|")
-                orderSubTotal .appendString("|")
-                orderItemId .appendString("|")
-                orderItemMRP .appendString("|")
-            }
-            orderItemName.appendString(cart.name! + "`" + cart.pID!)
-            orderItemQuantity.appendString(cart.quantity! + "`" + cart.pID!)
-            orderSubTotal.appendString(cart.name! + "`" + cart.pID!)
-            orderItemId.appendString(cart.itemCode! + "`" + cart.pID!)
-            orderItemMRP.appendString(cart.name! + "`" + cart.pID!)
-            print("Item \(index): \(cart)")
+        if isNewVersion() {
+            //Delete the old database if .txt files are modified
+        //  self.removeImage("", fileExtension: "")
+           print("Delete the old database if .txt files are modified")
+ 
+       self.removeImage("SingleViewCoreData", fileExtension: "sqlite")
+            self.removeImage("SingleViewCoreData", fileExtension: "sqlite-shm")
+            self.removeImage("SingleViewCoreData", fileExtension: "sqlite-wal")
+            setupCoreDate()
+
+            //SingleViewCoreData.sqlite
+            //SingleViewCoreData.sqlite-shm
+            //SingleViewCoreData.sqlite-wal
+            //1] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'recordChangeSnapshot:forObjectID:: global ID may not be temporary when recording
+            
+
+        }else{
+            
         }
-        
-        order["OrderItemId"] = orderItemId
-        //[order setObject:itemCode forKey:@"ItemCode"];
-        order["OrderItemQuantity"] = orderItemQuantity
-        order["OrderItemName"] = orderItemName
-        order["OrderItemSubTotal"] = orderSubTotal
-        order["OrderItemMRP"] = orderItemMRP
-        
-        print("order dic \(order)")
-        
-        /*
-         {
-         "list":[
-         {
-         "OrderItemName":"GRIP ACC [RH] KB BOXER/CALIBER N/M`13501630|STICKER SET TVS VICTOR [BLACK TANK]`14075630|STICKER SET TVS VICTOR [BLUE TANK]`14075740|STICKER SET TVS VICTOR [GREEN TANK]`14075840",
-         "Total":"",
-         "OrderItemQuantity":"30`13501630|30`14075630|40`14075740|40`14075840",
-         "OrderItemSubTotal":"0.0`13501630|0.0`14075630|0.0`14075740|0.0`14075840",
-         "OrderItemId":"135016`13501630|140756`14075630|140757`14075740|140758`14075840",
-         "Contact_Number":"7893335553",
-         "OrderItemMRP":"`13501630|`14075630|`14075740|`14075840",
-         "Address":"madhapur hyd",
-         "Name":"kushal"
-         }
-         ]
-         }
-         */
-        
-        
+
+    }
+    
+    func removeImage(itemName:String, fileExtension: String) {
+        let fileManager = NSFileManager.defaultManager()
+        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        guard let dirPath = paths.first else {
+            return
+        }
+        let filePath = "\(dirPath)/\(itemName).\(fileExtension)"
+        do {
+            try fileManager.removeItemAtPath(filePath)
+        } catch let error as NSError {
+            print(error.debugDescription)
+        }
     }
 
+      //  setupCoreDate()
+
+
+    
+    
+    
+    
+    func isNewVersion()-> Bool{
+        let newVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+
+        if(NSUserDefaults.standardUserDefaults().objectForKey("VERSION") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setObject(newVersion, forKey: "VERSION")
+            
+            print("NULL")
+            return true
+        }else{
+          let oldVersion =   NSUserDefaults.standardUserDefaults().objectForKey("VERSION") as! String
+            if oldVersion == newVersion {
+                return false
+            }else{
+                NSUserDefaults.standardUserDefaults().setObject(newVersion, forKey: "VERSION")
+                return true
+            }
+        }
+
+    }
+    
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

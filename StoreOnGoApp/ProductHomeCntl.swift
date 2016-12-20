@@ -26,7 +26,7 @@ class ProductHomeCntl: UIViewController {
         self.setupPager()
         self.designSearchBar()
         self.setupCollectionView()
-        let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
+        let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(1438)")
         isProductCategory = true
         self.getProductSubCategory(predicate)
         presentWindow = UIApplication.sharedApplication().keyWindow
@@ -153,12 +153,12 @@ class ProductHomeCntl: UIViewController {
         self.refreshSearchBar()
         switch index {
         case 0  :
-            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
+            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(1438)")
             self.getProductSubCategory(predicate)
             isProductCategory = true
             break
         case 1 :
-            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Miscellaneous(135918)")
+            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Miscellaneous(1439)")
             self.getProductSubCategory(predicate)
             isProductCategory = false
             break
@@ -194,10 +194,10 @@ extension ProductHomeCntl:UISearchBarDelegate{
     func loadDefaultList (){
         
         if isProductCategory {
-            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(129121)")
+            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Products List(1438)")
             self.getProductSubCategory(predicate)
         }else{
-            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Miscellaneous(135918)")
+            let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Miscellaneous(1439)")
             self.getProductSubCategory(predicate)
         }
     }
@@ -227,9 +227,9 @@ extension ProductHomeCntl:UISearchBarDelegate{
         var predicate:NSPredicate = NSPredicate()
         
         if isProductCategory {
-            predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Products List(129121)",self.searchBar.text!)
+            predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Products List(1438)",self.searchBar.text!)
         }else{
-            predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Miscellaneous(135918)",self.searchBar.text!)
+            predicate = NSPredicate(format: "masterCategory = %@ AND name contains[c] %@", "Miscellaneous(1439)",self.searchBar.text!)
         }
         
         fetchRequest.predicate = predicate

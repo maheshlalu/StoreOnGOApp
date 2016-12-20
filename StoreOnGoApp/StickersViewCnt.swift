@@ -21,7 +21,7 @@ class StickersViewCnt: UIViewController {
         self.setupCollectionView()
         //Get The Stickers
         self.view.backgroundColor = CXConstant.homeBackGroundColr
-        let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Sticker(139455)")
+        let predicate:NSPredicate = NSPredicate(format: "masterCategory = %@", "Sticker(1440)")
        self.getStickers(predicate)
         presentWindow = UIApplication.sharedApplication().keyWindow
         // Do any additional setup after loading the view.

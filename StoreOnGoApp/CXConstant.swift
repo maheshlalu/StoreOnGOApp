@@ -78,7 +78,7 @@ class CXConstant: NSObject, UIActionSheetDelegate{
 
     // static let DetailCollectionCellSize :  CGSize = CGSize(width: 150,height: 150)
     
-    static let MallID = "4452"
+    static let MallID = "22"
     
     //CGSize(width: UIScreen.mainScreen().bounds.size.width-20,height: tableViewHeigh-50)        ///
     
@@ -127,7 +127,7 @@ class CXConstant: NSObject, UIActionSheetDelegate{
     static let KOLLYWOOD_BANNAER = "/133516651/AppKollyBanner"
     static let MOLLYWOOD_BANNAER = "/133516651/AppMollyBanner"
     static let SANDALWOOD_BANNAER = "/133516651/AppSandalBanner"
-    static let MALL_ID = "4452"
+    static let MALL_ID = "22"
     
     
     // BrightCove Directives

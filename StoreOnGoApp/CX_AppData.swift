@@ -69,7 +69,7 @@ class CX_AppData: NSObject {
         dispatch_barrier_async(quees5) { // 1
             self.parseTheProductsList()
         }
-        
+ 
         let quees6 = dispatch_queue_create(
             "com.quees6.category", DISPATCH_QUEUE_CONCURRENT)
         dispatch_barrier_async(quees6) { // 1

@@ -147,12 +147,12 @@ class ViewController: UIViewController{
         }
      
     }
-    // MARK: - Call Services
+//     MARK: - Call Services
     
     
 }
 
-
+//MARK: PagerDelegate
 extension ViewController:KIImagePagerDelegate,KIImagePagerDataSource {
 
 //    }
