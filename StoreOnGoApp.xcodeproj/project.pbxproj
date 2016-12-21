@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1143D43C1E0AAD2A0067D266 /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143D43A1E0AAD2A0067D266 /* CallTableViewCell.swift */; };
+		1143D43D1E0AAD2A0067D266 /* CallTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1143D43B1E0AAD2A0067D266 /* CallTableViewCell.xib */; };
+		1143D4401E0AAD3A0067D266 /* aboutUsDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143D43E1E0AAD3A0067D266 /* aboutUsDetailTableViewCell.swift */; };
+		1143D4411E0AAD3A0067D266 /* aboutUsDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1143D43F1E0AAD3A0067D266 /* aboutUsDetailTableViewCell.xib */; };
+		11BAFF801E0A80A000F30BC5 /* AboutUsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BAFF7E1E0A80A000F30BC5 /* AboutUsTableViewCell.swift */; };
+		11BAFF811E0A80A000F30BC5 /* AboutUsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11BAFF7F1E0A80A000F30BC5 /* AboutUsTableViewCell.xib */; };
 		1202FB0B1CD323D400EF8F5B /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */; };
 		1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */; };
 		12100C311CD90F1900A44C0D /* ProductListCntl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12100C301CD90F1900A44C0D /* ProductListCntl.swift */; };
@@ -116,6 +122,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1143D43A1E0AAD2A0067D266 /* CallTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; };
+		1143D43B1E0AAD2A0067D266 /* CallTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CallTableViewCell.xib; sourceTree = "<group>"; };
+		1143D43E1E0AAD3A0067D266 /* aboutUsDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutUsDetailTableViewCell.swift; sourceTree = "<group>"; };
+		1143D43F1E0AAD3A0067D266 /* aboutUsDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = aboutUsDetailTableViewCell.xib; sourceTree = "<group>"; };
+		11BAFF7E1E0A80A000F30BC5 /* AboutUsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsTableViewCell.swift; sourceTree = "<group>"; };
+		11BAFF7F1E0A80A000F30BC5 /* AboutUsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsTableViewCell.xib; sourceTree = "<group>"; };
 		1202FB0A1CD323D400EF8F5B /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		1202FB0C1CD3298B00EF8F5B /* ProductsCnt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCnt.swift; sourceTree = "<group>"; };
 		12100C301CD90F1900A44C0D /* ProductListCntl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListCntl.swift; sourceTree = "<group>"; };
@@ -508,6 +520,12 @@
 				12100C301CD90F1900A44C0D /* ProductListCntl.swift */,
 				12F10A291CDEF23D007C8F5B /* ProductHomeCntl.swift */,
 				12F10A311CDF0C9B007C8F5B /* AboutUsViewCnt.swift */,
+				11BAFF7E1E0A80A000F30BC5 /* AboutUsTableViewCell.swift */,
+				11BAFF7F1E0A80A000F30BC5 /* AboutUsTableViewCell.xib */,
+				1143D43A1E0AAD2A0067D266 /* CallTableViewCell.swift */,
+				1143D43B1E0AAD2A0067D266 /* CallTableViewCell.xib */,
+				1143D43E1E0AAD3A0067D266 /* aboutUsDetailTableViewCell.swift */,
+				1143D43F1E0AAD3A0067D266 /* aboutUsDetailTableViewCell.xib */,
 				12F10A331CDF0E0F007C8F5B /* MapViewCntl.swift */,
 				AA5A46941CE0C326007E01A4 /* Station.swift */,
 				12F42B7E1D11021400C3BA63 /* CX_CollectionViewController.swift */,
@@ -693,11 +711,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1143D4411E0AAD3A0067D266 /* aboutUsDetailTableViewCell.xib in Resources */,
 				12F42B831D11053600C3BA63 /* CX_StickerCell.xib in Resources */,
 				12F9FC181CF76316004FE1F7 /* Roboto-Black.ttf in Resources */,
 				12F9FC191CF76316004FE1F7 /* Roboto-Bold.ttf in Resources */,
 				1216D88C1D3125880040F1E7 /* StickerDetailCell.xib in Resources */,
 				12F9FC1A1CF76316004FE1F7 /* Roboto-Italic.ttf in Resources */,
+				11BAFF811E0A80A000F30BC5 /* AboutUsTableViewCell.xib in Resources */,
 				12FBC0151D3CAF3200C8EBFE /* orderItemCell.xib in Resources */,
 				12F9FC1B1CF76316004FE1F7 /* Roboto-Light.ttf in Resources */,
 				12F9FC1C1CF76316004FE1F7 /* Roboto-Medium.ttf in Resources */,
@@ -712,6 +732,7 @@
 				AA0163391CD2073B00EA1619 /* Assets.xcassets in Resources */,
 				AA0163341CD2073B00EA1619 /* Main.storyboard in Resources */,
 				121EA6421CDB186100A69A4C /* productslist.txt in Resources */,
+				1143D43D1E0AAD2A0067D266 /* CallTableViewCell.xib in Resources */,
 				122329D71CF544EC00E93066 /* sticker.txt in Resources */,
 				121EA63F1CDB171B00A69A4C /* miscellaneous.txt in Resources */,
 			);
@@ -875,6 +896,7 @@
 				435DF6D41D66E84000F176E0 /* EVPageViewTopTabBar.swift in Sources */,
 				1202FB0D1CD3298B00EF8F5B /* ProductsCnt.swift in Sources */,
 				432DE7E51D65EFF10081FC80 /* CXForgotPassword.swift in Sources */,
+				1143D4401E0AAD3A0067D266 /* aboutUsDetailTableViewCell.swift in Sources */,
 				12EF6BDC1CFB485F009E17B6 /* EGOCache.m in Sources */,
 				12F42B7F1D11021400C3BA63 /* CX_CollectionViewController.swift in Sources */,
 				AA01637A1CD20E1400EA1619 /* SMSyncService.swift in Sources */,
@@ -890,6 +912,7 @@
 				126F827B1CDF6F57003C3DE4 /* CX_FeaturedProducts.swift in Sources */,
 				12EF6BD91CFAF0C7009E17B6 /* MIBadgeLabel.m in Sources */,
 				12100C341CD91C5E00A44C0D /* ProductHeaderCell.swift in Sources */,
+				11BAFF801E0A80A000F30BC5 /* AboutUsTableViewCell.swift in Sources */,
 				12C91DE31CFAB70B001AD55A /* CXHeaderView.m in Sources */,
 				12EF6BD81CFAF0C7009E17B6 /* MIBadgeButton.m in Sources */,
 				AA0163671CD20C0F00EA1619 /* CXConstant.swift in Sources */,
@@ -909,6 +932,7 @@
 				12F10A2A1CDEF23D007C8F5B /* ProductHomeCntl.swift in Sources */,
 				AA65A72A1CF71D7D00696A63 /* AutocompleteField.swift in Sources */,
 				126F82741CDF6F57003C3DE4 /* CX_Products+CoreDataProperties.swift in Sources */,
+				1143D43C1E0AAD2A0067D266 /* CallTableViewCell.swift in Sources */,
 				AA0163641CD20BE900EA1619 /* CXDBSettings.swift in Sources */,
 				12F64D911CD63A08007D760C /* CXDetailTableViewCell.swift in Sources */,
 				12100C311CD90F1900A44C0D /* ProductListCntl.swift in Sources */,

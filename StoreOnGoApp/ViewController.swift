@@ -221,8 +221,14 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource {
 
             break
         case 3  :
-            presentWindow?.makeToast(message: "Coming Soon!!")
-
+            //presentWindow?.makeToast(message: "Coming Soon!!")
+            
+//            let aboutUsView = AboutUsViewCnt.init()
+//            self.navigationController?.pushViewController(aboutUsView, animated: true)
+            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let aboutUs = storyBoard.instantiateViewControllerWithIdentifier("AboutUsViewCnt") as! AboutUsViewCnt
+            self.navigationController?.pushViewController(aboutUs, animated: true)
+            
             break
         default :
             break
