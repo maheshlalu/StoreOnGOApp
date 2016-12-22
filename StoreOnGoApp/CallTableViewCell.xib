@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,60 +14,79 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W8-7a-Cji">
-                        <rect key="frame" x="198" y="10" width="48" height="48"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="48" id="rRV-DE-uZU"/>
-                            <constraint firstAttribute="height" constant="48" id="t4o-3t-sl8"/>
-                        </constraints>
-                        <state key="normal" image="MSG"/>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kr-yD-cLW">
-                        <rect key="frame" x="74" y="10" width="48" height="48"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="48" id="VBH-q0-HnL"/>
-                            <constraint firstAttribute="width" constant="48" id="h2s-bT-CyD"/>
-                        </constraints>
-                        <state key="normal" image="call"/>
-                    </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcB-11-aQg">
-                        <rect key="frame" x="77" y="58" width="42" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="42" id="D8D-Sw-CWA"/>
-                            <constraint firstAttribute="height" constant="21" id="WSZ-V9-ahU"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SMS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOc-8e-xrb">
-                        <rect key="frame" x="201" y="58" width="45" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="AhU-68-RyQ"/>
-                            <constraint firstAttribute="width" constant="45" id="VHi-LH-dlE"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="3nv-8z-NLe">
+                        <rect key="frame" x="57" y="8" width="203" height="70"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OLM-CG-Jvw">
+                                <rect key="frame" x="0.0" y="0.0" width="55" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kr-yD-cLW">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="53"/>
+                                        <state key="normal" image="call"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcB-11-aQg">
+                                        <rect key="frame" x="0.0" y="53" width="55" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="QH0-Id-QXx"/>
+                                    <constraint firstAttribute="width" constant="55" id="jPN-eU-JhX"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-09-Jfs">
+                                <rect key="frame" x="74" y="0.0" width="55" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2B-LD-5gV">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="53"/>
+                                        <state key="normal" image="map"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0w-i9-vtv">
+                                        <rect key="frame" x="0.0" y="53" width="55" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="Y0e-zc-6p1"/>
+                                    <constraint firstAttribute="height" constant="70" id="nxD-mc-igB"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9oC-18-Fau">
+                                <rect key="frame" x="148" y="0.0" width="55" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W8-7a-Cji">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="53"/>
+                                        <state key="normal" image="MSG"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SMS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOc-8e-xrb">
+                                        <rect key="frame" x="0.0" y="53" width="55" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="7bS-9H-gyW"/>
+                                    <constraint firstAttribute="width" constant="55" id="SvG-H3-op1"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="lOc-8e-xrb" firstAttribute="top" secondItem="7W8-7a-Cji" secondAttribute="bottom" id="K6F-1N-ZoP"/>
-                    <constraint firstItem="UcB-11-aQg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="69" id="PwV-Sa-yUk"/>
-                    <constraint firstItem="7W8-7a-Cji" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="TcA-26-ehd"/>
-                    <constraint firstItem="UcB-11-aQg" firstAttribute="top" secondItem="5kr-yD-cLW" secondAttribute="bottom" id="gZr-VF-JYo"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="7W8-7a-Cji" secondAttribute="trailing" constant="66" id="iAW-rI-ikP"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="lOc-8e-xrb" secondAttribute="trailing" constant="66" id="r93-QG-FbU"/>
-                    <constraint firstItem="5kr-yD-cLW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="uay-Ms-iIF"/>
-                    <constraint firstItem="5kr-yD-cLW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="66" id="w1O-Km-oki"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="lOc-8e-xrb" secondAttribute="bottom" constant="-4" id="xuh-F1-iiL"/>
+                    <constraint firstItem="3nv-8z-NLe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="57" id="7Z5-Fq-MEH"/>
+                    <constraint firstAttribute="trailing" secondItem="3nv-8z-NLe" secondAttribute="trailing" constant="57" id="9al-OU-T8l"/>
+                    <constraint firstAttribute="bottom" secondItem="3nv-8z-NLe" secondAttribute="bottom" constant="5" id="NLf-gQ-kh5"/>
+                    <constraint firstItem="3nv-8z-NLe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="f6X-9r-LTd"/>
                 </constraints>
             </tableViewCellContentView>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="UcB-11-aQg" secondAttribute="bottom" constant="5" id="o6l-y9-oQ9"/>
-            </constraints>
             <connections>
                 <outlet property="callBtn" destination="5kr-yD-cLW" id="Yzg-lc-5X4"/>
+                <outlet property="mapBtn" destination="d2B-LD-5gV" id="HZu-qa-nTH"/>
                 <outlet property="smsBtn" destination="7W8-7a-Cji" id="qa9-6h-M3r"/>
             </connections>
             <point key="canvasLocation" x="360" y="218"/>
@@ -77,5 +95,6 @@
     <resources>
         <image name="MSG" width="512" height="512"/>
         <image name="call" width="512" height="512"/>
+        <image name="map" width="100" height="100"/>
     </resources>
 </document>

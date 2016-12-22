@@ -10,6 +10,7 @@ import UIKit
 
 class CallTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var mapBtn: UIButton!
     @IBOutlet weak var callBtn: UIButton!
     @IBOutlet weak var smsBtn: UIButton!
     override func awakeFromNib() {

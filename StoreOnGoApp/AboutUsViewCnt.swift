@@ -22,11 +22,13 @@ class AboutUsViewCnt: UIViewController,MFMessageComposeViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBarHidden = true
         self.designHeaderView()
         self.setupPagenator()
         self.getStores()
         self.getAboutDict()
         
+
         self.aboutUsTableview.estimatedRowHeight = 96
         self.aboutUsTableview.rowHeight = UITableViewAutomaticDimension
         
@@ -41,9 +43,10 @@ class AboutUsViewCnt: UIViewController,MFMessageComposeViewControllerDelegate {
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = true
+        self.designHeaderView()
     }
     
     // Designing Navigation Bar
@@ -64,10 +67,11 @@ class AboutUsViewCnt: UIViewController,MFMessageComposeViewControllerDelegate {
         self.imagePager = KIImagePager()
         imagePager.pageControl.currentPageIndicatorTintColor = UIColor.lightGrayColor()
         imagePager.pageControl.pageIndicatorTintColor = UIColor.blackColor()
-        imagePager.slideshowTimeInterval = 1
+        imagePager.slideshowTimeInterval = 2
         imagePager.slideshowShouldCallScrollToDelegate = true
         imagePager.checkWetherToToggleSlideshowTimer()
         imagePager.backgroundColor = UIColor.redColor()
+        self.view.addSubview(imagePager)
     }
     
     //MARK: Get Stores
@@ -110,12 +114,17 @@ class AboutUsViewCnt: UIViewController,MFMessageComposeViewControllerDelegate {
     }
 
     
-    @IBAction func mapAction(sender: AnyObject) {
+    func mapAction() {
         
+        let destinationLatitude = Double(self.aboutUsDict.valueForKey("Latitude")! as! String)
+        let destinationLongtitude = Double(self.aboutUsDict.valueForKey("Longitude")! as! String)
+        let googleMapUrlString = String.localizedStringWithFormat("http://maps.google.com/?daddr=%f,%f", destinationLatitude!, destinationLongtitude!)
+        UIApplication.sharedApplication().openURL(NSURL(string: googleMapUrlString)!)
     }
     
     
     func getAboutDict(){
+        
         let signUpUrl = "http://storeongo.com:8081/Services/getMasters?type=About%20Us"+"&mallId="+CXConstant.MallID
         SMSyncService.sharedInstance.startSyncProcessWithUrl(signUpUrl) { (responseDict) in
             let arr = responseDict.valueForKey("jobs") as! NSArray
@@ -167,6 +176,7 @@ extension AboutUsViewCnt:UITableViewDelegate, UITableViewDataSource {
 
             cell.callBtn.addTarget(self, action: #selector(callBtnAction), forControlEvents: UIControlEvents.TouchUpInside)
             cell.smsBtn.addTarget(self, action: #selector(smsAction), forControlEvents: UIControlEvents.TouchUpInside)
+            cell.mapBtn.addTarget(self, action: #selector(mapAction), forControlEvents: UIControlEvents.TouchUpInside)
             
             return cell
             
