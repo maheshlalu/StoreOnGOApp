@@ -75,6 +75,7 @@ class CXDBSettings: NSObject {
                 enProduct.storeID = product.storeID
                 enProduct.subCatNameID = product.subCatNameID
                 enProduct.type = product.name
+                enProduct.json = product.json
             }else{
 //                let cartItem : NSArray = CX_Cart.MR_executeFetchRequest(fetchRequest)
 //                let cartData : CX_Cart = (cartItem.lastObject as? CX_Cart)!

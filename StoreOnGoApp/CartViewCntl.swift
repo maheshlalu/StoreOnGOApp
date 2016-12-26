@@ -23,6 +23,9 @@ class CartViewCntl: UIViewController {
     var address:String!
     var email:String!
     var state:String!
+    var subTotal:String!
+    var total:Float = 0
+    var cart : CX_Cart!
 
     
     var heder: UIView!
@@ -82,6 +85,7 @@ class CartViewCntl: UIViewController {
         self.view.addSubview(heder)
         
     }
+    
     func getProductsList(){
         
         //let   predicate :   NSPredicate   = NSPredicate(format: "addToCart = 'YES'")
@@ -94,6 +98,15 @@ class CartViewCntl: UIViewController {
         
     }
     
+    func getTheDataInDictionaryFromKey(sourceDic:NSDictionary,sourceKey:NSString) ->String{
+        let keyExists = sourceDic[sourceKey] != nil
+        if keyExists {
+            // now val is not nil and the Optional has been unwrapped, so use it
+            return sourceDic.valueForKey(sourceKey as String) as! (String)
+        }
+        return ""
+        
+    }
     /*
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -382,27 +395,41 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
         order.setValue(self.mobile, forKey: "Contact_Number")
         
         //should be replaced
-        
+        var isExist = false
         
         for (index, element) in CX_Cart.MR_executeFetchRequest(fetchRequest).enumerate() {
-            let cart : CX_Cart = element as! CX_Cart
+            cart = element as! CX_Cart
             if index != 0 {
                 orderItemName.appendString(("\("|")"))
                 orderItemQuantity .appendString(("\("|")"))
-               //orderSubTotal .appendString(("\("|")"))
                 orderItemId .appendString(("\("|")"))
-               // orderItemMRP .appendString(("\("|")"))
+                orderItemMRP .appendString(("\("|")"))
             }
             
             //let cartName : String = cart.name!
-           // cartName.stringByReplacingOccurrencesOfString("", withString: "")
+            // cartName.stringByReplacingOccurrencesOfString("", withString: "")
             
             orderItemName.appendString("\(cart.name!.escapeStr() + "`" + cart.pID!)")
             orderItemQuantity.appendString("\(cart.quantity! + "`" + cart.pID!)")
-            //orderSubTotal.appendString(cart.name! + "`" + cart.pID!)
+            
             orderItemId.appendString("\(cart.pID! + "`" + cart.pID!)")
-            //orderItemMRP.appendString(cart.name! + "`" + cart.pID!)
-            //print("Item \(index): \(cart)")
+            
+            let dict = CXConstant.sharedInstance.convertStringToDictionary(cart.json!)
+            
+            let mrp = self.getTheDataInDictionaryFromKey(dict, sourceKey: "MRP")
+            if !mrp.isEmpty{
+                orderItemMRP.appendString(mrp + "`" + cart.pID!)
+                let MRP = Float(mrp)! as Float
+                let subTotalFinal = MRP + self.total
+                self.total = subTotalFinal
+                print(total)
+                self.subTotal = String(total)
+                isExist = true
+            }
+  
+        }
+        if isExist{
+            orderSubTotal.appendString(self.subTotal + "`" + cart.pID!)
         }
         
         //  order["OrderItemId"] = orderItemId
@@ -422,7 +449,7 @@ extension  CartViewCntl : UITableViewDelegate,UITableViewDataSource {
         order.setValue(orderItemMRP, forKey: "OrderItemMRP")
         
         
-        //print("order dic \(order)")
+        print("order dic \(order)")
         
         let listArray : NSMutableArray = NSMutableArray()
         
@@ -588,6 +615,8 @@ extension CartViewCntl : UITextFieldDelegate {
      */
     
 }
+
+
 
 
 

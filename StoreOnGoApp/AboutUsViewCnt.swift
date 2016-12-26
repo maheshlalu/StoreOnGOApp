@@ -16,7 +16,7 @@ class AboutUsViewCnt: UIViewController,MFMessageComposeViewControllerDelegate {
     var heder: UIView!
     var presentWindow : UIWindow?
     var descText:String!
-    
+   
     @IBOutlet weak var imagePager: KIImagePager!
     @IBOutlet weak var aboutUsTableview: UITableView!
     
@@ -101,12 +101,22 @@ class AboutUsViewCnt: UIViewController,MFMessageComposeViewControllerDelegate {
     
     func smsAction(){
     
-        let mobileNum = self.aboutUsDict.valueForKey("Contact Number") as! String
-        let messageVC = MFMessageComposeViewController()
-        messageVC.body = "Hi Do you have any query?"
-        messageVC.recipients = [mobileNum]
-        messageVC.messageComposeDelegate = self
-        self.presentViewController(messageVC, animated: true, completion: nil)
+        if (MFMessageComposeViewController.canSendText()) {
+            
+            let mobileNum = self.aboutUsDict.valueForKey("Contact Number") as! String
+            let messageVC = MFMessageComposeViewController()
+            messageVC.body = "Hi Do you have any query?"
+            messageVC.recipients = [mobileNum]
+            messageVC.messageComposeDelegate = self
+            self.presentViewController(messageVC, animated: true, completion: nil)
+            
+        } else {
+            
+            // Let the user know if his/her device isn't able to send text messages
+//            let errorAlert = UIAlertView(title: "Cannot Send Text Message", message: "Your device is not able to send text messages.", delegate: self, cancelButtonTitle: "OK")
+//            errorAlert.show()
+            
+        }
     }
     
     func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
