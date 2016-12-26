@@ -270,7 +270,7 @@ extension StickerDetails:UISearchBarDelegate{
     func doSearch () {
         let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
         let fetchRequest = CX_Products.MR_requestAllSortedBy("name", ascending: true)
-        fetchRequest.predicate = NSPredicate(format: "subCatNameID = %@ AND name contains[c] %@", self.predicateString,self.searchBar.text!)
+        fetchRequest.predicate = NSPredicate(format: "subCatNameID = %@ AND (name contains[c] %@ OR itemCode contains[c] %@)", self.predicateString,self.searchBar.text!,self.searchBar.text!)
         fetchRequest.entity = productEn
         self.stickersList =   CX_Products.MR_executeFetchRequest(fetchRequest)
        /* NSString *modelName = @"honda";

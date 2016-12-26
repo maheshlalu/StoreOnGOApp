@@ -24,7 +24,7 @@ class AboutUsViewCnt: UIViewController,MFMessageComposeViewControllerDelegate {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = true
         self.designHeaderView()
-        self.setupPagenator()
+       // self.setupPagenator()
         self.getStores()
         self.getAboutDict()
         
@@ -64,7 +64,7 @@ class AboutUsViewCnt: UIViewController,MFMessageComposeViewControllerDelegate {
     
     func setupPagenator (){
         
-        self.imagePager = KIImagePager()
+        //self.imagePager = KIImagePager()
         imagePager.pageControl.currentPageIndicatorTintColor = UIColor.lightGrayColor()
         imagePager.pageControl.pageIndicatorTintColor = UIColor.blackColor()
         imagePager.slideshowTimeInterval = 2

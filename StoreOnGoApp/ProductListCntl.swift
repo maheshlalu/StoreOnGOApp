@@ -17,7 +17,8 @@ class ProductListCntl: UIViewController {
     var headerTitle :  NSString = NSString()
     var presentWindow : UIWindow?
     var heder: UIView!
- 
+    var searchBar: SearchBar!
+
     //,EDIT TEXT, AddTOCard Button
 
     var productListTableView : UITableView!
@@ -25,15 +26,16 @@ class ProductListCntl: UIViewController {
         super.viewDidLoad()
         //self.setTheNavigationProperty()
         presentWindow = UIApplication.sharedApplication().keyWindow
-
-     //   dispatch_async(dispatch_get_main_queue(),{
-            self.designHeaderView()
-            self.designProductListTableView()
-            self.getTheProductsList()
-            
-       // })
-
-
+        
+        //   dispatch_async(dispatch_get_main_queue(),{
+        self.designHeaderView()
+        self.designSearchBar()
+        self.designProductListTableView()
+        self.getTheProductsList()
+        
+        // })
+        
+        
         // self.setUpTheSpreadSheetView()
         // Do any additional setup after loading the view.
     }
@@ -55,8 +57,19 @@ class ProductListCntl: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK : SearchBar
+    func designSearchBar (){
+        self.searchBar = SearchBar.designSearchBar()
+        self.searchBar.frame.origin.y =  CXConstant.headerViewHeigh
+        // CXConstant.searchBarFrame
+        //  self.searchBar.frame = CGRectMake(0, CXConstant.headerViewHeigh, self.searchBar.size.width,  self.searchBar.size.hieght)
+        self.searchBar.delegate = self
+        self.searchBar.placeholder = "Search Products"
+        self.view.addSubview(self.searchBar)
+    }
+    
     func designProductListTableView(){
-        self.productListTableView = UITableView.init(frame: CGRectMake(0, CXConstant.headerViewHeigh, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh))
+        self.productListTableView = UITableView.init(frame: CGRectMake(0, CXConstant.headerViewHeigh+self.searchBar.frame.size.height, CXConstant.screenSize.width, CXConstant.screenSize.height-CXConstant.headerViewHeigh+self.searchBar.frame.size.height))
         self.productListTableView.dataSource = self
         self.productListTableView.delegate = self
         self.productListTableView.backgroundColor = UIColor.whiteColor()
@@ -383,4 +396,59 @@ extension ProductListCntl : HeaderViewDelegate {
 }
 
 
-
+extension ProductListCntl:UISearchBarDelegate{
+    func searchBarSearchButtonClicked( searchBar: UISearchBar)
+    {
+        self.searchBar.resignFirstResponder()
+        self.doSearch()
+    }
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        // print("search string \(searchText)")
+        if (self.searchBar.text!.characters.count > 0) {
+            self.doSearch()
+        } else {
+            self.loadDefaultList()
+        }
+        
+    }
+    
+    func loadDefaultList (){
+        self.getTheProductsList()
+    }
+    
+    func refreshSearchBar (){
+        self.searchBar.resignFirstResponder()
+        // Clear search bar text
+        self.searchBar.text = "";
+        // Hide the cancel button
+        self.searchBar.showsCancelButton = false;
+    }
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.refreshSearchBar()
+        // Do a default fetch of the beers
+        self.loadDefaultList()
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true;
+    }
+    
+    func doSearch () {
+        let productEn = NSEntityDescription.entityForName("CX_Products", inManagedObjectContext: NSManagedObjectContext.MR_contextForCurrentThread())
+        let fetchRequest = CX_Products.MR_requestAllSortedBy("name", ascending: true)
+        // fetchRequest.predicate = NSPredicate(format: "subCatNameID = %@ AND (name contains[c] %@ OR itemCode contains[c] %@)", self.predicateString,self.searchBar.text!,self.searchBar.text!)
+        
+        let predicate1:NSPredicate = NSPredicate(format: "name contains[c] %@ OR itemCode contains[c] %@",self.searchBar.text!,self.searchBar.text!)
+        let predicate:NSPredicate  = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate,predicate1] )
+        fetchRequest.predicate = predicate
+        
+        //self.predicate
+        fetchRequest.entity = productEn
+        self.productsList =   CX_Products.MR_executeFetchRequest(fetchRequest)
+        /* NSString *modelName = @"honda";
+         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"model == %@", modelName];
+         NSArray *filteredArray = [results filteredArrayUsingPredicate:predicate];*/
+        self.productListTableView.reloadData()
+    }
+    
+}

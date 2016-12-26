@@ -60,7 +60,7 @@ class CXForgotPassword: UIViewController,UITextFieldDelegate {
         self.view.endEditing(true)
         print("Send button")
         if self.isValidEmail(self.emailAddressField.text!) {
-            let forgotUrl = "http://storeongo.com:8081/MobileAPIs/forgotpwd?email="+self.emailAddressField.text!
+            let forgotUrl = "http://storeongo.com:8081/MobileAPIs/forgotpwd?email="+self.emailAddressField.text!+"&orgId=\(CXConstant.MallID)"
             SMSyncService.sharedInstance.startSyncProcessWithUrl(forgotUrl) { (responseDict) in
                 // print("Forgot mail response \(responseDict)")
                 let message = responseDict.valueForKey("result") as? String
