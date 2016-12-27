@@ -247,7 +247,7 @@ class CXDBSettings: NSObject {
         
         let managedContext = self.appDelegate.managedObjectContext
         let productCatEn = NSEntityDescription.entityForName("CX_Stores", inManagedObjectContext: managedContext)
-        print ("stores   response   data \(stores) ")
+       // print ("stores   response   data \(stores) ")
         for storesItem in stores {
             
             let itemID = CXConstant.sharedInstance.resultString(storesItem.valueForKey("id")!)

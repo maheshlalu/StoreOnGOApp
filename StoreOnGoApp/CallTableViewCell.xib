@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="3nv-8z-NLe">
-                        <rect key="frame" x="57" y="8" width="203" height="70"/>
+                        <rect key="frame" x="59" y="8" width="203" height="70"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OLM-CG-Jvw">
                                 <rect key="frame" x="0.0" y="0.0" width="55" height="70"/>
@@ -75,14 +76,26 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="SRk-Kb-jfp"/>
+                            <constraint firstAttribute="width" constant="203" id="Stg-DJ-kke"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="3nv-8z-NLe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="57" id="7Z5-Fq-MEH"/>
-                    <constraint firstAttribute="trailing" secondItem="3nv-8z-NLe" secondAttribute="trailing" constant="57" id="9al-OU-T8l"/>
                     <constraint firstAttribute="bottom" secondItem="3nv-8z-NLe" secondAttribute="bottom" constant="5" id="NLf-gQ-kh5"/>
+                    <constraint firstItem="3nv-8z-NLe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SDs-7O-bce"/>
+                    <constraint firstItem="3nv-8z-NLe" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Zld-9U-CbE"/>
                     <constraint firstItem="3nv-8z-NLe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="f6X-9r-LTd"/>
+                    <constraint firstItem="3nv-8z-NLe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="mTA-D9-FqI"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="NLf-gQ-kh5"/>
+                        <exclude reference="SDs-7O-bce"/>
+                        <exclude reference="f6X-9r-LTd"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="callBtn" destination="5kr-yD-cLW" id="Yzg-lc-5X4"/>

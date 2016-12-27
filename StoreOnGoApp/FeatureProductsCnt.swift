@@ -129,7 +129,7 @@ extension FeatureProductsCnt: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
+      //  print("Collection view at row \(collectionView.tag) selected index path \(indexPath) indexPath Row\(indexPath.row)")
         //let galleryView = CXGalleryViewController.init()
 //        self.navigationController?.pushViewController(galleryView, animated: true)
         }
